@@ -3,11 +3,6 @@
 from . import cities, draw, geo, style
 from .maps_spain import KM, Label, _label_regions
 
-CONCEJO_PALETTE = [
-    "#a8cf74", "#f2b263", "#8fbfe8", "#f2b5c4",
-    "#ead98b", "#79c6b2", "#c3a3dd", "#f2a084",
-]
-
 NEIGHBOR_LABELS = [  # lon, lat
     ("GALICIA", -7.06, 42.97, 44),
     ("LEÓN", -5.85, 42.93, 44),
@@ -120,7 +115,7 @@ def map_asturias_concejos(group=None):
     fig, ax = draw.new_map(s["frame"])
     draw.draw_context(ax, s["context"])
 
-    colors = greedy_colors(s["conc"], CONCEJO_PALETTE)
+    colors = greedy_colors(s["conc"], style.CONCEJO_PALETTE)
     draw.draw_layer(ax, s["conc"], colors, style.BORDER_LIGHT, 2.0, zorder=2)
     # Outer border of the region.
     outline = s["conc"].dissolve()
@@ -159,18 +154,8 @@ def render_asturias_concejos_mudo():
 # The dataset's short form differs from the list in cities.py for one concejo.
 COMARCA_NAME_ALIASES = {"Tapia de Casariego": "Tapia"}
 
-# Hand-picked pastels (from/near the CCAA palette); every pair of
-# neighbouring comarcas differs clearly in hue.
-COMARCA_COLORS = {
-    "Eo-Navia": "#8fbfe8",   # light blue
-    "Narcea": "#ead98b",     # pale gold
-    "Avilés": "#f2b5c4",     # pink
-    "Oviedo": "#a8cf74",     # green
-    "Gijón": "#f2b263",      # orange
-    "Caudal": "#c3a3dd",     # lilac
-    "Nalón": "#f2a084",      # salmon
-    "Oriente": "#79c6b2",    # teal
-}
+# Comarca colors live in style.py (both themes), keyed by comarca name; every
+# pair of neighbouring comarcas differs clearly in hue.
 
 # Label tuning per comarca; the small coastal comarcas (Avilés, Gijón) get
 # leader-line callouts into the sea. Offsets in km.
@@ -206,7 +191,7 @@ def render_asturias_comarcas():
 
     conc, com = _comarcas_gdf(s["conc"])
     # Concejos filled with their comarca color, faint internal borders.
-    colors = [COMARCA_COLORS[c] for c in conc.comarca]
+    colors = [style.COMARCA_COLORS[c] for c in conc.comarca]
     draw.draw_layer(ax, conc, colors, "#a8a59c", 1.0, zorder=2)
     # Thick dark comarca borders on top, then the outer regional boundary.
     draw.draw_layer(ax, com, "none", style.BORDER_DARK, 4.0, zorder=3)

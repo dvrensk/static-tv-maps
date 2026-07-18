@@ -16,7 +16,7 @@ DOCKER_RUN = docker run --rm -v $(PWD):/app -u $(shell id -u):$(shell id -g) $(I
 VENV = .venv
 PY = $(VENV)/bin/python
 
-.PHONY: help setup data maps map list shell clean local-setup local-data local-maps local-map
+.PHONY: help setup data maps maps-sobrio map list shell clean local-setup local-data local-maps local-map
 
 help:
 	@echo "Docker targets:  setup, data, maps, map M=<name>, list, shell"
@@ -31,6 +31,9 @@ data:
 
 maps:
 	$(DOCKER_RUN) python generate.py all
+
+maps-sobrio:
+	$(DOCKER_RUN) python generate.py all --theme sobrio
 
 map:
 	$(DOCKER_RUN) python generate.py $(M)

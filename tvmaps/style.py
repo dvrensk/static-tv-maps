@@ -22,9 +22,18 @@ LABEL_COLOR = "#26241f"
 HALO = "#ffffff"
 TITLE_COLOR = "#26241f"
 
-# One color per autonomous community, keyed by INE acom_code.
-# Hand-tuned so that neighbouring communities never share a hue.
-CCAA_COLORS = {
+# --- Color themes -----------------------------------------------------------
+#
+# Political maps come in two palettes, switchable with set_theme():
+#   "vivo"   — the original bright scheme.
+#   "sobrio" — a muted, desaturated "antique atlas" scheme.
+# Each theme defines the community colors (keyed by INE acom_code), the eight
+# concejo colors (greedy graph coloring, Asturias) and the eight comarca
+# colors. Neighbouring regions are kept distinct within each palette.
+
+# One color per autonomous community. Hand-tuned so neighbours never share a
+# hue.
+CCAA_COLORS_VIVO = {
     "01": "#a8cf74",  # Andalucía        green
     "02": "#f2b263",  # Aragón           orange
     "03": "#79c6b2",  # Asturias         teal
@@ -45,6 +54,77 @@ CCAA_COLORS = {
     "18": "#b9c2ea",  # Ceuta            pale indigo
     "19": "#b9e3cf",  # Melilla          pale mint
 }
+
+# Muted "antique atlas" palette: lower saturation, earthy and harmonious,
+# still keeping every pair of neighbours distinct.
+CCAA_COLORS_SOBRIO = {
+    "01": "#c9b184",  # Andalucía        muted ochre
+    "02": "#cc9e71",  # Aragón           warm amber
+    "03": "#86b0a4",  # Asturias         muted teal
+    "04": "#c9a1aa",  # Illes Balears    dusty rose
+    "05": "#d2c091",  # Canarias         warm sand
+    "06": "#8ba6b6",  # Cantabria        slate blue
+    "07": "#cdc3a3",  # Castilla y León  pale taupe
+    "08": "#a7b88f",  # Castilla-La Mancha sage green
+    "09": "#b47f77",  # Cataluña         dusty brick
+    "10": "#b3a0bd",  # C. Valenciana    heather
+    "11": "#cfa39f",  # Extremadura      dusty coral
+    "12": "#8ba0b8",  # Galicia          denim blue
+    "13": "#b0a8c6",  # Madrid           stone lilac
+    "14": "#cf9e86",  # Murcia           soft terracotta
+    "15": "#ad9fbb",  # Navarra          mauve
+    "16": "#9cb488",  # País Vasco       soft sage
+    "17": "#d2a9ad",  # La Rioja         clay pink
+    "18": "#9aa7bd",  # Ceuta            muted indigo
+    "19": "#9fc0ab",  # Melilla          muted mint
+}
+
+# Eight colors for the Asturias concejo greedy coloring, per theme.
+CONCEJO_PALETTE_VIVO = [
+    "#a8cf74", "#f2b263", "#8fbfe8", "#f2b5c4",
+    "#ead98b", "#79c6b2", "#c3a3dd", "#f2a084",
+]
+CONCEJO_PALETTE_SOBRIO = [
+    "#a7b58a", "#c9a884", "#8ba6b6", "#c9a1aa",
+    "#cdc3a3", "#86b0a4", "#ad9fbb", "#cc9e8c",
+]
+
+# The eight functional comarcas of Asturias, per theme (neighbours differ).
+COMARCA_COLORS_VIVO = {
+    "Eo-Navia": "#8fbfe8", "Narcea": "#ead98b", "Avilés": "#f2b5c4",
+    "Oviedo": "#a8cf74", "Gijón": "#f2b263", "Caudal": "#c3a3dd",
+    "Nalón": "#f2a084", "Oriente": "#79c6b2",
+}
+COMARCA_COLORS_SOBRIO = {
+    "Eo-Navia": "#8ba6b6", "Narcea": "#cdc3a3", "Avilés": "#c9a1aa",
+    "Oviedo": "#a7b58a", "Gijón": "#c9a884", "Caudal": "#ad9fbb",
+    "Nalón": "#cc9e8c", "Oriente": "#86b0a4",
+}
+
+THEMES = {
+    "vivo": dict(ccaa=CCAA_COLORS_VIVO, concejo=CONCEJO_PALETTE_VIVO,
+                 comarca=COMARCA_COLORS_VIVO, suffix=""),
+    "sobrio": dict(ccaa=CCAA_COLORS_SOBRIO, concejo=CONCEJO_PALETTE_SOBRIO,
+                   comarca=COMARCA_COLORS_SOBRIO, suffix="-sobrio"),
+}
+
+# Active theme (mutated by set_theme). Modules read these at render time.
+THEME = "vivo"
+THEME_SUFFIX = ""
+CCAA_COLORS = CCAA_COLORS_VIVO
+CONCEJO_PALETTE = CONCEJO_PALETTE_VIVO
+COMARCA_COLORS = COMARCA_COLORS_VIVO
+
+
+def set_theme(name: str) -> None:
+    """Switch the active political-map palette ("vivo" or "sobrio")."""
+    global THEME, THEME_SUFFIX, CCAA_COLORS, CONCEJO_PALETTE, COMARCA_COLORS
+    theme = THEMES[name]
+    THEME = name
+    THEME_SUFFIX = theme["suffix"]
+    CCAA_COLORS = theme["ccaa"]
+    CONCEJO_PALETTE = theme["concejo"]
+    COMARCA_COLORS = theme["comarca"]
 
 # Common short names for display (official names are long).
 CCAA_DISPLAY = {

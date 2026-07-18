@@ -58,6 +58,19 @@ make local-maps
 Or directly: `python generate.py all [--jpg]`. The `--jpg` flag also writes
 JPEG copies, for TVs that only accept JPEG.
 
+### Color themes
+
+The political maps (communities, provinces, capitals, Asturias concejos and
+comarcas) come in two palettes:
+
+- **vivo** — the default bright scheme.
+- **sobrio** — a muted, desaturated "antique atlas" scheme.
+
+Render the muted set with `make maps-sobrio` (or
+`python generate.py all --theme sobrio`); the files get a `-sobrio` suffix, so
+both sets live side by side in `output/`. The other maps (physical, rivers,
+cities, wine, pantry) look the same in either theme and are not re-rendered.
+
 The processed geodata in `data/processed/` is committed, so rendering does not
 need network access; only `make data` does.
 

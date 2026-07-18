@@ -150,7 +150,7 @@ SAVE_JPG = False
 
 def save(fig, name: str) -> Path:
     OUTPUT.mkdir(exist_ok=True)
-    path = OUTPUT / f"{name}.png"
+    path = OUTPUT / f"{name}{style.THEME_SUFFIX}.png"
     fig.savefig(path, dpi=style.DPI, facecolor=fig.get_facecolor())
     plt.close(fig)
     if SAVE_JPG:
