@@ -1,0 +1,11 @@
+# Raw downloaded geodata (large; re-fetch with `make data`)
+data/raw/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS noise
+.DS_Store

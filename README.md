@@ -1,2 +1,89 @@
 # static-tv-maps
-World maps to display on my TV in standby mode
+
+Pedagogical maps of Spain (and Asturias) rendered as static 4000×2250 images,
+meant to be dropped in a folder that a TV cycles through in standby/ambient
+mode. Labels are sized to be readable from across the room.
+
+![Comunidades Autónomas de España](output/spain-comunidades.png)
+
+## The maps
+
+Everything lands in [`output/`](output/), pre-rendered and committed:
+
+| Map | Contents |
+| --- | --- |
+| `spain-comunidades` | The 17 autonomous communities (plus Ceuta and Melilla), each colored and named |
+| `spain-provincias-1` / `-2` | All 50 provinces, colored by community. The names are split over two maps so every label has room; cramped provinces get leader lines |
+| `asturias-concejos-1` / `-2` | The 78 concejos of Asturias, names split over two maps the same way |
+| `*-mudo` | The same maps without names ("mapa mudo"), for quizzing yourself |
+
+The Canary Islands are always present, transposed at true scale into a framed
+inset in the lower-left Atlantic corner — their real direction of travel from
+the peninsula.
+
+## Running it
+
+With Docker (no local dependencies needed):
+
+```bash
+make setup      # build the image
+make maps       # render all maps into output/
+make map M=spain-comunidades   # render one map
+make data       # re-download + re-process source geodata (needs network)
+make list       # list available map names
+```
+
+Without Docker (Python 3.11+):
+
+```bash
+make local-setup   # create .venv and install requirements
+make local-maps
+```
+
+Or directly: `python generate.py all [--jpg]`. The `--jpg` flag also writes
+JPEG copies, for TVs that only accept JPEG.
+
+The processed geodata in `data/processed/` is committed, so rendering does not
+need network access; only `make data` does.
+
+## Data sources
+
+- **Administrative boundaries** — [Opendatasoft `georef-spain`](https://public.opendatasoft.com/explore/?q=georef-spain)
+  (communities, provinces, municipalities), which repackages the official
+  boundaries of **IGN España** (Instituto Geográfico Nacional) with clean INE
+  codes and names. Simplified with a topology-preserving pass
+  (`shapely.coverage_simplify`) to ~100 m, far below one on-screen pixel.
+- **Neighbouring countries** — [Natural Earth](https://www.naturalearthdata.com/)
+  10 m admin-0 (public domain), clipped around Iberia.
+- Also evaluated: [es-atlas](https://github.com/martgnz/es-atlas) (TopoJSON of
+  the same IGN data, journalism-style; too generalized for 4000 px) and raw IGN
+  Centro de Descargas (canonical but awkward to script).
+- **Font** — [Inter](https://fonts.google.com/specimen/Inter) (SIL OFL),
+  bundled in `assets/fonts/`.
+
+## Design notes
+
+- Canvas is exactly 4000×2250 px (16:9), the TV's preferred size.
+- Peninsula and Baleares are drawn in ETRS89 / UTM 30N (EPSG:25830), the
+  Canaries in UTM 28N (EPSG:25828) before being translated into the inset, so
+  every shape keeps its proper metric proportions.
+- Provinces inherit their community's color with subtle per-province shading:
+  the province maps double as "which community does it belong to" maps.
+- Concejos in Asturias are colored by greedy graph coloring so no two
+  neighbours share a color.
+- Names use common Castilian forms (Álava, Alicante, Castellón, Valencia,
+  Islas Baleares) and keep sole-official forms (A Coruña, Ourense, Girona,
+  Lleida, Bizkaia, Gipuzkoa). All display names live in
+  `tvmaps/style.py` and are trivial to change.
+
+## Tweaking
+
+Label placement is data-driven: each map module has a dict of `Label` specs
+with anchor nudges (`dx`, `dy`, in km) or leader-line callouts (`tx`, `ty`).
+Colors live in `tvmaps/style.py`. Render, look, nudge, repeat — a full render
+of all maps takes ~10 s.
+
+## License
+
+Code under GPL-3.0 (see `LICENSE`). Boundary data © IGN España (CC-BY-style
+reuse with attribution), Natural Earth public domain, Inter font SIL OFL 1.1.
