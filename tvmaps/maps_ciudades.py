@@ -50,6 +50,7 @@ class CityLabel:
     tx: float | None = None
     ty: float | None = None
     wrap: str | None = None  # multi-line display name override
+    size: float | None = None  # font size override (else the population tier)
 
 
 CITY_LABELS = {
@@ -61,9 +62,9 @@ CITY_LABELS = {
     "Málaga": CityLabel(dy=-13, va="top"),                    # sea south
     "Murcia": CityLabel(dx=-11, ha="right"),
     "Palma": CityLabel(dy=-13, va="top"),                     # bay south
-    "Las Palmas de Gran Canaria": CityLabel(         # callout NE, clear of
-        tx=45, ty=63, va="bottom",                   # Fuerteventura/Lanzarote
-        wrap="Las Palmas de\nGran Canaria"),
+    "Las Palmas de Gran Canaria": CityLabel(         # callout up-right, clear
+        tx=28, ty=74, va="bottom", ha="left", size=25,   # of the Santa Cruz
+        wrap="Las Palmas de\nGran Canaria"),              # label and box edge
     "Alicante": CityLabel(dx=10, ha="left"),                  # sea east
     "Bilbao": CityLabel(dy=8, va="bottom"),                   # sea above
     "Córdoba": CityLabel(dy=10, va="bottom"),
@@ -77,8 +78,9 @@ CITY_LABELS = {
     "Oviedo": CityLabel(dy=-10, va="top"),
     "Cartagena": CityLabel(dy=-12, va="top"),                 # sea south
     "Jerez de la Frontera": CityLabel(dy=12, va="bottom"),
-    "Santa Cruz de Tenerife": CityLabel(              # over sea N of Tenerife
-        dx=-36, dy=19, va="bottom", wrap="Santa Cruz\nde Tenerife"),
+    "Santa Cruz de Tenerife": CityLabel(              # over sea NW of Tenerife
+        dx=-52, dy=26, va="bottom", ha="left", size=25,
+        wrap="Santa Cruz\nde Tenerife"),
     "Pamplona": CityLabel(dx=11, ha="left"),
     "Almería": CityLabel(dy=-12, va="top"),                   # sea south
     "San Sebastián": CityLabel(tx=-2, ty=55, va="bottom"),    # callout to sea
@@ -134,14 +136,16 @@ def map_spain_ciudades():
         ms, size = _tier(pop)
         draw.city_dot(ax, (x, y), size=ms, face=DOT_FACE, edge=DOT_EDGE)
         spec = CITY_LABELS[name]
-        text = f"{rank} {spec.wrap or name}"
+        size = spec.size or size
+        label = spec.wrap or name
         if spec.tx is not None:
-            draw.callout(ax, (x, y), (x + spec.tx * KM, y + spec.ty * KM),
-                         text, size, weight="extrabold", ha=spec.ha,
-                         va=spec.va)
+            draw.numbered_callout(ax, (x, y), (x + spec.tx * KM, y + spec.ty * KM),
+                                  rank, label, size, ha=spec.ha, va=spec.va,
+                                  badge_face=DOT_FACE)
         else:
-            draw.halo_text(ax, x + spec.dx * KM, y + spec.dy * KM, text, size,
-                           weight="extrabold", ha=spec.ha, va=spec.va)
+            draw.numbered_label(ax, (x + spec.dx * KM, y + spec.dy * KM), rank,
+                                label, size, ha=spec.ha, va=spec.va,
+                                badge_face=DOT_FACE)
 
     # Ranking legend: two columns of 15 entries over the Atlantic, west of
     # Portugal. Long names continue on a second line (see LEGEND_WRAPS) so

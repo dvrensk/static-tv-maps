@@ -120,6 +120,59 @@ def city_star(ax, xy, size=26, face="#f2c53d", edge="#4d4a45", zorder=8):
     ax.plot(xy[0], xy[1], "*", ms=size, mfc=face, mec=edge, mew=2.0, zorder=zorder)
 
 
+def _name_width_data(ax, text, size, weight):
+    """Width of a text string in data units (axes are aspect-equal)."""
+    fig = ax.figure
+    x0, x1 = ax.get_xlim()
+    data_per_px = (x1 - x0) / style.WIDTH_PX
+    renderer = fig.canvas.get_renderer()
+    tmp = ax.text(x0, ax.get_ylim()[0], text, fontproperties=style.font(weight),
+                  fontsize=size)
+    w = tmp.get_window_extent(renderer).width
+    tmp.remove()
+    return w * data_per_px, data_per_px
+
+
+def numbered_label(ax, xy, number, text, size, ha="center", va="center",
+                   badge_face="#b23a2e", name_color=style.LABEL_COLOR,
+                   weight="extrabold", zorder=10):
+    """A rank badge (filled circle with the number) followed by the name.
+
+    The badge is a fixed size regardless of digit count, so it reads like a
+    ranking medallion for numbers 1–99. `xy` is anchored per `ha`/`va` exactly
+    like halo_text, treating the badge+name as one group."""
+    from matplotlib.patches import Circle
+
+    name_w, data_per_px = _name_width_data(ax, text.replace("\n", " "), size,
+                                           weight)
+    r = 0.9 * size * (style.DPI / 72) * data_per_px   # badge radius, data units
+    gap = 0.9 * r
+    group_w = 2 * r + gap + name_w
+    x, y = xy
+    left = x if ha == "left" else x - group_w if ha == "right" else x - group_w / 2
+    cy = y + r if va == "bottom" else y - r if va == "top" else y
+    bcx = left + r
+
+    ax.add_patch(Circle((bcx, cy), r, facecolor=badge_face, edgecolor="#ffffff",
+                        linewidth=2.2, zorder=zorder))
+    ax.text(bcx, cy, str(number), fontproperties=style.font(weight),
+            fontsize=size * 0.72, color="#ffffff", ha="center", va="center",
+            zorder=zorder + 1)
+    return halo_text(ax, bcx + r + gap, cy, text, size, weight=weight,
+                     color=name_color, ha="left", va="center", zorder=zorder)
+
+
+def numbered_callout(ax, anchor, text_xy, number, text, size, ha="center",
+                     va="center", badge_face="#b23a2e", line_color="#55524d",
+                     zorder=11):
+    """numbered_label placed away from its point, with a leader line."""
+    ax.annotate("", xy=anchor, xytext=text_xy, zorder=zorder - 1,
+                arrowprops=dict(arrowstyle="-", color=line_color, linewidth=2.2,
+                                shrinkA=8, shrinkB=2))
+    return numbered_label(ax, text_xy, number, text, size, ha=ha, va=va,
+                          badge_face=badge_face, zorder=zorder)
+
+
 def legend_column(ax, frame, x_frac, y_top_frac, rows, size=26,
                   color=style.LABEL_COLOR, leading=1.5, num_gap_frac=0.0045):
     """A numbered legend column.
