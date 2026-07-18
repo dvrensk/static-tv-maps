@@ -116,6 +116,72 @@ def process_asturias() -> None:
     print(f"  wrote {out.name}: {len(gdf)} features")
 
 
+# --- Wine denominaciones de origen (spain-vinos map) -----------------------
+#
+# Real DOP/IGP boundary polygons from the Ministry (MAPA) "Zonas de Calidad
+# Diferenciada: Vinos" layer, served as GeoJSON by the MAPA OGC API-Features
+# endpoint. We keep only the DOs the map labels, dissolve the few that are
+# split across several source features (the three Basque Txakoli DOs into one
+# "Txakoli"; Jerez + Manzanilla into one "Jerez"), simplify, and store in
+# lon/lat. The map reprojects at render time (peninsula 25830, Canaries
+# 25828). Source metadata:
+#   https://www.mapama.gob.es/ide/metadatos/srv/api/records/5210b5ac-557b-48d0-a8ef-138b08fbd970
+#   https://www.mapa.gob.es/es/cartografia-y-sig/ide/descargas/alimentacion/vinos
+WINE_DO_URL = (
+    "https://wmts.mapama.gob.es/sig-api/ogc/features/v1/"
+    "collections/alimentacion:CDZ_Vinos/items"
+    "?f=application%2Fgeo%2Bjson&limit=200"
+)
+
+# map key (used by tvmaps/maps_productos.py) -> source zon_ds_nombre value(s)
+WINE_DO_ZONES = {
+    "Rías Baixas": ["Rías Baixas"],
+    "Bierzo": ["Bierzo"],
+    "Txakoli": ["Arabako Txakolina-Txakolí de Álava",
+                "Chacolí de Bizkaia-Bizkaiko Txakolina",
+                "Chacolí de Getaria-Getariako Txakolina"],
+    "Rioja": ["Rioja"],
+    "Somontano": ["Somontano"],
+    "Cariñena": ["Cariñena"],
+    "Ribera del Duero": ["Ribera del Duero"],
+    "Rueda": ["Rueda"],
+    "Toro": ["Toro"],
+    "Penedès": ["Penedés, Comunidad de Cataluña"],
+    "Priorat": ["Priorato, Comunidad de Cataluña"],
+    "Utiel-Requena": ["Utiel-Requena"],
+    "Jumilla": ["Jumilla"],
+    "La Mancha": ["La Mancha"],
+    "Valdepeñas": ["Valdepeñas"],
+    "Jerez": ["Jerez-Xeres-Sherry", "Manzanilla Sanlúcar de Barrameda"],
+    "Montilla-Moriles": ["Montilla-Moriles"],
+    "Lanzarote": ["Lanzarote"],
+}
+
+
+def process_wine_do() -> None:
+    from shapely.ops import unary_union
+
+    raw = fetch(WINE_DO_URL, RAW / "mapa_cdz_vinos.geojson",
+                "wine DOP/IGP zones (MAPA OGC API-Features)")
+    src = gpd.read_file(raw)
+    src = src.to_crs("EPSG:4326")
+    records = []
+    for key, names in WINE_DO_ZONES.items():
+        sub = src[src["zon_ds_nombre"].isin(names)]
+        if sub.empty:
+            print(f"  !! no source feature(s) for {key}: {names}")
+            continue
+        geom = unary_union(sub.geometry.values)
+        # ~0.004 deg (~400 m) is well below one pixel of a Spain-wide 4000 px
+        # map (~370 m/px) yet keeps the recognisable outline.
+        geom = geom.simplify(0.004).buffer(0)
+        records.append({"key": key, "geometry": geom})
+    gdf = gpd.GeoDataFrame(records, crs="EPSG:4326")
+    out = PROCESSED / "wine_do.geojson"
+    gdf.to_file(out, driver="GeoJSON")
+    print(f"  wrote {out.name}: {len(gdf)} wine DOs")
+
+
 def process_context_countries() -> None:
     raw = fetch(NE_COUNTRIES, RAW / "ne_10m_admin_0_countries.zip", "Natural Earth countries")
     gdf = gpd.read_file(f"zip://{raw}")
@@ -559,6 +625,8 @@ def main() -> None:
     process_asturias()
     print("Context countries:")
     process_context_countries()
+    print("Wine denominaciones de origen:")
+    process_wine_do()
     print("Physical (rivers + mountain ranges):")
     process_physical()
     print("Twenty rivers (spain-rios maps):")

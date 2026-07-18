@@ -21,12 +21,16 @@ Everything lands in [`output/`](output/), pre-rendered and committed:
 | `spain-fisica` | The major rivers (Miño, Duero, Tajo, Guadiana, Guadalquivir, Ebro, Júcar, Segura, Genil, Turia) and mountain systems (Pirineos, Cordillera Cantábrica, Macizo Galaico, Sistema Central, Sistema Ibérico, Montes de Toledo, Sierra Morena, Sistemas Béticos) |
 | `spain-rios` | The ~20 rivers a schoolchild learns, across all three watersheds, with the mountain systems shaded underneath |
 | `spain-rios-ciudades` | Rivers and the cities they run through — Sevilla/Guadalquivir, Barcelona/Llobregat, Bilbao/Nervión… including Lisboa (Tajo) and Oporto (Duero) |
-| `spain-vinos` | The main wine denominations of origin (Rioja, Ribera del Duero, Priorat, Rías Baixas, Jerez…) |
-| `spain-despensa` | The "pantry of Spain": jamón, olive oil, huerta/fruit, greenhouses, cheese and seafood regions, color-coded with a legend |
+| `spain-vinos` | The wine denominations of origin, coloured by wine type, with real DO boundaries from the Ministry (MAPA) |
+| `spain-despensa` | The "pantry of Spain": jamón, olive oil, huerta/fruit, rice, greenhouses, cheese and seafood regions, color-coded with a legend |
+| `spain-moda` | Spanish fashion — designers, footwear and jewellery firms and where they are from (Inditex in Arteixo, Balenciaga in Getaria, Camper in Mallorca…) |
+| `spain-editoriales` | Book publishers and record labels by headquarter city, with list panels for the Madrid and Barcelona clusters |
+| `spain-marcas` | Well-known Spanish commercial brands at their HQ cities, spread across the country (SEAT, Mercadona, Santander, BBVA, Osborne…) |
 | `asturias-concejos-1` / `-2` | The 78 concejos of Asturias, names split over two maps the same way |
 | `asturias-comarcas` | The 8 functional comarcas of Asturias (decree 11/91) |
 | `asturias-rios` | The 14 main rivers of Asturias (Nalón, Narcea, Navia, Sella, Eo, Piloña…), from OpenStreetMap |
 | `asturias-ciudades` | The main towns of Asturias — every concejo over 10 000 inhabitants |
+| `asturias-ciudades-concejos` | The same towns as a choropleth: each concejo painted by population tier, the rest neutral |
 | `*-mudo` | The same maps without names ("mapa mudo"), for quizzing yourself |
 
 All on-map text is in Spanish. Instead of big titles, each map carries a small
@@ -95,6 +99,10 @@ need network access; only `make data` does.
   the Overpass API (© OpenStreetMap contributors, ODbL), since Natural Earth
   carries almost no Asturian rivers; committed to
   `data/processed/asturias_rivers.geojson`.
+- **Wine DO boundaries** — the Ministry (MAPA) "Zonas de Calidad
+  Diferenciada: Vinos" layer via its OGC API-Features endpoint, committed to
+  `data/processed/wine_do.geojson`. The `spain-moda`, `spain-editoriales` and
+  `spain-marcas` company locations are compiled by hand ("elaboración propia").
 - **City locations** — geocoded once via
   [Nominatim](https://nominatim.openstreetmap.org/) (© OpenStreetMap
   contributors, ODbL) and committed to `data/processed/cities.geojson`.

@@ -2,9 +2,9 @@
 
 Two maps on the parchment base of maps_fisica:
 
-- spain-vinos: the famous wine denominaciones de origen, as soft burgundy
-  blobs along their real extents (Rioja follows the Ebro, Ribera del Duero
-  the Duero, Rías Baixas the SW Galician coast...).
+- spain-vinos: the famous wine denominaciones de origen, drawn from their
+  real MAPA (DOP/IGP) boundary polygons (data/processed/wine_do.geojson) and
+  coloured by type of wine, with hand-placed callout labels.
 - spain-despensa: everything else worth eating — the jamón DOPs, the olive
   oil country, huertas, cheeses, shellfish rías and the Almería greenhouse
   sea — color-coded by category with a swatch legend over the Atlantic.
@@ -185,57 +185,71 @@ def _swatch_legend(ax, frame, x_frac, y_top_frac, entries, size=28,
 
 # ---------------------------------------------------------------------------
 # Map 1 — the wine DOs
+#
+# These use REAL denominación-de-origen boundary polygons from the Ministry
+# (MAPA) "Zonas de Calidad Diferenciada: Vinos" layer, dissolved per DO and
+# committed to data/processed/wine_do.geojson by scripts/download_data.py.
+# Only the label position, wine-type colour and typographic tuning live here;
+# the shape comes from the data, keyed by `key`.
 # ---------------------------------------------------------------------------
+
+@dataclass
+class WineDO:
+    """One wine denominación de origen: a real polygon (looked up by `key`
+    in wine_do.geojson) plus one hand-placed label."""
+    key: str                    # lookup key into data/processed/wine_do.geojson
+    cat: str
+    label: tuple                # (lon, lat) of the label centre
+    name: str | None = None     # label text; defaults to key
+    size: float = 30
+    rotation: float = 0.0
+    sub: str | None = None      # smaller second line under the name
+    sub_size: float = 24
+    leader: bool = False        # leader line from the label to the polygon
+    ha: str = "center"
+
+    @property
+    def text(self) -> str:
+        return self.name if self.name is not None else self.key
+
 
 WINE_ZONES = [
     # Galicia / noroeste
-    Zone("Rías Baixas", "vino_blanco",
-         [(-8.85, 42.55), (-8.7, 42.35), (-8.68, 42.1), (-8.8, 41.95)], 12,
-         label=(-9.7, 42.28), size=32, sub="albariño", leader=True),
-    Zone("Bierzo", "vino_tinto", [(-6.65, 42.58)], 16, label=(-6.65, 42.58),
-         size=30),
+    WineDO("Rías Baixas", "vino_blanco", label=(-9.7, 42.28), size=32,
+           sub="albariño", leader=True),
+    WineDO("Bierzo", "vino_tinto", label=(-6.62, 42.75), size=30, leader=True),
     # Cornisa cantábrica
-    Zone("Txakoli", "vino_blanco", [(-2.9, 43.32), (-2.2, 43.28)], 12,
-         label=(-2.5, 43.62), size=30, leader=True),
+    WineDO("Txakoli", "vino_blanco", label=(-2.4, 43.62), size=30, leader=True),
     # Valle del Ebro
-    Zone("Rioja", "vino_tinto",
-         [(-2.85, 42.57), (-2.45, 42.47), (-1.96, 42.3), (-1.75, 42.18)], 15,
-         label=(-2.35, 42.42), size=36, rotation=-22),
-    Zone("Somontano", "vino_mixto", [(0.1, 42.05)], 15, label=(0.1, 42.3),
-         size=30),
-    Zone("Cariñena", "vino_tinto", [(-1.22, 41.34)], 15, label=(-1.22, 41.12),
-         size=30),
+    WineDO("Rioja", "vino_tinto", label=(-2.4, 42.55), size=36, leader=True),
+    WineDO("Somontano", "vino_mixto", label=(0.05, 42.42), size=30,
+           leader=True),
+    WineDO("Cariñena", "vino_tinto", label=(-1.19, 41.05), size=30,
+           leader=True),
     # Duero
-    Zone("Ribera del Duero", "vino_tinto",
-         [(-4.35, 41.62), (-3.69, 41.67), (-3.2, 41.58)], 15,
-         label=(-3.78, 41.63), size=32),
-    Zone("Rueda", "vino_blanco", [(-4.95, 41.38)], 17, label=(-4.95, 41.16),
-         size=30, sub="verdejo"),
-    Zone("Toro", "vino_tinto", [(-5.39, 41.52)], 14, label=(-5.42, 41.75),
-         size=30),
+    WineDO("Ribera del Duero", "vino_tinto", label=(-3.6, 41.95), size=32,
+           leader=True),
+    WineDO("Rueda", "vino_blanco", label=(-4.9, 41.02), size=30, sub="verdejo",
+           leader=True),
+    WineDO("Toro", "vino_tinto", label=(-5.75, 41.5), size=30, leader=True),
     # Cataluña
-    Zone("Penedès", "vino_espumoso", [(1.45, 41.2), (1.8, 41.43)], 13,
-         label=(2.15, 41.1), size=32, sub="cava", leader=True),
-    Zone("Priorat", "vino_tinto", [(0.82, 41.17)], 11, label=(0.3, 40.98),
-         size=30, leader=True),
+    WineDO("Penedès", "vino_espumoso", label=(2.25, 41.12), size=32,
+           sub="cava", leader=True),
+    WineDO("Priorat", "vino_tinto", label=(0.2, 40.9), size=30, leader=True),
     # Levante / interior
-    Zone("Utiel-Requena", "vino_tinto", [(-1.2, 39.57), (-1.1, 39.49)], 14,
-         label=(-1.15, 39.82), size=28),
-    Zone("Jumilla", "vino_tinto", [(-1.55, 38.62), (-1.25, 38.42)], 15,
-         label=(-1.4, 38.75), size=30),
+    WineDO("Utiel-Requena", "vino_tinto", label=(-1.4, 39.9), size=28,
+           leader=True),
+    WineDO("Jumilla", "vino_tinto", label=(-1.5, 38.9), size=30, leader=True),
     # Meseta sur
-    Zone("La Mancha", "vino_mixto",
-         [(-3.8, 39.5), (-3.1, 39.3), (-2.3, 39.15)], 38,
-         label=(-3.1, 39.33), size=40, sub="el mayor viñedo del mundo"),
-    Zone("Valdepeñas", "vino_tinto", [(-3.38, 38.76)], 14, label=(-3.38, 38.5),
-         size=28),
+    WineDO("La Mancha", "vino_mixto", label=(-3.15, 39.5), size=40,
+           sub="el mayor viñedo del mundo"),
+    WineDO("Valdepeñas", "vino_tinto", label=(-3.36, 38.5), size=28,
+           leader=True),
     # Andalucía
-    Zone("Jerez", "vino_generoso",
-         [(-6.35, 36.78), (-6.14, 36.69), (-6.23, 36.6)], 10,
-         label=(-6.85, 36.45), size=32, sub="fino y manzanilla",
-         leader=True),
-    Zone("Montilla-Moriles", "vino_generoso", [(-4.63, 37.59), (-4.62, 37.44)], 12,
-         label=(-4.62, 37.22), size=28),
+    WineDO("Jerez", "vino_generoso", label=(-6.9, 36.45), size=32,
+           sub="fino y manzanilla", leader=True),
+    WineDO("Montilla-Moriles", "vino_generoso", label=(-4.55, 37.18), size=28,
+           leader=True),
 ]
 
 
@@ -248,12 +262,89 @@ WINE_LEGEND = [
 ]
 
 
+def _leader_anchor(geom, x, y):
+    """Point on `geom` nearest label (x, y): the centroid of the closest part
+    (avoids pointing at open space between disjoint DO subzones)."""
+    parts = list(geom.geoms) if geom.geom_type == "MultiPolygon" else [geom]
+    return min(parts, key=lambda g: g.distance(Point(x, y))).centroid
+
+
+def _draw_wine_zones(ax, zones, geoms, spain, frame, zorder=5):
+    """Draw wine DOs from their real polygons (`geoms`: key -> geometry in
+    MAIN_CRS), reusing the label / leader / sub-line style of _draw_zones."""
+    kper_px = (frame[2] - frame[0]) / style.WIDTH_PX  # data units per pixel
+    for z in zones:
+        geom = geoms.get(z.key)
+        if geom is None or geom.is_empty:
+            print(f"  !! wine DO polygon missing: {z.key}")
+            continue
+        fill, label_color = CATS[z.cat]
+        geom = geom.intersection(spain)
+        gpd.GeoSeries([geom], crs=geo.MAIN_CRS).plot(
+            ax=ax, facecolor=to_rgba(fill, FILL_ALPHA),
+            edgecolor=to_rgba(fill, 0.9), linewidth=1.6, zorder=zorder)
+        x, y = _project_lonlat(*z.label)
+        if z.leader:
+            anchor = _leader_anchor(geom, x, y)
+            ax.annotate("", xy=(anchor.x, anchor.y), xytext=(x, y),
+                        zorder=zorder + 2,
+                        arrowprops=dict(arrowstyle="-", color=LEADER,
+                                        linewidth=2.2, shrinkA=26, shrinkB=4))
+        t = draw.halo_text(ax, x, y, z.text, z.size, weight="extrabold",
+                           color=label_color, halo_width=max(3, z.size / 8),
+                           ha=z.ha, zorder=zorder + 3)
+        t.set_rotation(z.rotation)
+        if z.sub:
+            n_lines = z.text.count("\n") + 1
+            dy = ((z.size * (0.45 + 0.95 * (n_lines - 1)) + z.sub_size * 0.75)
+                  * (style.DPI / 72) * kper_px)
+            st = draw.halo_text(ax, x, y - dy, z.sub, z.sub_size,
+                                weight="semibold", color=label_color,
+                                halo_width=4, ha=z.ha, zorder=zorder + 3)
+            st.set_rotation(z.rotation)
+
+
+def _draw_canary_wine(ax, scene, cat, geom_wgs, label, label_lonlat,
+                      size=25, leader=True, ha="center", zorder=6):
+    """Draw one real DO polygon inside the Canary inset (Malvasía/Lanzarote)."""
+    fill, label_color = CATS[cat]
+    tf = scene["canary_tf"]
+    scale, origin, dx, dy = tf
+    geom = (gpd.GeoSeries([geom_wgs], crs="EPSG:4326")
+            .to_crs(geo.CANARY_CRS).iloc[0])
+    geom = affinity.scale(geom, xfact=scale, yfact=scale, origin=origin)
+    geom = affinity.translate(geom, xoff=dx, yoff=dy)
+    geom = geom.intersection(scene["ccaa_can"].union_all())
+    gpd.GeoSeries([geom], crs=geo.MAIN_CRS).plot(
+        ax=ax, facecolor=to_rgba(fill, FILL_ALPHA),
+        edgecolor=to_rgba(fill, 0.9), linewidth=1.4, zorder=zorder)
+    x, y = geo.canary_xy(_project_canary(*label_lonlat), tf)
+    if leader:
+        anchor = _leader_anchor(geom, x, y)
+        ax.annotate("", xy=(anchor.x, anchor.y), xytext=(x, y),
+                    zorder=zorder + 1,
+                    arrowprops=dict(arrowstyle="-", color=LEADER,
+                                    linewidth=2.0, shrinkA=22, shrinkB=4))
+    draw.halo_text(ax, x, y, label, size, weight="extrabold",
+                   color=label_color, halo_width=4, ha=ha, zorder=zorder + 2)
+
+
+def _load_wine_do():
+    """key -> geometry, reprojected to MAIN_CRS, plus the raw lon/lat gdf."""
+    gdf = geo.load("wine_do")
+    main = gdf.to_crs(geo.MAIN_CRS)
+    geoms = dict(zip(main["key"], main.geometry))
+    wgs = dict(zip(gdf["key"], gdf.geometry))
+    return geoms, wgs
+
+
 def map_spain_vinos():
     s = spain_scene()
     fig, ax, spain = _base_map(s)
-    _draw_zones(ax, WINE_ZONES, spain, s["frame"])
-    # Malvasía de Lanzarote, inside the Canary inset.
-    _draw_canary_zone(ax, s, "vino_blanco", [(-13.66, 28.98)], 9,
+    geoms, wgs = _load_wine_do()
+    _draw_wine_zones(ax, WINE_ZONES, geoms, spain, s["frame"])
+    # Malvasía de Lanzarote, inside the Canary inset (real Lanzarote DO shape).
+    _draw_canary_wine(ax, s, "vino_blanco", wgs["Lanzarote"],
                       "Malvasía de Lanzarote", (-14.7, 28.55), size=25)
     _swatch_legend(ax, s["frame"], 0.03, 0.60, WINE_LEGEND)
     _draw_country_labels(ax, s["frame"])
@@ -262,7 +353,7 @@ def map_spain_vinos():
                      "por tipo de vino")
     draw.draw_attribution(
         ax, s["frame"],
-        "Datos: IGN España · Natural Earth · MAPA (DOP/IGP), zonas aproximadas")
+        "Datos: IGN España · Natural Earth · MAPA (DOP/IGP)")
     return fig
 
 

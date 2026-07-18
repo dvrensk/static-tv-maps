@@ -280,6 +280,75 @@ def render_asturias_ciudades():
     return draw.save(fig, "asturias-ciudades")
 
 
+# Choropleth twin of the towns map: the whole concejo of each town over 10 000
+# inhabitants is painted, shaded by population tier; the rest stay neutral.
+# Sequential warm scale (lightens toward white for the smaller tiers).
+TIER_FILL = [
+    (100_000, "#b23a2e", "más de 100.000 hab."),
+    (20_000, "#cd7f77", "20.000 – 100.000 hab."),
+    (0, "#e2b4b0", "10.000 – 20.000 hab."),
+]
+
+
+def _tier_fill(pop):
+    for floor, color, _ in TIER_FILL:
+        if pop >= floor:
+            return color
+    return TIER_FILL[-1][1]
+
+
+def render_asturias_ciudades_concejos():
+    s = asturias_scene()
+    fig, ax = draw.new_map(s["frame"])
+    draw.draw_context(ax, s["context"])
+
+    # Population of each concejo that has a town over 10 000 inhabitants.
+    conc_pop = {concejo: pop for _t, concejo, pop in cities.ASTURIAS_TOWNS}
+    known = set(s["conc"].mun_name)
+    for concejo in conc_pop:
+        if concejo not in known:
+            print(f"  !! concejo not found in dataset: {concejo}")
+    colors = [_tier_fill(conc_pop[name]) if name in conc_pop else CONCEJO_MUTED
+              for name in s["conc"].mun_name]
+    draw.draw_layer(ax, s["conc"], colors, "#d6cdb9", 1.2, zorder=2)
+    draw.draw_layer(ax, s["conc"].dissolve(), "none", style.BORDER_DARK, 4.0,
+                    zorder=3)
+
+    # Dark dots (so they read on the red fills) + town names.
+    points = cities.load_points()
+    for town, _concejo, pop in cities.ASTURIAS_TOWNS:
+        x, y = points[town]
+        _ms, size = _town_tier(pop)
+        draw.city_dot(ax, (x, y), size=11, zorder=8)
+        spec = TOWN_LABELS[town]
+        if spec.tx is not None:
+            draw.callout(ax, (x, y), (x + spec.tx * KM, y + spec.ty * KM),
+                         town, size, ha=spec.ha)
+        else:
+            draw.halo_text(ax, x + spec.dx * KM, y + spec.dy * KM, town, size,
+                           ha=spec.ha)
+
+    # Tier legend, lower-left over the León side.
+    fx0, fy0, fx1, fy1 = s["frame"]
+    fw, fh = fx1 - fx0, fy1 - fy0
+    lx = fx0 + 0.03 * fw
+    ly = fy0 + 0.20 * fh
+    step = 0.06 * fh
+    for floor, color, text in TIER_FILL:
+        ax.plot(lx, ly, marker="s", ms=30, mfc=color, mec="#7a6f5e", mew=1.8,
+                zorder=20)
+        draw.halo_text(ax, lx + 0.012 * fw, ly, text, 28, weight="semibold",
+                       color="#3c3933", ha="left", va="center", zorder=20)
+        ly -= step
+
+    _neighbor_labels(ax, s["frame"])
+    draw.draw_footer(ax, s["frame"],
+                     "Los concejos más poblados de Asturias · más de "
+                     "10.000 habitantes (INE 2023)")
+    draw.draw_attribution(ax, s["frame"], "Datos: IGN España")
+    return draw.save(fig, "asturias-ciudades-concejos")
+
+
 # ---------------------------------------------------------------------------
 # Rivers map
 # ---------------------------------------------------------------------------
