@@ -148,6 +148,8 @@ def map_spain_rios():
 
     riv = geo.load("rivers20").to_crs(geo.MAIN_CRS)
     _draw_rivers(ax, riv, spain, RIOS_LABELS)
+    gpd.GeoSeries([_project_line(GUADALQUIVIR_MOUTH)], crs=geo.MAIN_CRS).plot(
+        ax=ax, color=RIVER, linewidth=MAIN_LW, zorder=6, capstyle="round")
     _label_rivers(ax, RIOS_LABELS)
 
     from .maps_fisica import RANGE_LABEL
@@ -195,6 +197,12 @@ CIUDADES_RIVER_LABELS = {
 # Portuguese reach.
 TAJO_ESTUARIO = [(-8.77, 39.10), (-8.88, 39.05), (-8.99, 38.95),
                  (-9.04, 38.86), (-9.09, 38.78), (-9.13, 38.72)]
+
+# Natural Earth's Guadalquivir centerline stops in the marshes near La Puebla
+# (-6.20, 36.93), ~15 km short of the real Atlantic mouth at Sanlúcar de
+# Barrameda; extend it by hand down the estuary so it reaches the sea.
+GUADALQUIVIR_MOUTH = [(-6.195, 36.93), (-6.26, 36.90), (-6.32, 36.85),
+                      (-6.36, 36.80), (-6.38, 36.77)]
 
 # The Nervión (Bilbao) and Llobregat (Barcelona) are famous city rivers but
 # too small for Natural Earth's 10 m dataset, so their courses are traced by
@@ -285,6 +293,8 @@ def map_spain_rios_ciudades():
     gpd.GeoSeries([_project_line(TAJO_ESTUARIO)], crs=geo.MAIN_CRS).plot(
         ax=ax, color=RIVER_FAINT, linewidth=MAIN_LW - 0.4, zorder=6,
         capstyle="round")
+    gpd.GeoSeries([_project_line(GUADALQUIVIR_MOUTH)], crs=geo.MAIN_CRS).plot(
+        ax=ax, color=RIVER, linewidth=MAIN_LW, zorder=6, capstyle="round")
 
     pts = cities.load_points()
     for key, (lon, lat) in EXTRA_CITIES.items():
