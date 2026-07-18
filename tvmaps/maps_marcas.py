@@ -75,17 +75,19 @@ HUBS = [
     # --- Cataluña (Mediterráneo al este; el interior a poniente) -----------
     Hub("Manresa", (1.830, 41.727), ["Tous"],
         tx=55, ty=100, ha="left"),
+    Hub("Sabadell", (2.109, 41.549), ["Banco Sabadell"],
+        tx=-20, ty=76, ha="center"),
     Hub("Palau-solità", (2.187, 41.585), ["Mango"],
         tx=150, ty=48, ha="left"),
     Hub("Barcelona", (2.173, 41.387),
-        ["Estrella Damm", "Puig", "Cola Cao", "Gallina Blanca"],
+        ["Estrella Damm", "Puig", "Cola Cao", "Gallina Blanca", "Chupa Chups"],
         tx=140, ty=28, ha="left"),
     Hub("Martorell", (1.930, 41.474), ["SEAT"],
         tx=-140, ty=-12, ha="right"),
     Hub("Sant Sadurní", (1.788, 41.427), ["Freixenet", "Codorníu"],
         tx=-125, ty=-88, ha="right"),
     Hub("Gavà", (1.990, 41.305), ["Roca"],
-        tx=150, ty=-90, ha="left"),
+        tx=128, ty=-86, ha="center"),
 
     # --- Comunidad Valenciana ----------------------------------------------
     Hub("Vila-real", (-0.101, 39.938), ["Porcelanosa"],
