@@ -14,12 +14,17 @@ Everything lands in [`output/`](output/), pre-rendered and committed:
 | --- | --- |
 | `spain-comunidades` | The 17 autonomous communities (plus Ceuta and Melilla), each colored and named |
 | `spain-provincias-1` / `-2` | All 50 provinces, colored by community. The names are split over two maps so every label has room; cramped provinces get leader lines |
+| `spain-provincias-numeros` | All 50 provinces labeled with their INE code — the two-digit postal-code prefix |
 | `asturias-concejos-1` / `-2` | The 78 concejos of Asturias, names split over two maps the same way |
 | `*-mudo` | The same maps without names ("mapa mudo"), for quizzing yourself |
 
-The Canary Islands are always present, transposed at true scale into a framed
-inset in the lower-left Atlantic corner — their real direction of travel from
-the peninsula.
+All on-map text is in Spanish. Instead of big titles, each map carries a small
+caption in the lower-right corner, so the geography gets every pixel.
+
+The Canary Islands are always present, transposed into a framed inset in the
+lower-left Atlantic corner — their real direction of travel from the
+peninsula. The inset may cover Portugal or Morocco but never Spain; if space
+is tight the archipelago shrinks slightly rather than overlap the peninsula.
 
 ## Running it
 

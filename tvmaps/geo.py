@@ -50,22 +50,33 @@ def frame_polygon(frame) -> Polygon:
     return Polygon([(minx, miny), (maxx, miny), (maxx, maxy), (minx, maxy)])
 
 
-def place_canary(canary: gpd.GeoDataFrame, frame, margin_x=0.025, margin_y=0.045):
+def place_canary(canary: gpd.GeoDataFrame, frame, margin_x=0.02, margin_y=0.035,
+                 max_x=None):
     """Project the Canary Islands in their own CRS and translate them to the
     lower-left corner of the frame (their true direction from the peninsula).
 
     Returns the translated GeoDataFrame (in main-map coordinates) and the
     inset rectangle (minx, miny, maxx, maxy) to draw around them.
-    Both CRSs are metric UTM zones, so true relative scale is preserved.
+    Both CRSs are metric UTM zones, so relative scale is preserved — unless
+    `max_x` (a hard limit so the box never covers Spanish territory) forces
+    the archipelago to shrink slightly.
     """
     can = canary.to_crs(CANARY_CRS).copy()
     fx0, fy0, fx1, fy1 = frame
     fw, fh = fx1 - fx0, fy1 - fy0
     cx0, cy0, cx1, cy1 = can.total_bounds
     pad = 42_000  # metres of breathing room inside the inset box
-    target_x = fx0 + margin_x * fw + pad
-    target_y = fy0 + margin_y * fh + pad
-    dx, dy = target_x - cx0, target_y - cy0
+    target_x0 = fx0 + margin_x * fw  # left edge of the box
+    scale = 1.0
+    if max_x is not None:
+        natural_w = (cx1 - cx0) + 2 * pad
+        scale = min(1.0, (max_x - target_x0) / natural_w)
+    can.geometry = can.geometry.apply(
+        lambda g: affinity.scale(g, xfact=scale, yfact=scale, origin=(cx0, cy0)))
+    pad *= scale
+    cx0, cy0, cx1, cy1 = can.total_bounds
+    dx = target_x0 + pad - cx0
+    dy = fy0 + margin_y * fh + pad - cy0
     can.geometry = can.geometry.apply(lambda g: affinity.translate(g, xoff=dx, yoff=dy))
     box = (cx0 + dx - pad, cy0 + dy - pad, cx1 + dx + pad, cy1 + dy + pad)
     return can, box

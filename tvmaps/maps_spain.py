@@ -28,10 +28,14 @@ def spain_scene():
 
     ccaa_pen = ccaa[ccaa.acom_code != "05"].to_crs(geo.MAIN_CRS)
     prov_pen = prov[prov.acom_code != "05"].to_crs(geo.MAIN_CRS)
-    # Extra padding at the top leaves a band of open sea for the title.
-    frame = geo.compute_frame(ccaa_pen.total_bounds, pad=(0.03, 0.075, 0.03, 0.16))
-    ccaa_can, box = geo.place_canary(ccaa[ccaa.acom_code == "05"], frame)
-    prov_can, _ = geo.place_canary(prov[prov.acom_code == "05"], frame)
+    # Keep just enough sea at the top for the northern callout labels; every
+    # km of padding makes the peninsula smaller.
+    frame = geo.compute_frame(ccaa_pen.total_bounds, pad=(0.03, 0.05, 0.03, 0.085))
+    # The Canary inset may cover Portugal or Morocco but never Spain: cap its
+    # right edge just west of the Huelva coast.
+    limit = _project_lonlat(-7.6, 37.0)[0]
+    ccaa_can, box = geo.place_canary(ccaa[ccaa.acom_code == "05"], frame, max_x=limit)
+    prov_can, _ = geo.place_canary(prov[prov.acom_code == "05"], frame, max_x=limit)
 
     return dict(
         frame=frame,
@@ -86,7 +90,7 @@ CCAA_LABELS = {
     "07": Label(),                      # Castilla y León
     "08": Label(54, dx=35, dy=-5),      # Castilla-La Mancha
     "09": Label(),                      # Cataluña
-    "10": Label(44, tx=130, ty=100, ha="left"),  # C. Valenciana — at sea
+    "10": Label(44, tx=103, ty=30, ha="left"),   # C. Valenciana — at sea
     "11": Label(52, dx=-25, dy=-20),    # Extremadura
     "12": Label(48),                    # Galicia
     "13": Label(40),                    # Madrid
@@ -130,11 +134,11 @@ def map_spain_comunidades(labels=True):
     if labels:
         _label_regions(ax, s["ccaa_pen"], "acom_code",
                        lambda c, r: style.CCAA_DISPLAY[c], CCAA_LABELS)
-        title = "Comunidades Autónomas de España"
+        footer = "Comunidades autónomas de España"
     else:
-        title = "España · mapa mudo de comunidades"
+        footer = "Mapa mudo · Comunidades autónomas de España"
     _draw_country_labels(ax, s["frame"])
-    draw.draw_title(ax, s["frame"], title)
+    draw.draw_footer(ax, s["frame"], footer)
     draw.draw_attribution(ax, s["frame"])
     return fig
 
@@ -262,13 +266,12 @@ def map_spain_provincias(group=None):
         _label_regions(ax, s["prov_pen"], "prov_code", _prov_name, specs)
         _label_regions(ax, s["prov_can"], "prov_code", _prov_name, specs)
         n = "1" if group == "A" else "2"
-        title = f"Provincias de España · {n} de 2"
-        subtitle = "colores por comunidad autónoma"
+        footer = (f"Provincias de España (nombres {n} de 2) · "
+                  "colores por comunidad autónoma")
     else:
-        title = "España · mapa mudo de provincias"
-        subtitle = None
+        footer = "Mapa mudo · Provincias de España"
     _draw_country_labels(ax, s["frame"])
-    draw.draw_title(ax, s["frame"], title, subtitle)
+    draw.draw_footer(ax, s["frame"], footer)
     draw.draw_attribution(ax, s["frame"])
     return fig
 
@@ -283,3 +286,45 @@ def render_spain_provincias_2():
 
 def render_spain_provincias_mudo():
     return draw.save(map_spain_provincias(None), "spain-provincias-mudo")
+
+
+# Number placement: numbers are compact, so nearly all fit directly; only the
+# smallest features get size tweaks or (Ceuta/Melilla) leader lines.
+NUM_LABELS = {
+    "01": Label(36), "20": Label(34), "48": Label(34),   # País Vasco
+    "26": Label(36), "28": Label(40), "39": Label(40),   # Rioja/Madrid/Cantabria
+    "36": Label(40),                                      # Pontevedra
+    "07": Label(40),                                      # Baleares (on Mallorca)
+    "35": Label(38), "38": Label(38),                     # Canarias
+    "51": Label(30, tx=-45, ty=20, ha="right"),           # Ceuta
+    "52": Label(30, tx=20, ty=35, ha="left"),             # Melilla
+}
+
+
+def map_spain_provincias_numeros():
+    s = spain_scene()
+    fig, ax = draw.new_map(s["frame"])
+    draw.draw_context(ax, s["countries"])
+
+    draw.draw_layer(ax, s["prov_pen"], _province_colors(s["prov_pen"]),
+                    style.BORDER_LIGHT, 1.8, zorder=2)
+    draw.draw_layer(ax, s["ccaa_pen"], "none", style.BORDER_DARK, 3.2, zorder=3)
+    draw.draw_inset_box(ax, s["canary_box"], label="Islas Canarias")
+    draw.draw_layer(ax, s["prov_can"], _province_colors(s["prov_can"]),
+                    style.BORDER_LIGHT, 1.8, zorder=4)
+    draw.draw_layer(ax, s["ccaa_can"], "none", style.BORDER_DARK, 2.2, zorder=5)
+
+    specs = {code: NUM_LABELS.get(code, Label(46)) for code in PROV_LABELS}
+    for layer in (s["prov_pen"], s["prov_can"]):
+        _label_regions(ax, layer, "prov_code", lambda c, r: c, specs)
+
+    _draw_country_labels(ax, s["frame"])
+    draw.draw_footer(ax, s["frame"],
+                     "Provincias de España · el número es el prefijo "
+                     "del código postal")
+    draw.draw_attribution(ax, s["frame"])
+    return fig
+
+
+def render_spain_provincias_numeros():
+    return draw.save(map_spain_provincias_numeros(), "spain-provincias-numeros")

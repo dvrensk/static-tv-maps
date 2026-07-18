@@ -131,11 +131,11 @@ def map_asturias_concejos(group=None):
         _label_regions(ax, s["conc"], "mun_code",
                        lambda c, r: wrap_name(r.mun_name), specs)
         n = "1" if group == "A" else "2"
-        title = f"Concejos de Asturias · {n} de 2"
+        footer = f"Concejos de Asturias (nombres {n} de 2)"
     else:
-        title = "Asturias · mapa mudo de concejos"
+        footer = "Mapa mudo · Concejos de Asturias"
     _neighbor_labels(ax, s["frame"])
-    draw.draw_title(ax, s["frame"], title)
+    draw.draw_footer(ax, s["frame"], footer)
     draw.draw_attribution(ax, s["frame"], "Datos: IGN España")
     return fig
 

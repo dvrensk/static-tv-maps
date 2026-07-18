@@ -86,6 +86,14 @@ def draw_attribution(ax, frame, text="Datos: IGN España · Natural Earth"):
               ha="right", va="bottom", zorder=20)
 
 
+def draw_footer(ax, frame, text):
+    """Small caption in the lower-right corner saying what the map shows."""
+    fx0, fy0, fx1, fy1 = frame
+    halo_text(ax, fx1 - 0.008 * (fx1 - fx0), fy0 + 0.038 * (fy1 - fy0), text,
+              30, weight="semibold", color="#5d5a54", halo_width=6,
+              ha="right", va="bottom", zorder=20)
+
+
 def draw_inset_box(ax, box, label=None, zorder=3):
     """Rounded rectangle that hosts the Canary Islands inset."""
     x0, y0, x1, y1 = box
