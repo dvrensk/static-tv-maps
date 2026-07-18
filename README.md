@@ -17,6 +17,7 @@ Everything lands in [`output/`](output/), pre-rendered and committed:
 | `spain-provincias-numeros` | All 50 provinces labeled with their INE code — the two-digit postal-code prefix — with a full name legend (01–26 in the Atlantic, 27–52 in the Mediterranean) |
 | `spain-capitales-provincias` | All 52 province capitals, dot + name, on the community-colored provinces |
 | `spain-capitales-comunidades` | The community capitals starred and named (Canarias has two co-capitals) |
+| `spain-comunidades-capitales` | The 17 communities colored, showing both the community name and its capital together |
 | `spain-ciudades` | The 30 most populated municipalities (INE 2025, metro-area satellites excluded), numbered by rank with a population legend in the Atlantic |
 | `spain-fisica` | The major rivers (Miño, Duero, Tajo, Guadiana, Guadalquivir, Ebro, Júcar, Segura, Genil, Turia) and mountain systems (Pirineos, Cordillera Cantábrica, Macizo Galaico, Sistema Central, Sistema Ibérico, Montes de Toledo, Sierra Morena, Sistemas Béticos) |
 | `spain-rios` | The ~20 rivers a schoolchild learns, across all three watersheds, with the mountain systems shaded underneath |

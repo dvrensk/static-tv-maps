@@ -31,13 +31,13 @@ POLITICAL_MAPS = [
 
 def registry():
     from tvmaps import (maps_asturias, maps_capitals, maps_ciudades,
-                        maps_editoriales, maps_fisica, maps_marcas, maps_moda,
-                        maps_productos, maps_rios, maps_spain)
+                        maps_comcap, maps_editoriales, maps_fisica, maps_marcas,
+                        maps_moda, maps_productos, maps_rios, maps_spain)
 
     maps = {}
     for mod in (maps_spain, maps_asturias, maps_capitals, maps_ciudades,
                 maps_fisica, maps_rios, maps_productos, maps_moda,
-                maps_editoriales, maps_marcas):
+                maps_editoriales, maps_marcas, maps_comcap):
         for name in dir(mod):
             if name.startswith("render_"):
                 key = name[len("render_"):].replace("_", "-")
