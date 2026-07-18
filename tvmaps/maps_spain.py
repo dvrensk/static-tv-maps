@@ -34,8 +34,8 @@ def spain_scene():
     # The Canary inset may cover Portugal or Morocco but never Spain: cap its
     # right edge just west of the Huelva coast.
     limit = _project_lonlat(-7.6, 37.0)[0]
-    ccaa_can, box = geo.place_canary(ccaa[ccaa.acom_code == "05"], frame, max_x=limit)
-    prov_can, _ = geo.place_canary(prov[prov.acom_code == "05"], frame, max_x=limit)
+    ccaa_can, box, tf = geo.place_canary(ccaa[ccaa.acom_code == "05"], frame, max_x=limit)
+    prov_can, _, _ = geo.place_canary(prov[prov.acom_code == "05"], frame, max_x=limit)
 
     return dict(
         frame=frame,
@@ -45,6 +45,7 @@ def spain_scene():
         prov_pen=prov_pen,
         prov_can=prov_can,
         canary_box=box,
+        canary_tf=tf,
     )
 
 
@@ -88,9 +89,9 @@ CCAA_LABELS = {
     "04": Label(44, dx=-30, dy=-75),    # Islas Baleares — at sea below Mallorca
     "06": Label(40, tx=-20, ty=75),     # Cantabria — callout into the sea
     "07": Label(),                      # Castilla y León
-    "08": Label(54, dx=35, dy=-5),      # Castilla-La Mancha
+    "08": Label(54, dx=-35),            # Castilla-La Mancha
     "09": Label(),                      # Cataluña
-    "10": Label(44, tx=103, ty=30, ha="left"),   # C. Valenciana — at sea
+    "10": Label(38, dx=28, dy=-25),     # Comunidad Valenciana
     "11": Label(52, dx=-25, dy=-20),    # Extremadura
     "12": Label(48),                    # Galicia
     "13": Label(40),                    # Madrid

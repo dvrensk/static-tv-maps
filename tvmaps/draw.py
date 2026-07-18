@@ -112,6 +112,37 @@ def draw_inset_box(ax, box, label=None, zorder=3):
     return patch
 
 
+def city_dot(ax, xy, size=13, face="#3a3733", edge="#ffffff", zorder=8):
+    ax.plot(xy[0], xy[1], "o", ms=size, mfc=face, mec=edge, mew=2.2, zorder=zorder)
+
+
+def city_star(ax, xy, size=26, face="#f2c53d", edge="#4d4a45", zorder=8):
+    ax.plot(xy[0], xy[1], "*", ms=size, mfc=face, mec=edge, mew=2.0, zorder=zorder)
+
+
+def legend_column(ax, frame, x_frac, y_top_frac, rows, size=26,
+                  color=style.LABEL_COLOR, leading=1.5, num_gap_frac=0.0045):
+    """A numbered legend column.
+
+    `rows` is a list of (number, text) tuples; numbers are right-aligned at
+    x_frac, texts left-aligned just after. Returns the bottom y fraction."""
+    fx0, fy0, fx1, fy1 = frame
+    fw, fh = fx1 - fx0, fy1 - fy0
+    row_frac = (size * style.DPI / 72 * leading) / style.HEIGHT_PX
+    x_num = fx0 + x_frac * fw
+    x_text = fx0 + (x_frac + num_gap_frac) * fw
+    y = y_top_frac
+    for num, text in rows:
+        yy = fy0 + y * fh
+        if num is not None:
+            halo_text(ax, x_num, yy, str(num), size, weight="extrabold",
+                      color=color, ha="right", va="top", zorder=20)
+        halo_text(ax, x_text, yy, text, size, weight="semibold",
+                  color=color, ha="left", va="top", zorder=20)
+        y -= row_frac
+    return y
+
+
 # When True (see generate.py --jpg), each map is also written as JPEG —
 # handy for TVs that only accept JPEG from USB sticks or DLNA servers.
 SAVE_JPG = False

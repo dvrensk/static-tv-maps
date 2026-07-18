@@ -55,7 +55,7 @@ CCAA_DISPLAY = {
     "05": "Canarias",
     "06": "Cantabria",
     "07": "Castilla y León",
-    "08": "Castilla-La Mancha",
+    "08": "Castilla-\nLa Mancha",
     "09": "Cataluña",
     "10": "Comunidad\nValenciana",
     "11": "Extremadura",

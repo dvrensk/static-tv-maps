@@ -128,6 +128,132 @@ def process_context_countries() -> None:
     print(f"  wrote {out.name}: {len(gdf)} features")
 
 
+# Cities and towns whose exact point locations the maps need. Geocoded once
+# via Nominatim (OSM) and committed in data/processed/cities.geojson; the raw
+# responses are cached per city under data/raw/nominatim/.
+# key -> search query
+CITY_QUERIES = {
+    # Province capitals (the key is the display name used on the maps)
+    "Vitoria-Gasteiz": "Vitoria-Gasteiz, España",
+    "Albacete": "Albacete, España",
+    "Alicante": "Alicante, España",
+    "Almería": "Almería, España",
+    "Ávila": "Ávila, España",
+    "Badajoz": "Badajoz, España",
+    "Palma": "Palma de Mallorca, España",
+    "Barcelona": "Barcelona, España",
+    "Burgos": "Burgos, España",
+    "Cáceres": "Cáceres, España",
+    "Cádiz": "Cádiz, España",
+    "Castellón de la Plana": "Castellón de la Plana, España",
+    "Ciudad Real": "Ciudad Real, España",
+    "Córdoba": "Córdoba, España",
+    "A Coruña": "A Coruña, España",
+    "Cuenca": "Cuenca, España",
+    "Girona": "Girona, España",
+    "Granada": "Granada, España",
+    "Guadalajara": "Guadalajara, España",
+    "San Sebastián": "Donostia-San Sebastián, España",
+    "Huelva": "Huelva, España",
+    "Huesca": "Huesca, España",
+    "Jaén": "Jaén, España",
+    "León": "León, España",
+    "Lleida": "Lleida, España",
+    "Logroño": "Logroño, España",
+    "Lugo": "Lugo, España",
+    "Madrid": "Madrid, España",
+    "Málaga": "Málaga, España",
+    "Murcia": "Murcia, España",
+    "Pamplona": "Pamplona, España",
+    "Ourense": "Ourense, España",
+    "Oviedo": "Oviedo, Asturias, España",
+    "Palencia": "Palencia, España",
+    "Las Palmas de Gran Canaria": "Las Palmas de Gran Canaria, España",
+    "Pontevedra": "Pontevedra, España",
+    "Salamanca": "Salamanca, España",
+    "Santa Cruz de Tenerife": "Santa Cruz de Tenerife, España",
+    "Santander": "Santander, España",
+    "Segovia": "Segovia, España",
+    "Sevilla": "Sevilla, España",
+    "Soria": "Soria, España",
+    "Tarragona": "Tarragona, España",
+    "Teruel": "Teruel, España",
+    "Toledo": "Toledo, España",
+    "Valencia": "Valencia, España",
+    "Valladolid": "Valladolid, España",
+    "Bilbao": "Bilbao, España",
+    "Zamora": "Zamora, España",
+    "Zaragoza": "Zaragoza, España",
+    "Ceuta": "Ceuta, España",
+    "Melilla": "Melilla, España",
+    # Community capitals not already above
+    "Mérida": "Mérida, Badajoz, España",
+    "Santiago de Compostela": "Santiago de Compostela, España",
+    # Big non-capital cities
+    "Vigo": "Vigo, España",
+    "Gijón": "Gijón, Asturias, España",
+    "Elche": "Elche, España",
+    "Jerez de la Frontera": "Jerez de la Frontera, España",
+    "Cartagena": "Cartagena, España",
+    # Main towns of Asturias (capitals of the concejos over 10 000 inhabitants)
+    "Avilés": "Avilés, Asturias, España",
+    "Pola de Siero": "Pola de Siero, Asturias, España",
+    "Langreo": "La Felguera, Langreo, Asturias, España",
+    "Mieres": "Mieres del Camino, Asturias, España",
+    "Piedras Blancas": "Piedras Blancas, Castrillón, Asturias, España",
+    "Nubledo": "Nubledo, Corvera de Asturias, España",
+    "Sotrondio": "Sotrondio, Asturias, España",
+    "Villaviciosa": "Villaviciosa, Asturias, España",
+    "Posada": "Posada, Llanera, Asturias, España",
+    "Llanes": "Llanes, Asturias, España",
+    "Pola de Laviana": "Pola de Laviana, Asturias, España",
+    "Cangas del Narcea": "Cangas del Narcea, Asturias, España",
+    "Luarca": "Luarca, Asturias, España",
+    "Luanco": "Luanco, Asturias, España",
+    "Pola de Lena": "Pola de Lena, Asturias, España",
+    "Candás": "Candás, Asturias, España",
+    "Cabañaquinta": "Cabañaquinta, Aller, Asturias, España",
+}
+
+
+def process_cities() -> None:
+    import json
+    import time
+
+    cache_dir = RAW / "nominatim"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    features = []
+    for key, query in CITY_QUERIES.items():
+        cache = cache_dir / (key.replace(" ", "_").replace("/", "-") + ".json")
+        if not cache.exists():
+            resp = requests.get(
+                "https://nominatim.openstreetmap.org/search",
+                params={"q": query, "format": "json", "limit": 1},
+                headers={"User-Agent": "static-tv-maps/1.0 (personal project)"},
+                timeout=30,
+            )
+            resp.raise_for_status()
+            cache.write_text(resp.text)
+            time.sleep(1.1)  # Nominatim usage policy: max 1 request/second
+        hits = json.loads(cache.read_text())
+        if not hits:
+            print(f"  !! no result for {key} ({query})")
+            continue
+        lon, lat = float(hits[0]["lon"]), float(hits[0]["lat"])
+        if not (-19.0 < lon < 5.0 and 27.0 < lat < 44.5):
+            print(f"  !! suspicious location for {key}: {lat:.3f}, {lon:.3f}")
+        features.append({
+            "type": "Feature",
+            "properties": {"key": key},
+            "geometry": {"type": "Point", "coordinates": [round(lon, 5), round(lat, 5)]},
+        })
+    out = PROCESSED / "cities.geojson"
+    out.write_text(json.dumps(
+        {"type": "FeatureCollection", "features": features},
+        ensure_ascii=False, indent=None))
+    print(f"  wrote {out.name}: {len(features)} cities")
+
+
 def main() -> None:
     RAW.mkdir(parents=True, exist_ok=True)
     PROCESSED.mkdir(parents=True, exist_ok=True)
@@ -139,6 +265,8 @@ def main() -> None:
     process_asturias()
     print("Context countries:")
     process_context_countries()
+    print("Cities:")
+    process_cities()
     print("Done.")
 
 
