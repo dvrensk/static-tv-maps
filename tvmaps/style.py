@@ -101,11 +101,47 @@ COMARCA_COLORS_SOBRIO = {
     "Nalón": "#cc9e8c", "Oriente": "#86b0a4",
 }
 
+# Vivid "galaxy" palette: saturated pinks, purples, cyans and gold, in the
+# cosmic register some younger viewers love. Still medium-light so the dark
+# labels and white halos stay readable.
+CCAA_COLORS_GALAXIA = {
+    "01": "#f2c34d",  # Andalucía        gold
+    "02": "#f79a5c",  # Aragón           tiger orange
+    "03": "#3fd0c0",  # Asturias         turquoise
+    "04": "#f483c0",  # Illes Balears    hot pink
+    "05": "#f4d868",  # Canarias         yellow
+    "06": "#6fb0ef",  # Cantabria        sky blue
+    "07": "#c3a6ee",  # Castilla y León  lavender
+    "08": "#5cc2e8",  # Castilla-La Mancha cyan
+    "09": "#d15fc0",  # Cataluña         magenta
+    "10": "#8f7ce6",  # C. Valenciana    violet
+    "11": "#f28cb0",  # Extremadura      pink
+    "12": "#7f9cf0",  # Galicia          periwinkle
+    "13": "#a86fe0",  # Madrid           bright purple
+    "14": "#f78fa0",  # Murcia           coral pink
+    "15": "#cf8fe6",  # Navarra          orchid
+    "16": "#58cfa8",  # País Vasco       mint green
+    "17": "#ec6fb0",  # La Rioja         magenta pink
+    "18": "#6fd0e0",  # Ceuta            aqua
+    "19": "#b98fe6",  # Melilla          lilac
+}
+CONCEJO_PALETTE_GALAXIA = [
+    "#4fcbd6", "#f483c0", "#8f7ce6", "#f2c34d",
+    "#6fb0ef", "#d15fc0", "#f79a5c", "#58cfa8",
+]
+COMARCA_COLORS_GALAXIA = {
+    "Eo-Navia": "#6fb0ef", "Narcea": "#f2c34d", "Avilés": "#f483c0",
+    "Oviedo": "#a88fea", "Gijón": "#f79a5c", "Caudal": "#d15fc0",
+    "Nalón": "#4fcbd6", "Oriente": "#7f9cf0",
+}
+
 THEMES = {
     "vivo": dict(ccaa=CCAA_COLORS_VIVO, concejo=CONCEJO_PALETTE_VIVO,
                  comarca=COMARCA_COLORS_VIVO, suffix=""),
     "sobrio": dict(ccaa=CCAA_COLORS_SOBRIO, concejo=CONCEJO_PALETTE_SOBRIO,
                    comarca=COMARCA_COLORS_SOBRIO, suffix="-sobrio"),
+    "galaxia": dict(ccaa=CCAA_COLORS_GALAXIA, concejo=CONCEJO_PALETTE_GALAXIA,
+                    comarca=COMARCA_COLORS_GALAXIA, suffix="-galaxia"),
 }
 
 # Active theme (mutated by set_theme). Modules read these at render time.

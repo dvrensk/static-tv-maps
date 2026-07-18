@@ -66,11 +66,11 @@ Conventions:
 - Community colors are hand-tuned so neighbours differ; if you change one,
   check its neighbours. Provinces use `style.shade()` variations of the
   community color. Concejos use greedy graph coloring.
-- Two palettes live in `style.py` (`THEMES`): "vivo" (default) and "sobrio"
-  (muted). `generate.py all --theme sobrio` renders only the political maps
-  (see `POLITICAL_MAPS`) with a `-sobrio` suffix. Modules read
-  `style.CCAA_COLORS` / `style.CONCEJO_PALETTE` / `style.COMARCA_COLORS` at
-  render time, which `style.set_theme()` swaps.
+- Three palettes live in `style.py` (`THEMES`): "vivo" (default), "sobrio"
+  (muted) and "galaxia" (vivid cosmic). `generate.py all --theme <name>`
+  renders only the political maps (see `POLITICAL_MAPS`) with a per-theme
+  suffix. Modules read `style.CCAA_COLORS` / `style.CONCEJO_PALETTE` /
+  `style.COMARCA_COLORS` at render time, which `style.set_theme()` swaps.
 - Names: common Castilian (see `PROVINCE_DISPLAY` / `CCAA_DISPLAY`).
 - Every visible collision matters: after any change, re-render and actually
   look at the image at full size before committing.
