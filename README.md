@@ -14,8 +14,14 @@ Everything lands in [`output/`](output/), pre-rendered and committed:
 | --- | --- |
 | `spain-comunidades` | The 17 autonomous communities (plus Ceuta and Melilla), each colored and named |
 | `spain-provincias-1` / `-2` | All 50 provinces, colored by community. The names are split over two maps so every label has room; cramped provinces get leader lines |
-| `spain-provincias-numeros` | All 50 provinces labeled with their INE code — the two-digit postal-code prefix |
+| `spain-provincias-numeros` | All 50 provinces labeled with their INE code — the two-digit postal-code prefix — with a full name legend (01–26 in the Atlantic, 27–52 in the Mediterranean) |
+| `spain-capitales-provincias` | All 52 province capitals, dot + name, on the community-colored provinces |
+| `spain-capitales-comunidades` | The community capitals starred and named (Canarias has two co-capitals) |
+| `spain-ciudades` | The 30 most populated municipalities (INE 2025, metro-area satellites excluded), numbered by rank with a population legend in the Atlantic |
+| `spain-fisica` | The major rivers (Miño, Duero, Tajo, Guadiana, Guadalquivir, Ebro, Júcar, Segura, Genil, Turia) and mountain systems (Pirineos, Cordillera Cantábrica, Macizo Galaico, Sistema Central, Sistema Ibérico, Montes de Toledo, Sierra Morena, Sistemas Béticos) |
 | `asturias-concejos-1` / `-2` | The 78 concejos of Asturias, names split over two maps the same way |
+| `asturias-comarcas` | The 8 functional comarcas of Asturias (decree 11/91) |
+| `asturias-ciudades` | The main towns of Asturias — every concejo over 10 000 inhabitants |
 | `*-mudo` | The same maps without names ("mapa mudo"), for quizzing yourself |
 
 All on-map text is in Spanish. Instead of big titles, each map carries a small
@@ -58,8 +64,17 @@ need network access; only `make data` does.
   boundaries of **IGN España** (Instituto Geográfico Nacional) with clean INE
   codes and names. Simplified with a topology-preserving pass
   (`shapely.coverage_simplify`) to ~100 m, far below one on-screen pixel.
-- **Neighbouring countries** — [Natural Earth](https://www.naturalearthdata.com/)
-  10 m admin-0 (public domain), clipped around Iberia.
+- **Neighbouring countries, rivers, mountain regions** —
+  [Natural Earth](https://www.naturalearthdata.com/) 10 m admin-0,
+  rivers_lake_centerlines (+ europe supplement) and geography_regions_polys
+  (public domain), clipped around Iberia. Ranges missing from Natural Earth
+  (Sistema Central, Sistema Ibérico, Montes de Toledo, Macizo Galaico) are
+  drawn as hand-placed capsules through their known summits.
+- **City locations** — geocoded once via
+  [Nominatim](https://nominatim.openstreetmap.org/) (© OpenStreetMap
+  contributors, ODbL) and committed to `data/processed/cities.geojson`.
+  Populations: INE (padrón, 1 Jan 2025 for Spain; 2023 for Asturias).
+  Comarca composition: decree 11/91 of the Principado de Asturias.
 - Also evaluated: [es-atlas](https://github.com/martgnz/es-atlas) (TopoJSON of
   the same IGN data, journalism-style; too generalized for 4000 px) and raw IGN
   Centro de Descargas (canonical but awkward to script).

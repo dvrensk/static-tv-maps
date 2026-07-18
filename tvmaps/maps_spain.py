@@ -319,6 +319,18 @@ def map_spain_provincias_numeros():
     for layer in (s["prov_pen"], s["prov_can"]):
         _label_regions(ax, layer, "prov_code", lambda c, r: c, specs)
 
+    # Name legend: 01-26 over the Atlantic (above the Canary inset box),
+    # 27-52 over the Mediterranean along the right edge.
+    names = {}
+    for _, row in geo.load("provincias").iterrows():
+        names[row.prov_code] = style.PROVINCE_DISPLAY.get(
+            row.prov_code, row.prov_name).replace("\n", " ")
+    rows = [(code, names[code]) for code in sorted(names)]
+    draw.legend_column(ax, s["frame"], 0.030, 0.86, rows[:26],
+                       size=25, leading=1.38)
+    draw.legend_column(ax, s["frame"], 0.855, 0.80, rows[26:],
+                       size=25, leading=1.38)
+
     _draw_country_labels(ax, s["frame"])
     draw.draw_footer(ax, s["frame"],
                      "Provincias de España · el número es el prefijo "

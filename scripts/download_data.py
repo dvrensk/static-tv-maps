@@ -30,6 +30,7 @@ PROCESSED = ROOT / "data" / "processed"
 
 ODS = "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets"
 NE_COUNTRIES = "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_countries.zip"
+NE_PHYSICAL = "https://naciscdn.org/naturalearth/10m/physical"
 
 # Simplification tolerance in degrees. 0.001 deg is roughly 100 m — far below
 # one pixel at 4000 px for a map of Spain (~370 m/px).
@@ -126,6 +127,74 @@ def process_context_countries() -> None:
     out = PROCESSED / "context_countries.geojson"
     gdf.to_file(out, driver="GeoJSON")
     print(f"  wrote {out.name}: {len(gdf)} features")
+
+
+# --- Physical geography (rivers + mountain ranges) -------------------------
+#
+# Rivers come from two Natural Earth 10m datasets: the worldwide
+# rivers_lake_centerlines (which carries the six biggest Iberian rivers) and
+# the rivers_europe supplement (which adds the Júcar, Segura, Genil and
+# Turia). The worldwide file mixes languages in `name` (Tejo, Minho, ...) but
+# `name_es` is reliably the Spanish name; the europe supplement's `name_es`
+# is NOT reliable (e.g. the Guadiana Menor carries name_es "Guadalquivir"),
+# so there we match on `name`, which for our four targets is already the
+# Spanish form.
+
+# Matched against `name_es` in ne_10m_rivers_lake_centerlines.
+RIVERS_WORLD = {"Miño", "Duero", "Tajo", "Guadiana", "Guadalquivir", "Ebro"}
+# Matched against `name` in ne_10m_rivers_europe.
+RIVERS_EUROPE = {"Júcar", "Segura", "Genil", "Turia"}
+
+# Mountain-range polygons in ne_10m_geography_regions_polys that exist for
+# Spain (matched against NAME_ES). The Sistema Central, Sistema Ibérico,
+# Montes de Toledo and Macizo Galaico have no polygon in Natural Earth; the
+# physical map hand-places those (see tvmaps/maps_fisica.py).
+MOUNTAIN_RANGES = {"Pirineos", "Cordillera Cantábrica", "Sierra Morena",
+                   "Sierra Nevada"}
+
+# Generous lon/lat box around the Iberian peninsula.
+IBERIA_BOX = (-9.95, 35.7, 4.6, 44.3)
+
+
+def process_physical() -> None:
+    import pandas as pd
+    from shapely.ops import linemerge
+
+    world = fetch(f"{NE_PHYSICAL}/ne_10m_rivers_lake_centerlines.zip",
+                  RAW / "ne_10m_rivers_lake_centerlines.zip",
+                  "Natural Earth rivers (world)")
+    europe = fetch(f"{NE_PHYSICAL}/ne_10m_rivers_europe.zip",
+                   RAW / "ne_10m_rivers_europe.zip",
+                   "Natural Earth rivers (europe supplement)")
+    regions = fetch(f"{NE_PHYSICAL}/ne_10m_geography_regions_polys.zip",
+                    RAW / "ne_10m_geography_regions_polys.zip",
+                    "Natural Earth geography regions")
+
+    gw = gpd.read_file(f"zip://{world}")
+    gw = gw[gw["name_es"].isin(RIVERS_WORLD)]
+    gw = gw[["name_es", "geometry"]].rename(columns={"name_es": "name"})
+    ge = gpd.read_file(f"zip://{europe}!ne_10m_rivers_europe.shp")
+    ge = ge[ge["name"].isin(RIVERS_EUROPE)][["name", "geometry"]]
+    riv = gpd.GeoDataFrame(pd.concat([gw, ge], ignore_index=True), crs=gw.crs)
+    riv = riv.clip(IBERIA_BOX)
+    # One (Multi)LineString per river, main stem and reservoir centerlines
+    # merged together.
+    riv = riv.dissolve("name").reset_index()
+    riv.geometry = riv.geometry.apply(
+        lambda g: linemerge(g) if g.geom_type == "MultiLineString" else g)
+    riv.geometry = riv.geometry.simplify(TOLERANCE)
+    out = PROCESSED / "rivers.geojson"
+    riv.sort_values("name").to_file(out, driver="GeoJSON")
+    print(f"  wrote {out.name}: {len(riv)} rivers")
+
+    gm = gpd.read_file(f"zip://{regions}")
+    gm = gm[(gm["FEATURECLA"] == "Range/mtn") & gm["NAME_ES"].isin(MOUNTAIN_RANGES)]
+    gm = gm[["NAME_ES", "geometry"]].rename(columns={"NAME_ES": "name"})
+    gm = gm.clip(IBERIA_BOX)
+    gm.geometry = gm.geometry.simplify(0.01)  # soft shaded blobs, keep them light
+    out = PROCESSED / "mountains.geojson"
+    gm.sort_values("name").to_file(out, driver="GeoJSON")
+    print(f"  wrote {out.name}: {len(gm)} ranges")
 
 
 # Cities and towns whose exact point locations the maps need. Geocoded once
@@ -265,6 +334,8 @@ def main() -> None:
     process_asturias()
     print("Context countries:")
     process_context_countries()
+    print("Physical (rivers + mountain ranges):")
+    process_physical()
     print("Cities:")
     process_cities()
     print("Done.")

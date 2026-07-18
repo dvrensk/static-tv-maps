@@ -24,8 +24,14 @@ Machinery that renders **pedagogical maps of Spain and Asturias as static
 - `tvmaps/geo.py` — data loading, 16:9 frame computation, Canary inset
   placement, label anchor (pole of inaccessibility).
 - `tvmaps/draw.py` — canvas, halo text, callouts, title/attribution, save.
-- `tvmaps/maps_spain.py`, `tvmaps/maps_asturias.py` — the actual maps and
-  all per-feature label tuning.
+- `tvmaps/maps_spain.py`, `tvmaps/maps_asturias.py`, `tvmaps/maps_capitals.py`,
+  `tvmaps/maps_ciudades.py`, `tvmaps/maps_fisica.py` — the actual maps and
+  all per-feature label tuning. New modules must be added to the registry
+  tuple in `generate.py`.
+- `tvmaps/cities.py` — city gazetteer access (`data/processed/cities.geojson`,
+  geocoded via Nominatim by the download script) plus metadata: province and
+  community capitals, INE 2025 big-city populations, Asturias towns over
+  10 000 inhabitants, and the 8 functional comarcas with their concejos.
 - `scripts/download_data.py` — fetches raw sources into `data/raw/`
   (gitignored) and writes simplified GeoJSON to `data/processed/`
   (committed). Rendering never needs the network.
@@ -46,6 +52,15 @@ map), open the PNG, adjust, repeat. Label tuning is all data:
 
 Conventions:
 
+- ALL user-visible map text is in Spanish (standing instruction from the
+  user), including footers, legends and neighbour-country labels.
+- No big titles: maps identify themselves with a small footer caption
+  (`draw.draw_footer`) so the geography gets every pixel. Anything that
+  makes the peninsula smaller is a net negative.
+- The Canary inset may cover Portugal or Morocco but must never cover any
+  Spanish territory (`place_canary` takes a `max_x` cap and shrinks the
+  archipelago if needed). City points move into the inset via
+  `geo.canary_xy(point, scene["canary_tf"])`.
 - Projections: peninsula EPSG:25830, Canaries EPSG:25828 (both metric, so
   the inset keeps true scale). Asturias maps also 25830.
 - Community colors are hand-tuned so neighbours differ; if you change one,
