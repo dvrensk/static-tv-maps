@@ -211,6 +211,11 @@ HAND_RIVERS = {
                    (1.9, 41.55), (1.93, 41.47), (2.03, 41.38), (2.11, 41.32),
                    (2.138, 41.298)],
                   RiverSpec(1.66, 41.68, -70, 27)),
+    # Congost headwater → Granollers → Montcada → mouth NE of Barcelona, so
+    # the city sits between its two rivers.
+    "Besòs": ([(2.38, 41.77), (2.32, 41.68), (2.29, 41.61), (2.23, 41.52),
+               (2.19, 41.47), (2.22, 41.44), (2.235, 41.418)],
+              RiverSpec(2.45, 41.62, -58, 25)),
 }
 
 # Cities missing from data/processed/cities.geojson (the two Portuguese
