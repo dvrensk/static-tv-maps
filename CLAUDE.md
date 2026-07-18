@@ -25,9 +25,9 @@ Machinery that renders **pedagogical maps of Spain and Asturias as static
   placement, label anchor (pole of inaccessibility).
 - `tvmaps/draw.py` — canvas, halo text, callouts, title/attribution, save.
 - `tvmaps/maps_spain.py`, `tvmaps/maps_asturias.py`, `tvmaps/maps_capitals.py`,
-  `tvmaps/maps_ciudades.py`, `tvmaps/maps_fisica.py` — the actual maps and
-  all per-feature label tuning. New modules must be added to the registry
-  tuple in `generate.py`.
+  `tvmaps/maps_ciudades.py`, `tvmaps/maps_fisica.py`, `tvmaps/maps_rios.py`,
+  `tvmaps/maps_productos.py` — the actual maps and all per-feature label
+  tuning. New modules must be added to the registry tuple in `generate.py`.
 - `tvmaps/cities.py` — city gazetteer access (`data/processed/cities.geojson`,
   geocoded via Nominatim by the download script) plus metadata: province and
   community capitals, INE 2025 big-city populations, Asturias towns over

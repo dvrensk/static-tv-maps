@@ -19,6 +19,10 @@ Everything lands in [`output/`](output/), pre-rendered and committed:
 | `spain-capitales-comunidades` | The community capitals starred and named (Canarias has two co-capitals) |
 | `spain-ciudades` | The 30 most populated municipalities (INE 2025, metro-area satellites excluded), numbered by rank with a population legend in the Atlantic |
 | `spain-fisica` | The major rivers (Miño, Duero, Tajo, Guadiana, Guadalquivir, Ebro, Júcar, Segura, Genil, Turia) and mountain systems (Pirineos, Cordillera Cantábrica, Macizo Galaico, Sistema Central, Sistema Ibérico, Montes de Toledo, Sierra Morena, Sistemas Béticos) |
+| `spain-rios` | The ~20 rivers a schoolchild learns, across all three watersheds, with the mountain systems shaded underneath |
+| `spain-rios-ciudades` | Rivers and the cities they run through — Sevilla/Guadalquivir, Barcelona/Llobregat, Bilbao/Nervión… including Lisboa (Tajo) and Oporto (Duero) |
+| `spain-vinos` | The main wine denominations of origin (Rioja, Ribera del Duero, Priorat, Rías Baixas, Jerez…) |
+| `spain-despensa` | The "pantry of Spain": jamón, olive oil, huerta/fruit, greenhouses, cheese and seafood regions, color-coded with a legend |
 | `asturias-concejos-1` / `-2` | The 78 concejos of Asturias, names split over two maps the same way |
 | `asturias-comarcas` | The 8 functional comarcas of Asturias (decree 11/91) |
 | `asturias-ciudades` | The main towns of Asturias — every concejo over 10 000 inhabitants |
@@ -75,6 +79,10 @@ need network access; only `make data` does.
   contributors, ODbL) and committed to `data/processed/cities.geojson`.
   Populations: INE (padrón, 1 Jan 2025 for Spain; 2023 for Asturias).
   Comarca composition: decree 11/91 of the Principado de Asturias.
+- **Wine / food regions** — approximate zones, hand-placed from the Spanish
+  Ministry (MAPA) DOP/IGP references and each consejo regulador; the Nervión
+  and Llobregat courses (too small for Natural Earth) are traced by hand from
+  their source towns. Marked "zonas aproximadas" on the maps.
 - Also evaluated: [es-atlas](https://github.com/martgnz/es-atlas) (TopoJSON of
   the same IGN data, journalism-style; too generalized for 4000 px) and raw IGN
   Centro de Descargas (canonical but awkward to script).

@@ -197,6 +197,119 @@ def process_physical() -> None:
     print(f"  wrote {out.name}: {len(gm)} ranges")
 
 
+# --- The "twenty rivers" set (spain-rios maps) ------------------------------
+#
+# Superset of the ten rivers above, adding the tributaries and coastal rivers
+# a Spanish schoolchild learns. Same two Natural Earth sources, same matching
+# caveat: in ne_10m_rivers_europe match on `name` (its `name_es` is
+# unreliable) — except for a handful of features that are themselves
+# mislabeled and need special handling (see process_rivers20).
+
+# Matched against `name_es` in ne_10m_rivers_lake_centerlines.
+RIVERS20_WORLD = {"Miño", "Duero", "Tajo", "Guadiana", "Guadalquivir", "Ebro",
+                  "Segre", "Esla"}
+# Matched against `name` in ne_10m_rivers_europe. (Esla again: the europe
+# file carries the Riaño headwaters stub that completes the world course.)
+RIVERS20_EUROPE = {"Júcar", "Segura", "Genil", "Turia", "Sil", "Cinca",
+                   "Mijares", "Tormes", "Esla", "Jalón", "Pisuerga"}
+
+
+def _nearest_endpoint_bridge(a, b):
+    """Shortest segment connecting an endpoint of line a to one of line b."""
+    from shapely.geometry import LineString
+
+    def endpoints(g):
+        parts = g.geoms if g.geom_type == "MultiLineString" else [g]
+        for part in parts:
+            coords = list(part.coords)
+            yield coords[0]
+            yield coords[-1]
+
+    best = None
+    for pa in endpoints(a):
+        for pb in endpoints(b):
+            d = (pa[0] - pb[0]) ** 2 + (pa[1] - pb[1]) ** 2
+            if best is None or d < best[0]:
+                best = (d, pa, pb)
+    return LineString([best[1], best[2]])
+
+
+def process_rivers20() -> None:
+    import pandas as pd
+    from shapely.geometry import box
+    from shapely.ops import linemerge, unary_union
+
+    world = fetch(f"{NE_PHYSICAL}/ne_10m_rivers_lake_centerlines.zip",
+                  RAW / "ne_10m_rivers_lake_centerlines.zip",
+                  "Natural Earth rivers (world)")
+    europe = fetch(f"{NE_PHYSICAL}/ne_10m_rivers_europe.zip",
+                   RAW / "ne_10m_rivers_europe.zip",
+                   "Natural Earth rivers (europe supplement)")
+
+    gw = gpd.read_file(f"zip://{world}")
+    gw = gw[gw["name_es"].isin(RIVERS20_WORLD)]
+    gw = gw[["name_es", "geometry"]].rename(columns={"name_es": "name"})
+    ge = gpd.read_file(f"zip://{europe}!ne_10m_rivers_europe.shp").clip(IBERIA_BOX)
+
+    frames = [gw, ge[ge["name"].isin(RIVERS20_EUROPE)][["name", "geometry"]]]
+
+    # Natural Earth mislabels the Nalón as "Narcea": the course rises at the
+    # Fuente la Nalona area, passes Langreo and reaches the sea at San
+    # Esteban de Pravia — that is the Nalón main stem (the real Narcea, which
+    # comes down from Cangas del Narcea further west, is absent).
+    nalon = ge[ge["name"] == "Narcea"][["name", "geometry"]].copy()
+    nalon["name"] = "Nalón"
+    frames.append(nalon)
+
+    # The Aragón (Ebro tributary through Navarra) is filed under name
+    # "Alagón" with name_es "Aragón"; the real Alagón (Tajo tributary) also
+    # exists under the same `name`, so disambiguate with name_es here.
+    aragon = ge[(ge["name"] == "Alagón") & (ge["name_es"] == "Aragón")]
+    aragon = aragon[["name", "geometry"]].copy()
+    aragon["name"] = "Aragón"
+    frames.append(aragon)
+
+    # The lower Jalón (Calatayud -> Ebro) is carried by NE's "Jiloca"
+    # feature (NE routes the system's main stem along the Jiloca). Take the
+    # part downstream of the Calatayud junction and file it as Jalón.
+    jalon_lower = ge[ge["name"] == "Jiloca"].clip(box(-2.0, 41.352, -0.9, 42.0))
+    jalon_lower = jalon_lower[["name", "geometry"]].copy()
+    jalon_lower["name"] = "Jalón"
+    frames.append(jalon_lower)
+
+    riv = gpd.GeoDataFrame(pd.concat(frames, ignore_index=True), crs=gw.crs)
+    riv = riv.clip(IBERIA_BOX)
+    riv = riv.dissolve("name").reset_index()
+
+    # NE's "Pisuerga" main stem actually follows the Arlanza upstream of the
+    # Torquemada confluence; cut the Arlanza branch off so the label is true.
+    pis = riv["name"] == "Pisuerga"
+    riv.loc[pis, "geometry"] = riv.loc[pis, "geometry"].intersection(
+        box(-9.0, 40.0, -4.213, 44.0)).values
+
+    riv.geometry = riv.geometry.apply(
+        lambda g: linemerge(g) if g.geom_type == "MultiLineString" else g)
+
+    # Bridge sub-pixel gaps left where courses were stitched from separate
+    # NE features (lower Jalón from "Jiloca", trimmed Pisuerga).
+    for name in ("Jalón", "Pisuerga"):
+        i = riv.index[riv["name"] == name][0]
+        g = riv.at[i, "geometry"]
+        while g.geom_type == "MultiLineString" and len(g.geoms) > 1:
+            parts = sorted(g.geoms, key=lambda p: p.length, reverse=True)
+            bridge = _nearest_endpoint_bridge(parts[0], parts[1])
+            merged = linemerge(unary_union(list(parts) + [bridge]))
+            if merged.geom_type == "MultiLineString" and len(merged.geoms) >= len(g.geoms):
+                break  # no progress; keep what we have
+            g = merged
+        riv.at[i, "geometry"] = g
+
+    riv.geometry = riv.geometry.simplify(TOLERANCE)
+    out = PROCESSED / "rivers20.geojson"
+    riv.sort_values("name").to_file(out, driver="GeoJSON")
+    print(f"  wrote {out.name}: {len(riv)} rivers")
+
+
 # Cities and towns whose exact point locations the maps need. Geocoded once
 # via Nominatim (OSM) and committed in data/processed/cities.geojson; the raw
 # responses are cached per city under data/raw/nominatim/.
@@ -336,6 +449,8 @@ def main() -> None:
     process_context_countries()
     print("Physical (rivers + mountain ranges):")
     process_physical()
+    print("Twenty rivers (spain-rios maps):")
+    process_rivers20()
     print("Cities:")
     process_cities()
     print("Done.")
