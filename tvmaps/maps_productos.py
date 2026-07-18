@@ -33,10 +33,17 @@ LEADER = "#6b675f"
 
 # category -> (blob fill, label color)
 CATS = {
-    "vino":        ("#8e3a56", "#6d2740"),
+    # Wine, coloured by type of wine.
+    "vino_tinto":    ("#9b2d43", "#6d2029"),   # red
+    "vino_blanco":   ("#cdb84f", "#877014"),   # white (straw gold)
+    "vino_espumoso": ("#7fb6c4", "#3f7c8a"),   # sparkling (cava)
+    "vino_generoso": ("#c0863a", "#875313"),   # fortified (Jerez, Montilla)
+    "vino_mixto":    ("#a87fb0", "#6d4a75"),   # both red and white
+    # Despensa.
     "jamon":       ("#b3653d", "#8a3f1a"),
     "aceite":      ("#8a9a3d", "#5c682a"),
     "huerta":      ("#5eae57", "#2f7332"),
+    "arroz":       ("#cbd39a", "#7a8543"),
     "invernadero": ("#b9bfc6", "#5f6870"),
     "queso":       ("#e0b33c", "#8f6c12"),
     "marisco":     ("#4f93c4", "#2c6491"),
@@ -182,53 +189,62 @@ def _swatch_legend(ax, frame, x_frac, y_top_frac, entries, size=28,
 
 WINE_ZONES = [
     # Galicia / noroeste
-    Zone("Rías Baixas", "vino",
+    Zone("Rías Baixas", "vino_blanco",
          [(-8.85, 42.55), (-8.7, 42.35), (-8.68, 42.1), (-8.8, 41.95)], 12,
          label=(-9.7, 42.28), size=32, sub="albariño", leader=True),
-    Zone("Bierzo", "vino", [(-6.65, 42.58)], 16, label=(-6.65, 42.58),
+    Zone("Bierzo", "vino_tinto", [(-6.65, 42.58)], 16, label=(-6.65, 42.58),
          size=30),
     # Cornisa cantábrica
-    Zone("Txakoli", "vino", [(-2.9, 43.32), (-2.2, 43.28)], 12,
+    Zone("Txakoli", "vino_blanco", [(-2.9, 43.32), (-2.2, 43.28)], 12,
          label=(-2.5, 43.62), size=30, leader=True),
     # Valle del Ebro
-    Zone("Rioja", "vino",
+    Zone("Rioja", "vino_tinto",
          [(-2.85, 42.57), (-2.45, 42.47), (-1.96, 42.3), (-1.75, 42.18)], 15,
          label=(-2.35, 42.42), size=36, rotation=-22),
-    Zone("Somontano", "vino", [(0.1, 42.05)], 15, label=(0.1, 42.3),
+    Zone("Somontano", "vino_mixto", [(0.1, 42.05)], 15, label=(0.1, 42.3),
          size=30),
-    Zone("Cariñena", "vino", [(-1.22, 41.34)], 15, label=(-1.22, 41.12),
+    Zone("Cariñena", "vino_tinto", [(-1.22, 41.34)], 15, label=(-1.22, 41.12),
          size=30),
     # Duero
-    Zone("Ribera del Duero", "vino",
+    Zone("Ribera del Duero", "vino_tinto",
          [(-4.35, 41.62), (-3.69, 41.67), (-3.2, 41.58)], 15,
          label=(-3.78, 41.63), size=32),
-    Zone("Rueda", "vino", [(-4.95, 41.38)], 17, label=(-4.95, 41.16),
+    Zone("Rueda", "vino_blanco", [(-4.95, 41.38)], 17, label=(-4.95, 41.16),
          size=30, sub="verdejo"),
-    Zone("Toro", "vino", [(-5.39, 41.52)], 14, label=(-5.42, 41.75),
+    Zone("Toro", "vino_tinto", [(-5.39, 41.52)], 14, label=(-5.42, 41.75),
          size=30),
     # Cataluña
-    Zone("Penedès", "vino", [(1.45, 41.2), (1.8, 41.43)], 13,
+    Zone("Penedès", "vino_espumoso", [(1.45, 41.2), (1.8, 41.43)], 13,
          label=(2.15, 41.1), size=32, sub="cava", leader=True),
-    Zone("Priorat", "vino", [(0.82, 41.17)], 11, label=(0.3, 40.98),
+    Zone("Priorat", "vino_tinto", [(0.82, 41.17)], 11, label=(0.3, 40.98),
          size=30, leader=True),
     # Levante / interior
-    Zone("Utiel-Requena", "vino", [(-1.2, 39.57), (-1.1, 39.49)], 14,
+    Zone("Utiel-Requena", "vino_tinto", [(-1.2, 39.57), (-1.1, 39.49)], 14,
          label=(-1.15, 39.82), size=28),
-    Zone("Jumilla", "vino", [(-1.55, 38.62), (-1.25, 38.42)], 15,
+    Zone("Jumilla", "vino_tinto", [(-1.55, 38.62), (-1.25, 38.42)], 15,
          label=(-1.4, 38.75), size=30),
     # Meseta sur
-    Zone("La Mancha", "vino",
+    Zone("La Mancha", "vino_mixto",
          [(-3.8, 39.5), (-3.1, 39.3), (-2.3, 39.15)], 38,
          label=(-3.1, 39.33), size=40, sub="el mayor viñedo del mundo"),
-    Zone("Valdepeñas", "vino", [(-3.38, 38.76)], 14, label=(-3.38, 38.5),
+    Zone("Valdepeñas", "vino_tinto", [(-3.38, 38.76)], 14, label=(-3.38, 38.5),
          size=28),
     # Andalucía
-    Zone("Jerez", "vino",
+    Zone("Jerez", "vino_generoso",
          [(-6.35, 36.78), (-6.14, 36.69), (-6.23, 36.6)], 10,
          label=(-6.85, 36.45), size=32, sub="fino y manzanilla",
          leader=True),
-    Zone("Montilla-Moriles", "vino", [(-4.63, 37.59), (-4.62, 37.44)], 12,
+    Zone("Montilla-Moriles", "vino_generoso", [(-4.63, 37.59), (-4.62, 37.44)], 12,
          label=(-4.62, 37.22), size=28),
+]
+
+
+WINE_LEGEND = [
+    ("vino_tinto", "Tinto"),
+    ("vino_blanco", "Blanco"),
+    ("vino_espumoso", "Espumoso (cava)"),
+    ("vino_generoso", "Generoso (Jerez, Montilla)"),
+    ("vino_mixto", "Tinto y blanco"),
 ]
 
 
@@ -237,12 +253,13 @@ def map_spain_vinos():
     fig, ax, spain = _base_map(s)
     _draw_zones(ax, WINE_ZONES, spain, s["frame"])
     # Malvasía de Lanzarote, inside the Canary inset.
-    _draw_canary_zone(ax, s, "vino", [(-13.66, 28.98)], 9,
+    _draw_canary_zone(ax, s, "vino_blanco", [(-13.66, 28.98)], 9,
                       "Malvasía de Lanzarote", (-14.7, 28.55), size=25)
+    _swatch_legend(ax, s["frame"], 0.03, 0.60, WINE_LEGEND)
     _draw_country_labels(ax, s["frame"])
     draw.draw_footer(ax, s["frame"],
-                     "El vino en España · principales denominaciones "
-                     "de origen (DO)")
+                     "El vino en España · denominaciones de origen, "
+                     "por tipo de vino")
     draw.draw_attribution(
         ax, s["frame"],
         "Datos: IGN España · Natural Earth · MAPA (DOP/IGP), zonas aproximadas")
@@ -304,6 +321,13 @@ DESPENSA_ZONES = [
          label=(-5.65, 39.86), size=26),
     Zone("Azafrán", "huerta", [(-3.57, 39.45)], 12, label=(-3.57, 39.68),
          size=26),
+    # --- Arroz (las tres zonas arroceras con DOP) ---
+    Zone("Arroz del\nDelta del Ebro", "arroz", [(0.72, 40.72)], 9,
+         label=(1.5, 40.62), size=26, leader=True, ha="left"),
+    Zone("Arroz de\nla Albufera", "arroz", [(-0.32, 39.32)], 7,
+         label=(-0.35, 38.85), size=26, leader=True),
+    Zone("Calasparra", "arroz", [(-1.7, 38.23)], 8, label=(-2.15, 38.34),
+         size=26, ha="right"),
     Zone("Sidra", "huerta", [(-5.7, 43.4), (-5.4, 43.45)], 12,
          label=(-5.5, 43.72), size=28, leader=True),
     # --- Invernaderos ---
@@ -328,6 +352,7 @@ DESPENSA_LEGEND = [
     ("jamon", "Jamón"),
     ("aceite", "Aceite de oliva"),
     ("huerta", "Huerta, fruta y especias"),
+    ("arroz", "Arroz"),
     ("invernadero", "Invernaderos"),
     ("queso", "Queso"),
     ("marisco", "Marisco"),
