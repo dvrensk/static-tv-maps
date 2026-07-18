@@ -4,9 +4,9 @@ from . import cities, draw, geo, style
 from .maps_spain import KM, Label, _label_regions
 
 NEIGHBOR_LABELS = [  # lon, lat
-    ("GALICIA", -7.06, 42.97, 44),
+    ("GALICIA", -7.06, 43.11, 44),
     ("LEÓN", -5.85, 42.93, 44),
-    ("CANTABRIA", -4.62, 43.24, 44),
+    ("CANTABRIA", -4.62, 43.14, 44),
     ("MAR CANTÁBRICO", -5.8, 43.75, 52),
 ]
 
