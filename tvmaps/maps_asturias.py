@@ -278,3 +278,124 @@ def render_asturias_ciudades():
                      "10.000 habitantes (INE 2023)")
     draw.draw_attribution(ax, s["frame"], "Datos: IGN España")
     return draw.save(fig, "asturias-ciudades")
+
+
+# ---------------------------------------------------------------------------
+# Rivers map
+# ---------------------------------------------------------------------------
+# Parchment Asturias with the named rivers a local would recognise, traced
+# from OpenStreetMap (data/processed/asturias_rivers.geojson, see
+# process_asturias_rivers in scripts/download_data.py). Main stems in full
+# blue, well-known tributaries thinner and lighter. Names run along each
+# course, rotated to follow the stream.
+
+from dataclasses import dataclass
+
+RIVER = "#3f7fb5"          # main stems (as on the Spain physical map)
+RIVER_TRIB = "#6b9cc7"     # tributaries: lighter and thinner
+RIVER_MAIN_LW = 5.0
+RIVER_TRIB_LW = 3.6
+
+
+@dataclass
+class RiverSpec:
+    lon: float
+    lat: float
+    rotation: float = 0.0
+    size: float = 30
+    main: bool = True
+
+
+# Which class each river is drawn in (main = full blue, thicker). The Narcea
+# is a Nalón tributary but is one of Asturias' headline rivers, so it reads as
+# a main stem; the Cares (Deva tributary, Picos de Europa) stays a tributary.
+# lon/lat is where the name sits, rotation follows the local course. All
+# hand-tuned so no name touches another name or crosses its own line awkwardly.
+ASTURIAS_RIOS = {
+    "Nalón":   RiverSpec(-5.48, 43.238, -27, 34),
+    "Narcea":  RiverSpec(-6.435, 43.045, 60, 32),
+    "Navia":   RiverSpec(-6.905, 43.220, 66, 32),
+    "Sella":   RiverSpec(-5.010, 43.300, -78, 30),
+    "Deva":    RiverSpec(-4.560, 43.290, 74, 28),
+    "Eo":      RiverSpec(-7.075, 43.432, 0, 28),
+    "Esva":    RiverSpec(-6.520, 43.480, 68, 26),
+    "Piloña":  RiverSpec(-5.320, 43.395, 16, 28, main=False),
+    "Nora":    RiverSpec(-5.905, 43.410, -20, 28, main=False),
+    "Trubia":  RiverSpec(-6.055, 43.240, 58, 26, main=False),
+    "Pigüeña": RiverSpec(-6.320, 43.210, 60, 26, main=False),
+    "Caudal":  RiverSpec(-5.930, 43.245, -40, 26, main=False),
+    "Cares":   RiverSpec(-4.815, 43.255, 30, 26, main=False),
+    "Piles":   RiverSpec(-5.608, 43.522, 0, 24, main=False),
+}
+
+# A few reference points so the rivers can be read against known places.
+# Oviedo/Gijón for orientation, plus two river-mouth towns. lon, lat.
+RIOS_TOWNS = {
+    "Oviedo": (-5.845, 43.362),
+    "Gijón": (-5.662, 43.545),
+    "Ribadesella": (-5.058, 43.462),
+    "San Esteban de Pravia": (-6.085, 43.557),
+}
+
+RIOS_TOWN_LABELS = {
+    "Oviedo": Label(28, dx=3, dy=-1, ha="left"),
+    "Gijón": Label(28, dx=3, dy=3, ha="left"),
+    "Ribadesella": Label(24, tx=4, ty=6, ha="left"),
+    "San Esteban de Pravia": Label(24, tx=-4, ty=8, ha="right"),
+}
+
+
+def render_asturias_rios():
+    from .maps_spain import _project_lonlat
+
+    s = asturias_scene()
+    fig, ax = draw.new_map(s["frame"])
+    draw.draw_context(ax, s["context"])
+
+    # Parchment base, exactly like the ciudades map.
+    draw.draw_layer(ax, s["conc"], CONCEJO_MUTED, "#d6cdb9", 1.2, zorder=2)
+    outline = s["conc"].dissolve()
+    draw.draw_layer(ax, outline, "none", style.BORDER_DARK, 4.0, zorder=3)
+
+    # Rivers, clipped to the region outline (buffer a hair so mouths reach the
+    # coast). Tributaries first so the main stems draw over them at junctions.
+    import geopandas as gpd
+
+    riv = geo.load("asturias_rivers").to_crs(geo.MAIN_CRS)
+    clip = outline.union_all().buffer(1.5 * KM)
+    for main_pass in (False, True):
+        for _, row in riv.iterrows():
+            spec = ASTURIAS_RIOS.get(row["name"])
+            if spec is None or spec.main != main_pass:
+                continue
+            color = RIVER if spec.main else RIVER_TRIB
+            lw = RIVER_MAIN_LW if spec.main else RIVER_TRIB_LW
+            gpd.GeoSeries([row.geometry.intersection(clip)],
+                          crs=geo.MAIN_CRS).plot(
+                ax=ax, color=color, linewidth=lw, zorder=6, capstyle="round")
+
+    # Reference town dots.
+    for town, (lon, lat) in RIOS_TOWNS.items():
+        x, y = _project_lonlat(lon, lat)
+        draw.city_dot(ax, (x, y), size=13, face="#3a3733", zorder=9)
+        spec = RIOS_TOWN_LABELS[town]
+        if spec.tx is not None:
+            draw.callout(ax, (x, y), (x + spec.tx * KM, y + spec.ty * KM),
+                         town, spec.size, ha=spec.ha)
+        else:
+            draw.halo_text(ax, x + spec.dx * KM, y + spec.dy * KM, town,
+                           spec.size, weight="extrabold", ha=spec.ha)
+
+    # River names, in blue, running along each course.
+    for name, spec in ASTURIAS_RIOS.items():
+        x, y = _project_lonlat(spec.lon, spec.lat)
+        color = RIVER if spec.main else RIVER_TRIB
+        t = draw.halo_text(ax, x, y, name, spec.size, weight="semibold",
+                           color=color, halo=CONCEJO_MUTED, halo_width=6,
+                           zorder=8)
+        t.set_rotation(spec.rotation)
+
+    _neighbor_labels(ax, s["frame"])
+    draw.draw_footer(ax, s["frame"], "Ríos de Asturias")
+    draw.draw_attribution(ax, s["frame"], "Datos: OpenStreetMap")
+    return draw.save(fig, "asturias-rios")

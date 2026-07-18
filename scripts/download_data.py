@@ -310,6 +310,118 @@ def process_rivers20() -> None:
     print(f"  wrote {out.name}: {len(riv)} rivers")
 
 
+# --- Rivers of Asturias (asturias-rios map) --------------------------------
+#
+# Natural Earth carries essentially no Asturian rivers, so the named rivers a
+# local would recognise are pulled from OpenStreetMap via the Overpass API and
+# committed to data/processed/asturias_rivers.geojson. The raw Overpass JSON is
+# cached under data/raw/ so re-runs are offline.
+#
+# OSM tags the same watercourse under several `name` spellings — Castilian
+# ("Río Sella"), Asturian ("Ríu Nalón") and dual forms ("Río Sella / Ríu
+# Seya") — often split across many ways. We canonicalise the name (drop the
+# "Río/Ríu" prefix and anything after a slash), keep only the target rivers,
+# and linemerge every way that shares a canonical name into one course.
+
+OVERPASS_URL = "https://overpass-api.de/api/interpreter"
+OVERPASS_QUERY = """[out:json][timeout:180];
+area["ISO3166-2"="ES-AS"]->.a;
+(way["waterway"="river"]["name"](area.a););
+out geom;"""
+
+# The rivers an Asturian would name. Cares/Deva are the eastern border pair;
+# Eo the western border; Piles is Gijón's little river (kept because the family
+# lives there). Everything else is a main stem or a well-known tributary.
+ASTURIAS_RIVER_TARGETS = {
+    "Nalón", "Narcea", "Navia", "Sella", "Eo", "Piloña", "Caudal", "Nora",
+    "Trubia", "Cares", "Deva", "Esva", "Pigüeña", "Piles",
+}
+
+
+def _canon_river_name(name: str) -> str:
+    """Strip the OSM "Río/Ríu" prefix and any slashed alternate spelling."""
+    n = name.split("/")[0].strip()
+    for pre in ("O Río ", "El Río ", "Río ", "Ríu ", "Rio ", "Riu "):
+        if n.startswith(pre):
+            return n[len(pre):].strip()
+    return n
+
+
+def process_asturias_rivers() -> None:
+    import json
+    from collections import defaultdict
+
+    from shapely.geometry import LineString
+    from shapely.ops import linemerge, unary_union
+
+    cache = RAW / "asturias_rivers_overpass.json"
+    if cache.exists():
+        print(f"  [cached] {cache.name}")
+        text = cache.read_text()
+    else:
+        print("  querying Overpass for Asturian rivers ...")
+        last_err = None
+        for attempt in range(3):
+            try:
+                resp = requests.post(
+                    OVERPASS_URL, data={"data": OVERPASS_QUERY},
+                    headers={"User-Agent": "static-tv-maps/1.0 (personal project)",
+                             "Accept": "*/*"},
+                    timeout=300)
+                resp.raise_for_status()
+                text = resp.text
+                break
+            except Exception as exc:  # 504/timeout are common on Overpass
+                last_err = exc
+                print(f"  Overpass attempt {attempt + 1} failed: {exc}")
+                import time
+                time.sleep(5)
+        else:
+            raise RuntimeError(
+                f"Overpass unreachable after 3 tries ({last_err}). "
+                "asturias_rivers.geojson not written.")
+        cache.write_text(text)
+        print(f"  -> cached {cache.name} ({len(text) / 1e6:.1f} MB)")
+
+    elements = json.loads(text)["elements"]
+    lines = defaultdict(list)
+    for el in elements:
+        if el.get("type") != "way":
+            continue
+        name = el.get("tags", {}).get("name")
+        geom = el.get("geometry")
+        if not name or not geom:
+            continue
+        canon = _canon_river_name(name)
+        if canon not in ASTURIAS_RIVER_TARGETS:
+            continue
+        coords = [(p["lon"], p["lat"]) for p in geom]
+        if len(coords) >= 2:
+            lines[canon].append(LineString(coords))
+
+    records = []
+    for canon, segs in lines.items():
+        union = unary_union(segs)
+        merged = linemerge(union) if union.geom_type == "MultiLineString" else union
+        records.append({"name": canon, "geometry": merged})
+
+    riv = gpd.GeoDataFrame(records, crs="EPSG:4326")
+    # Length in metres (metric CRS) for logging / a sanity floor.
+    length_km = riv.to_crs("EPSG:25830").length / 1000
+    riv["km"] = length_km.round(1).values
+    riv = riv.sort_values("km", ascending=False).reset_index(drop=True)
+    for _, r in riv.iterrows():
+        print(f"    kept  {r['name']:10s} {r['km']:6.1f} km")
+    missing = ASTURIAS_RIVER_TARGETS - set(riv["name"])
+    if missing:
+        print(f"    !! targets not found in Overpass data: {sorted(missing)}")
+
+    riv.geometry = riv.geometry.simplify(0.0003)  # Asturias maps zoom in close
+    out = PROCESSED / "asturias_rivers.geojson"
+    riv[["name", "geometry"]].to_file(out, driver="GeoJSON")
+    print(f"  wrote {out.name}: {len(riv)} rivers")
+
+
 # Cities and towns whose exact point locations the maps need. Geocoded once
 # via Nominatim (OSM) and committed in data/processed/cities.geojson; the raw
 # responses are cached per city under data/raw/nominatim/.
@@ -451,6 +563,8 @@ def main() -> None:
     process_physical()
     print("Twenty rivers (spain-rios maps):")
     process_rivers20()
+    print("Asturias rivers (asturias-rios map):")
+    process_asturias_rivers()
     print("Cities:")
     process_cities()
     print("Done.")

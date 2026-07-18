@@ -25,6 +25,7 @@ Everything lands in [`output/`](output/), pre-rendered and committed:
 | `spain-despensa` | The "pantry of Spain": jamón, olive oil, huerta/fruit, greenhouses, cheese and seafood regions, color-coded with a legend |
 | `asturias-concejos-1` / `-2` | The 78 concejos of Asturias, names split over two maps the same way |
 | `asturias-comarcas` | The 8 functional comarcas of Asturias (decree 11/91) |
+| `asturias-rios` | The 14 main rivers of Asturias (Nalón, Narcea, Navia, Sella, Eo, Piloña…), from OpenStreetMap |
 | `asturias-ciudades` | The main towns of Asturias — every concejo over 10 000 inhabitants |
 | `*-mudo` | The same maps without names ("mapa mudo"), for quizzing yourself |
 
@@ -90,6 +91,10 @@ need network access; only `make data` does.
   (public domain), clipped around Iberia. Ranges missing from Natural Earth
   (Sistema Central, Sistema Ibérico, Montes de Toledo, Macizo Galaico) are
   drawn as hand-placed capsules through their known summits.
+- **Asturian rivers** — [OpenStreetMap](https://www.openstreetmap.org/) via
+  the Overpass API (© OpenStreetMap contributors, ODbL), since Natural Earth
+  carries almost no Asturian rivers; committed to
+  `data/processed/asturias_rivers.geojson`.
 - **City locations** — geocoded once via
   [Nominatim](https://nominatim.openstreetmap.org/) (© OpenStreetMap
   contributors, ODbL) and committed to `data/processed/cities.geojson`.
