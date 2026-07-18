@@ -162,9 +162,9 @@ COMARCA_NAME_ALIASES = {"Tapia de Casariego": "Tapia"}
 COMARCA_LABELS = {
     "Eo-Navia": Label(48),
     "Narcea": Label(48),
-    "Avilés": Label(44, tx=-14, ty=26, ha="right"),
+    "Avilés": Label(38, dy=8),
     "Oviedo": Label(48),
-    "Gijón": Label(44, tx=10, ty=22, ha="left"),
+    "Gijón": Label(38, dx=-10, dy=2),
     "Caudal": Label(44),
     "Nalón": Label(44),
     "Oriente": Label(48),
