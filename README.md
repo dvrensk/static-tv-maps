@@ -28,6 +28,7 @@ Everything lands in [`output/`](output/), pre-rendered and committed:
 | `spain-moda` | Spanish fashion — designers, footwear and jewellery firms and where they are from (Inditex in Arteixo, Balenciaga in Getaria, Camper in Mallorca…) |
 | `spain-editoriales` | Book publishers and record labels by headquarter city, with list panels for the Madrid and Barcelona clusters |
 | `spain-marcas` | Well-known Spanish commercial brands at their HQ cities, spread across the country (SEAT, Mercadona, Santander, BBVA, Osborne…) |
+| `spain-marcas-logos` | The same brands, drawn as company logos if you supply them in `assets/logos/` (gitignored), otherwise as colored brand-name chips |
 | `asturias-concejos-1` / `-2` | The 78 concejos of Asturias, names split over two maps the same way |
 | `asturias-comarcas` | The 8 functional comarcas of Asturias (decree 11/91) |
 | `asturias-rios` | The 14 main rivers of Asturias (Nalón, Narcea, Navia, Sella, Eo, Piloña…), from OpenStreetMap |
