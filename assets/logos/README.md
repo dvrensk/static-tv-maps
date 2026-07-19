@@ -17,6 +17,27 @@ the brand's origin city.
 
 You can add logos for only some brands — each is independent.
 
+## Helper scripts
+
+Two optional helpers live in `scripts/` — both leave the choice of what to use
+to you, and neither commits anything (this folder stays gitignored):
+
+- `python scripts/find_logos.py` — for each brand, asks **Wikidata** for the
+  official logo (property P154) and looks up that file's **licence** on
+  Wikimedia Commons, writing `sources.suggested.tsv` (slug · licence · url).
+  Many simple wordmarks come back as public-domain `PD-textlogo`; others are
+  non-free and left to your own judgement. It does **not** scrape company
+  websites — it reports licence-tagged files so you can choose knowingly.
+- `python scripts/fetch_logos.py` — downloads the URLs **you** put in
+  `sources.tsv` (`python scripts/fetch_logos.py --init` writes a template;
+  `--list` shows every brand and its filename) and saves each under the right
+  `<slug>.png`, converting webp/SVG to PNG. You can also grab one directly:
+  `python scripts/fetch_logos.py "SEAT" <url>`.
+
+Typical flow: run `find_logos.py`, review the licences, copy the rows you're
+happy to use from `sources.suggested.tsv` into `sources.tsv` (keeping just
+`slug<TAB>url`), run `fetch_logos.py`, then re-render the map.
+
 ## Important: these files are NOT committed
 
 Company logos are copyrighted / trademarked artwork. This whole folder
