@@ -488,6 +488,326 @@ def process_asturias_rivers() -> None:
     print(f"  wrote {out.name}: {len(riv)} rivers")
 
 
+# --- Gijón street-level data (gijon city maps) ------------------------------
+#
+# Streets, coastline/beaches and landmark points for the schematic Gijón city
+# maps, pulled from OpenStreetMap via the Overpass API. Each raw Overpass JSON
+# response is cached under data/raw/ (like the Asturian rivers) so re-runs are
+# offline. Processed files stay in lon/lat (EPSG:4326); the renderer projects.
+
+# Overpass bbox order: south, west, north, east. Generous box around Gijón.
+GIJON_BBOX = "43.46,-5.75,43.575,-5.58"
+
+# Main road classes kept wholesale (motorway_link etc. deliberately excluded:
+# ramps only add clutter at schematic-map scale).
+GIJON_STREET_CLASSES = "motorway|trunk|primary|secondary|tertiary"
+
+# Streets the maps must carry even when OSM classes them lower (residential,
+# pedestrian, ...). Unanchored regexes, so OSM variants like "Paseo del Muro
+# de San Lorenzo", "Avenida de El Llano" or "Avenida de la República
+# Argentina" still hit.
+GIJON_STREET_NAMES = (
+    "Muro de San Lorenzo",
+    "Avenida de la Costa",
+    "Pablo Iglesias",
+    "Avenida de la Constitución",
+    "Calle Quevedo",
+    "Avenida de Portugal",
+    "Juan Carlos I",
+    "Avenida de Galicia",
+    "Ramón y Cajal",
+    "Avenida de(l| El) Llano",
+    "Avenida de Schulz",
+    "Magnus Blikstad",
+    "Avenida de la (República )?Argentina",
+    "Príncipe de Asturias",
+    "Carretera del Obispo",
+    "Albert Einstein",
+    "Avenida del Jardín Botánico",
+    "Marqués de San Esteban",
+    "Calle Corrida",
+)
+
+# Road refs the maps must carry regardless of class.
+GIJON_STREET_REFS = "AS-19|AS-II|GJ-81|A-8"
+
+# Landmarks for the schematic map:
+# display name -> (OSM name regex, kind, preferred tag or None).
+# The regexes are deliberately loose substrings; _pick_landmark chooses the
+# best of the matching OSM elements (skipping streets, transit stops, bus
+# routes and car parks), giving priority to elements carrying the preferred
+# tag — e.g. Sanz Crespo names a street, a stop area and the station, and
+# only railway=station is the landmark. "Laboral Ciudad de la Cultura" is not
+# named as such in OSM: the complex is the "Universidad Laboral" multipolygon
+# (relation 181245), which the map should label with both roles.
+GIJON_LANDMARK_TARGETS = {
+    "Ayuntamiento de Gijón": ("Ayuntamiento de (Gijón|Xixón)|Casa Consistorial", "edificio",
+                              ("amenity", "townhall")),
+    "Plaza Mayor": ("Plaza Mayor", "plaza", None),
+    "Elogio del Horizonte": ("Elogio del Horizonte", "escultura", None),
+    "Cerro de Santa Catalina": ("Cerro de Santa Catalina", "parque", None),
+    "Acuario de Gijón": ("Acuario de Gijón", "acuario", None),
+    "Puerto Deportivo": ("Puerto Deportivo", "puerto", ("leisure", "marina")),
+    "Estadio El Molinón": ("Molinón", "estadio", ("leisure", "stadium")),
+    "Parque de Isabel la Católica": ("Parque de Isabel la Católica", "parque", None),
+    "Universidad Laboral": ("Universidad Laboral", "edificio",
+                            ("building", "university")),
+    "Jardín Botánico Atlántico": ("Jardín Botánico Atlántico", "parque", None),
+    "Hospital de Cabueñes": ("Hospital (Universitario )?de Cabueñes", "hospital",
+                             ("amenity", "hospital")),
+    "Estación Sanz Crespo": ("Sanz Crespo", "estación", ("railway", "station")),
+    "Palacio de Revillagigedo": ("Palacio de Revillagigedo", "edificio", None),
+    "Teatro Jovellanos": ("Teatro Jovellanos", "teatro", None),
+    "Museo del Ferrocarril": ("Museo del Ferrocarril", "museo", None),
+    "Plaza del Humedal": ("Plaza del Humedal", "plaza", None),
+    "CMI El Coto": ("Integrado de El Coto|Integrado El Coto|CMI El Coto", "edificio", None),
+    "Iglesia de San Pedro": ("Iglesia( Mayor)? de San Pedro", "iglesia", None),
+    "Termas Romanas de Campo Valdés": ("Termas Romanas", "museo", None),
+    "Parque de Los Pericones": ("Pericones", "parque", None),
+    "Los Fresnos": ("Los Fresnos", "comercio", None),
+    "Mercado del Sur": ("Mercado del Sur|Mercáu del Sur", "mercado", None),
+}
+
+
+def _overpass(query: str, cache: Path, desc: str) -> list:
+    """POST an Overpass query with retries, caching the raw JSON response."""
+    import json
+    import time
+
+    if cache.exists():
+        print(f"  [cached] {cache.name}")
+        return json.loads(cache.read_text())["elements"]
+    print(f"  querying Overpass for {desc} ...")
+    last_err = None
+    for attempt in range(3):
+        try:
+            resp = requests.post(
+                OVERPASS_URL, data={"data": query},
+                headers={"User-Agent": "static-tv-maps/1.0 (personal project)",
+                         "Accept": "*/*"},
+                timeout=300)
+            resp.raise_for_status()
+            text = resp.text
+            break
+        except Exception as exc:  # 504/timeout are common on Overpass
+            last_err = exc
+            print(f"  Overpass attempt {attempt + 1} failed: {exc}")
+            time.sleep(5 * (attempt + 1))
+    else:
+        raise RuntimeError(
+            f"Overpass unreachable after 3 tries ({last_err}). "
+            f"{desc} not written.")
+    cache.write_text(text)
+    print(f"  -> cached {cache.name} ({len(text) / 1e6:.1f} MB)")
+    return json.loads(text)["elements"]
+
+
+def _way_coords(el: dict) -> list:
+    return [(p["lon"], p["lat"]) for p in el.get("geometry", [])]
+
+
+def _relation_polygon(el: dict):
+    """Assemble the outer ways of a multipolygon relation into one polygon."""
+    from shapely.geometry import LineString
+    from shapely.ops import polygonize, unary_union
+
+    lines = []
+    for m in el.get("members", []):
+        if m.get("type") != "way" or m.get("role") not in ("outer", ""):
+            continue
+        coords = [(p["lon"], p["lat"]) for p in m.get("geometry") or []]
+        if len(coords) >= 2:
+            lines.append(LineString(coords))
+    polys = list(polygonize(unary_union(lines))) if lines else []
+    return unary_union(polys) if polys else None
+
+
+def _write_geojson(features: list, out: Path, precision: int = 6) -> None:
+    """Write (properties, shapely geometry) pairs with rounded coordinates."""
+    import json
+
+    from shapely.geometry import mapping
+
+    def rnd(coords):
+        if isinstance(coords, (int, float)):
+            return round(coords, precision)
+        return [rnd(c) for c in coords]
+
+    fc = {"type": "FeatureCollection", "features": [
+        {"type": "Feature", "properties": props,
+         "geometry": {"type": (g := mapping(geom))["type"],
+                      "coordinates": rnd(g["coordinates"])}}
+        for props, geom in features]}
+    out.write_text(json.dumps(fc, ensure_ascii=False, indent=None))
+
+
+def process_gijon_streets() -> None:
+    query = f"""[out:json][timeout:180];
+(
+  way["highway"~"^({GIJON_STREET_CLASSES})$"]["name"]({GIJON_BBOX});
+  way["highway"~"^({GIJON_STREET_CLASSES})$"]["ref"]({GIJON_BBOX});
+  way["highway"]["name"~"{'|'.join(GIJON_STREET_NAMES)}"]({GIJON_BBOX});
+  way["highway"]["ref"~"^({GIJON_STREET_REFS})$"]({GIJON_BBOX});
+);
+out geom;"""
+    elements = _overpass(query, RAW / "gijon_streets_overpass.json",
+                         "Gijón streets")
+
+    features = []
+    seen = set()
+    for el in elements:
+        if el.get("type") != "way" or el["id"] in seen:
+            continue
+        seen.add(el["id"])
+        tags = el.get("tags", {})
+        coords = _way_coords(el)
+        if len(coords) < 2:
+            continue
+        from shapely.geometry import LineString
+        geom = LineString(coords).simplify(0.00002)  # ~2 m
+        features.append(({"name": tags.get("name"), "ref": tags.get("ref"),
+                          "highway": tags.get("highway")}, geom))
+
+    out = PROCESSED / "gijon_streets.geojson"
+    _write_geojson(features, out)
+    names = {p["name"] for p, _ in features if p["name"]}
+    print(f"  wrote {out.name}: {len(features)} segments, "
+          f"{len(names)} distinct names")
+    import re
+    missing = [n for n in GIJON_STREET_NAMES
+               if not any(re.search(n, name) for name in names)]
+    if missing:
+        print(f"  !! street names not found in OSM: {missing}")
+
+
+def process_gijon_coast() -> None:
+    from shapely.geometry import LineString, Polygon
+
+    query = f"""[out:json][timeout:180];
+(
+  way["natural"="coastline"]({GIJON_BBOX});
+  way["natural"="beach"]({GIJON_BBOX});
+  relation["natural"="beach"]({GIJON_BBOX});
+  way["leisure"="marina"]({GIJON_BBOX});
+  relation["leisure"="marina"]({GIJON_BBOX});
+  way["man_made"="pier"]({GIJON_BBOX});
+  way["man_made"="breakwater"]({GIJON_BBOX});
+);
+out geom;"""
+    elements = _overpass(query, RAW / "gijon_coast_overpass.json",
+                         "Gijón coastline/beaches/harbour")
+
+    def kind_of(tags: dict) -> str:
+        if tags.get("natural") == "coastline":
+            return "coastline"
+        if tags.get("natural") == "beach":
+            return "beach"
+        if tags.get("leisure") == "marina":
+            return "marina"
+        return "pier"  # man_made=pier / breakwater
+
+    features = []
+    for el in elements:
+        tags = el.get("tags", {})
+        kind = kind_of(tags)
+        if el["type"] == "relation":
+            geom = _relation_polygon(el)
+        else:
+            coords = _way_coords(el)
+            if len(coords) < 2:
+                continue
+            closed = coords[0] == coords[-1] and len(coords) >= 4
+            # Beaches and marinas are areas; coastline and closed piers stay
+            # lines (a closed coastline ring here is an islet outline).
+            if closed and kind in ("beach", "marina"):
+                geom = Polygon(coords)
+            else:
+                geom = LineString(coords)
+        if geom is None or geom.is_empty:
+            continue
+        geom = geom.simplify(0.00002)  # ~2 m
+        features.append(({"kind": kind, "name": tags.get("name")}, geom))
+
+    out = PROCESSED / "gijon_coast.geojson"
+    _write_geojson(features, out)
+    beaches = sorted({p["name"] for p, _ in features
+                      if p["kind"] == "beach" and p["name"]})
+    print(f"  wrote {out.name}: {len(features)} features "
+          f"({len(beaches)} named beaches: {', '.join(beaches)})")
+
+
+def _pick_landmark(candidates: list, kind: str, prefer, rx):
+    """Choose the best OSM element among those whose name matched a target."""
+    def ok(el):
+        tags = el.get("tags", {})
+        # Streets, transit stops, bus routes and car parks share names with
+        # the landmarks; skip them (but plazas themselves are often mapped as
+        # highway=pedestrian areas).
+        if "highway" in tags and kind != "plaza":
+            return False
+        if tags.get("type") in ("route", "route_master"):
+            return False
+        if tags.get("public_transport") in ("platform", "stop_position", "stop_area"):
+            return False
+        if tags.get("amenity") in ("parking", "taxi", "bicycle_rental", "cafe"):
+            return False
+        return True
+
+    # Name + preferred tag beats preferred tag alone beats name alone (Gijón
+    # tags its district civic centres amenity=townhall too, so tag-only hits
+    # can be the wrong building).
+    def score(el):
+        tags = el.get("tags", {})
+        name_ok = bool(rx.search(tags.get("name", "")))
+        pref_ok = bool(prefer) and tags.get(prefer[0]) == prefer[1]
+        return 0 if name_ok and pref_ok else 1 if pref_ok else 2
+
+    rank = {"relation": 0, "way": 1, "node": 2}
+    good = sorted((el for el in candidates if ok(el)),
+                  key=lambda el: (score(el), rank[el["type"]],
+                                  -len(el.get("tags", {}))))
+    return good[0] if good else None
+
+
+def process_gijon_landmarks() -> None:
+    import re
+
+    pattern = "|".join(p for p, _, _ in GIJON_LANDMARK_TARGETS.values())
+    # The town hall gets a tag clause too: its OSM name need not contain
+    # "Ayuntamiento" (the name-matched hits are pavilions and offices).
+    query = f"""[out:json][timeout:180];
+(
+  nwr["name"~"{pattern}"]({GIJON_BBOX});
+  nwr["amenity"="townhall"]({GIJON_BBOX});
+);
+out center;"""
+    elements = _overpass(query, RAW / "gijon_landmarks_overpass.json",
+                         "Gijón landmarks")
+
+    features = []
+    for target, (pat, kind, prefer) in GIJON_LANDMARK_TARGETS.items():
+        rx = re.compile(pat)
+        candidates = [el for el in elements
+                      if rx.search(el.get("tags", {}).get("name", ""))
+                      or (prefer and el.get("tags", {}).get(prefer[0]) == prefer[1])]
+        el = _pick_landmark(candidates, kind, prefer, rx)
+        if el is None:
+            print(f"  !! no OSM match for {target}")
+            continue
+        if el["type"] == "node":
+            lon, lat = el["lon"], el["lat"]
+        else:
+            lon, lat = el["center"]["lon"], el["center"]["lat"]
+        from shapely.geometry import Point
+        features.append(({"name": target, "kind": kind}, Point(lon, lat)))
+        print(f"    {target:32s} {kind:10s} {lat:.5f}, {lon:.5f} "
+              f"({el['type']} \"{el['tags'].get('name', '')}\")")
+
+    out = PROCESSED / "gijon_landmarks.geojson"
+    _write_geojson(features, out, precision=5)
+    print(f"  wrote {out.name}: {len(features)} landmarks")
+
+
 # Cities and towns whose exact point locations the maps need. Geocoded once
 # via Nominatim (OSM) and committed in data/processed/cities.geojson; the raw
 # responses are cached per city under data/raw/nominatim/.
@@ -633,6 +953,12 @@ def main() -> None:
     process_rivers20()
     print("Asturias rivers (asturias-rios map):")
     process_asturias_rivers()
+    print("Gijón streets:")
+    process_gijon_streets()
+    print("Gijón coast:")
+    process_gijon_coast()
+    print("Gijón landmarks:")
+    process_gijon_landmarks()
     print("Cities:")
     process_cities()
     print("Done.")
