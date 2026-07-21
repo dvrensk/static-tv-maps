@@ -34,6 +34,9 @@ Everything lands in [`output/`](output/), pre-rendered and committed:
 | `asturias-rios` | The 14 main rivers of Asturias (Nalón, Narcea, Navia, Sella, Eo, Piloña…), from OpenStreetMap |
 | `asturias-ciudades` | The main towns of Asturias — every concejo over 10 000 inhabitants |
 | `asturias-ciudades-concejos` | The same towns as a choropleth: each concejo painted by population tier, the rest neutral |
+| `gijon-calles-centro` | Schematic street map of central Gijón: the structural streets as bold coloured strokes with names along them, landmark pictograms, sea/beach/harbour |
+| `gijon-calles-medio` | The same street skeleton zoomed out to El Natahoyo, El Llano and Ceares, adding barrio ghost names, the río Piles and Los Pericones |
+| `gijon-calles-amplio` | The widest Gijón frame: the AS-19 and AS-II corridors, La Calzada and Roces to the Universidad Laboral, Jardín Botánico and Hospital de Cabueñes |
 | `*-mudo` | The same maps without names ("mapa mudo"), for quizzing yourself |
 
 All on-map text is in Spanish. Instead of big titles, each map carries a small

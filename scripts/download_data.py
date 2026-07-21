@@ -526,6 +526,7 @@ GIJON_STREET_NAMES = (
     "Avenida del Jardín Botánico",
     "Marqués de San Esteban",
     "Calle Corrida",
+    "Calle de Los Moros",
 )
 
 # Road refs the maps must carry regardless of class.
@@ -566,6 +567,22 @@ GIJON_LANDMARK_TARGETS = {
     "Parque de Los Pericones": ("Pericones", "parque", None),
     "Los Fresnos": ("Los Fresnos", "comercio", None),
     "Mercado del Sur": ("Mercado del Sur|Mercáu del Sur", "mercado", None),
+}
+
+
+# Parks / green areas for the Gijón schematic maps: a handful of polygons
+# fetched by name (display name -> OSM name regex). OSM quirks: the Cerro de
+# Santa Catalina green cap is relation 3922053 "Parque del Cerro" (the ways
+# named "Cerro de Santa Catalina" are its cliffs), and the Begoña park is
+# "Jardines del Paseo de Begoña". The query accepts any green-ish tag
+# alongside the name.
+GIJON_PARK_TARGETS = {
+    "Parque de Isabel la Católica": "Parque de Isabel la Católica",
+    "Cerro de Santa Catalina": "Cerro de Santa Catalina|Parque del Cerro",
+    "Parque de Begoña": "Jardines del Paseo de Begoña",
+    "Parque de Los Pericones": "Parque de( Los)? Pericones|Los Pericones",
+    "Jardín Botánico Atlántico": "Jardín Botánico Atlántico",
+    "Parque de Moreda": "Parque de Moreda",
 }
 
 
@@ -734,6 +751,54 @@ out geom;"""
                       if p["kind"] == "beach" and p["name"]})
     print(f"  wrote {out.name}: {len(features)} features "
           f"({len(beaches)} named beaches: {', '.join(beaches)})")
+
+
+def process_gijon_parks() -> None:
+    import re
+
+    from shapely.geometry import Polygon
+
+    pattern = "|".join(GIJON_PARK_TARGETS.values())
+    query = f"""[out:json][timeout:180];
+(
+  way["name"~"{pattern}"]["leisure"]({GIJON_BBOX});
+  relation["name"~"{pattern}"]["leisure"]({GIJON_BBOX});
+  way["name"~"{pattern}"]["natural"]({GIJON_BBOX});
+  relation["name"~"{pattern}"]["natural"]({GIJON_BBOX});
+  way["name"~"{pattern}"]["landuse"]({GIJON_BBOX});
+);
+out geom;"""
+    elements = _overpass(query, RAW / "gijon_parks_overpass.json",
+                         "Gijón parks")
+
+    features = []
+    for target, pat in GIJON_PARK_TARGETS.items():
+        rx = re.compile(pat)
+        best = None
+        for el in elements:
+            if not rx.search(el.get("tags", {}).get("name", "")):
+                continue
+            if el["type"] == "relation":
+                geom = _relation_polygon(el)
+            else:
+                coords = _way_coords(el)
+                if len(coords) < 4 or coords[0] != coords[-1]:
+                    continue
+                geom = Polygon(coords)
+            if geom is None or geom.is_empty:
+                continue
+            if best is None or geom.area > best.area:
+                best = geom
+        if best is None:
+            print(f"  !! no OSM polygon for {target}")
+            continue
+        features.append(({"kind": "park", "name": target},
+                         best.simplify(0.00005)))
+
+    out = PROCESSED / "gijon_parks.geojson"
+    _write_geojson(features, out)
+    print(f"  wrote {out.name}: {len(features)} parks "
+          f"({', '.join(p['name'] for p, _ in features)})")
 
 
 def _pick_landmark(candidates: list, kind: str, prefer, rx):
@@ -959,6 +1024,8 @@ def main() -> None:
     process_gijon_coast()
     print("Gijón landmarks:")
     process_gijon_landmarks()
+    print("Gijón parks:")
+    process_gijon_parks()
     print("Cities:")
     process_cities()
     print("Done.")
