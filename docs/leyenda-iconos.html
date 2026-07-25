@@ -1,0 +1,456 @@
+<title>Leyenda · Lo más típico de cada provincia</title>
+<style>
+  :root {
+    --paper: #f7f4ee;
+    --card: #fffdf9;
+    --ink: #2b2824;
+    --ink-soft: #55524d;
+    --line: #c6bfb1;
+    --rule: #8f887b;
+    --sea: #4a7a99;
+    --sea-soft: #7da7bf;
+    --sand: #f2dfae;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #1f1d1a;
+      --card: #2b2824;
+      --ink: #ece7dc;
+      --ink-soft: #b3ac9f;
+      --line: #4a463f;
+      --rule: #6b665d;
+      --sea: #9dbfd4;
+      --sea-soft: #6f93ab;
+      --sand: #4a4232;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1f1d1a;
+    --card: #2b2824;
+    --ink: #ece7dc;
+    --ink-soft: #b3ac9f;
+    --line: #4a463f;
+    --rule: #6b665d;
+    --sea: #9dbfd4;
+    --sea-soft: #6f93ab;
+    --sand: #4a4232;
+  }
+  :root[data-theme="light"] {
+    --paper: #f7f4ee;
+    --card: #fffdf9;
+    --ink: #2b2824;
+    --ink-soft: #55524d;
+    --line: #c6bfb1;
+    --rule: #8f887b;
+    --sea: #4a7a99;
+    --sea-soft: #7da7bf;
+    --sand: #f2dfae;
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    margin: 0;
+    padding: 2.5rem 1.25rem 4rem;
+  }
+  .wrap { max-width: 72rem; margin: 0 auto; }
+  header.intro { max-width: 46rem; margin: 0 auto 2.5rem; text-align: center; }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--sea);
+    margin: 0 0 0.6rem;
+  }
+  h1 {
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 1rem;
+    text-wrap: balance;
+  }
+  header.intro p { color: var(--ink-soft); margin: 0.4rem 0; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 0.9rem;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    padding: 0.95rem 1.05rem;
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+  }
+  .glyph {
+    font-size: 2rem;
+    line-height: 1;
+    flex: 0 0 auto;
+    margin-top: 0.15rem;
+  }
+  .card h2 {
+    font-size: 1.02rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .what {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--sea);
+    margin: 0.15rem 0 0.3rem;
+  }
+  .card p {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  section.notes {
+    max-width: 46rem;
+    margin: 2.8rem auto 0;
+    border-top: 2px solid var(--rule);
+    padding-top: 1.4rem;
+  }
+  section.notes h2 { font-size: 1.05rem; font-weight: 800; margin: 0 0 0.6rem; }
+  section.notes p { font-size: 0.9rem; color: var(--ink-soft); margin: 0.5rem 0; }
+  section.notes .glyph-inline { font-size: 1.05rem; }
+</style>
+
+<div class="wrap">
+  <header class="intro">
+    <p class="eyebrow">Leyenda del mapa · España</p>
+    <h1>Lo más típico de cada provincia</h1>
+    <p>Cada provincia lleva en el mapa un dibujo de aquello por lo que es más
+    conocida. Cuando dos provincias vecinas presumen de lo mismo (vino,
+    playas, catedrales…), una se queda con el icono evidente y la otra luce
+    lo siguiente que la hace única — por eso algunas elecciones sorprenden.</p>
+    <p>En el mapa los iconos van en trazo de línea sobre fondo claro; aquí se
+    muestran en color. Orden alfabético.</p>
+  </header>
+
+  <div class="grid">
+    <article class="card"><span class="glyph">🗼</span><div>
+      <h2>A Coruña</h2><span class="what">Torre de Hércules</span>
+      <p>El faro romano más antiguo del mundo que sigue en funcionamiento,
+      símbolo de la ciudad y de su costa atlántica.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🧂</span><div>
+      <h2>Álava</h2><span class="what">Salinas de Añana</span>
+      <p>Un valle salado explotado desde hace 6.500 años. La Rioja Alavesa
+      también es tierra de gran vino, pero la copa ya la lleva la vecina
+      La Rioja.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🔪</span><div>
+      <h2>Albacete</h2><span class="what">Navajas y cuchillos</span>
+      <p>La cuchillería es el oficio de la ciudad desde hace siglos;
+      «albaceteña» es casi sinónimo de navaja.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍬</span><div>
+      <h2>Alicante</h2><span class="what">Turrón</span>
+      <p>Jijona y Alicante dan nombre a los dos turrones clásicos de la
+      Navidad española.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🏜️</span><div>
+      <h2>Almería</h2><span class="what">Desierto de Tabernas</span>
+      <p>El único desierto de Europa, plató de los westerns de Hollywood.
+      (Sus famosos invernaderos ya salen en el mapa de la despensa.)</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍾</span><div>
+      <h2>Asturias</h2><span class="what">Sidra</span>
+      <p>La botella escanciada a pulso es el gesto asturiano por
+      excelencia.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🧱</span><div>
+      <h2>Ávila</h2><span class="what">Murallas</span>
+      <p>La muralla medieval mejor conservada de España rodea la ciudad
+      entera, con sus 88 torreones.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍖</span><div>
+      <h2>Badajoz</h2><span class="what">Jamón y dehesa</span>
+      <p>La dehesa extremeña cría el cerdo ibérico. El jamón marca a Badajoz
+      y deja las fresas para la vecina Huelva.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">⛪</span><div>
+      <h2>Barcelona</h2><span class="what">Sagrada Família</span>
+      <p>El templo de Gaudí, el monumento más visitado de España y aún en
+      construcción tras más de un siglo.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🎨</span><div>
+      <h2>Bizkaia</h2><span class="what">Museo Guggenheim</span>
+      <p>El museo de titanio que transformó Bilbao. La gastronomía la
+      comparte todo el País Vasco; el arte moderno distingue a Bizkaia.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🌭</span><div>
+      <h2>Burgos</h2><span class="what">Morcilla</span>
+      <p>La morcilla de arroz, embutido con fama nacional. Su catedral gótica
+      quedó en reserva: las iglesias ya abundan en el mapa.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🐦</span><div>
+      <h2>Cáceres</h2><span class="what">Cigüeñas</span>
+      <p>Los nidos coronan cada torre y campanario, y Monfragüe es santuario
+      de grandes aves.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🎭</span><div>
+      <h2>Cádiz</h2><span class="what">Carnaval</span>
+      <p>Las chirigotas gaditanas: el carnaval con más ingenio del país.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🐟</span><div>
+      <h2>Cantabria</h2><span class="what">Anchoas</span>
+      <p>Las anchoas de Santoña, las más apreciadas del Cantábrico.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍊</span><div>
+      <h2>Castellón</h2><span class="what">Naranjas</span>
+      <p>El azahar perfuma la Plana castellonense. La naranja es suya para
+      que la vecina Valencia pueda lucir la paella.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">⚓</span><div>
+      <h2>Ceuta</h2><span class="what">Puerto y Estrecho</span>
+      <p>Ciudad-puerto donde el Mediterráneo se encuentra con el
+      Atlántico.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🧀</span><div>
+      <h2>Ciudad Real</h2><span class="what">Queso manchego</span>
+      <p>El queso de oveja de la llanura del Quijote, la denominación de
+      origen más conocida de España.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🕌</span><div>
+      <h2>Córdoba</h2><span class="what">Mezquita</span>
+      <p>El bosque de columnas y arcos bicolores omeyas, único en el
+      mundo.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🏠</span><div>
+      <h2>Cuenca</h2><span class="what">Casas Colgadas</span>
+      <p>Casas suspendidas literalmente sobre la hoz del río Huécar.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🏄</span><div>
+      <h2>Gipuzkoa</h2><span class="what">Surf</span>
+      <p>Zarautz y La Zurriola son la capital española del surf. Los pintxos
+      los comparte todo el País Vasco; la tabla es su seña propia.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🏖️</span><div>
+      <h2>Girona</h2><span class="what">Costa Brava</span>
+      <p>Calas de pinos y agua turquesa que dieron nombre a toda una manera
+      de veranear.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🏰</span><div>
+      <h2>Granada</h2><span class="what">Alhambra</span>
+      <p>El palacio nazarí más admirado del mundo, con Sierra Nevada de
+      telón.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍯</span><div>
+      <h2>Guadalajara</h2><span class="what">Miel de la Alcarria</span>
+      <p>La miel con denominación de origen del páramo alcarreño, la más
+      literaria de España (Cela la recorrió a pie).</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍓</span><div>
+      <h2>Huelva</h2><span class="what">Fresas</span>
+      <p>Nueve de cada diez fresas españolas. El jamón de Jabugo cedió el
+      puesto: el ibérico ya marca a la vecina Badajoz.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🏔️</span><div>
+      <h2>Huesca</h2><span class="what">Pirineos</span>
+      <p>Los tresmiles, los valles y las pistas de esquí de Aragón.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🏝️</span><div>
+      <h2>Islas Baleares</h2><span class="what">Playas y calas</span>
+      <p>Las calas de agua clara de Mallorca, Menorca, Ibiza y
+      Formentera.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🫒</span><div>
+      <h2>Jaén</h2><span class="what">Aceite de oliva</span>
+      <p>Un mar de más de 60 millones de olivos: la primera productora de
+      aceite del mundo.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍷</span><div>
+      <h2>La Rioja</h2><span class="what">Vino</span>
+      <p>El vino español por antonomasia; la copa le pertenece por derecho
+      propio.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🏖️</span><div>
+      <h2>Las Palmas</h2><span class="what">Dunas y playa</span>
+      <p>Las dunas de Maspalomas junto al mar. (Comparte icono con la Costa
+      Brava: a 2.000 km de distancia no hay confusión posible.)</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🦁</span><div>
+      <h2>León</h2><span class="what">El león</span>
+      <p>El viejo reino puso el león en el escudo: pura heráldica, y fácil
+      de recordar.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍎</span><div>
+      <h2>Lleida</h2><span class="what">Fruta dulce</span>
+      <p>La mayor huerta de manzanas, peras y melocotones de España.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🧱</span><div>
+      <h2>Lugo</h2><span class="what">Muralla romana</span>
+      <p>La única muralla romana del mundo conservada entera: se puede dar
+      la vuelta a la ciudad paseando por encima. (Mismo icono que Ávila —
+      no son vecinas, así que en el mapa no se confunden.)</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🐻</span><div>
+      <h2>Madrid</h2><span class="what">El Oso y el Madroño</span>
+      <p>El símbolo de la Puerta del Sol, escudo de la villa.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🎨</span><div>
+      <h2>Málaga</h2><span class="what">Picasso</span>
+      <p>El pintor más famoso del siglo XX nació aquí. La playa ya la
+      llevaban otras costas, así que Málaga luce a su genio.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">⛵</span><div>
+      <h2>Melilla</h2><span class="what">Puerto</span>
+      <p>Ciudad portuaria mediterránea (y, de propina, con el mejor
+      modernismo fuera de Cataluña).</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🥬</span><div>
+      <h2>Murcia</h2><span class="what">La huerta</span>
+      <p>«La huerta de Europa»: verduras y hortalizas regadas por el
+      Segura.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🐂</span><div>
+      <h2>Navarra</h2><span class="what">San Fermín</span>
+      <p>El encierro de Pamplona, la fiesta española más conocida del
+      mundo.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">♨️</span><div>
+      <h2>Ourense</h2><span class="what">Termas</span>
+      <p>As Burgas manan agua caliente en pleno centro desde época
+      romana.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🌾</span><div>
+      <h2>Palencia</h2><span class="what">Tierra de Campos</span>
+      <p>El granero castellano: cereal hasta el horizonte.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🦐</span><div>
+      <h2>Pontevedra</h2><span class="what">Marisco de las rías</span>
+      <p>Las Rías Baixas: mejillones, percebes, nécoras… y el albariño para
+      acompañar.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🎓</span><div>
+      <h2>Salamanca</h2><span class="what">Universidad</span>
+      <p>La universidad más antigua de España (1218) y su fachada donde
+      todos buscan la rana.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🌋</span><div>
+      <h2>Santa Cruz de Tenerife</h2><span class="what">El Teide</span>
+      <p>El pico más alto de España (3.715 m) es un volcán canario.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🌉</span><div>
+      <h2>Segovia</h2><span class="what">Acueducto</span>
+      <p>Dos mil años de granito romano sin una gota de argamasa.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">💃</span><div>
+      <h2>Sevilla</h2><span class="what">Flamenco</span>
+      <p>Compás, feria y azahar: la capital sentimental del flamenco.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🌲</span><div>
+      <h2>Soria</h2><span class="what">Pinares</span>
+      <p>Los grandes pinares del alto Duero, los bosques que cantó
+      Machado.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🏛️</span><div>
+      <h2>Tarragona</h2><span class="what">Tarraco romana</span>
+      <p>El anfiteatro junto al mar de la que fue capital romana de
+      Hispania.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🦕</span><div>
+      <h2>Teruel</h2><span class="what">Dinosaurios</span>
+      <p>Grandes yacimientos y Dinópolis: Teruel existe… desde el
+      Jurásico.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">⚔️</span><div>
+      <h2>Toledo</h2><span class="what">Espadas</span>
+      <p>El acero toledano armó a medio mundo durante siglos.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🥘</span><div>
+      <h2>Valencia</h2><span class="what">Paella</span>
+      <p>El plato español más universal nació en su huerta y su
+      Albufera.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍇</span><div>
+      <h2>Valladolid</h2><span class="what">Ribera del Duero</span>
+      <p>Los grandes tintos del Duero: La Rioja lleva la copa, Valladolid
+      la uva.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">⛪</span><div>
+      <h2>Zamora</h2><span class="what">Románico</span>
+      <p>La mayor concentración de iglesias románicas de Europa.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">⛪</span><div>
+      <h2>Zaragoza</h2><span class="what">Basílica del Pilar</span>
+      <p>La basílica junto al Ebro, patrona de la Hispanidad y corazón de
+      las fiestas del Pilar.</p>
+    </div></article>
+  </div>
+
+  <section class="notes">
+    <h2>Iconos repetidos, a propósito</h2>
+    <p>La regla del mapa es que <strong>las vecinas nunca compartan
+    icono</strong>; a distancia sí se permite repetir:
+    <span class="glyph-inline">⛪</span> Barcelona, Zamora y Zaragoza ·
+    <span class="glyph-inline">🧱</span> Ávila y Lugo ·
+    <span class="glyph-inline">🎨</span> Bizkaia y Málaga ·
+    <span class="glyph-inline">🏖️</span> Girona y Las Palmas.</p>
+    <p>En el mapa (<code>spain-provincias-iconos</code>) los dibujos son
+    versiones de trazo del mismo símbolo (fuente Noto Emoji monocroma);
+    esta leyenda los muestra en color. Las razones de cada elección están
+    documentadas en el código, en <code>tvmaps/maps_iconos.py</code>.</p>
+  </section>
+</div>
