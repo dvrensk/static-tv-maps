@@ -1,0 +1,483 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leyenda · El día a día de cada provincia</title>
+<style>
+  :root {
+    --paper: #f7f4ee;
+    --card: #fffdf9;
+    --ink: #2b2824;
+    --ink-soft: #55524d;
+    --line: #c6bfb1;
+    --rule: #8f887b;
+    --sea: #4a7a99;
+    --sea-soft: #7da7bf;
+    --sand: #f2dfae;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #1f1d1a;
+      --card: #2b2824;
+      --ink: #ece7dc;
+      --ink-soft: #b3ac9f;
+      --line: #4a463f;
+      --rule: #6b665d;
+      --sea: #9dbfd4;
+      --sea-soft: #6f93ab;
+      --sand: #4a4232;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1f1d1a;
+    --card: #2b2824;
+    --ink: #ece7dc;
+    --ink-soft: #b3ac9f;
+    --line: #4a463f;
+    --rule: #6b665d;
+    --sea: #9dbfd4;
+    --sea-soft: #6f93ab;
+    --sand: #4a4232;
+  }
+  :root[data-theme="light"] {
+    --paper: #f7f4ee;
+    --card: #fffdf9;
+    --ink: #2b2824;
+    --ink-soft: #55524d;
+    --line: #c6bfb1;
+    --rule: #8f887b;
+    --sea: #4a7a99;
+    --sea-soft: #7da7bf;
+    --sand: #f2dfae;
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    margin: 0;
+    padding: 2.5rem 1.25rem 4rem;
+  }
+  .wrap { max-width: 72rem; margin: 0 auto; }
+  header.intro { max-width: 46rem; margin: 0 auto 2.5rem; text-align: center; }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--sea);
+    margin: 0 0 0.6rem;
+  }
+  h1 {
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 1rem;
+    text-wrap: balance;
+  }
+  header.intro p { color: var(--ink-soft); margin: 0.4rem 0; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr));
+    gap: 0.9rem;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    padding: 0.95rem 1.05rem;
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+  }
+  .glyph {
+    font-size: 2rem;
+    line-height: 1;
+    flex: 0 0 auto;
+    margin-top: 0.15rem;
+  }
+  .card h2 {
+    font-size: 1.02rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .what {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--sea);
+    margin: 0.15rem 0 0.3rem;
+  }
+  .card p {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  section.notes {
+    max-width: 46rem;
+    margin: 2.8rem auto 0;
+    border-top: 2px solid var(--rule);
+    padding-top: 1.4rem;
+  }
+  section.notes h2 { font-size: 1.05rem; font-weight: 800; margin: 0 0 0.6rem; }
+  section.notes p { font-size: 0.9rem; color: var(--ink-soft); margin: 0.5rem 0; }
+  section.notes .glyph-inline { font-size: 1.05rem; }
+</style>
+
+
+<div class="wrap">
+  <header class="intro">
+    <p class="eyebrow">Leyenda del mapa · España</p>
+    <h1>El día a día de cada provincia</h1>
+    <p>Hermano del mapa de «lo más típico», pero con otra regla: aquí no vale
+    lo más famoso, sino <strong>lo que de verdad te viene a la cabeza cuando
+    conoces a alguien de allí</strong> — lo que da forma a su vida diaria.
+    Si conoces a alguien de Sevilla piensas en flamenco (y por eso se queda);
+    a un malagueño no le preguntas por la infancia de Picasso — piensas en
+    espetos en la playa.</p>
+    <p>Monumentos, museos y artistas muertos fuera; comida, fiestas, clima y
+    trabajo dentro. Orden alfabético.</p>
+  </header>
+
+  <div class="grid">
+    <article class="card"><span class="glyph">👕</span><div>
+      <h2>A Coruña</h2><span class="what">Zara / Inditex</span>
+      <p>El imperio textil se dirige desde Arteixo: media comarca trabaja o ha
+      trabajado para Inditex, y el resto de España viste sus tiendas.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🌳</span><div>
+      <h2>Álava</h2><span class="what">Vitoria, capital verde</span>
+      <p>Vitoria-Gasteiz vive rodeada de su Anillo Verde (Capital Verde
+      Europea 2012): una capital tranquila, ordenada y muy vivible de la que
+      los alaveses presumen a diario.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🔪</span><div>
+      <h2>Albacete</h2><span class="what">Navajas</span>
+      <p>Como en el mapa de lo típico: la navaja albaceteña sigue en bolsillos
+      y cocinas de toda España. Aquí lo famoso y lo cotidiano coinciden.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🏙️</span><div>
+      <h2>Alicante</h2><span class="what">Benidorm y la playa</span>
+      <p>La provincia del veraneo popular español: los rascacielos de Benidorm
+      y el turismo de sol y playa dan trabajo y fama. (El turrón queda en el
+      mapa de lo típico.)</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍅</span><div>
+      <h2>Almería</h2><span class="what">Los invernaderos</span>
+      <p>El «mar de plástico» que se ve desde el espacio llena de tomates,
+      pimientos y pepinos las neveras de media Europa. De eso vive Almería,
+      no del desierto de Tabernas.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍾</span><div>
+      <h2>Asturias</h2><span class="what">Sidra escanciada</span>
+      <p>La sidra no es un monumento, es vida diaria: la botella escanciada a
+      pulso en cualquier chigre. Se queda tal cual.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🥩</span><div>
+      <h2>Ávila</h2><span class="what">Chuletón</span>
+      <p>Cuando te invitan a comer en Ávila piensas en el chuletón antes que
+      en la muralla.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍖</span><div>
+      <h2>Badajoz</h2><span class="what">Jamón ibérico</span>
+      <p>La dehesa y el cerdo ibérico marcan el paisaje, el trabajo y la mesa.
+      Igual de cotidiano que famoso.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">⚽</span><div>
+      <h2>Barcelona</h2><span class="what">El Barça</span>
+      <p>«¿Culé o madridista?» es conversación diaria en toda España; la
+      Sagrada Família queda para el mapa de lo típico.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">⚽</span><div>
+      <h2>Bizkaia</h2><span class="what">El Athletic de Bilbao</span>
+      <p>San Mamés y la filosofía de jugar solo con gente de casa: el Athletic
+      es identidad cotidiana bilbaína, mucho más que el Guggenheim.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🌭</span><div>
+      <h2>Burgos</h2><span class="what">Morcilla</span>
+      <p>Di «soy de Burgos» y alguien mencionará la morcilla de arroz antes de
+      un minuto.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🌶️</span><div>
+      <h2>Cáceres</h2><span class="what">Pimentón de la Vera</span>
+      <p>El pimentón ahumado de la Vera está en casi todas las cocinas de
+      España: el sabor diario que exporta Cáceres. (Las cigüeñas quedan en el
+      otro mapa.)</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🎭</span><div>
+      <h2>Cádiz</h2><span class="what">Carnaval y guasa</span>
+      <p>Las chirigotas y el humor gaditano no son un monumento: son la manera
+      de hablar de la gente todo el año.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍰</span><div>
+      <h2>Cantabria</h2><span class="what">Sobaos y quesadas</span>
+      <p>El desayuno pasiego viaja en todas las mochilas que salen de
+      Cantabria; más cotidiano que las anchoas de lata.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🧱</span><div>
+      <h2>Castellón</h2><span class="what">Azulejos (cerámica)</span>
+      <p>La Plana fabrica la mayor parte de la cerámica española: el azulejo
+      es el trabajo de miles de familias castellonenses, más «suyo» que la
+      naranja que comparte con Valencia.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">⚓</span><div>
+      <h2>Ceuta</h2><span class="what">La frontera y el Estrecho</span>
+      <p>La vida diaria mira al puerto, al Estrecho y a la frontera: cruce
+      constante de personas y mercancías.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🧀</span><div>
+      <h2>Ciudad Real</h2><span class="what">Queso manchego</span>
+      <p>En plena Mancha, el queso de oveja es el embajador de diario de la
+      provincia.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">☀️</span><div>
+      <h2>Córdoba</h2><span class="what">El calor</span>
+      <p>«¿De Córdoba? Qué calor pasáis en verano.» Los 45 grados son la
+      primera conversación; la Mezquita ya reina en el mapa de lo típico.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🏠</span><div>
+      <h2>Cuenca</h2><span class="what">Casas colgadas</span>
+      <p>Sigue siendo la imagen que evoca la palabra «Cuenca», también en la
+      conversación de todos los días.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🏖️</span><div>
+      <h2>Girona</h2><span class="what">La Costa Brava</span>
+      <p>Calas y pueblos de veraneo: para media Europa, conocer a alguien de
+      Girona es acordarse de sus vacaciones.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍽️</span><div>
+      <h2>Gipuzkoa</h2><span class="what">Pintxos y sociedades</span>
+      <p>Donostia es capital gastronómica: barras de pintxos y sociedades
+      donde se cocina entre amigos. Comer bien es el día a día
+      guipuzcoano.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍻</span><div>
+      <h2>Granada</h2><span class="what">Tapas gratis</span>
+      <p>Pides una caña y llega una tapa sin pagar: la costumbre que todo
+      estudiante y visitante recuerda de Granada, más a mano que la
+      Alhambra.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍯</span><div>
+      <h2>Guadalajara</h2><span class="what">Miel de la Alcarria</span>
+      <p>«La Alcarria» suena a miel: el producto cotidiano que da nombre y
+      fama a la comarca.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍓</span><div>
+      <h2>Huelva</h2><span class="what">Fresas y el Rocío</span>
+      <p>Las fresas de los desayunos de toda España salen de Huelva, y cada
+      primavera la provincia entera vive la romería del Rocío.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">⛷️</span><div>
+      <h2>Huesca</h2><span class="what">Esquí y montaña</span>
+      <p>El Pirineo es el patio de casa: esquiar, caminar y vivir del turismo
+      de nieve.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🥐</span><div>
+      <h2>Islas Baleares</h2><span class="what">Ensaimadas</span>
+      <p>La caja octogonal de ensaimadas en la cola del aeropuerto es el gesto
+      balear universal.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🫒</span><div>
+      <h2>Jaén</h2><span class="what">Aceite de oliva</span>
+      <p>El mar de olivos manda en el paisaje, el calendario (la campaña de la
+      aceituna) y la economía. Aquí lo típico ES la vida diaria.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍷</span><div>
+      <h2>La Rioja</h2><span class="what">El vino</span>
+      <p>Vendimia, bodegas y la copa de Rioja en la mesa: lo típico y lo
+      cotidiano son la misma cosa.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🏖️</span><div>
+      <h2>Las Palmas</h2><span class="what">Playa todo el año</span>
+      <p>22 grados en enero: el clima eterno y la playa perpetua es lo que
+      cualquiera envidia al conocer a un canario.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🥩</span><div>
+      <h2>León</h2><span class="what">Cecina</span>
+      <p>La cecina (y unas tapas generosas con cada consumición) es lo que un
+      leonés pone en la mesa antes que su catedral.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍎</span><div>
+      <h2>Lleida</h2><span class="what">La fruta dulce</span>
+      <p>Huertos de manzana, pera y melocotón (y la boira del invierno) marcan
+      el año leridano.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🐄</span><div>
+      <h2>Lugo</h2><span class="what">Vacas y ternera gallega</span>
+      <p>La Galicia interior de prados y ganado: la ternera gallega de la
+      carnicería es Lugo en el día a día, más que su muralla romana.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🚇</span><div>
+      <h2>Madrid</h2><span class="what">El metro y las prisas</span>
+      <p>La vida madrileña se mide en paradas de metro y en prisas; el oso y
+      el madroño quedan para el mapa de lo típico.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🐟</span><div>
+      <h2>Málaga</h2><span class="what">Espetos y playa</span>
+      <p>Sardinas espetadas en el chiringuito: así se vive Málaga. A un
+      malagueño no le preguntas por la infancia de Picasso.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🤝</span><div>
+      <h2>Melilla</h2><span class="what">Cuatro culturas</span>
+      <p>Cristianos, musulmanes, judíos e hindúes conviven a diario: la mezcla
+      es la seña de identidad de la ciudad.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🥬</span><div>
+      <h2>Murcia</h2><span class="what">La huerta de Europa</span>
+      <p>Lechugas, tomates y frutales que llenan los supermercados europeos:
+      la huerta define paisaje, trabajo y orgullo murciano.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🐂</span><div>
+      <h2>Navarra</h2><span class="what">San Fermín</span>
+      <p>Una semana de julio que organiza el año entero. Fiesta vivida, no
+      postal: se queda.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🐙</span><div>
+      <h2>Ourense</h2><span class="what">Pulpo á feira</span>
+      <p>El pulpo de las ferias — con O Carballiño como capital — acompaña a
+      todo ourensano; más cotidiano que las termas.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🌾</span><div>
+      <h2>Palencia</h2><span class="what">Tierra de Campos</span>
+      <p>El horizonte de cereal define la provincia — junto a la eterna
+      aclaración: «Palencia, con P».</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🦐</span><div>
+      <h2>Pontevedra</h2><span class="what">Marisco y albariño</span>
+      <p>Las rías dan de comer: marisco, mejillón y albariño son cotidianidad,
+      no solo carta de restaurante.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🎓</span><div>
+      <h2>Salamanca</h2><span class="what">Vida universitaria</span>
+      <p>Ciudad de estudiantes desde 1218: cursos, pisos compartidos y noches
+      universitarias es lo que evoca Salamanca — hoy igual que entonces.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍌</span><div>
+      <h2>Santa Cruz de Tenerife</h2><span class="what">Plátanos</span>
+      <p>El plátano de Canarias — con La Palma a la cabeza — es el sabor
+      diario del archipiélago; el Teide queda en el mapa de lo típico.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🐖</span><div>
+      <h2>Segovia</h2><span class="what">Cochinillo</span>
+      <p>El cochinillo asado es la comida segoviana por antonomasia; el
+      acueducto ya luce en el otro mapa.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">💃</span><div>
+      <h2>Sevilla</h2><span class="what">Flamenco y Feria</span>
+      <p>Flamenco, Feria de Abril, Semana Santa: en Sevilla lo famoso y lo
+      vivido coinciden. El ejemplo que inspiró este mapa.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🥓</span><div>
+      <h2>Soria</h2><span class="what">Torreznos</span>
+      <p>El torrezno de Soria, crujiente y con marca de garantía, ha puesto a
+      la provincia en la barra de todos los bares.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🧅</span><div>
+      <h2>Tarragona</h2><span class="what">Calçotadas</span>
+      <p>De enero a marzo, el rito de los calçots a la brasa con romesco reúne
+      a familias y cuadrillas enteras.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">❄️</span><div>
+      <h2>Teruel</h2><span class="what">El frío («Teruel existe»)</span>
+      <p>Inviernos bajo cero y la reivindicación «Teruel existe»: eso acompaña
+      a los turolenses, más que los dinosaurios.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🍬</span><div>
+      <h2>Toledo</h2><span class="what">Mazapán</span>
+      <p>El mazapán toledano endulza todas las Navidades españolas; las
+      espadas quedan para el mapa de lo típico.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🎆</span><div>
+      <h2>Valencia</h2><span class="what">Las Fallas</span>
+      <p>La mascletà, los ninots y la ciudad entera en la calle: las Fallas
+      ordenan el calendario valenciano. (La paella ya reina en el mapa de la
+      despensa.)</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">💬</span><div>
+      <h2>Valladolid</h2><span class="what">«El mejor castellano»</span>
+      <p>El tópico que persigue — con orgullo — a todo vallisoletano: que allí
+      se habla el castellano más neutro de España.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">🕯️</span><div>
+      <h2>Zamora</h2><span class="what">Semana Santa</span>
+      <p>La Semana Santa zamorana, sobria y de silencio, es la semana que
+      define la ciudad y a su gente.</p>
+    </div></article>
+
+    <article class="card"><span class="glyph">💨</span><div>
+      <h2>Zaragoza</h2><span class="what">El cierzo</span>
+      <p>El viento que despeina la ciudad casi a diario: ningún zaragozano se
+      libra de hablar del cierzo.</p>
+    </div></article>
+  </div>
+
+  <section class="notes">
+    <h2>La regla del mapa</h2>
+    <p>Frente al mapa de «lo más típico», aquí gana <strong>lo que asocias a
+    la persona, no al folleto turístico</strong>: comida, fiestas, clima y
+    trabajo. Cuando ambas cosas coinciden (sidra, flamenco, San Fermín, el
+    aceite de Jaén…) el icono se repite en los dos mapas — esa coincidencia
+    también cuenta algo.</p>
+    <p>Se permiten iconos repetidos a distancia porque la vida diaria a veces
+    coincide: <span class="glyph-inline">⚽</span> el Barça y el Athletic ·
+    <span class="glyph-inline">🥩</span> chuletón de Ávila y cecina de León ·
+    <span class="glyph-inline">🏖️</span> Costa Brava y las playas
+    canarias.</p>
+    <p>En el mapa (<code>spain-provincias-cotidiano</code>) los dibujos son
+    versiones de trazo del mismo símbolo (fuente Noto Emoji monocroma); esta
+    leyenda los muestra en color. Las razones de cada elección están
+    documentadas en el código, en <code>tvmaps/maps_cotidiano.py</code>.</p>
+  </section>
+</div>

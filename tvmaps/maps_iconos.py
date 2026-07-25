@@ -140,7 +140,12 @@ def _draw_icon_name(ax, x, y, icon, name, icon_size, name_size,
                    color=NAME_COLOR, ha="center", va="top", zorder=11)
 
 
-def map_spain_iconos():
+def build_icon_map(icons, footer):
+    """Shared renderer: pale political base + one icon/name pair per province.
+
+    `icons` is a prov_code -> IconSpec mapping; modules with a different
+    editorial angle (maps_cotidiano) reuse this with their own table.
+    """
     s = spain_scene()
     fig, ax = draw.new_map(s["frame"])
     draw.draw_context(ax, s["countries"])
@@ -160,7 +165,7 @@ def map_spain_iconos():
 
     for layer in (s["prov_pen"], s["prov_can"]):
         for _, row in layer.iterrows():
-            spec = ICONS.get(row.prov_code)
+            spec = icons.get(row.prov_code)
             if spec is None:
                 continue
             name = _prov_name(row.prov_code, row)
@@ -178,11 +183,12 @@ def map_spain_iconos():
                                 spec.icon_size, spec.name_size)
 
     _draw_country_labels(ax, s["frame"])
-    draw.draw_footer(ax, s["frame"], "España · lo más típico de cada provincia")
+    draw.draw_footer(ax, s["frame"], footer)
     draw.draw_attribution(ax, s["frame"],
                           "Datos: IGN España · iconos Noto Emoji")
     return fig
 
 
 def render_spain_provincias_iconos():
-    return draw.save(map_spain_iconos(), "spain-provincias-iconos")
+    fig = build_icon_map(ICONS, "España · lo más típico de cada provincia")
+    return draw.save(fig, "spain-provincias-iconos")
