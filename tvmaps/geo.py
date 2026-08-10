@@ -24,6 +24,14 @@ CENTRAL_AMERICA_CRS = (
     "+x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs"
 )
 
+# The same idea one zoom level out, for the map that adds Mexico and the
+# Spanish-speaking Antilles: standard parallels and centre moved north-west to
+# suit a region running from Baja California to Puerto Rico.
+MEXICO_CARIBE_CRS = (
+    "+proj=lcc +lat_1=13 +lat_2=29 +lat_0=21 +lon_0=-91 "
+    "+x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs"
+)
+
 RATIO = 16 / 9
 
 

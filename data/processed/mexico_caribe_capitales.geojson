@@ -1,0 +1,18 @@
+{
+"type": "FeatureCollection",
+"name": "mexico_caribe_capitales",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "iso": "BZ", "name": "Belmopán" }, "geometry": { "type": "Point", "coordinates": [ -88.767073, 17.2520335 ] } },
+{ "type": "Feature", "properties": { "iso": "CR", "name": "San José" }, "geometry": { "type": "Point", "coordinates": [ -84.078813969646333, 9.930370727948475 ] } },
+{ "type": "Feature", "properties": { "iso": "CU", "name": "La Habana" }, "geometry": { "type": "Point", "coordinates": [ -82.366128, 23.1339047 ] } },
+{ "type": "Feature", "properties": { "iso": "DO", "name": "Santo Domingo" }, "geometry": { "type": "Point", "coordinates": [ -69.929742315790548, 18.470745058048376 ] } },
+{ "type": "Feature", "properties": { "iso": "GT", "name": "Ciudad de Guatemala" }, "geometry": { "type": "Point", "coordinates": [ -90.5289114, 14.6230805 ] } },
+{ "type": "Feature", "properties": { "iso": "HN", "name": "Tegucigalpa" }, "geometry": { "type": "Point", "coordinates": [ -87.2194752, 14.1039908 ] } },
+{ "type": "Feature", "properties": { "iso": "MX", "name": "Ciudad de México" }, "geometry": { "type": "Point", "coordinates": [ -99.1329341, 19.4443883 ] } },
+{ "type": "Feature", "properties": { "iso": "NI", "name": "Managua" }, "geometry": { "type": "Point", "coordinates": [ -86.2704375, 12.1549624 ] } },
+{ "type": "Feature", "properties": { "iso": "PA", "name": "Ciudad de Panamá" }, "geometry": { "type": "Point", "coordinates": [ -79.534983, 8.969963 ] } },
+{ "type": "Feature", "properties": { "iso": "PR", "name": "San Juan" }, "geometry": { "type": "Point", "coordinates": [ -66.1299793, 18.440023 ] } },
+{ "type": "Feature", "properties": { "iso": "SV", "name": "San Salvador" }, "geometry": { "type": "Point", "coordinates": [ -89.215575804527603, 13.703280259193864 ] } }
+]
+}

@@ -1,10 +1,18 @@
-"""América Central: the seven countries, their capitals and a flag panel.
+"""América Central, in two framings.
 
-The isthmus is much taller than 16:9, so a whole column of canvas is free on
-the Caribbean side: that column holds the flags, each with its country and
-capital, in north-west to south-east order. The passe-partout around every flag
-repeats the country's fill color on the map, so a viewer can pair flag and
-country without reading a legend.
+`centroamerica` — the seven countries of the isthmus with their capitals named
+on the map. The isthmus is much taller than 16:9, so a whole column of canvas
+is free on the Caribbean side: that column holds the flags, each with its
+country and capital, in north-west to south-east order.
+
+`mexico-centroamerica-caribe` — the same idea zoomed out to México and the
+three Spanish-speaking Antilles (Cuba, República Dominicana, Puerto Rico).
+Mexico's width sets the scale, which leaves the isthmus too small for six
+capital names, so there the capitals are stars only and the panel — a 3x4 grid
+of flags over the empty Pacific — is what names them.
+
+In both, the passe-partout around every flag repeats the country's fill color
+on the map, so a viewer can pair flag and country without reading a legend.
 """
 
 from dataclasses import dataclass
@@ -68,13 +76,13 @@ def scene():
     )
 
 
-def _project_lonlat(lon, lat):
+def _project_lonlat(lon, lat, crs=geo.CENTRAL_AMERICA_CRS):
     import geopandas as gpd
     from shapely.geometry import Point
 
     return (
         gpd.GeoSeries([Point(lon, lat)], crs="EPSG:4326")
-        .to_crs(geo.CENTRAL_AMERICA_CRS)
+        .to_crs(crs)
         .iloc[0]
         .coords[0]
     )
@@ -141,14 +149,17 @@ WATER_LABELS = [
 WATER_COLOR = "#8fb4c9"
 
 
-def _draw_context_labels(ax, frame):
+def _draw_context_labels(ax, frame, panel, context=None, water=None,
+                         crs=geo.CENTRAL_AMERICA_CRS):
     """Neighbours and seas, skipping anything that would land under the panel."""
     fx0, fy0, fx1, fy1 = frame
-    px0, py0, px1, py1 = panel_rect(frame)
-    for labels, color in ((CONTEXT_LABELS, style.NEIGHBOR_LABEL),
-                          (WATER_LABELS, WATER_COLOR)):
+    px0, py0, px1, py1 = panel
+    pairs = ((context if context is not None else CONTEXT_LABELS,
+              style.NEIGHBOR_LABEL),
+             (water if water is not None else WATER_LABELS, WATER_COLOR))
+    for labels, color in pairs:
         for text, lon, lat, size, rotation in labels:
-            x, y = _project_lonlat(lon, lat)
+            x, y = _project_lonlat(lon, lat, crs)
             if not (fx0 < x < fx1 and fy0 < y < fy1):
                 continue
             if px0 < x < px1 and py0 < y < py1:
@@ -156,6 +167,26 @@ def _draw_context_labels(ax, frame):
             t = draw.halo_text(ax, x, y, text, size, weight="semibold",
                                color=color, halo_width=7, zorder=5)
             t.set_rotation(rotation)
+
+
+def _flag_entry(ax, u, left, cy, iso, name, capital, flag_w=270, name_size=46,
+                cap_size=34, gap=30, name_dy=10, cap_dy=40, star=22,
+                star_dx=18, cap_dx=44, mat_px=8):
+    """One panel entry: matted flag, country name, star + capital name.
+
+    `left`/`cy` are the flag's left edge and vertical centre; every other
+    measurement is in canvas pixels, scaled to data units by `u`."""
+    draw.flag(ax, FLAGS / f"{iso}.png", left, cy, width=flag_w * u,
+              mat_color=style.COUNTRY_COLORS[iso], mat_px=mat_px)
+    text_left = left + (flag_w + gap) * u
+    draw.halo_text(ax, text_left, cy + name_dy * u, name, name_size,
+                   weight="extrabold", color=style.LABEL_COLOR, halo_width=0,
+                   ha="left", va="bottom", zorder=20)
+    draw.city_star(ax, (text_left + star_dx * u, cy - cap_dy * u), size=star,
+                   zorder=20)
+    draw.halo_text(ax, text_left + cap_dx * u, cy - cap_dy * u, capital,
+                   cap_size, weight="semibold", color="#4a4741", halo_width=0,
+                   ha="left", zorder=20)
 
 
 def _draw_flag_panel(ax, frame, capital_names):
@@ -173,19 +204,9 @@ def _draw_flag_panel(ax, frame, capital_names):
 
     top = by1 - 150 * u
     row_h = (top - by0 - 10 * u) / len(ORDER)
-    flag_left = bx0 + 30 * u
-    text_left = flag_left + 300 * u
     for i, iso in enumerate(ORDER):
-        cy = top - (i + 0.5) * row_h
-        draw.flag(ax, FLAGS / f"{iso}.png", flag_left, cy, width=270 * u,
-                  mat_color=style.CENTRO_COLORS[iso], mat_px=8)
-        draw.halo_text(ax, text_left, cy + 10 * u, COUNTRY_NAMES[iso], 46,
-                       weight="extrabold", color=style.LABEL_COLOR,
-                       halo_width=0, ha="left", va="bottom", zorder=20)
-        draw.city_star(ax, (text_left + 18 * u, cy - 40 * u), size=22, zorder=20)
-        draw.halo_text(ax, text_left + 44 * u, cy - 40 * u,
-                       capital_names[iso], 34, weight="semibold",
-                       color="#4a4741", halo_width=0, ha="left", zorder=20)
+        _flag_entry(ax, u, bx0 + 30 * u, top - (i + 0.5) * row_h, iso,
+                    COUNTRY_NAMES[iso], capital_names[iso])
 
 
 def _label_place(ax, xy, text, spec, weight="extrabold"):
@@ -204,10 +225,10 @@ def map_centroamerica():
     draw.draw_context(ax, s["context"])
 
     main = s["main"]
-    colors = [style.CENTRO_COLORS[i] for i in main.iso]
+    colors = [style.COUNTRY_COLORS[i] for i in main.iso]
     draw.draw_layer(ax, main, colors, style.BORDER_DARK, 3.0, zorder=2)
 
-    _draw_context_labels(ax, s["frame"])
+    _draw_context_labels(ax, s["frame"], panel_rect(s["frame"]))
 
     for _, row in main.iterrows():
         spec = COUNTRY_LABELS[row.iso]
@@ -235,3 +256,167 @@ def map_centroamerica():
 
 def render_centroamerica():
     return draw.save(map_centroamerica(), "centroamerica")
+
+
+# ---------------------------------------------------------------------------
+# Extended variant: México, América Central y el Caribe hispano
+# ---------------------------------------------------------------------------
+#
+# Mexico's width (Baja California to Yucatán) sets the scale here, so the
+# isthmus is roughly half the size it has on the map above. The flag panel
+# therefore moves into the empty Pacific south-west of Mexico — the only free
+# block big enough — and grows a second and third column. Six capital names
+# will not fit inside the isthmus at this scale, so on this map the capitals
+# are stars and the panel is what names them.
+
+# Column-major reading order: Mexico + the isthmus fill the first two columns,
+# the Antilles the third.
+EXT_ORDER = ["MX", "GT", "BZ", "SV", "HN", "NI", "CR", "PA", "CU", "DO", "PR"]
+
+# Mainland framing box (lon/lat): drops Isla del Coco and the Islas del Cisne.
+EXT_CORE_BOX = (-118.0, 6.9, -64.9, 33.0)
+
+# Panel box in canvas pixels, measured from the lower-left corner. The rule the
+# top edge obeys: no Mexican territory may be covered. The Pacific coast comes
+# down to y≈712 px around Michoacán and the Islas Revillagigedo sit at y≈1045,
+# so 692 is as tall as this panel can get at this width.
+EXT_PANEL_PX = (34, 34, 1716, 692)
+EXT_COLS, EXT_ROWS = 3, 4
+
+# Panel cells are 546 px wide, which is not enough for every name at full
+# length: the Dominican Republic gets the usual atlas abbreviation (a two-line
+# wrap would climb into the row above) and Guatemala's capital wraps.
+EXT_PANEL_NAMES = {"DO": "Rep. Dominicana"}
+EXT_PANEL_CAPITALS = {"GT": "Ciudad de\nGuatemala"}
+
+
+def ext_scene():
+    countries = geo.load("mexico_caribe")
+    capitals = geo.load("mexico_caribe_capitales")
+    core = countries[countries.role == "centro"].clip(EXT_CORE_BOX)
+    frame = geo.compute_frame(core.to_crs(geo.MEXICO_CARIBE_CRS).total_bounds,
+                              pad=(0.012, 0.02, 0.012, 0.02))
+    return dict(
+        frame=frame,
+        main=countries[countries.role == "centro"].to_crs(geo.MEXICO_CARIBE_CRS),
+        context=countries[countries.role == "contexto"].to_crs(geo.MEXICO_CARIBE_CRS),
+        capitals=capitals.to_crs(geo.MEXICO_CARIBE_CRS),
+    )
+
+
+def ext_panel_rect(frame):
+    u = _px(frame)
+    x0, y0, x1, y1 = EXT_PANEL_PX
+    return (frame[0] + x0 * u, frame[1] + y0 * u,
+            frame[0] + x1 * u, frame[1] + y1 * u)
+
+
+EXT_COUNTRY_LABELS = {
+    "MX": Place(78, dy=60),
+    "GT": Place(30, dx=50, dy=95),
+    "BZ": Place(28, tx=125, ty=25, ha="left"),
+    "SV": Place(28, dx=45, dy=-10, tx=-20, ty=-115),
+    "HN": Place(32, dx=5, dy=15),
+    "NI": Place(32, dy=25),
+    "CR": Place(28, tx=-135, ty=-105, ha="right"),
+    "PA": Place(28, dx=-30, tx=-60, ty=110),   # north, into the Caribbean
+    "CU": Place(44, dx=-30, dy=-10),
+    # Both Antilles labels go north into the Atlantic; keep them clear of each
+    # other by stacking República Dominicana higher than Puerto Rico.
+    "DO": Place(26, tx=0, ty=190, text="República\nDominicana"),
+    "PR": Place(26, tx=0, ty=105),
+}
+
+EXT_CONTEXT_LABELS = [
+    ("ESTADOS UNIDOS", -101.5, 31.6, 50, 0),
+    ("BAHAMAS", -77.4, 24.6, 30, 0),
+    ("HAITÍ", -72.75, 19.05, 26, 0),
+    ("JAMAICA", -77.3, 18.15, 26, 0),
+    ("COLOMBIA", -74.6, 7.4, 40, 0),
+    ("VENEZUELA", -68.3, 8.2, 40, 0),
+]
+
+EXT_WATER_LABELS = [
+    ("GOLFO DE MÉXICO", -93.4, 24.6, 46, 0),
+    ("MAR CARIBE", -76.6, 14.2, 46, 0),
+    ("OCÉANO\nPACÍFICO", -108.5, 16.8, 44, 0),
+    ("OCÉANO\nATLÁNTICO", -68.0, 26.0, 44, 0),
+]
+
+
+def _draw_ext_panel(ax, frame, capital_names):
+    u = _px(frame)
+    box = ext_panel_rect(frame)
+    draw.panel_box(ax, box)
+    bx0, by0, bx1, by1 = box
+
+    draw.halo_text(ax, (bx0 + bx1) / 2, by1 - 22 * u,
+                   "México, América Central y el Caribe hispano", 42,
+                   weight="extrabold", color=style.LABEL_COLOR, halo_width=0,
+                   va="top", zorder=20)
+    draw.halo_text(ax, (bx0 + bx1) / 2, by1 - 80 * u,
+                   "banderas y capitales · la estrella marca la capital", 26,
+                   weight="semibold", color="#6b6862", halo_width=0,
+                   va="top", zorder=20)
+
+    grid_top = by1 - 118 * u
+    cell_w = (bx1 - bx0 - 44 * u) / EXT_COLS
+    cell_h = (grid_top - by0 - 16 * u) / EXT_ROWS
+    for i, iso in enumerate(EXT_ORDER):
+        col, row = divmod(i, EXT_ROWS)
+        _flag_entry(ax, u, bx0 + 22 * u + col * cell_w,
+                    grid_top - (row + 0.5) * cell_h, iso,
+                    EXT_PANEL_NAMES.get(iso, COUNTRY_NAMES[iso]),
+                    EXT_PANEL_CAPITALS.get(iso, capital_names[iso]),
+                    flag_w=160, name_size=30, cap_size=24, gap=16, name_dy=6,
+                    cap_dy=30, star=16, star_dx=13, cap_dx=32, mat_px=6)
+
+    # The twelfth cell is free: use it to say what Puerto Rico is, since it is
+    # the one protagonist that is not a sovereign country.
+    col, row = divmod(len(EXT_ORDER), EXT_ROWS)
+    draw.halo_text(ax, bx0 + 22 * u + col * cell_w,
+                   grid_top - (row + 0.5) * cell_h,
+                   "Puerto Rico es un\nterritorio de Estados Unidos", 24,
+                   weight="semibold", color="#6b6862", halo_width=0,
+                   ha="left", zorder=20)
+
+
+# Display names for the protagonists the extended map adds.
+COUNTRY_NAMES.update({
+    "MX": "México", "CU": "Cuba", "DO": "República Dominicana",
+    "PR": "Puerto Rico",
+})
+
+
+def map_mexico_centroamerica_caribe():
+    s = ext_scene()
+    fig, ax = draw.new_map(s["frame"])
+    draw.draw_context(ax, s["context"])
+
+    main = s["main"]
+    colors = [style.COUNTRY_COLORS[i] for i in main.iso]
+    draw.draw_layer(ax, main, colors, style.BORDER_DARK, 2.4, zorder=2)
+
+    _draw_context_labels(ax, s["frame"], ext_panel_rect(s["frame"]),
+                         context=EXT_CONTEXT_LABELS, water=EXT_WATER_LABELS,
+                         crs=geo.MEXICO_CARIBE_CRS)
+
+    for _, row in main.iterrows():
+        spec = EXT_COUNTRY_LABELS[row.iso]
+        xy = geo.label_point(row.geometry, tol=1000.0)
+        _label_place(ax, xy, spec.text or COUNTRY_NAMES[row.iso], spec)
+
+    for _, row in s["capitals"].iterrows():
+        draw.city_star(ax, (row.geometry.x, row.geometry.y), size=26)
+
+    capital_names = dict(zip(s["capitals"].iso, s["capitals"]["name"]))
+    _draw_ext_panel(ax, s["frame"], capital_names)
+
+    draw.draw_attribution(ax, s["frame"],
+                          "Datos: Natural Earth · Banderas: flagcdn.com")
+    return fig
+
+
+def render_mexico_centroamerica_caribe():
+    return draw.save(map_mexico_centroamerica_caribe(),
+                     "mexico-centroamerica-caribe")

@@ -1,9 +1,9 @@
 # static-tv-maps
 
-Pedagogical maps of Spain (and Asturias, and now América Central) rendered as
-static 4000×2250 images, meant to be dropped in a folder that a TV cycles
-through in standby/ambient mode. Labels are sized to be readable from across
-the room.
+Pedagogical maps of Spain (and Asturias, and now América Central plus México
+and the Caribbean) rendered as static 4000×2250 images, meant to be dropped in
+a folder that a TV cycles through in standby/ambient mode. Labels are sized to
+be readable from across the room.
 
 ![Comunidades Autónomas de España](output/spain-comunidades.png)
 
@@ -39,6 +39,7 @@ Everything lands in [`output/`](output/), pre-rendered and committed:
 | `gijon-calles-medio` | The same street skeleton zoomed out to El Natahoyo, El Llano and Ceares, adding barrio ghost names, the río Piles and Los Pericones |
 | `gijon-calles-amplio` | The widest Gijón frame: the AS-19 and AS-II corridors, La Calzada and Roces to the Universidad Laboral, Jardín Botánico and Hospital de Cabueñes |
 | `centroamerica` | The seven countries of América Central with their capitals, plus a side panel of the seven flags — each framed in its country's map color |
+| `mexico-centroamerica-caribe` | The same zoomed out to México and the Spanish-speaking Antilles (Cuba, República Dominicana, Puerto Rico): 11 countries, 11 flags in a grid over the Pacific, capitals as stars |
 | `*-mudo` | The same maps without names ("mapa mudo"), for quizzing yourself |
 
 All on-map text is in Spanish. Instead of big titles, each map carries a small
@@ -97,10 +98,12 @@ need network access; only `make data` does.
   boundaries of **IGN España** (Instituto Geográfico Nacional) with clean INE
   codes and names. Simplified with a topology-preserving pass
   (`shapely.coverage_simplify`) to ~100 m, far below one on-screen pixel.
-- **Central America** — [Natural Earth](https://www.naturalearthdata.com/) 10 m
-  admin-0 countries (Castilian names straight from `NAME_ES`) and
-  populated_places for the national capitals (`ADM0CAP`), clipped around the
-  isthmus.
+- **Central America, México and the Caribbean** —
+  [Natural Earth](https://www.naturalearthdata.com/) 10 m admin-0 countries
+  (Castilian names straight from `NAME_ES`) and populated_places for the
+  national capitals (`ADM0CAP`; San Juan is filed as an Admin-1 capital, since
+  Natural Earth counts Puerto Rico as part of the United States), clipped
+  around the isthmus and around the wider México–Caribbean region.
 - **Flags** — [flagcdn.com](https://flagcdn.com/) PNGs (public domain, redrawn
   from Wikimedia Commons), committed in `assets/flags/` so rendering stays
   offline.
@@ -141,9 +144,12 @@ need network access; only `make data` does.
   every shape keeps its proper metric proportions. Central America spans three
   UTM zones, so it gets its own metric Lambert conformal conic centred on the
   isthmus.
-- The Central America map exploits its own shape: the isthmus is far taller
+- The Central America maps exploit their own shape: the isthmus is far taller
   than 16:9, so the leftover column of Caribbean becomes the flag panel and
-  costs no map scale at all.
+  costs no map scale at all. On the extended map, where Mexico's width sets the
+  scale, the panel moves into the empty Pacific instead and becomes a 3×4 grid;
+  it is placed so that it never covers Mexican territory (not even the Islas
+  Revillagigedo).
 - Provinces inherit their community's color with subtle per-province shading:
   the province maps double as "which community does it belong to" maps.
 - Concejos in Asturias are colored by greedy graph coloring so no two

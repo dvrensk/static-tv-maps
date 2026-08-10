@@ -22,8 +22,8 @@ requirements:
 - `generate.py` — CLI. `python generate.py all | <map-name> | --list [--jpg]`.
   Map names are derived from `render_*` functions in `tvmaps/maps_*.py`.
 - `tvmaps/style.py` — canvas constants, palette (keyed by INE community
-  code), Central America country colors, display-name overrides, font loading
-  (bundled Inter in `assets/fonts/`).
+  code), `COUNTRY_COLORS` for the América Central maps (keyed by ISO alpha-2),
+  display-name overrides, font loading (bundled Inter in `assets/fonts/`).
 - `tvmaps/geo.py` — data loading, projections (Spain UTM 30N/28N, Central
   America LCC), 16:9 frame computation, Canary inset placement, label anchor
   (pole of inaccessibility).
@@ -62,6 +62,8 @@ Conventions:
 
 - ALL user-visible map text is in Spanish (standing instruction from the
   user), including footers, legends and neighbour-country labels.
+- No new "mapa mudo" (nameless) variants — standing instruction from the user.
+  The three that already exist stay; don't add more, and don't offer them.
 - No big titles: maps identify themselves with a small footer caption
   (`draw.draw_footer`, `side="left"|"right"`) so the geography gets every
   pixel. Anything that makes the peninsula smaller is a net negative — a title
@@ -73,15 +75,28 @@ Conventions:
   `geo.canary_xy(point, scene["canary_tf"])`.
 - Projections: peninsula EPSG:25830, Canaries EPSG:25828 (both metric, so
   the inset keeps true scale). Asturias maps also 25830. Central America uses
-  `geo.CENTRAL_AMERICA_CRS`, a metric LCC centred on the isthmus.
-- América Central (`maps_centroamerica.py`): the isthmus is much taller than
-  16:9, so the frame is height-constrained and the leftover Caribbean column
-  holds the flag panel — widening `PANEL_FRAC` costs no map scale, but the
-  seven countries are already at full width, so there is no room to shift them
-  sideways. The panel stops `PANEL_BOTTOM_PX` above the bottom edge so the
-  corner where Colombia enters stays visible; context/water labels that would
-  fall inside `panel_rect()` are skipped automatically. Each flag is framed in
-  a passe-partout of its country's map fill, which is what ties panel to map.
+  `geo.CENTRAL_AMERICA_CRS` and the extended map `geo.MEXICO_CARIBE_CRS`, both
+  metric LCCs centred on their region.
+- América Central (`maps_centroamerica.py`) holds two maps that share the flag
+  machinery (`_flag_entry`, `draw.panel_box`, `draw.flag`). Each flag is framed
+  in a passe-partout of its country's map fill, which is what ties panel to
+  map; `style.COUNTRY_COLORS` is keyed by ISO alpha-2.
+  - `centroamerica`: the isthmus is much taller than 16:9, so the frame is
+    height-constrained and the leftover Caribbean column holds the panel —
+    widening `PANEL_FRAC` costs no map scale, but the seven countries are
+    already at full width, so there is no room to shift them sideways. The
+    panel stops `PANEL_BOTTOM_PX` above the bottom edge so the corner where
+    Colombia enters stays visible.
+  - `mexico-centroamerica-caribe`: Mexico's width sets the scale (~1.37 km/px,
+    half the other map's), so the panel moves to the empty Pacific as a 3x4
+    grid (`EXT_PANEL_PX`, in canvas pixels). Its top edge is capped by the
+    Mexican Pacific coast — the panel must never cover Mexican territory, and
+    the coast reaches y≈712 px — so cell width is scarce: long names are
+    abbreviated or wrapped (`EXT_PANEL_NAMES`, `EXT_PANEL_CAPITALS`). At this
+    scale six capital names will not fit inside the isthmus, so capitals are
+    stars on the map and the panel is what names them.
+  - In both, context/water labels that would fall inside the panel rect are
+    skipped automatically by `_draw_context_labels`.
 - Community colors are hand-tuned so neighbours differ; if you change one,
   check its neighbours. Provinces use `style.shade()` variations of the
   community color. Concejos use greedy graph coloring.
@@ -117,5 +132,3 @@ Conventions:
 - Province-capital maps (city dots + names), rivers/mountains physical maps.
 - Gijón (city/parroquias) maps once a good source is picked.
 - Comarcas of Asturias grouping map.
-- "Mapa mudo" variant of América Central: flags in the panel, no names on the
-  map, so the flags become the quiz.

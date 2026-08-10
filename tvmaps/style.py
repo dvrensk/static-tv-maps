@@ -162,10 +162,11 @@ def set_theme(name: str) -> None:
     CONCEJO_PALETTE = theme["concejo"]
     COMARCA_COLORS = theme["comarca"]
 
-# The seven countries of Central America (centroamerica map). One color each,
-# no neighbouring pair alike; same medium-light register as the Spanish maps so
-# dark labels with a white halo stay readable.
-CENTRO_COLORS = {
+# Protagonist countries of the América Central maps, keyed by ISO 3166-1
+# alpha-2. One color each, no neighbouring pair alike; same medium-light
+# register as the Spanish maps so dark labels with a white halo stay readable.
+# The last four only appear on the extended México / Caribe map.
+COUNTRY_COLORS = {
     "GT": "#a8cf74",  # Guatemala    green
     "BZ": "#8fbfe8",  # Belice       light blue
     "SV": "#f0c95f",  # El Salvador  warm yellow
@@ -173,6 +174,10 @@ CENTRO_COLORS = {
     "NI": "#f2a084",  # Nicaragua    salmon
     "CR": "#79c6b2",  # Costa Rica   teal
     "PA": "#f2b263",  # Panamá       orange
+    "MX": "#dfa3c6",  # México       plum pink (borders Guatemala and Belice)
+    "CU": "#d9c88c",  # Cuba         khaki
+    "DO": "#9adcc0",  # R. Dominicana mint
+    "PR": "#a8b6e8",  # Puerto Rico  periwinkle
 }
 
 # Panel that hosts the flags: warm paper, distinct from the ocean.

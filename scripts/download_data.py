@@ -1025,7 +1025,21 @@ CENTRAL_AMERICA_CONTEXT = ["MX", "CO", "CU", "JM", "HT", "DO", "KY"]
 # Generous lon/lat box around the isthmus, so the committed file stays small.
 CENTRAL_AMERICA_BOX = (-104.0, 1.0, -66.0, 26.0)
 
+# The extended map (mexico-centroamerica-caribe) adds Mexico and the three
+# Spanish-speaking Antilles as protagonists, and needs a much wider frame:
+# from Baja California to Puerto Rico, with the United States, Haiti, Jamaica,
+# the Bahamas, Colombia and Venezuela as background.
+MEXICO_CARIBE = ["MX", "CU", "DO", "PR"] + list(CENTRAL_AMERICA)
+MEXICO_CARIBE_CONTEXT = ["US", "HT", "JM", "BS", "KY", "TC", "CO", "VE", "AW",
+                         "CW"]
+# West edge cuts Isla Guadalupe (-118.3), which would widen the frame for one
+# speck of rock; everything mainland is inside.
+MEXICO_CARIBE_BOX = (-118.0, 3.0, -62.0, 35.5)
+
 FLAG_URL = "https://flagcdn.com/w640/{code}.png"
+
+# One flag per protagonist of either map.
+FLAG_CODES = sorted(set(MEXICO_CARIBE))
 
 
 def process_central_america() -> None:
@@ -1060,11 +1074,49 @@ def process_central_america() -> None:
     print(f"  wrote {out.name}: {len(cap)} capitals")
 
 
+def process_mexico_caribe() -> None:
+    """Countries and capitals for the wide México / Caribe map."""
+    raw = fetch(NE_COUNTRIES, RAW / "ne_10m_admin_0_countries.zip",
+                "Natural Earth countries")
+    gdf = gpd.read_file(f"zip://{raw}")
+    keep = MEXICO_CARIBE + MEXICO_CARIBE_CONTEXT
+    gdf = gdf[gdf["ISO_A2_EH"].isin(keep)].copy()
+    gdf["iso"] = gdf["ISO_A2_EH"]
+    gdf["name"] = gdf["NAME_ES"]
+    gdf["role"] = ["centro" if i in MEXICO_CARIBE else "contexto"
+                   for i in gdf["iso"]]
+    gdf = gdf[["iso", "name", "role", "geometry"]].clip(MEXICO_CARIBE_BOX)
+    # Half the width of Spain's maps per pixel, so a coarser tolerance still
+    # stays under one pixel and keeps this (USA-sized) file reasonable.
+    gdf = simplify(gdf, tolerance=0.004)
+    out = PROCESSED / "mexico_caribe.geojson"
+    gdf.sort_values("iso").to_file(out, driver="GeoJSON")
+    print(f"  wrote {out.name}: {len(gdf)} countries")
+
+    places = fetch(NE_PLACES, RAW / "ne_10m_populated_places.zip",
+                   "Natural Earth populated places")
+    pl = gpd.read_file(f"zip://{places}")
+    # San Juan is filed as an Admin-1 capital, since Natural Earth treats
+    # Puerto Rico as part of the United States; take it anyway.
+    is_capital = (pl["ADM0CAP"] == 1) | ((pl["ISO_A2"] == "PR")
+                                         & (pl["NAME"] == "San Juan"))
+    cap = pl[is_capital & pl["ISO_A2"].isin(MEXICO_CARIBE)].copy()
+    cap["iso"] = cap["ISO_A2"]
+    cap["name"] = cap["NAME_ES"]
+    cap = cap[["iso", "name", "geometry"]].sort_values("iso")
+    missing = set(MEXICO_CARIBE) - set(cap["iso"])
+    if missing:
+        print(f"    !! no capital found for {sorted(missing)}")
+    out = PROCESSED / "mexico_caribe_capitales.geojson"
+    cap.to_file(out, driver="GeoJSON")
+    print(f"  wrote {out.name}: {len(cap)} capitals")
+
+
 def process_flags() -> None:
-    """Fetch the seven flags into assets/flags/ (committed, so rendering is
+    """Fetch the flags into assets/flags/ (committed, so rendering is
     offline). flagcdn.com serves public-domain flag images."""
     FLAGS.mkdir(parents=True, exist_ok=True)
-    for iso in CENTRAL_AMERICA:
+    for iso in FLAG_CODES:
         fetch(FLAG_URL.format(code=iso.lower()), FLAGS / f"{iso}.png",
               f"flag of {iso}")
 
@@ -1100,6 +1152,8 @@ def main() -> None:
     process_cities()
     print("Central America (countries + capitals):")
     process_central_america()
+    print("México / Caribe (countries + capitals):")
+    process_mexico_caribe()
     print("Flags:")
     process_flags()
     print("Done.")

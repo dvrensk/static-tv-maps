@@ -1,7 +1,8 @@
 # Bundled flags
 
-National flags of the seven Central American countries, named by ISO 3166-1
-alpha-2 code (`GT`, `BZ`, `SV`, `HN`, `NI`, `CR`, `PA`).
+Flags of the protagonists of the América Central maps, named by ISO 3166-1
+alpha-2 code: the seven countries of the isthmus (`GT`, `BZ`, `SV`, `HN`, `NI`,
+`CR`, `PA`) plus `MX`, `CU`, `DO` and `PR` for the extended map.
 
 Downloaded at 640 px wide from https://flagcdn.com/ (public-domain images,
 redrawn from Wikimedia Commons). Each file keeps its flag's official
