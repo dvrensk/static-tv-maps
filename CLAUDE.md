@@ -97,6 +97,14 @@ Conventions:
     stars on the map and the panel is what names them.
   - In both, context/water labels that would fall inside the panel rect are
     skipped automatically by `_draw_context_labels`.
+  - The Panama Canal (`CANAL_LONLAT`, `_draw_canal`) is hand-traced — Natural
+    Earth has no canal here — and drawn as a white-cased navy line so ~60 km
+    still reads at either scale. Its label goes north-east into the Caribbean;
+    the Gulf of Panama side is taken by the capital and the Islas Perlas.
+  - Panel populations (`COUNTRY_POPULATION`, extended map only) are rounded on
+    purpose: whole millions above five, half millions below, thousands for
+    Belice. Keep them rounded — the point is numbers a viewer can repeat, and
+    the rounding outlives the estimate.
 - Community colors are hand-tuned so neighbours differ; if you change one,
   check its neighbours. Provinces use `style.shade()` variations of the
   community color. Concejos use greedy graph coloring.

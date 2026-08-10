@@ -130,7 +130,8 @@ CAPITAL_LABELS = {
     "HN": Place(34, dx=22, dy=-16, ha="left"),
     "NI": Place(34, dx=-20, dy=-24, ha="right"),
     "CR": Place(34, dx=20, dy=24, ha="left"),
-    "PA": Place(34, dx=6, dy=32, ha="left", text="Ciudad de\nPanamá"),
+    # East of its star, to leave the canal's leader line a clear run north-east.
+    "PA": Place(34, dx=28, dy=8, ha="left", text="Ciudad de\nPanamá"),
 }
 
 # Neighbours and waters, in the muted register of the Spanish maps.
@@ -147,6 +148,36 @@ WATER_LABELS = [
 ]
 
 WATER_COLOR = "#8fb4c9"
+
+# --- Panama Canal ----------------------------------------------------------
+#
+# Natural Earth has no canal for this region, so the course is traced by hand
+# (the same treatment the Nervión and Llobregat get on the Spanish maps):
+# Cristóbal/Colón on the Caribbean, up the Gatún locks and across the lake to
+# Gamboa, then Pedro Miguel and Miraflores down to Balboa on the Pacific.
+# Only ~60 km end to end, so it is drawn as a cased line to stay visible.
+CANAL_LONLAT = [
+    (-79.917, 9.371), (-79.905, 9.290), (-79.845, 9.230), (-79.780, 9.190),
+    (-79.700, 9.120), (-79.630, 9.045), (-79.588, 8.985), (-79.556, 8.930),
+]
+CANAL_COLOR = "#1a4a8a"
+
+
+def _draw_canal(ax, spec, crs=geo.CENTRAL_AMERICA_CRS, width=5.0, casing=11.0):
+    """The Panama Canal as a white-cased line, plus its label on a leader."""
+    pts = [_project_lonlat(lon, lat, crs) for lon, lat in CANAL_LONLAT]
+    xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+    ax.plot(xs, ys, "-", color="#ffffff", linewidth=casing, solid_capstyle="round",
+            zorder=6)
+    ax.plot(xs, ys, "-", color=CANAL_COLOR, linewidth=width,
+            solid_capstyle="round", zorder=7)
+    mid = pts[len(pts) // 2]
+    _label_place(ax, mid, spec.text or "Canal de Panamá", spec)
+
+
+# Both maps put the canal's name in the Caribbean north-east of it: the Gulf of
+# Panama side is already busy with the capital and the Islas Perlas.
+CANAL_LABEL = Place(34, tx=95, ty=145, ha="left")
 
 
 def _draw_context_labels(ax, frame, panel, context=None, water=None,
@@ -171,8 +202,10 @@ def _draw_context_labels(ax, frame, panel, context=None, water=None,
 
 def _flag_entry(ax, u, left, cy, iso, name, capital, flag_w=270, name_size=46,
                 cap_size=34, gap=30, name_dy=10, cap_dy=40, star=22,
-                star_dx=18, cap_dx=44, mat_px=8):
-    """One panel entry: matted flag, country name, star + capital name.
+                star_dx=18, cap_dx=44, mat_px=8, pop=None, pop_size=24,
+                pop_dy=50):
+    """One panel entry: matted flag, country name, star + capital name, and
+    optionally a third line with the population.
 
     `left`/`cy` are the flag's left edge and vertical centre; every other
     measurement is in canvas pixels, scaled to data units by `u`."""
@@ -187,6 +220,10 @@ def _flag_entry(ax, u, left, cy, iso, name, capital, flag_w=270, name_size=46,
     draw.halo_text(ax, text_left + cap_dx * u, cy - cap_dy * u, capital,
                    cap_size, weight="semibold", color="#4a4741", halo_width=0,
                    ha="left", zorder=20)
+    if pop:
+        draw.halo_text(ax, text_left, cy - pop_dy * u, pop, pop_size,
+                       weight="semibold", color="#7a776f", halo_width=0,
+                       ha="left", zorder=20)
 
 
 def _draw_flag_panel(ax, frame, capital_names):
@@ -235,6 +272,8 @@ def map_centroamerica():
         xy = geo.label_point(row.geometry, tol=1000.0)
         _label_place(ax, xy, spec.text or COUNTRY_NAMES[row.iso], spec)
 
+    _draw_canal(ax, CANAL_LABEL)
+
     capital_names = dict(zip(s["capitals"].iso, s["capitals"]["name"]))
     for _, row in s["capitals"].iterrows():
         spec = CAPITAL_LABELS[row.iso]
@@ -279,15 +318,34 @@ EXT_CORE_BOX = (-118.0, 6.9, -64.9, 33.0)
 # Panel box in canvas pixels, measured from the lower-left corner. The rule the
 # top edge obeys: no Mexican territory may be covered. The Pacific coast comes
 # down to y≈712 px around Michoacán and the Islas Revillagigedo sit at y≈1045,
-# so 692 is as tall as this panel can get at this width.
-EXT_PANEL_PX = (34, 34, 1716, 692)
+# so 700 is as tall as this panel can get at this width — and every pixel is
+# needed, because each cell carries three lines of text.
+EXT_PANEL_PX = (28, 24, 1716, 700)
 EXT_COLS, EXT_ROWS = 3, 4
 
-# Panel cells are 546 px wide, which is not enough for every name at full
+# Panel cells are ~548 px wide, which is not enough for every name at full
 # length: the Dominican Republic gets the usual atlas abbreviation (a two-line
-# wrap would climb into the row above) and Guatemala's capital wraps.
+# wrap would climb into the row above).
 EXT_PANEL_NAMES = {"DO": "Rep. Dominicana"}
-EXT_PANEL_CAPITALS = {"GT": "Ciudad de\nGuatemala"}
+EXT_PANEL_CAPITALS = {}
+
+# Population for the panel, deliberately rounded to numbers a viewer can
+# remember and repeat: whole millions above five, half millions below, and
+# thousands for Belice. Estimates for 2024 (UN World Population Prospects);
+# they move slowly enough that the rounding outlives the data.
+COUNTRY_POPULATION = {
+    "MX": "130 millones",
+    "GT": "18 millones",
+    "BZ": "400 mil",
+    "SV": "6 millones",
+    "HN": "11 millones",
+    "NI": "7 millones",
+    "CR": "5 millones",
+    "PA": "4,5 millones",
+    "CU": "11 millones",
+    "DO": "11 millones",
+    "PR": "3 millones",
+}
 
 
 def ext_scene():
@@ -336,6 +394,8 @@ EXT_CONTEXT_LABELS = [
     ("VENEZUELA", -68.3, 8.2, 40, 0),
 ]
 
+EXT_CANAL_LABEL = Place(28, tx=130, ty=125, ha="left")
+
 EXT_WATER_LABELS = [
     ("GOLFO DE MÉXICO", -93.4, 24.6, 46, 0),
     ("MAR CARIBE", -76.6, 14.2, 46, 0),
@@ -350,34 +410,41 @@ def _draw_ext_panel(ax, frame, capital_names):
     draw.panel_box(ax, box)
     bx0, by0, bx1, by1 = box
 
-    draw.halo_text(ax, (bx0 + bx1) / 2, by1 - 22 * u,
+    draw.halo_text(ax, (bx0 + bx1) / 2, by1 - 20 * u,
                    "México, América Central y el Caribe hispano", 42,
                    weight="extrabold", color=style.LABEL_COLOR, halo_width=0,
                    va="top", zorder=20)
-    draw.halo_text(ax, (bx0 + bx1) / 2, by1 - 80 * u,
-                   "banderas y capitales · la estrella marca la capital", 26,
+    draw.halo_text(ax, (bx0 + bx1) / 2, by1 - 76 * u,
+                   "banderas, capitales y población · "
+                   "la estrella marca la capital", 24,
                    weight="semibold", color="#6b6862", halo_width=0,
                    va="top", zorder=20)
 
-    grid_top = by1 - 118 * u
+    grid_top = by1 - 116 * u
     cell_w = (bx1 - bx0 - 44 * u) / EXT_COLS
-    cell_h = (grid_top - by0 - 16 * u) / EXT_ROWS
+    cell_h = (grid_top - by0 - 12 * u) / EXT_ROWS
     for i, iso in enumerate(EXT_ORDER):
         col, row = divmod(i, EXT_ROWS)
         _flag_entry(ax, u, bx0 + 22 * u + col * cell_w,
                     grid_top - (row + 0.5) * cell_h, iso,
                     EXT_PANEL_NAMES.get(iso, COUNTRY_NAMES[iso]),
                     EXT_PANEL_CAPITALS.get(iso, capital_names[iso]),
-                    flag_w=160, name_size=30, cap_size=24, gap=16, name_dy=6,
-                    cap_dy=30, star=16, star_dx=13, cap_dx=32, mat_px=6)
+                    flag_w=132, name_size=30, cap_size=24, gap=16, name_dy=18,
+                    cap_dy=8, star=16, star_dx=13, cap_dx=32, mat_px=6,
+                    pop=COUNTRY_POPULATION[iso], pop_size=24, pop_dy=50)
 
     # The twelfth cell is free: use it to say what Puerto Rico is, since it is
-    # the one protagonist that is not a sovereign country.
+    # the one protagonist that is not a sovereign country, and to source the
+    # population figures next to where they are read.
     col, row = divmod(len(EXT_ORDER), EXT_ROWS)
-    draw.halo_text(ax, bx0 + 22 * u + col * cell_w,
-                   grid_top - (row + 0.5) * cell_h,
+    cx, cy = bx0 + 22 * u + col * cell_w, grid_top - (row + 0.5) * cell_h
+    draw.halo_text(ax, cx, cy + 16 * u,
                    "Puerto Rico es un\nterritorio de Estados Unidos", 24,
                    weight="semibold", color="#6b6862", halo_width=0,
+                   ha="left", zorder=20)
+    draw.halo_text(ax, cx, cy - 50 * u,
+                   "Población: ONU 2024, redondeada", 20,
+                   weight="regular", color="#8a8880", halo_width=0,
                    ha="left", zorder=20)
 
 
@@ -405,6 +472,9 @@ def map_mexico_centroamerica_caribe():
         spec = EXT_COUNTRY_LABELS[row.iso]
         xy = geo.label_point(row.geometry, tol=1000.0)
         _label_place(ax, xy, spec.text or COUNTRY_NAMES[row.iso], spec)
+
+    _draw_canal(ax, EXT_CANAL_LABEL, crs=geo.MEXICO_CARIBE_CRS, width=4.0,
+                casing=9.0)
 
     for _, row in s["capitals"].iterrows():
         draw.city_star(ax, (row.geometry.x, row.geometry.y), size=26)

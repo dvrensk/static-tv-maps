@@ -38,8 +38,8 @@ Everything lands in [`output/`](output/), pre-rendered and committed:
 | `gijon-calles-centro` | Schematic street map of central Gijón: the structural streets as bold coloured strokes with names along them, landmark pictograms, sea/beach/harbour |
 | `gijon-calles-medio` | The same street skeleton zoomed out to El Natahoyo, El Llano and Ceares, adding barrio ghost names, the río Piles and Los Pericones |
 | `gijon-calles-amplio` | The widest Gijón frame: the AS-19 and AS-II corridors, La Calzada and Roces to the Universidad Laboral, Jardín Botánico and Hospital de Cabueñes |
-| `centroamerica` | The seven countries of América Central with their capitals, plus a side panel of the seven flags — each framed in its country's map color |
-| `mexico-centroamerica-caribe` | The same zoomed out to México and the Spanish-speaking Antilles (Cuba, República Dominicana, Puerto Rico): 11 countries, 11 flags in a grid over the Pacific, capitals as stars |
+| `centroamerica` | The seven countries of América Central with their capitals and the Panama Canal, plus a side panel of the seven flags — each framed in its country's map color |
+| `mexico-centroamerica-caribe` | The same zoomed out to México and the Spanish-speaking Antilles (Cuba, República Dominicana, Puerto Rico): 11 countries, 11 flags in a grid over the Pacific with capital and population per country, capitals as stars |
 | `*-mudo` | The same maps without names ("mapa mudo"), for quizzing yourself |
 
 All on-map text is in Spanish. Instead of big titles, each map carries a small
@@ -126,6 +126,10 @@ need network access; only `make data` does.
   contributors, ODbL) and committed to `data/processed/cities.geojson`.
   Populations: INE (padrón, 1 Jan 2025 for Spain; 2023 for Asturias).
   Comarca composition: decree 11/91 of the Principado de Asturias.
+- **Panama Canal** — traced by hand (Colón, Gatún, Gamboa, Pedro Miguel,
+  Miraflores, Balboa); Natural Earth has no canal layer for the isthmus.
+  Populations in the América Central panel are UN World Population Prospects
+  2024 estimates, deliberately rounded to numbers worth remembering.
 - **Wine / food regions** — approximate zones, hand-placed from the Spanish
   Ministry (MAPA) DOP/IGP references and each consejo regulador; the Nervión
   and Llobregat courses (too small for Natural Earth) are traced by hand from
