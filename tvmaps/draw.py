@@ -79,19 +79,28 @@ def draw_title(ax, frame, title, subtitle=None):
                   ha="right", va="bottom", zorder=20)
 
 
-def draw_attribution(ax, frame, text="Datos: IGN España · Natural Earth"):
+def _corner_x(frame, side):
+    """x and horizontal alignment for a caption in a bottom corner."""
     fx0, fy0, fx1, fy1 = frame
-    halo_text(ax, fx1 - 0.008 * (fx1 - fx0), fy0 + 0.012 * (fy1 - fy0), text,
+    if side == "left":
+        return fx0 + 0.008 * (fx1 - fx0), "left"
+    return fx1 - 0.008 * (fx1 - fx0), "right"
+
+
+def draw_attribution(ax, frame, text="Datos: IGN España · Natural Earth",
+                     side="right"):
+    x, ha = _corner_x(frame, side)
+    halo_text(ax, x, frame[1] + 0.012 * (frame[3] - frame[1]), text,
               20, weight="regular", color="#8a8880", halo_width=4,
-              ha="right", va="bottom", zorder=20)
+              ha=ha, va="bottom", zorder=20)
 
 
-def draw_footer(ax, frame, text):
-    """Small caption in the lower-right corner saying what the map shows."""
-    fx0, fy0, fx1, fy1 = frame
-    halo_text(ax, fx1 - 0.008 * (fx1 - fx0), fy0 + 0.038 * (fy1 - fy0), text,
+def draw_footer(ax, frame, text, side="right"):
+    """Small caption in a bottom corner saying what the map shows."""
+    x, ha = _corner_x(frame, side)
+    halo_text(ax, x, frame[1] + 0.038 * (frame[3] - frame[1]), text,
               30, weight="semibold", color="#5d5a54", halo_width=6,
-              ha="right", va="bottom", zorder=20)
+              ha=ha, va="bottom", zorder=20)
 
 
 def draw_inset_box(ax, box, label=None, zorder=3):
@@ -110,6 +119,75 @@ def draw_inset_box(ax, box, label=None, zorder=3):
                   weight="extrabold", color="#55524d", ha="center", va="top",
                   zorder=zorder + 7)
     return patch
+
+
+def panel_box(ax, box, zorder=14, facecolor=None, radius_px=26):
+    """Rounded paper panel (for the flag column beside the map)."""
+    x0, y0, x1, y1 = box
+    data_per_px = (ax.get_xlim()[1] - ax.get_xlim()[0]) / style.WIDTH_PX
+    patch = FancyBboxPatch(
+        (x0, y0), x1 - x0, y1 - y0,
+        boxstyle=f"round,pad=0,rounding_size={radius_px * data_per_px}",
+        facecolor=facecolor or style.PANEL_FILL, edgecolor=style.BORDER_DARK,
+        linewidth=3.0, zorder=zorder,
+    )
+    ax.add_patch(patch)
+    return patch
+
+
+_FLAG_CACHE = {}
+
+
+def flag_image(path):
+    """A flag PNG as an RGB array (palette PNGs need the explicit convert)."""
+    import numpy as np
+    from PIL import Image
+
+    key = str(path)
+    if key not in _FLAG_CACHE:
+        with Image.open(path) as im:
+            _FLAG_CACHE[key] = np.asarray(im.convert("RGB"))
+    return _FLAG_CACHE[key]
+
+
+def flag(ax, path, left, cy, width=None, height=None, mat_color=None,
+         mat_px=7, zorder=15):
+    """Draw a flag with its left edge at `left`, vertically centred on `cy`.
+
+    Give either `width` or `height` in data units; the other follows from the
+    image's own proportions (flags are not all 2:3). `mat_color` paints a
+    passe-partout around it — used to carry the country's map color into the
+    panel. Returns (right_edge, mat_right_edge)."""
+    from matplotlib.patches import Rectangle
+
+    img = flag_image(path)
+    h_px, w_px = img.shape[0], img.shape[1]
+    if (width is None) == (height is None):
+        raise ValueError("flag(): give exactly one of width, height")
+    if height is None:
+        height = width * h_px / w_px
+    else:
+        width = height * w_px / h_px
+    x0, x1 = left, left + width
+    y0, y1 = cy - height / 2, cy + height / 2
+
+    xlim, ylim = ax.get_xlim(), ax.get_ylim()
+    data_per_px = (xlim[1] - xlim[0]) / style.WIDTH_PX
+    mat = mat_px * data_per_px if mat_color else 0.0
+    if mat_color:
+        ax.add_patch(Rectangle((x0 - mat, y0 - mat), width + 2 * mat,
+                               height + 2 * mat, facecolor=mat_color,
+                               edgecolor=style.BORDER_DARK, linewidth=1.8,
+                               zorder=zorder))
+    ax.imshow(img, extent=(x0, x1, y0, y1), zorder=zorder + 1,
+              interpolation="lanczos")
+    ax.add_patch(Rectangle((x0, y0), width, height, facecolor="none",
+                           edgecolor="#6b6862", linewidth=1.4,
+                           zorder=zorder + 2))
+    # imshow() autoscales the axes; put the frame back.
+    ax.set_xlim(*xlim)
+    ax.set_ylim(*ylim)
+    return x1, x1 + mat
 
 
 def city_dot(ax, xy, size=13, face="#3a3733", edge="#ffffff", zorder=8):

@@ -12,8 +12,13 @@ Sources:
   municipalities with official codes and names.
   https://public.opendatasoft.com/explore/?q=georef-spain
 - Natural Earth 10m admin-0 countries (public domain), used for the
-  neighbouring-country context (Portugal, France, Morocco, ...).
+  neighbouring-country context (Portugal, France, Morocco, ...) and for the
+  Central America map.
   https://www.naturalearthdata.com/
+- Natural Earth 10m populated places (public domain): the national capitals of
+  Central America.
+- flagcdn.com (flag images in the public domain, redrawn from Wikimedia
+  Commons): the seven Central American flags, saved to assets/flags/.
 """
 
 import io
@@ -27,9 +32,12 @@ import requests
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw"
 PROCESSED = ROOT / "data" / "processed"
+FLAGS = ROOT / "assets" / "flags"
 
 ODS = "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets"
-NE_COUNTRIES = "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_countries.zip"
+NE_CULTURAL = "https://naciscdn.org/naturalearth/10m/cultural"
+NE_COUNTRIES = f"{NE_CULTURAL}/ne_10m_admin_0_countries.zip"
+NE_PLACES = f"{NE_CULTURAL}/ne_10m_populated_places.zip"
 NE_PHYSICAL = "https://naciscdn.org/naturalearth/10m/physical"
 
 # Simplification tolerance in degrees. 0.001 deg is roughly 100 m — far below
@@ -999,6 +1007,68 @@ def process_cities() -> None:
     print(f"  wrote {out.name}: {len(features)} cities")
 
 
+# --- Central America (centroamerica maps) ----------------------------------
+#
+# The seven countries of the isthmus, plus the neighbours that share the frame
+# (Mexico, Colombia and the nearest Caribbean islands) drawn as context.
+# Names come from Natural Earth's NAME_ES, which is already the Castilian form
+# ("Belice", "Panamá"), and the capitals from ne_10m_populated_places, where
+# ADM0CAP marks the national capital.
+
+# ISO 3166-1 alpha-2 -> alpha-3 (Natural Earth's ADM0_A3 for the places file).
+CENTRAL_AMERICA = {
+    "GT": "GTM", "BZ": "BLZ", "SV": "SLV", "HN": "HND",
+    "NI": "NIC", "CR": "CRI", "PA": "PAN",
+}
+# Countries that only appear as background in the frame.
+CENTRAL_AMERICA_CONTEXT = ["MX", "CO", "CU", "JM", "HT", "DO", "KY"]
+# Generous lon/lat box around the isthmus, so the committed file stays small.
+CENTRAL_AMERICA_BOX = (-104.0, 1.0, -66.0, 26.0)
+
+FLAG_URL = "https://flagcdn.com/w640/{code}.png"
+
+
+def process_central_america() -> None:
+    raw = fetch(NE_COUNTRIES, RAW / "ne_10m_admin_0_countries.zip",
+                "Natural Earth countries")
+    gdf = gpd.read_file(f"zip://{raw}")
+    keep = list(CENTRAL_AMERICA) + CENTRAL_AMERICA_CONTEXT
+    gdf = gdf[gdf["ISO_A2_EH"].isin(keep)].copy()
+    gdf["iso"] = gdf["ISO_A2_EH"]
+    gdf["name"] = gdf["NAME_ES"]
+    gdf["role"] = ["centro" if i in CENTRAL_AMERICA else "contexto"
+                   for i in gdf["iso"]]
+    gdf = gdf[["iso", "name", "role", "geometry"]].clip(CENTRAL_AMERICA_BOX)
+    gdf = simplify(gdf, tolerance=0.002)
+    out = PROCESSED / "centroamerica.geojson"
+    gdf.sort_values("iso").to_file(out, driver="GeoJSON")
+    print(f"  wrote {out.name}: {len(gdf)} countries")
+
+    places = fetch(NE_PLACES, RAW / "ne_10m_populated_places.zip",
+                   "Natural Earth populated places")
+    pl = gpd.read_file(f"zip://{places}")
+    a3 = {v: k for k, v in CENTRAL_AMERICA.items()}
+    cap = pl[(pl["ADM0CAP"] == 1) & pl["ADM0_A3"].isin(a3)].copy()
+    cap["iso"] = [a3[c] for c in cap["ADM0_A3"]]
+    cap["name"] = cap["NAME_ES"]
+    cap = cap[["iso", "name", "geometry"]].sort_values("iso")
+    missing = set(CENTRAL_AMERICA) - set(cap["iso"])
+    if missing:
+        print(f"    !! no capital found for {sorted(missing)}")
+    out = PROCESSED / "centroamerica_capitales.geojson"
+    cap.to_file(out, driver="GeoJSON")
+    print(f"  wrote {out.name}: {len(cap)} capitals")
+
+
+def process_flags() -> None:
+    """Fetch the seven flags into assets/flags/ (committed, so rendering is
+    offline). flagcdn.com serves public-domain flag images."""
+    FLAGS.mkdir(parents=True, exist_ok=True)
+    for iso in CENTRAL_AMERICA:
+        fetch(FLAG_URL.format(code=iso.lower()), FLAGS / f"{iso}.png",
+              f"flag of {iso}")
+
+
 def main() -> None:
     RAW.mkdir(parents=True, exist_ok=True)
     PROCESSED.mkdir(parents=True, exist_ok=True)
@@ -1028,6 +1098,10 @@ def main() -> None:
     process_gijon_parks()
     print("Cities:")
     process_cities()
+    print("Central America (countries + capitals):")
+    process_central_america()
+    print("Flags:")
+    process_flags()
     print("Done.")
 
 

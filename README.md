@@ -1,8 +1,9 @@
 # static-tv-maps
 
-Pedagogical maps of Spain (and Asturias) rendered as static 4000×2250 images,
-meant to be dropped in a folder that a TV cycles through in standby/ambient
-mode. Labels are sized to be readable from across the room.
+Pedagogical maps of Spain (and Asturias, and now América Central) rendered as
+static 4000×2250 images, meant to be dropped in a folder that a TV cycles
+through in standby/ambient mode. Labels are sized to be readable from across
+the room.
 
 ![Comunidades Autónomas de España](output/spain-comunidades.png)
 
@@ -37,10 +38,11 @@ Everything lands in [`output/`](output/), pre-rendered and committed:
 | `gijon-calles-centro` | Schematic street map of central Gijón: the structural streets as bold coloured strokes with names along them, landmark pictograms, sea/beach/harbour |
 | `gijon-calles-medio` | The same street skeleton zoomed out to El Natahoyo, El Llano and Ceares, adding barrio ghost names, the río Piles and Los Pericones |
 | `gijon-calles-amplio` | The widest Gijón frame: the AS-19 and AS-II corridors, La Calzada and Roces to the Universidad Laboral, Jardín Botánico and Hospital de Cabueñes |
+| `centroamerica` | The seven countries of América Central with their capitals, plus a side panel of the seven flags — each framed in its country's map color |
 | `*-mudo` | The same maps without names ("mapa mudo"), for quizzing yourself |
 
 All on-map text is in Spanish. Instead of big titles, each map carries a small
-caption in the lower-right corner, so the geography gets every pixel.
+caption in a bottom corner, so the geography gets every pixel.
 
 The Canary Islands are always present, transposed into a framed inset in the
 lower-left Atlantic corner — their real direction of travel from the
@@ -95,6 +97,13 @@ need network access; only `make data` does.
   boundaries of **IGN España** (Instituto Geográfico Nacional) with clean INE
   codes and names. Simplified with a topology-preserving pass
   (`shapely.coverage_simplify`) to ~100 m, far below one on-screen pixel.
+- **Central America** — [Natural Earth](https://www.naturalearthdata.com/) 10 m
+  admin-0 countries (Castilian names straight from `NAME_ES`) and
+  populated_places for the national capitals (`ADM0CAP`), clipped around the
+  isthmus.
+- **Flags** — [flagcdn.com](https://flagcdn.com/) PNGs (public domain, redrawn
+  from Wikimedia Commons), committed in `assets/flags/` so rendering stays
+  offline.
 - **Neighbouring countries, rivers, mountain regions** —
   [Natural Earth](https://www.naturalearthdata.com/) 10 m admin-0,
   rivers_lake_centerlines (+ europe supplement) and geography_regions_polys
@@ -129,7 +138,12 @@ need network access; only `make data` does.
 - Canvas is exactly 4000×2250 px (16:9), the TV's preferred size.
 - Peninsula and Baleares are drawn in ETRS89 / UTM 30N (EPSG:25830), the
   Canaries in UTM 28N (EPSG:25828) before being translated into the inset, so
-  every shape keeps its proper metric proportions.
+  every shape keeps its proper metric proportions. Central America spans three
+  UTM zones, so it gets its own metric Lambert conformal conic centred on the
+  isthmus.
+- The Central America map exploits its own shape: the isthmus is far taller
+  than 16:9, so the leftover column of Caribbean becomes the flag panel and
+  costs no map scale at all.
 - Provinces inherit their community's color with subtle per-province shading:
   the province maps double as "which community does it belong to" maps.
 - Concejos in Asturias are colored by greedy graph coloring so no two
@@ -149,4 +163,5 @@ of all maps takes ~10 s.
 ## License
 
 Code under GPL-3.0 (see `LICENSE`). Boundary data © IGN España (CC-BY-style
-reuse with attribution), Natural Earth public domain, Inter font SIL OFL 1.1.
+reuse with attribution), Natural Earth public domain, flag images public
+domain, Inter font SIL OFL 1.1.

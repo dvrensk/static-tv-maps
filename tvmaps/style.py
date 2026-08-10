@@ -162,6 +162,22 @@ def set_theme(name: str) -> None:
     CONCEJO_PALETTE = theme["concejo"]
     COMARCA_COLORS = theme["comarca"]
 
+# The seven countries of Central America (centroamerica map). One color each,
+# no neighbouring pair alike; same medium-light register as the Spanish maps so
+# dark labels with a white halo stay readable.
+CENTRO_COLORS = {
+    "GT": "#a8cf74",  # Guatemala    green
+    "BZ": "#8fbfe8",  # Belice       light blue
+    "SV": "#f0c95f",  # El Salvador  warm yellow
+    "HN": "#c3a3dd",  # Honduras     lilac
+    "NI": "#f2a084",  # Nicaragua    salmon
+    "CR": "#79c6b2",  # Costa Rica   teal
+    "PA": "#f2b263",  # Panamá       orange
+}
+
+# Panel that hosts the flags: warm paper, distinct from the ocean.
+PANEL_FILL = "#faf7f0"
+
 # Common short names for display (official names are long).
 CCAA_DISPLAY = {
     "01": "Andalucía",

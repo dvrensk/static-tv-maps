@@ -4,8 +4,9 @@ Guidance for working on this repository.
 
 ## What this project is
 
-Machinery that renders **pedagogical maps of Spain and Asturias as static
-4000×2250 px (16:9) PNGs** for a TV's standby slideshow. Hard requirements:
+Machinery that renders **pedagogical maps of Spain, Asturias and América
+Central as static 4000×2250 px (16:9) PNGs** for a TV's standby slideshow. Hard
+requirements:
 
 - Output exactly 4000×2250; the TV displays PNG or JPEG as-is.
 - Text must be readable from ~5 m: prefer fewer, bigger labels. If names
@@ -13,30 +14,35 @@ Machinery that renders **pedagogical maps of Spain and Asturias as static
   callouts — never shrink text below ~24 pt (33 px).
 - The Canary Islands must appear on every Spain-wide map, transposed into a
   framed inset (currently lower-left, at true scale).
+- Rendering must never need the network: everything a map reads is committed
+  (`data/processed/`, `assets/`).
 
 ## Layout
 
 - `generate.py` — CLI. `python generate.py all | <map-name> | --list [--jpg]`.
   Map names are derived from `render_*` functions in `tvmaps/maps_*.py`.
 - `tvmaps/style.py` — canvas constants, palette (keyed by INE community
-  code), display-name overrides, font loading (bundled Inter in
-  `assets/fonts/`).
-- `tvmaps/geo.py` — data loading, 16:9 frame computation, Canary inset
-  placement, label anchor (pole of inaccessibility).
-- `tvmaps/draw.py` — canvas, halo text, callouts, title/attribution, save.
+  code), Central America country colors, display-name overrides, font loading
+  (bundled Inter in `assets/fonts/`).
+- `tvmaps/geo.py` — data loading, projections (Spain UTM 30N/28N, Central
+  America LCC), 16:9 frame computation, Canary inset placement, label anchor
+  (pole of inaccessibility).
+- `tvmaps/draw.py` — canvas, halo text, callouts, title/attribution, side
+  panels and flag images (`panel_box`, `flag`), save.
 - `tvmaps/maps_spain.py`, `tvmaps/maps_asturias.py`, `tvmaps/maps_capitals.py`,
   `tvmaps/maps_ciudades.py`, `tvmaps/maps_fisica.py`, `tvmaps/maps_rios.py`,
-  `tvmaps/maps_productos.py`, `tvmaps/maps_gijon.py` (schematic Gijón street
-  maps, spec in `docs/gijon-schematic-design.md`) — the actual maps and all
-  per-feature label tuning. New modules must be added to the registry tuple
-  in `generate.py`.
+  `tvmaps/maps_productos.py`, `tvmaps/maps_centroamerica.py`,
+  `tvmaps/maps_gijon.py` (schematic Gijón street maps, spec in
+  `docs/gijon-schematic-design.md`) — the actual maps and all per-feature label
+  tuning. New modules must be added to the registry tuple in `generate.py`.
 - `tvmaps/cities.py` — city gazetteer access (`data/processed/cities.geojson`,
   geocoded via Nominatim by the download script) plus metadata: province and
   community capitals, INE 2025 big-city populations, Asturias towns over
   10 000 inhabitants, and the 8 functional comarcas with their concejos.
 - `scripts/download_data.py` — fetches raw sources into `data/raw/`
   (gitignored) and writes simplified GeoJSON to `data/processed/`
-  (committed). Rendering never needs the network.
+  (committed), plus the flag PNGs in `assets/flags/` (committed, one per ISO
+  alpha-2 code). Rendering never needs the network.
 - `output/` — rendered maps, committed.
 
 ## Working on maps
@@ -57,14 +63,25 @@ Conventions:
 - ALL user-visible map text is in Spanish (standing instruction from the
   user), including footers, legends and neighbour-country labels.
 - No big titles: maps identify themselves with a small footer caption
-  (`draw.draw_footer`) so the geography gets every pixel. Anything that
-  makes the peninsula smaller is a net negative.
+  (`draw.draw_footer`, `side="left"|"right"`) so the geography gets every
+  pixel. Anything that makes the peninsula smaller is a net negative — a title
+  is only allowed where it costs nothing, e.g. inside the Central America flag
+  panel, which sits on space no geography wants.
 - The Canary inset may cover Portugal or Morocco but must never cover any
   Spanish territory (`place_canary` takes a `max_x` cap and shrinks the
   archipelago if needed). City points move into the inset via
   `geo.canary_xy(point, scene["canary_tf"])`.
 - Projections: peninsula EPSG:25830, Canaries EPSG:25828 (both metric, so
-  the inset keeps true scale). Asturias maps also 25830.
+  the inset keeps true scale). Asturias maps also 25830. Central America uses
+  `geo.CENTRAL_AMERICA_CRS`, a metric LCC centred on the isthmus.
+- América Central (`maps_centroamerica.py`): the isthmus is much taller than
+  16:9, so the frame is height-constrained and the leftover Caribbean column
+  holds the flag panel — widening `PANEL_FRAC` costs no map scale, but the
+  seven countries are already at full width, so there is no room to shift them
+  sideways. The panel stops `PANEL_BOTTOM_PX` above the bottom edge so the
+  corner where Colombia enters stays visible; context/water labels that would
+  fall inside `panel_rect()` are skipped automatically. Each flag is framed in
+  a passe-partout of its country's map fill, which is what ties panel to map.
 - Community colors are hand-tuned so neighbours differ; if you change one,
   check its neighbours. Provinces use `style.shade()` variations of the
   community color. Concejos use greedy graph coloring.
@@ -100,3 +117,5 @@ Conventions:
 - Province-capital maps (city dots + names), rivers/mountains physical maps.
 - Gijón (city/parroquias) maps once a good source is picked.
 - Comarcas of Asturias grouping map.
+- "Mapa mudo" variant of América Central: flags in the panel, no names on the
+  map, so the flags become the quiz.

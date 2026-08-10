@@ -16,6 +16,14 @@ MAIN_CRS = "EPSG:25830"
 # undistorted shape before being translated into the main map frame.
 CANARY_CRS = "EPSG:25828"
 
+# Central America spans three UTM zones, so it gets its own Lambert conformal
+# conic centred on the isthmus: metric (label offsets stay in km) and with the
+# familiar shapes of a school wall map.
+CENTRAL_AMERICA_CRS = (
+    "+proj=lcc +lat_1=8 +lat_2=17 +lat_0=12.5 +lon_0=-85 "
+    "+x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs"
+)
+
 RATIO = 16 / 9
 
 
