@@ -21,6 +21,14 @@ def main():
     ap.add_argument("--theme", default="vivo")
     args = ap.parse_args()
 
+    try:
+        import libcst  # noqa: F401 — needed by the save endpoint
+    except ModuleNotFoundError:
+        raise SystemExit(
+            "libcst is not installed — your environment predates the tuner.\n"
+            "Refresh it with:  make local-setup   (venv)\n"
+            "              or  make setup         (rebuild the Docker image)")
+
     from tvmaps import style
 
     if args.theme not in style.THEMES:

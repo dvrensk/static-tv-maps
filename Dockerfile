@@ -7,6 +7,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+# The container runs as the invoking host user (no HOME), so give matplotlib
+# a writable config/cache dir instead of letting it probe /.config.
+ENV MPLCONFIGDIR=/tmp/matplotlib
+
 # The interactive label tuner (make tune) listens here.
 EXPOSE 8321
 
