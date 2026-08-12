@@ -1,13 +1,18 @@
 {
  "schema": 1,
- "map": "asturias-concejos-mudo",
+ "map": "spain-provincias-iconos",
  "canvas": {
   "width_px": 4000,
   "height_px": 2250,
   "dpi": 100
  },
- "km_per_px": 0.056263,
- "canary_inset_px": null,
+ "km_per_px": 0.48262,
+ "canary_inset_px": {
+  "x0": 80.0,
+  "y0": 1694.4,
+  "x1": 1034.8,
+  "y1": 2171.2
+ },
  "font": {
   "family": "Inter",
   "weights": {
@@ -18,12 +23,12 @@
  },
  "labels": [
   {
-   "id": "neighbor:GALICIA",
+   "id": "country:PORTUGAL",
    "kind": "country",
-   "text": "GALICIA",
+   "text": "PORTUGAL",
    "anchor_px": {
-    "x": 226.1,
-    "y": 1471.5
+    "x": 983.8,
+    "y": 1140.7
    },
    "offset_km": {
     "dx": 0.0,
@@ -31,16 +36,16 @@
    },
    "callout_km": null,
    "text_px": {
-    "x": 226.1,
-    "y": 1471.5
+    "x": 983.8,
+    "y": 1140.7
    },
    "bbox_px": {
-    "x0": 103.5,
-    "y0": 1436.3,
-    "x1": 348.8,
-    "y1": 1506.6
+    "x0": 947.1,
+    "y0": 964.6,
+    "x1": 1020.5,
+    "y1": 1316.8
    },
-   "size_pt": 44,
+   "size_pt": 46,
    "weight": "semibold",
    "color": "#a09f99",
    "halo": {
@@ -49,7 +54,7 @@
    },
    "ha": "center",
    "va": "center",
-   "rotation": 0.0,
+   "rotation": 90,
    "linespacing": 0.95,
    "leader": null,
    "sub": null,
@@ -64,12 +69,12 @@
    ]
   },
   {
-   "id": "neighbor:LEÓN",
+   "id": "country:FRANCIA",
    "kind": "country",
-   "text": "LEÓN",
+   "text": "FRANCIA",
    "anchor_px": {
-    "x": 1964.1,
-    "y": 1899.0
+    "x": 2665.8,
+    "y": 154.5
    },
    "offset_km": {
     "dx": 0.0,
@@ -77,16 +82,16 @@
    },
    "callout_km": null,
    "text_px": {
-    "x": 1964.1,
-    "y": 1899.0
+    "x": 2665.8,
+    "y": 154.5
    },
    "bbox_px": {
-    "x0": 1882.1,
-    "y0": 1863.8,
-    "x1": 2046.1,
-    "y1": 1934.1
+    "x0": 2522.8,
+    "y0": 117.8,
+    "x1": 2808.8,
+    "y1": 191.3
    },
-   "size_pt": 44,
+   "size_pt": 46,
    "weight": "semibold",
    "color": "#a09f99",
    "halo": {
@@ -95,7 +100,7 @@
    },
    "ha": "center",
    "va": "center",
-   "rotation": 0.0,
+   "rotation": 0,
    "linespacing": 0.95,
    "leader": null,
    "sub": null,
@@ -110,12 +115,12 @@
    ]
   },
   {
-   "id": "neighbor:CANTABRIA",
+   "id": "country:MARRUECOS",
    "kind": "country",
-   "text": "CANTABRIA",
+   "text": "MARRUECOS",
    "anchor_px": {
-    "x": 3756.1,
-    "y": 1531.9
+    "x": 1523.9,
+    "y": 2203.9
    },
    "offset_km": {
     "dx": 0.0,
@@ -123,16 +128,16 @@
    },
    "callout_km": null,
    "text_px": {
-    "x": 3756.1,
-    "y": 1531.9
+    "x": 1523.9,
+    "y": 2203.9
    },
    "bbox_px": {
-    "x0": 3579.5,
-    "y0": 1496.8,
-    "x1": 3932.7,
-    "y1": 1567.0
+    "x0": 1361.4,
+    "y0": 2175.1,
+    "x1": 1686.4,
+    "y1": 2232.6
    },
-   "size_pt": 44,
+   "size_pt": 36,
    "weight": "semibold",
    "color": "#a09f99",
    "halo": {
@@ -141,53 +146,7 @@
    },
    "ha": "center",
    "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "size",
-    "rotation"
-   ]
-  },
-  {
-   "id": "neighbor:MAR CANTÁBRICO",
-   "kind": "country",
-   "text": "MAR CANTÁBRICO",
-   "anchor_px": {
-    "x": 2090.9,
-    "y": 282.7
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": 0.0
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 2090.9,
-    "y": 282.7
-   },
-   "bbox_px": {
-    "x0": 1761.5,
-    "y0": 241.2,
-    "x1": 2420.4,
-    "y1": 324.2
-   },
-   "size_pt": 52,
-   "weight": "semibold",
-   "color": "#7da7bf",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 6
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
+   "rotation": 0,
    "linespacing": 0.95,
    "leader": null,
    "sub": null,
@@ -204,11 +163,22 @@
  ],
  "locked": [
   {
+   "id": "locked:inset-caption",
+   "kind": "inset-caption",
+   "text": "Islas Canarias",
+   "bbox_px": {
+    "x0": 363.8,
+    "y0": 1703.9,
+    "x1": 750.9,
+    "y1": 1767.8
+   }
+  },
+  {
    "id": "locked:footer",
    "kind": "footer",
-   "text": "Mapa mudo · Concejos de Asturias",
+   "text": "España · lo más típico de cada provincia",
    "bbox_px": {
-    "x0": 3261.6,
+    "x0": 3160.9,
     "y0": 2116.6,
     "x1": 3968.0,
     "y1": 2164.5
@@ -217,9 +187,9 @@
   {
    "id": "locked:attribution",
    "kind": "attribution",
-   "text": "Datos: IGN España",
+   "text": "Datos: IGN España · iconos Noto Emoji",
    "bbox_px": {
-    "x0": 3724.0,
+    "x0": 3467.3,
     "y0": 2191.1,
     "x1": 3968.0,
     "y1": 2223.0

@@ -150,7 +150,7 @@ class LabelingTest(unittest.TestCase):
     def test_zone_sub_and_leader_style(self):
         _, m = self._export("spain-vinos")
         rioja = next(e for e in m["labels"] if e["id"] == "zone:Rioja")
-        self.assertEqual(rioja["rotation"], -22)
+        self.assertIsNotNone(rioja["leader"])
         rb = next(e for e in m["labels"] if e["id"] == "zone:Rías Baixas")
         self.assertEqual(rb["sub"], {"text": "albariño", "size_pt": 24})
         self.assertEqual(rb["leader"]["shrink_from_pt"], 26)

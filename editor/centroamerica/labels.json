@@ -1,0 +1,44 @@
+{
+ "schema": 1,
+ "map": "centroamerica",
+ "canvas": {
+  "width_px": 4000,
+  "height_px": 2250,
+  "dpi": 100
+ },
+ "km_per_px": 0.586744,
+ "canary_inset_px": null,
+ "font": {
+  "family": "Inter",
+  "weights": {
+   "regular": 400,
+   "semibold": 600,
+   "extrabold": 800
+  }
+ },
+ "labels": [],
+ "locked": [
+  {
+   "id": "locked:footer",
+   "kind": "footer",
+   "text": "Los siete países de América Central y sus capitales",
+   "bbox_px": {
+    "x0": 32.0,
+    "y0": 2116.6,
+    "x1": 1070.9,
+    "y1": 2164.5
+   }
+  },
+  {
+   "id": "locked:attribution",
+   "kind": "attribution",
+   "text": "Datos: Natural Earth · Banderas: flagcdn.com",
+   "bbox_px": {
+    "x0": 32.0,
+    "y0": 2191.1,
+    "x1": 620.2,
+    "y1": 2223.0
+   }
+  }
+ ]
+}

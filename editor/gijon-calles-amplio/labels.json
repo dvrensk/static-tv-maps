@@ -1,0 +1,44 @@
+{
+ "schema": 1,
+ "map": "gijon-calles-amplio",
+ "canvas": {
+  "width_px": 4000,
+  "height_px": 2250,
+  "dpi": 100
+ },
+ "km_per_px": 0.002554,
+ "canary_inset_px": null,
+ "font": {
+  "family": "Inter",
+  "weights": {
+   "regular": 400,
+   "semibold": 600,
+   "extrabold": 800
+  }
+ },
+ "labels": [],
+ "locked": [
+  {
+   "id": "locked:footer",
+   "kind": "footer",
+   "text": "Gijón · calles principales, del mar a Roces y Tremañes",
+   "bbox_px": {
+    "x0": 2882.5,
+    "y0": 2116.6,
+    "x1": 3967.9,
+    "y1": 2164.5
+   }
+  },
+  {
+   "id": "locked:attribution",
+   "kind": "attribution",
+   "text": "Datos: © OpenStreetMap",
+   "bbox_px": {
+    "x0": 3637.6,
+    "y0": 2191.1,
+    "x1": 3967.9,
+    "y1": 2223.0
+   }
+  }
+ ]
+}

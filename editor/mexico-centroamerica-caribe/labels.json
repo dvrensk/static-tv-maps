@@ -1,0 +1,33 @@
+{
+ "schema": 1,
+ "map": "mexico-centroamerica-caribe",
+ "canvas": {
+  "width_px": 4000,
+  "height_px": 2250,
+  "dpi": 100
+ },
+ "km_per_px": 1.373196,
+ "canary_inset_px": null,
+ "font": {
+  "family": "Inter",
+  "weights": {
+   "regular": 400,
+   "semibold": 600,
+   "extrabold": 800
+  }
+ },
+ "labels": [],
+ "locked": [
+  {
+   "id": "locked:attribution",
+   "kind": "attribution",
+   "text": "Datos: Natural Earth · Banderas: flagcdn.com",
+   "bbox_px": {
+    "x0": 3379.8,
+    "y0": 2191.1,
+    "x1": 3968.0,
+    "y1": 2223.0
+   }
+  }
+ ]
+}

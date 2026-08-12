@@ -1,13 +1,18 @@
 {
  "schema": 1,
- "map": "asturias-comarcas",
+ "map": "spain-comunidades-capitales",
  "canvas": {
   "width_px": 4000,
   "height_px": 2250,
   "dpi": 100
  },
- "km_per_px": 0.056263,
- "canary_inset_px": null,
+ "km_per_px": 0.48262,
+ "canary_inset_px": {
+  "x0": 80.0,
+  "y0": 1694.4,
+  "x1": 1034.8,
+  "y1": 2171.2
+ },
  "font": {
   "family": "Inter",
   "weights": {
@@ -18,34 +23,34 @@
  },
  "labels": [
   {
-   "id": "comarca:Avilés",
+   "id": "region:01",
    "kind": "region",
-   "text": "Avilés",
+   "text": "Andalucía",
    "anchor_px": {
-    "x": 1691.8,
-    "y": 772.8
+    "x": 1563.1,
+    "y": 1623.0
    },
    "offset_km": {
-    "dx": 0.0,
-    "dy": 1.8652800362058133
+    "dx": 95,
+    "dy": 12
    },
    "callout_km": null,
    "text_px": {
-    "x": 1691.8,
-    "y": 739.7
+    "x": 1759.9,
+    "y": 1598.1
    },
    "bbox_px": {
-    "x0": 1589.6,
-    "y0": 701.4,
-    "x1": 1794.0,
-    "y1": 778.0
+    "x0": 1572.4,
+    "y0": 1555.0,
+    "x1": 1947.4,
+    "y1": 1641.3
    },
-   "size_pt": 48,
+   "size_pt": 54,
    "weight": "extrabold",
    "color": "#26241f",
    "halo": {
     "color": "#ffffff",
-    "width_pt": 5.33
+    "width_pt": 6.0
    },
    "ha": "center",
    "va": "center",
@@ -66,896 +71,1026 @@
    ]
   },
   {
-   "id": "comarca-pop:Avilés",
+   "id": "region:02",
    "kind": "region",
-   "text": "(145.000)",
+   "text": "Aragón",
    "anchor_px": {
-    "x": 1691.8,
-    "y": 772.8
+    "x": 2283.5,
+    "y": 729.3
    },
    "offset_km": {
     "dx": 0.0,
-    "dy": -1.8652800362058133
+    "dy": -78
    },
    "callout_km": null,
    "text_px": {
-    "x": 1691.8,
-    "y": 806.0
+    "x": 2283.5,
+    "y": 890.9
    },
    "bbox_px": {
-    "x0": 1598.9,
-    "y0": 782.8,
-    "x1": 1784.8,
-    "y1": 829.1
-   },
-   "size_pt": 29,
-   "weight": "semibold",
-   "color": "#26241f",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 3.22
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "tx",
-    "ty",
-    "size",
-    "ha"
-   ]
-  },
-  {
-   "id": "comarca:Caudal",
-   "kind": "region",
-   "text": "Caudal",
-   "anchor_px": {
-    "x": 2139.2,
-    "y": 1475.5
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": 1.6957091238234663
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 2139.2,
-    "y": 1445.3
-   },
-   "bbox_px": {
-    "x0": 2033.7,
-    "y0": 1410.2,
-    "x1": 2244.7,
-    "y1": 1480.4
-   },
-   "size_pt": 44,
-   "weight": "extrabold",
-   "color": "#26241f",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 4.89
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "tx",
-    "ty",
-    "size",
-    "ha"
-   ]
-  },
-  {
-   "id": "comarca-pop:Caudal",
-   "kind": "region",
-   "text": "(57.000)",
-   "anchor_px": {
-    "x": 2139.2,
-    "y": 1475.5
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": -1.6957091238234663
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 2139.2,
-    "y": 1505.6
-   },
-   "bbox_px": {
-    "x0": 2065.4,
-    "y0": 1484.8,
-    "x1": 2212.9,
-    "y1": 1526.4
-   },
-   "size_pt": 26,
-   "weight": "semibold",
-   "color": "#26241f",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 2.89
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "tx",
-    "ty",
-    "size",
-    "ha"
-   ]
-  },
-  {
-   "id": "comarca:Eo-Navia",
-   "kind": "region",
-   "text": "Eo-Navia",
-   "anchor_px": {
-    "x": 527.4,
-    "y": 862.9
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": 1.8652800362058133
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 527.4,
-    "y": 829.8
-   },
-   "bbox_px": {
-    "x0": 376.5,
-    "y0": 791.4,
-    "x1": 678.2,
-    "y1": 868.1
-   },
-   "size_pt": 48,
-   "weight": "extrabold",
-   "color": "#26241f",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 5.33
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "tx",
-    "ty",
-    "size",
-    "ha"
-   ]
-  },
-  {
-   "id": "comarca-pop:Eo-Navia",
-   "kind": "region",
-   "text": "(42.000)",
-   "anchor_px": {
-    "x": 527.4,
-    "y": 862.9
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": -1.8652800362058133
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 527.4,
-    "y": 896.1
-   },
-   "bbox_px": {
-    "x0": 441.9,
-    "y0": 872.9,
-    "x1": 612.8,
-    "y1": 919.2
-   },
-   "size_pt": 29,
-   "weight": "semibold",
-   "color": "#26241f",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 3.22
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "tx",
-    "ty",
-    "size",
-    "ha"
-   ]
-  },
-  {
-   "id": "comarca:Gijón",
-   "kind": "region",
-   "text": "Gijón",
-   "anchor_px": {
-    "x": 2468.8,
-    "y": 816.2
-   },
-   "offset_km": {
-    "dx": -10,
-    "dy": 3.8652800362058133
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 2291.1,
-    "y": 747.5
-   },
-   "bbox_px": {
-    "x0": 2204.6,
-    "y0": 709.2,
-    "x1": 2377.6,
-    "y1": 785.9
-   },
-   "size_pt": 48,
-   "weight": "extrabold",
-   "color": "#26241f",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 5.33
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "tx",
-    "ty",
-    "size",
-    "ha"
-   ]
-  },
-  {
-   "id": "comarca-pop:Gijón",
-   "kind": "region",
-   "text": "(296.000)",
-   "anchor_px": {
-    "x": 2468.8,
-    "y": 816.2
-   },
-   "offset_km": {
-    "dx": -10,
-    "dy": 0.13471996379418671
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 2291.1,
-    "y": 813.8
-   },
-   "bbox_px": {
-    "x0": 2193.7,
-    "y0": 790.7,
-    "x1": 2388.4,
-    "y1": 837.0
-   },
-   "size_pt": 29,
-   "weight": "semibold",
-   "color": "#26241f",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 3.22
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "tx",
-    "ty",
-    "size",
-    "ha"
-   ]
-  },
-  {
-   "id": "comarca:Nalón",
-   "kind": "region",
-   "text": "Nalón",
-   "anchor_px": {
-    "x": 2685.7,
-    "y": 1450.2
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": 1.6957091238234663
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 2685.7,
-    "y": 1420.0
-   },
-   "bbox_px": {
-    "x0": 2598.2,
-    "y0": 1384.9,
-    "x1": 2773.2,
-    "y1": 1455.2
-   },
-   "size_pt": 44,
-   "weight": "extrabold",
-   "color": "#26241f",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 4.89
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "tx",
-    "ty",
-    "size",
-    "ha"
-   ]
-  },
-  {
-   "id": "comarca-pop:Nalón",
-   "kind": "region",
-   "text": "(69.000)",
-   "anchor_px": {
-    "x": 2685.7,
-    "y": 1450.2
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": -1.6957091238234663
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 2685.7,
-    "y": 1480.3
-   },
-   "bbox_px": {
-    "x0": 2608.2,
-    "y0": 1459.6,
-    "x1": 2763.2,
-    "y1": 1501.1
-   },
-   "size_pt": 26,
-   "weight": "semibold",
-   "color": "#26241f",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 2.89
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "tx",
-    "ty",
-    "size",
-    "ha"
-   ]
-  },
-  {
-   "id": "comarca:Narcea",
-   "kind": "region",
-   "text": "Narcea",
-   "anchor_px": {
-    "x": 950.3,
-    "y": 1288.8
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": 1.8652800362058133
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 950.3,
-    "y": 1255.6
-   },
-   "bbox_px": {
-    "x0": 832.9,
-    "y0": 1217.3,
-    "x1": 1067.7,
-    "y1": 1293.9
-   },
-   "size_pt": 48,
-   "weight": "extrabold",
-   "color": "#26241f",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 5.33
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "tx",
-    "ty",
-    "size",
-    "ha"
-   ]
-  },
-  {
-   "id": "comarca-pop:Narcea",
-   "kind": "region",
-   "text": "(23.000)",
-   "anchor_px": {
-    "x": 950.3,
-    "y": 1288.8
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": -1.8652800362058133
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 950.3,
-    "y": 1321.9
-   },
-   "bbox_px": {
-    "x0": 866.3,
-    "y0": 1298.8,
-    "x1": 1034.3,
-    "y1": 1345.1
-   },
-   "size_pt": 29,
-   "weight": "semibold",
-   "color": "#26241f",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 3.22
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "tx",
-    "ty",
-    "size",
-    "ha"
-   ]
-  },
-  {
-   "id": "comarca:Oriente",
-   "kind": "region",
-   "text": "Oriente",
-   "anchor_px": {
-    "x": 3055.0,
-    "y": 1158.4
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": 1.8652800362058133
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 3055.0,
-    "y": 1125.3
-   },
-   "bbox_px": {
-    "x0": 2931.3,
-    "y0": 1086.9,
-    "x1": 3178.8,
-    "y1": 1163.6
-   },
-   "size_pt": 48,
-   "weight": "extrabold",
-   "color": "#26241f",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 5.33
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "tx",
-    "ty",
-    "size",
-    "ha"
-   ]
-  },
-  {
-   "id": "comarca-pop:Oriente",
-   "kind": "region",
-   "text": "(48.000)",
-   "anchor_px": {
-    "x": 3055.0,
-    "y": 1158.4
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": -1.8652800362058133
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 3055.0,
-    "y": 1191.6
-   },
-   "bbox_px": {
-    "x0": 2969.5,
-    "y0": 1168.4,
-    "x1": 3140.5,
-    "y1": 1214.7
-   },
-   "size_pt": 29,
-   "weight": "semibold",
-   "color": "#26241f",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 3.22
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "tx",
-    "ty",
-    "size",
-    "ha"
-   ]
-  },
-  {
-   "id": "comarca:Oviedo",
-   "kind": "region",
-   "text": "Oviedo",
-   "anchor_px": {
-    "x": 1631.0,
-    "y": 1283.3
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": 1.8652800362058133
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 1631.0,
-    "y": 1250.1
-   },
-   "bbox_px": {
-    "x0": 1513.5,
-    "y0": 1211.8,
-    "x1": 1748.5,
-    "y1": 1288.5
-   },
-   "size_pt": 48,
-   "weight": "extrabold",
-   "color": "#26241f",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 5.33
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "tx",
-    "ty",
-    "size",
-    "ha"
-   ]
-  },
-  {
-   "id": "comarca-pop:Oviedo",
-   "kind": "region",
-   "text": "(334.000)",
-   "anchor_px": {
-    "x": 1631.0,
-    "y": 1283.3
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": -1.8652800362058133
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 1631.0,
-    "y": 1316.5
-   },
-   "bbox_px": {
-    "x0": 1533.7,
-    "y0": 1293.3,
-    "x1": 1728.2,
-    "y1": 1339.6
-   },
-   "size_pt": 29,
-   "weight": "semibold",
-   "color": "#26241f",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 3.22
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "tx",
-    "ty",
-    "size",
-    "ha"
-   ]
-  },
-  {
-   "id": "neighbor:GALICIA",
-   "kind": "country",
-   "text": "GALICIA",
-   "anchor_px": {
-    "x": 226.1,
-    "y": 1471.5
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": 0.0
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 226.1,
-    "y": 1471.5
-   },
-   "bbox_px": {
-    "x0": 103.5,
-    "y0": 1436.3,
-    "x1": 348.8,
-    "y1": 1506.6
-   },
-   "size_pt": 44,
-   "weight": "semibold",
-   "color": "#a09f99",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 6
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "size",
-    "rotation"
-   ]
-  },
-  {
-   "id": "neighbor:LEÓN",
-   "kind": "country",
-   "text": "LEÓN",
-   "anchor_px": {
-    "x": 1964.1,
-    "y": 1899.0
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": 0.0
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 1964.1,
-    "y": 1899.0
-   },
-   "bbox_px": {
-    "x0": 1882.1,
-    "y0": 1863.8,
-    "x1": 2046.1,
-    "y1": 1934.1
-   },
-   "size_pt": 44,
-   "weight": "semibold",
-   "color": "#a09f99",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 6
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "size",
-    "rotation"
-   ]
-  },
-  {
-   "id": "neighbor:CANTABRIA",
-   "kind": "country",
-   "text": "CANTABRIA",
-   "anchor_px": {
-    "x": 3756.1,
-    "y": 1531.9
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": 0.0
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 3756.1,
-    "y": 1531.9
-   },
-   "bbox_px": {
-    "x0": 3579.5,
-    "y0": 1496.8,
-    "x1": 3932.7,
-    "y1": 1567.0
-   },
-   "size_pt": 44,
-   "weight": "semibold",
-   "color": "#a09f99",
-   "halo": {
-    "color": "#ffffff",
-    "width_pt": 6
-   },
-   "ha": "center",
-   "va": "center",
-   "rotation": 0.0,
-   "linespacing": 0.95,
-   "leader": null,
-   "sub": null,
-   "badge": null,
-   "marker": null,
-   "in_canary_inset": false,
-   "editable": [
-    "dx",
-    "dy",
-    "size",
-    "rotation"
-   ]
-  },
-  {
-   "id": "neighbor:MAR CANTÁBRICO",
-   "kind": "country",
-   "text": "MAR CANTÁBRICO",
-   "anchor_px": {
-    "x": 2090.9,
-    "y": 282.7
-   },
-   "offset_km": {
-    "dx": 0.0,
-    "dy": 0.0
-   },
-   "callout_km": null,
-   "text_px": {
-    "x": 2090.9,
-    "y": 282.7
-   },
-   "bbox_px": {
-    "x0": 1761.5,
-    "y0": 241.2,
-    "x1": 2420.4,
-    "y1": 324.2
+    "x0": 2150.7,
+    "y0": 849.4,
+    "x1": 2416.3,
+    "y1": 932.4
    },
    "size_pt": 52,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:03",
+   "kind": "region",
+   "text": "Asturias",
+   "anchor_px": {
+    "x": 1396.6,
+    "y": 290.1
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": -82,
+    "ty": 58
+   },
+   "text_px": {
+    "x": 1226.7,
+    "y": 169.9
+   },
+   "bbox_px": {
+    "x0": 1104.1,
+    "y0": 136.4,
+    "x1": 1395.0,
+    "y1": 288.9
+   },
+   "size_pt": 42,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.67
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1226.7,
+     "y": 169.9
+    },
+    "to_px": {
+     "x": 1396.6,
+     "y": 290.1
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:04",
+   "kind": "region",
+   "text": "Islas Baleares",
+   "anchor_px": {
+    "x": 2954.5,
+    "y": 1125.0
+   },
+   "offset_km": {
+    "dx": -8,
+    "dy": -88
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2937.9,
+    "y": 1307.3
+   },
+   "bbox_px": {
+    "x0": 2746.9,
+    "y0": 1275.4,
+    "x1": 3128.9,
+    "y1": 1339.2
+   },
+   "size_pt": 40,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.44
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:06",
+   "kind": "region",
+   "text": "Cantabria",
+   "anchor_px": {
+    "x": 1688.7,
+    "y": 330.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": -72,
+    "ty": 70
+   },
+   "text_px": {
+    "x": 1539.5,
+    "y": 185.4
+   },
+   "bbox_px": {
+    "x0": 1408.8,
+    "y0": 155.0,
+    "x1": 1687.3,
+    "y1": 329.0
+   },
+   "size_pt": 38,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.22
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1539.5,
+     "y": 185.4
+    },
+    "to_px": {
+     "x": 1688.7,
+     "y": 330.4
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:07",
+   "kind": "region",
+   "text": "Castilla y León",
+   "anchor_px": {
+    "x": 1576.3,
+    "y": 642.9
+   },
+   "offset_km": {
+    "dx": 20,
+    "dy": -72
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1617.8,
+    "y": 792.0
+   },
+   "bbox_px": {
+    "x0": 1355.3,
+    "y0": 750.5,
+    "x1": 1880.3,
+    "y1": 833.5
+   },
+   "size_pt": 52,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:08",
+   "kind": "region",
+   "text": "Castilla-\nLa Mancha",
+   "anchor_px": {
+    "x": 1956.3,
+    "y": 1213.8
+   },
+   "offset_km": {
+    "dx": -25,
+    "dy": -45
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1904.5,
+    "y": 1307.0
+   },
+   "bbox_px": {
+    "x0": 1705.0,
+    "y0": 1220.8,
+    "x1": 2104.0,
+    "y1": 1393.2
+   },
+   "size_pt": 54,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6.0
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:09",
+   "kind": "region",
+   "text": "Cataluña",
+   "anchor_px": {
+    "x": 2650.8,
+    "y": 628.6
+   },
+   "offset_km": {
+    "dx": -28,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2592.8,
+    "y": 628.6
+   },
+   "bbox_px": {
+    "x0": 2427.1,
+    "y0": 585.5,
+    "x1": 2758.5,
+    "y1": 671.7
+   },
+   "size_pt": 54,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6.0
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:10",
+   "kind": "region",
+   "text": "Comunidad\nValenciana",
+   "anchor_px": {
+    "x": 2278.8,
+    "y": 1172.1
+   },
+   "offset_km": {
+    "dx": 8,
+    "dy": 36
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2295.4,
+    "y": 1097.5
+   },
+   "bbox_px": {
+    "x0": 2143.4,
+    "y0": 1036.8,
+    "x1": 2447.4,
+    "y1": 1158.2
+   },
+   "size_pt": 38,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.22
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:11",
+   "kind": "region",
+   "text": "Extremadura",
+   "anchor_px": {
+    "x": 1345.7,
+    "y": 1246.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 66
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1345.7,
+    "y": 1110.1
+   },
+   "bbox_px": {
+    "x0": 1114.9,
+    "y0": 1068.6,
+    "x1": 1576.4,
+    "y1": 1151.6
+   },
+   "size_pt": 52,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:12",
+   "kind": "region",
+   "text": "Galicia",
+   "anchor_px": {
+    "x": 1055.2,
+    "y": 406.7
+   },
+   "offset_km": {
+    "dx": 58,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1175.4,
+    "y": 406.7
+   },
+   "bbox_px": {
+    "x0": 1062.9,
+    "y0": 368.4,
+    "x1": 1287.9,
+    "y1": 445.0
+   },
+   "size_pt": 48,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.33
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:13",
+   "kind": "region",
+   "text": "Madrid",
+   "anchor_px": {
+    "x": 1744.9,
+    "y": 947.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 26
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1744.9,
+    "y": 893.1
+   },
+   "bbox_px": {
+    "x0": 1646.9,
+    "y0": 861.2,
+    "x1": 1843.0,
+    "y1": 925.0
+   },
+   "size_pt": 40,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.44
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:14",
+   "kind": "region",
+   "text": "Murcia",
+   "anchor_px": {
+    "x": 2157.7,
+    "y": 1536.2
+   },
+   "offset_km": {
+    "dx": -34,
+    "dy": 30
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2087.3,
+    "y": 1474.0
+   },
+   "bbox_px": {
+    "x0": 1992.0,
+    "y0": 1442.1,
+    "x1": 2182.5,
+    "y1": 1505.9
+   },
+   "size_pt": 40,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.44
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:15",
+   "kind": "region",
+   "text": "Navarra",
+   "anchor_px": {
+    "x": 2096.4,
+    "y": 443.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": -50
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2096.4,
+    "y": 546.8
+   },
+   "bbox_px": {
+    "x0": 1987.2,
+    "y0": 514.9,
+    "x1": 2205.7,
+    "y1": 578.7
+   },
+   "size_pt": 40,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.44
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:16",
+   "kind": "region",
+   "text": "País Vasco",
+   "anchor_px": {
+    "x": 1945.2,
+    "y": 355.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 80,
+    "ty": 104
+   },
+   "text_px": {
+    "x": 2111.0,
+    "y": 140.1
+   },
+   "bbox_px": {
+    "x0": 1946.4,
+    "y0": 108.1,
+    "x1": 2261.2,
+    "y1": 354.0
+   },
+   "size_pt": 40,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.44
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 2111.0,
+     "y": 140.1
+    },
+    "to_px": {
+     "x": 1945.2,
+     "y": 355.6
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:17",
+   "kind": "region",
+   "text": "La Rioja",
+   "anchor_px": {
+    "x": 1916.6,
+    "y": 527.4
+   },
+   "offset_km": {
+    "dx": -14,
+    "dy": -16
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1887.6,
+    "y": 560.6
+   },
+   "bbox_px": {
+    "x0": 1814.1,
+    "y0": 538.2,
+    "x1": 1961.1,
+    "y1": 582.9
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:18",
+   "kind": "region",
+   "text": "Ceuta",
+   "anchor_px": {
+    "x": 1442.6,
+    "y": 2001.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": -55,
+    "ty": 25
+   },
+   "text_px": {
+    "x": 1328.6,
+    "y": 1949.4
+   },
+   "bbox_px": {
+    "x0": 1187.4,
+    "y0": 1922.2,
+    "x1": 1440.8,
+    "y1": 2000.3
+   },
+   "size_pt": 34,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.78
+   },
+   "ha": "right",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1328.6,
+     "y": 1949.4
+    },
+    "to_px": {
+     "x": 1442.6,
+     "y": 2001.2
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "region:19",
+   "kind": "region",
+   "text": "Melilla",
+   "anchor_px": {
+    "x": 1892.3,
+    "y": 2144.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 25,
+    "ty": 45
+   },
+   "text_px": {
+    "x": 1944.1,
+    "y": 2051.3
+   },
+   "bbox_px": {
+    "x0": 1893.3,
+    "y0": 2024.2,
+    "x1": 2102.1,
+    "y1": 2142.8
+   },
+   "size_pt": 34,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.78
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1944.1,
+     "y": 2051.3
+    },
+    "to_px": {
+     "x": 1892.3,
+     "y": 2144.6
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "country:PORTUGAL",
+   "kind": "country",
+   "text": "PORTUGAL",
+   "anchor_px": {
+    "x": 983.8,
+    "y": 1140.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 983.8,
+    "y": 1140.7
+   },
+   "bbox_px": {
+    "x0": 947.1,
+    "y0": 964.6,
+    "x1": 1020.5,
+    "y1": 1316.8
+   },
+   "size_pt": 46,
    "weight": "semibold",
-   "color": "#7da7bf",
+   "color": "#a09f99",
    "halo": {
     "color": "#ffffff",
     "width_pt": 6
    },
    "ha": "center",
    "va": "center",
-   "rotation": 0.0,
+   "rotation": 90,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "country:FRANCIA",
+   "kind": "country",
+   "text": "FRANCIA",
+   "anchor_px": {
+    "x": 2665.8,
+    "y": 154.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2665.8,
+    "y": 154.5
+   },
+   "bbox_px": {
+    "x0": 2522.8,
+    "y0": 117.8,
+    "x1": 2808.8,
+    "y1": 191.3
+   },
+   "size_pt": 46,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "country:MARRUECOS",
+   "kind": "country",
+   "text": "MARRUECOS",
+   "anchor_px": {
+    "x": 1523.9,
+    "y": 2203.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1523.9,
+    "y": 2203.9
+   },
+   "bbox_px": {
+    "x0": 1361.4,
+    "y0": 2175.1,
+    "x1": 1686.4,
+    "y1": 2232.6
+   },
+   "size_pt": 36,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0,
    "linespacing": 0.95,
    "leader": null,
    "sub": null,
@@ -972,11 +1107,22 @@
  ],
  "locked": [
   {
+   "id": "locked:inset-caption",
+   "kind": "inset-caption",
+   "text": "Canarias",
+   "bbox_px": {
+    "x0": 434.3,
+    "y0": 1703.9,
+    "x1": 680.4,
+    "y1": 1767.8
+   }
+  },
+  {
    "id": "locked:footer",
    "kind": "footer",
-   "text": "Comarcas de Asturias (ocho comarcas funcionales, decreto 11/91) · población INE 2025",
+   "text": "Comunidades autónomas y sus capitales",
    "bbox_px": {
-    "x0": 2205.6,
+    "x0": 3135.8,
     "y0": 2116.6,
     "x1": 3968.0,
     "y1": 2164.5
@@ -985,9 +1131,9 @@
   {
    "id": "locked:attribution",
    "kind": "attribution",
-   "text": "Datos: IGN España",
+   "text": "Datos: IGN España · Natural Earth",
    "bbox_px": {
-    "x0": 3724.0,
+    "x0": 3530.6,
     "y0": 2191.1,
     "x1": 3968.0,
     "y1": 2223.0

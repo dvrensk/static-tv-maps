@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "map": "asturias-concejos-mudo",
+ "map": "asturias-ciudades-concejos",
  "canvas": {
   "width_px": 4000,
   "height_px": 2250,
@@ -206,9 +206,9 @@
   {
    "id": "locked:footer",
    "kind": "footer",
-   "text": "Mapa mudo · Concejos de Asturias",
+   "text": "Los concejos más poblados de Asturias · más de 10.000 habitantes (INE 2023)",
    "bbox_px": {
-    "x0": 3261.6,
+    "x0": 2383.6,
     "y0": 2116.6,
     "x1": 3968.0,
     "y1": 2164.5

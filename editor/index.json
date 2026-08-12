@@ -9,11 +9,18 @@
    "labels": 23
   },
   {
+   "name": "asturias-ciudades-concejos",
+   "base": "editor/asturias-ciudades-concejos/base.png",
+   "manifest": "editor/asturias-ciudades-concejos/labels.json",
+   "output": "output/asturias-ciudades-concejos.png",
+   "labels": 4
+  },
+  {
    "name": "asturias-comarcas",
    "base": "editor/asturias-comarcas/base.png",
    "manifest": "editor/asturias-comarcas/labels.json",
    "output": "output/asturias-comarcas.png",
-   "labels": 12
+   "labels": 20
   },
   {
    "name": "asturias-concejos-1",
@@ -44,6 +51,41 @@
    "labels": 22
   },
   {
+   "name": "centroamerica",
+   "base": "editor/centroamerica/base.png",
+   "manifest": "editor/centroamerica/labels.json",
+   "output": "output/centroamerica.png",
+   "labels": 0
+  },
+  {
+   "name": "gijon-calles-amplio",
+   "base": "editor/gijon-calles-amplio/base.png",
+   "manifest": "editor/gijon-calles-amplio/labels.json",
+   "output": "output/gijon-calles-amplio.png",
+   "labels": 0
+  },
+  {
+   "name": "gijon-calles-centro",
+   "base": "editor/gijon-calles-centro/base.png",
+   "manifest": "editor/gijon-calles-centro/labels.json",
+   "output": "output/gijon-calles-centro.png",
+   "labels": 0
+  },
+  {
+   "name": "gijon-calles-medio",
+   "base": "editor/gijon-calles-medio/base.png",
+   "manifest": "editor/gijon-calles-medio/labels.json",
+   "output": "output/gijon-calles-medio.png",
+   "labels": 0
+  },
+  {
+   "name": "mexico-centroamerica-caribe",
+   "base": "editor/mexico-centroamerica-caribe/base.png",
+   "manifest": "editor/mexico-centroamerica-caribe/labels.json",
+   "output": "output/mexico-centroamerica-caribe.png",
+   "labels": 0
+  },
+  {
    "name": "spain-capitales-comunidades",
    "base": "editor/spain-capitales-comunidades/base.png",
    "manifest": "editor/spain-capitales-comunidades/labels.json",
@@ -72,6 +114,13 @@
    "labels": 21
   },
   {
+   "name": "spain-comunidades-capitales",
+   "base": "editor/spain-comunidades-capitales/base.png",
+   "manifest": "editor/spain-comunidades-capitales/labels.json",
+   "output": "output/spain-comunidades-capitales.png",
+   "labels": 21
+  },
+  {
    "name": "spain-comunidades-mudo",
    "base": "editor/spain-comunidades-mudo/base.png",
    "manifest": "editor/spain-comunidades-mudo/labels.json",
@@ -83,7 +132,14 @@
    "base": "editor/spain-despensa/base.png",
    "manifest": "editor/spain-despensa/labels.json",
    "output": "output/spain-despensa.png",
-   "labels": 29
+   "labels": 32
+  },
+  {
+   "name": "spain-editoriales",
+   "base": "editor/spain-editoriales/base.png",
+   "manifest": "editor/spain-editoriales/labels.json",
+   "output": "output/spain-editoriales.png",
+   "labels": 0
   },
   {
    "name": "spain-fisica",
@@ -91,6 +147,27 @@
    "manifest": "editor/spain-fisica/labels.json",
    "output": "output/spain-fisica.png",
    "labels": 21
+  },
+  {
+   "name": "spain-marcas",
+   "base": "editor/spain-marcas/base.png",
+   "manifest": "editor/spain-marcas/labels.json",
+   "output": "output/spain-marcas.png",
+   "labels": 3
+  },
+  {
+   "name": "spain-marcas-logos",
+   "base": "editor/spain-marcas-logos/base.png",
+   "manifest": "editor/spain-marcas-logos/labels.json",
+   "output": "output/spain-marcas-logos.png",
+   "labels": 3
+  },
+  {
+   "name": "spain-moda",
+   "base": "editor/spain-moda/base.png",
+   "manifest": "editor/spain-moda/labels.json",
+   "output": "output/spain-moda.png",
+   "labels": 3
   },
   {
    "name": "spain-provincias-1",
@@ -105,6 +182,20 @@
    "manifest": "editor/spain-provincias-2/labels.json",
    "output": "output/spain-provincias-2.png",
    "labels": 29
+  },
+  {
+   "name": "spain-provincias-cotidiano",
+   "base": "editor/spain-provincias-cotidiano/base.png",
+   "manifest": "editor/spain-provincias-cotidiano/labels.json",
+   "output": "output/spain-provincias-cotidiano.png",
+   "labels": 3
+  },
+  {
+   "name": "spain-provincias-iconos",
+   "base": "editor/spain-provincias-iconos/base.png",
+   "manifest": "editor/spain-provincias-iconos/labels.json",
+   "output": "output/spain-provincias-iconos.png",
+   "labels": 3
   },
   {
    "name": "spain-provincias-mudo",

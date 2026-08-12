@@ -989,6 +989,185 @@
    ]
   },
   {
+   "id": "zone:Arroz del Delta del Ebro",
+   "kind": "zone",
+   "text": "Arroz del\nDelta del Ebro",
+   "anchor_px": {
+    "x": 2533.7,
+    "y": 884.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 66.68400773752342,
+    "ty": -7.485577967123128
+   },
+   "text_px": {
+    "x": 2671.8,
+    "y": 899.7
+   },
+   "bbox_px": {
+    "x0": 2537.6,
+    "y0": 858.2,
+    "x1": 2915.5,
+    "y1": 941.2
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#7a8543",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.25
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 2671.8,
+     "y": 899.7
+    },
+    "to_px": {
+     "x": 2533.7,
+     "y": 884.2
+    },
+    "color": "#6b675f",
+    "width_pt": 2.2,
+    "shrink_from_pt": 26,
+    "shrink_to_pt": 4
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Arroz de la Albufera",
+   "kind": "zone",
+   "text": "Arroz de\nla Albufera",
+   "anchor_px": {
+    "x": 2358.0,
+    "y": 1213.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 0.7588250803108094,
+    "ty": -51.49615999439824
+   },
+   "text_px": {
+    "x": 2359.6,
+    "y": 1320.0
+   },
+   "bbox_px": {
+    "x0": 2262.7,
+    "y0": 1217.3,
+    "x1": 2456.4,
+    "y1": 1361.5
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#7a8543",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.25
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 2359.6,
+     "y": 1320.0
+    },
+    "to_px": {
+     "x": 2358.0,
+     "y": 1213.3
+    },
+    "color": "#6b675f",
+    "width_pt": 2.2,
+    "shrink_from_pt": 26,
+    "shrink_to_pt": 4
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Calasparra",
+   "kind": "zone",
+   "text": "Calasparra",
+   "anchor_px": {
+    "x": 2118.8,
+    "y": 1467.8
+   },
+   "offset_km": {
+    "dx": -39.4989455850647,
+    "dy": 11.748281775494107
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2037.0,
+    "y": 1443.5
+   },
+   "bbox_px": {
+    "x0": 1843.2,
+    "y0": 1422.7,
+    "x1": 2037.0,
+    "y1": 1464.3
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#7a8543",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.25
+   },
+   "ha": "right",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
    "id": "zone:Sidra",
    "kind": "zone",
    "text": "Sidra",
@@ -1601,34 +1780,45 @@
   {
    "id": "locked:swatch:3",
    "kind": "swatch",
-   "text": "Invernaderos",
+   "text": "Arroz",
    "bbox_px": {
     "x0": 101.5,
     "y0": 1013.5,
-    "x1": 418.2,
+    "x1": 268.8,
     "y1": 1058.2
    }
   },
   {
    "id": "locked:swatch:4",
    "kind": "swatch",
-   "text": "Queso",
+   "text": "Invernaderos",
    "bbox_px": {
     "x0": 101.5,
     "y0": 1073.8,
-    "x1": 288.0,
+    "x1": 418.2,
     "y1": 1118.5
    }
   },
   {
    "id": "locked:swatch:5",
    "kind": "swatch",
-   "text": "Marisco",
+   "text": "Queso",
    "bbox_px": {
     "x0": 101.5,
     "y0": 1134.0,
-    "x1": 316.3,
+    "x1": 288.0,
     "y1": 1178.7
+   }
+  },
+  {
+   "id": "locked:swatch:6",
+   "kind": "swatch",
+   "text": "Marisco",
+   "bbox_px": {
+    "x0": 101.5,
+    "y0": 1194.3,
+    "x1": 316.3,
+    "y1": 1239.0
    }
   },
   {

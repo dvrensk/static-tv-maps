@@ -275,7 +275,6 @@ def _leader_anchor(geom, x, y):
 def _draw_wine_zones(ax, zones, geoms, spain, frame, zorder=5):
     """Draw wine DOs from their real polygons (`geoms`: key -> geometry in
     MAIN_CRS), reusing the label / leader / sub-line style of _draw_zones."""
-    kper_px = (frame[2] - frame[0]) / style.WIDTH_PX  # data units per pixel
     for z in zones:
         geom = geoms.get(z.key)
         if geom is None or geom.is_empty:
@@ -287,24 +286,22 @@ def _draw_wine_zones(ax, zones, geoms, spain, frame, zorder=5):
             ax=ax, facecolor=to_rgba(fill, FILL_ALPHA),
             edgecolor=to_rgba(fill, 0.9), linewidth=1.6, zorder=zorder)
         x, y = _project_lonlat(*z.label)
-        if z.leader:
-            anchor = _leader_anchor(geom, x, y)
-            ax.annotate("", xy=(anchor.x, anchor.y), xytext=(x, y),
-                        zorder=zorder + 2,
-                        arrowprops=dict(arrowstyle="-", color=LEADER,
-                                        linewidth=2.2, shrinkA=26, shrinkB=4))
-        t = draw.halo_text(ax, x, y, z.text, z.size, weight="extrabold",
-                           color=label_color, halo_width=max(3, z.size / 8),
-                           ha=z.ha, zorder=zorder + 3)
-        t.set_rotation(z.rotation)
-        if z.sub:
-            n_lines = z.text.count("\n") + 1
-            dy = ((z.size * (0.45 + 0.95 * (n_lines - 1)) + z.sub_size * 0.75)
-                  * (style.DPI / 72) * kper_px)
-            st = draw.halo_text(ax, x, y - dy, z.sub, z.sub_size,
-                                weight="semibold", color=label_color,
-                                halo_width=4, ha=z.ha, zorder=zorder + 3)
-            st.set_rotation(z.rotation)
+        # Normalize the absolute label position to an offset from the leader
+        # anchor (nearest polygon part), like _draw_zones does.
+        anchor = _leader_anchor(geom, x, y)
+        ox, oy = (x - anchor.x) / KM, (y - anchor.y) / KM
+        labeling.emit(ax, labeling.Spec(
+            id=f"zone:{z.key}", kind="zone", text=z.text,
+            anchor=(anchor.x, anchor.y),
+            dx=0.0 if z.leader else ox, dy=0.0 if z.leader else oy,
+            tx=ox if z.leader else None, ty=oy if z.leader else None,
+            size=z.size, weight="extrabold", color=label_color,
+            halo_width=max(3, z.size / 8), ha=z.ha, rotation=z.rotation,
+            zorder=zorder + 3,
+            leader_style={"color": LEADER, "width": 2.2, "shrinkA": 26,
+                          "shrinkB": 4, "zorder": zorder + 2},
+            sub={"text": z.sub, "size": z.sub_size} if z.sub else None,
+            editable=("dx", "dy", "tx", "ty", "size", "ha", "rotation")))
 
 
 def _draw_canary_wine(ax, scene, cat, geom_wgs, label, label_lonlat,
@@ -322,14 +319,18 @@ def _draw_canary_wine(ax, scene, cat, geom_wgs, label, label_lonlat,
         ax=ax, facecolor=to_rgba(fill, FILL_ALPHA),
         edgecolor=to_rgba(fill, 0.9), linewidth=1.4, zorder=zorder)
     x, y = geo.canary_xy(_project_canary(*label_lonlat), tf)
-    if leader:
-        anchor = _leader_anchor(geom, x, y)
-        ax.annotate("", xy=(anchor.x, anchor.y), xytext=(x, y),
-                    zorder=zorder + 1,
-                    arrowprops=dict(arrowstyle="-", color=LEADER,
-                                    linewidth=2.0, shrinkA=22, shrinkB=4))
-    draw.halo_text(ax, x, y, label, size, weight="extrabold",
-                   color=label_color, halo_width=4, ha=ha, zorder=zorder + 2)
+    anchor = _leader_anchor(geom, x, y)
+    ox, oy = (x - anchor.x) / KM, (y - anchor.y) / KM
+    labeling.emit(ax, labeling.Spec(
+        id=f"zone:{label.replace(chr(10), ' ')}", kind="zone", text=label,
+        anchor=(anchor.x, anchor.y),
+        dx=0.0 if leader else ox, dy=0.0 if leader else oy,
+        tx=ox if leader else None, ty=oy if leader else None,
+        size=size, weight="extrabold", color=label_color, halo_width=4,
+        ha=ha, zorder=zorder + 2,
+        leader_style={"color": LEADER, "width": 2.0, "shrinkA": 22,
+                      "shrinkB": 4, "zorder": zorder + 1},
+        editable=("dx", "dy", "tx", "ty", "size", "ha", "rotation")))
 
 
 def _load_wine_do():

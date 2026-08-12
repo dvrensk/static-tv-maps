@@ -1,0 +1,44 @@
+{
+ "schema": 1,
+ "map": "gijon-calles-medio",
+ "canvas": {
+  "width_px": 4000,
+  "height_px": 2250,
+  "dpi": 100
+ },
+ "km_per_px": 0.001611,
+ "canary_inset_px": null,
+ "font": {
+  "family": "Inter",
+  "weights": {
+   "regular": 400,
+   "semibold": 600,
+   "extrabold": 800
+  }
+ },
+ "labels": [],
+ "locked": [
+  {
+   "id": "locked:footer",
+   "kind": "footer",
+   "text": "Gijón · calles principales, del mar a Ceares",
+   "bbox_px": {
+    "x0": 3112.3,
+    "y0": 2116.5,
+    "x1": 3968.0,
+    "y1": 2164.4
+   }
+  },
+  {
+   "id": "locked:attribution",
+   "kind": "attribution",
+   "text": "Datos: © OpenStreetMap",
+   "bbox_px": {
+    "x0": 3637.7,
+    "y0": 2191.0,
+    "x1": 3968.0,
+    "y1": 2222.9
+   }
+  }
+ ]
+}
