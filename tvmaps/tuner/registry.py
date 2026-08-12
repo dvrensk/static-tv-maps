@@ -24,6 +24,7 @@ class Table:
     display: str | None = None   # key -> name lookup: "ccaa" | "prov" | None
     weight: str = "extrabold"    # font weight the map draws this table with
     numbered: bool = False       # rank-badge labels (spain-ciudades)
+    size_editable: bool = True   # False where the map uses a population tier
 
 
 TABLES = {
@@ -37,7 +38,7 @@ TABLES = {
                                "Label"),
     "COMARCA_LABELS": Table("COMARCA_LABELS", "tvmaps.maps_asturias", "Label"),
     "TOWN_LABELS": Table("TOWN_LABELS", "tvmaps.maps_asturias", "Label",
-                         weight="semibold"),
+                         weight="semibold", size_editable=False),
     "RIOS_TOWN_LABELS": Table("RIOS_TOWN_LABELS", "tvmaps.maps_asturias",
                               "Label"),
     "PROV_CAPITAL_LABELS": Table("PROV_CAPITAL_LABELS", "tvmaps.maps_capitals",
@@ -120,8 +121,24 @@ def field_defaults(table_id) -> dict:
 
 
 def editable_fields(table_id) -> list:
+    skip = set(NON_EDITABLE)
+    if not TABLES[table_id].size_editable:
+        skip.add("size")
     return [f.name for f in dc_fields(factory_class(table_id))
-            if f.name not in NON_EDITABLE]
+            if f.name not in skip]
+
+
+_PROV_NAMES = None
+
+
+def _prov_names() -> dict:
+    """prov_code -> official name, for provinces without a display override."""
+    global _PROV_NAMES
+    if _PROV_NAMES is None:
+        from .. import geo
+        gdf = geo.load("provincias")
+        _PROV_NAMES = dict(zip(gdf.prov_code, gdf.prov_name))
+    return _PROV_NAMES
 
 
 def display_name(table_id, key) -> str:
@@ -130,7 +147,7 @@ def display_name(table_id, key) -> str:
     if kind == "ccaa":
         name = style.CCAA_DISPLAY.get(key, key)
     elif kind == "prov":
-        name = style.PROVINCE_DISPLAY.get(key, key)
+        name = style.PROVINCE_DISPLAY.get(key) or _prov_names().get(key, key)
     else:
         name = key
     return name.replace("\n", " ")

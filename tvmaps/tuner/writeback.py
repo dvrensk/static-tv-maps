@@ -66,37 +66,73 @@ def _normalize_commas(args):
     return out
 
 
+# Fields the files always write explicitly even when the value matches the
+# dataclass default (every PROV_LABELS entry names its group).
+KEEP_EXPLICIT = {"group"}
+
+
+def _find_arg(args, field, field_order):
+    """Index of the arg bound to `field`, mapping positionals through the
+    dataclass field order. Returns (index, is_positional) or (None, None)."""
+    pos = 0
+    for i, a in enumerate(args):
+        if a.keyword is None:
+            bound = field_order[pos]
+            pos += 1
+        else:
+            bound = a.keyword.value
+        if bound == field:
+            return i, a.keyword is None
+    return None, None
+
+
 def _edit_call(call, fields, changed, defaults, editable):
     """Update a Label(...)-style Call: rewrite only the changed fields,
-    dropping arguments that return to their dataclass default."""
+    dropping keyword arguments that return to their dataclass default."""
     args = list(call.args)
     field_order = list(defaults)
     for field in sorted(set(changed), key=field_order.index):
         if field not in editable:
             continue
         value = fields[field]
-        is_default = _values_equal(value, defaults[field])
+        is_default = (_values_equal(value, defaults[field])
+                      and field not in KEEP_EXPLICIT)
         src = _fmt_value(value)
-        if field == "size":
-            # File convention: size is the first positional argument.
-            if args and args[0].keyword is None:
-                if is_default:
-                    del args[0]
-                else:
-                    args[0] = args[0].with_changes(value=cst.parse_expression(src))
-            elif not is_default:
-                args.insert(0, _plain_arg(src))
-            continue
-        idx = next((i for i, a in enumerate(args)
-                    if a.keyword is not None and a.keyword.value == field), None)
-        if is_default:
-            if idx is not None:
+        idx, positional = _find_arg(args, field, field_order)
+        if idx is not None:
+            if is_default and not positional:
                 del args[idx]
-        elif idx is not None:
-            args[idx] = args[idx].with_changes(value=cst.parse_expression(src))
-        else:
-            args.append(_kwarg(field, src))
+            else:
+                # Positional args are rewritten in place even at the default
+                # value: removing one would shift the bindings after it.
+                args[idx] = args[idx].with_changes(value=cst.parse_expression(src))
+        elif not is_default:
+            if field == field_order[0]:
+                # First dataclass field (size in the Label family): the files
+                # pass it positionally.
+                args.insert(0, _plain_arg(src))
+            else:
+                args.append(_kwarg(field, src))
     return call.with_changes(args=_normalize_commas(args))
+
+
+_CODEGEN = cst.parse_module("")  # empty module, used for code_for_node
+
+
+def _repad_comment(el, delta):
+    """Keep a trailing same-line comment in its column when the entry's
+    rendered length changed by `delta` characters."""
+    if delta == 0 or not isinstance(el.comma, cst.Comma):
+        return el
+    ws = el.comma.whitespace_after
+    if not (isinstance(ws, cst.ParenthesizedWhitespace)
+            and ws.first_line.comment):
+        return el
+    pad = max(1, len(ws.first_line.whitespace.value) + delta)
+    return el.with_changes(comma=el.comma.with_changes(
+        whitespace_after=ws.with_changes(
+            first_line=ws.first_line.with_changes(
+                whitespace=cst.SimpleWhitespace(" " * pad)))))
 
 
 class _Transformer(cst.CSTTransformer):
@@ -123,8 +159,11 @@ class _Transformer(cst.CSTTransformer):
                 key = el.key.evaluated_value
                 if key in table_edits:
                     fields, changed = table_edits[key]
-                    el = el.with_changes(value=_edit_call(
-                        el.value, fields, changed, defaults, editable))
+                    call = _edit_call(el.value, fields, changed, defaults,
+                                      editable)
+                    delta = (len(_CODEGEN.code_for_node(el.value))
+                             - len(_CODEGEN.code_for_node(call)))
+                    el = _repad_comment(el.with_changes(value=call), delta)
             elements.append(el)
         return updated.with_changes(
             value=updated.value.with_changes(elements=elements))
@@ -135,14 +174,16 @@ def _entry_line(table_id, key, fields) -> str:
     t = registry.TABLES[table_id]
     defaults = registry.field_defaults(table_id)
     editable = registry.editable_fields(table_id)
+    field_order = list(defaults)
     args = []
-    size = fields.get("size")
-    if "size" in editable and not _values_equal(size, defaults.get("size")):
-        args.append(_fmt_value(size))
-    for field in defaults:
-        if field == "size" or field not in editable:
+    for field in field_order:
+        if field not in editable:
             continue
-        if not _values_equal(fields.get(field), defaults[field]):
+        if _values_equal(fields.get(field), defaults[field]):
+            continue
+        if field == field_order[0]:
+            args.append(_fmt_value(fields[field]))  # positional, file style
+        else:
             args.append(f"{field}={_fmt_value(fields[field])}")
     line = f'    "{key}": {t.factory}({", ".join(args)}),'
     display = registry.display_name(table_id, key)
