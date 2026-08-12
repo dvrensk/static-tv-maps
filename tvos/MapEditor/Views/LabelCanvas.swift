@@ -224,8 +224,8 @@ final class LabelCanvasView: UIView {
                                color: "#000000", ha: "center",
                                linespacing: linespacing)
         return (text as NSString).boundingRect(
-            with: CGSize(width: .greatestFiniteMagnitude,
-                         height: .greatestFiniteMagnitude),
+            with: CGSize(width: CGFloat.greatestFiniteMagnitude,
+                         height: CGFloat.greatestFiniteMagnitude),
             options: [.usesLineFragmentOrigin], attributes: attrs,
             context: nil).size
     }
