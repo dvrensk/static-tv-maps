@@ -263,29 +263,38 @@ def _town_tier(pop):
     return 14, 36
 
 
+from dataclasses import dataclass as _dataclass
+
+
+@_dataclass
+class TownLabel(Label):
+    # An explicit size overrides the population tier from _town_tier.
+    size: float | None = None
+
+
 # Text placement per town, offsets in km from the dot. Plain dx/dy places the
 # name next to the dot; tx/ty draws a leader-line callout (coastal towns point
 # into the sea; the crowded centre points into empty countryside).
 TOWN_LABELS = {
-    "Gijón": Label(dx=2, dy=3.2, ha="left"),
-    "Oviedo": Label(dy=-3.5),
-    "Avilés": Label(tx=-2, ty=9),
-    "Pola de Siero": Label(dx=2.2, ha="left"),
-    "Langreo": Label(dy=2.4),
-    "Mieres": Label(dx=-2.2, ha="right"),
-    "Piedras Blancas": Label(tx=-7, ty=8, ha="right"),
-    "Nubledo": Label(tx=-8, ty=-4, ha="right"),
-    "Sotrondio": Label(dy=2.2),
-    "Villaviciosa": Label(dx=2, ha="left"),
-    "Posada": Label(dx=2, ha="left"),
-    "Llanes": Label(dy=2.6),
-    "Pola de Laviana": Label(dy=-2.2),
-    "Cangas del Narcea": Label(dy=2.2),
-    "Luarca": Label(dy=3.6),
-    "Luanco": Label(tx=3, ty=3.5, ha="left"),
-    "Pola de Lena": Label(dy=-2.2),
-    "Candás": Label(tx=3, ty=3, ha="left"),
-    "Cabañaquinta": Label(dx=2, ha="left"),
+    "Gijón": TownLabel(dx=2, dy=3.2, ha="left"),
+    "Oviedo": TownLabel(dy=-3.5),
+    "Avilés": TownLabel(tx=-2, ty=9),
+    "Pola de Siero": TownLabel(dx=2.2, ha="left"),
+    "Langreo": TownLabel(dy=2.4),
+    "Mieres": TownLabel(dx=-2.2, ha="right"),
+    "Piedras Blancas": TownLabel(tx=-7, ty=8, ha="right"),
+    "Nubledo": TownLabel(tx=-8, ty=-4, ha="right"),
+    "Sotrondio": TownLabel(dy=2.2),
+    "Villaviciosa": TownLabel(dx=2, ha="left"),
+    "Posada": TownLabel(dx=2, ha="left"),
+    "Llanes": TownLabel(dy=2.6),
+    "Pola de Laviana": TownLabel(dy=-2.2),
+    "Cangas del Narcea": TownLabel(dy=2.2),
+    "Luarca": TownLabel(dy=3.6),
+    "Luanco": TownLabel(tx=3, ty=3.5, ha="left"),
+    "Pola de Lena": TownLabel(dy=-2.2),
+    "Candás": TownLabel(tx=3, ty=3, ha="left"),
+    "Cabañaquinta": TownLabel(dx=2, ha="left"),
 }
 
 
@@ -308,6 +317,7 @@ def map_asturias_ciudades():
         hooks.capture("TOWN_LABELS", town, town, (x, y), spec, tier_size=size)
         if hooks.SUPPRESS:
             continue
+        size = spec.size or size
         if spec.tx is not None:
             draw.callout(ax, (x, y), (x + spec.tx * KM, y + spec.ty * KM),
                          town, size, ha=spec.ha)

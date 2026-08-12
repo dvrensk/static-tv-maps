@@ -474,6 +474,7 @@ function leaveReal() {
   state.real = false;
   $("base").src = state.baseURL;
   $("overlay").classList.remove("hidden");
+  msg(state.bundle ? state.bundle.title : "");
 }
 function setField(e, field, value) {
   leaveReal();
