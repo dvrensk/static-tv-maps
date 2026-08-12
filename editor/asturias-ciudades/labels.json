@@ -1,0 +1,1297 @@
+{
+ "schema": 1,
+ "map": "asturias-ciudades",
+ "canvas": {
+  "width_px": 4000,
+  "height_px": 2250,
+  "dpi": 100
+ },
+ "km_per_px": 0.056263,
+ "canary_inset_px": null,
+ "font": {
+  "family": "Inter",
+  "weights": {
+   "regular": 400,
+   "semibold": 600,
+   "extrabold": 800
+  }
+ },
+ "labels": [
+  {
+   "id": "town:Gijón",
+   "kind": "city",
+   "text": "Gijón",
+   "anchor_px": {
+    "x": 2274.4,
+    "y": 694.0
+   },
+   "offset_km": {
+    "dx": 2,
+    "dy": 3.2
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2309.9,
+    "y": 637.1
+   },
+   "bbox_px": {
+    "x0": 2309.9,
+    "y0": 608.4,
+    "x1": 2433.9,
+    "y1": 665.9
+   },
+   "size_pt": 36,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.0
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Oviedo",
+   "kind": "city",
+   "text": "Oviedo",
+   "anchor_px": {
+    "x": 1950.0,
+    "y": 1061.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": -3.5
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1950.0,
+    "y": 1124.0
+   },
+   "bbox_px": {
+    "x0": 1864.0,
+    "y0": 1095.3,
+    "x1": 2036.0,
+    "y1": 1152.8
+   },
+   "size_pt": 36,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.0
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Avilés",
+   "kind": "city",
+   "text": "Avilés",
+   "anchor_px": {
+    "x": 1902.5,
+    "y": 660.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": -2,
+    "ty": 9
+   },
+   "text_px": {
+    "x": 1867.0,
+    "y": 500.6
+   },
+   "bbox_px": {
+    "x0": 1806.9,
+    "y0": 476.7,
+    "x1": 1927.1,
+    "y1": 658.6
+   },
+   "size_pt": 30,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.33
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1867.0,
+     "y": 500.6
+    },
+    "to_px": {
+     "x": 1902.5,
+     "y": 660.6
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Pola de Siero",
+   "kind": "city",
+   "text": "Pola de Siero",
+   "anchor_px": {
+    "x": 2261.3,
+    "y": 1003.8
+   },
+   "offset_km": {
+    "dx": 2.2,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2300.4,
+    "y": 1003.8
+   },
+   "bbox_px": {
+    "x0": 2300.4,
+    "y0": 979.8,
+    "x1": 2565.2,
+    "y1": 1027.7
+   },
+   "size_pt": 30,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.33
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Langreo",
+   "kind": "city",
+   "text": "Langreo",
+   "anchor_px": {
+    "x": 2215.9,
+    "y": 1166.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 2.4
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2215.9,
+    "y": 1124.0
+   },
+   "bbox_px": {
+    "x0": 2132.4,
+    "y0": 1100.0,
+    "x1": 2299.5,
+    "y1": 1147.9
+   },
+   "size_pt": 30,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.33
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Mieres",
+   "kind": "city",
+   "text": "Mieres",
+   "anchor_px": {
+    "x": 2086.0,
+    "y": 1267.4
+   },
+   "offset_km": {
+    "dx": -2.2,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2046.9,
+    "y": 1267.4
+   },
+   "bbox_px": {
+    "x0": 1909.8,
+    "y0": 1243.4,
+    "x1": 2046.9,
+    "y1": 1291.3
+   },
+   "size_pt": 30,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.33
+   },
+   "ha": "right",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Piedras Blancas",
+   "kind": "city",
+   "text": "Piedras Blancas",
+   "anchor_px": {
+    "x": 1826.1,
+    "y": 656.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": -7,
+    "ty": 8
+   },
+   "text_px": {
+    "x": 1701.7,
+    "y": 513.8
+   },
+   "bbox_px": {
+    "x0": 1379.7,
+    "y0": 489.9,
+    "x1": 1824.8,
+    "y1": 654.5
+   },
+   "size_pt": 30,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.33
+   },
+   "ha": "right",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1701.7,
+     "y": 513.8
+    },
+    "to_px": {
+     "x": 1826.1,
+     "y": 656.0
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Nubledo",
+   "kind": "city",
+   "text": "Nubledo",
+   "anchor_px": {
+    "x": 1975.4,
+    "y": 726.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": -8,
+    "ty": -4
+   },
+   "text_px": {
+    "x": 1833.2,
+    "y": 797.6
+   },
+   "bbox_px": {
+    "x0": 1685.2,
+    "y0": 727.4,
+    "x1": 1973.6,
+    "y1": 818.4
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.89
+   },
+   "ha": "right",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1833.2,
+     "y": 797.6
+    },
+    "to_px": {
+     "x": 1975.4,
+     "y": 726.5
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Sotrondio",
+   "kind": "city",
+   "text": "Sotrondio",
+   "anchor_px": {
+    "x": 2340.9,
+    "y": 1227.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 2.2
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2340.9,
+    "y": 1188.4
+   },
+   "bbox_px": {
+    "x0": 2254.8,
+    "y0": 1167.6,
+    "x1": 2427.0,
+    "y1": 1209.1
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.89
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Villaviciosa",
+   "kind": "city",
+   "text": "Villaviciosa",
+   "anchor_px": {
+    "x": 2598.4,
+    "y": 829.5
+   },
+   "offset_km": {
+    "dx": 2,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2634.0,
+    "y": 829.5
+   },
+   "bbox_px": {
+    "x0": 2634.0,
+    "y0": 808.8,
+    "x1": 2828.4,
+    "y1": 850.3
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.89
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Posada",
+   "kind": "city",
+   "text": "Posada",
+   "anchor_px": {
+    "x": 1996.5,
+    "y": 891.8
+   },
+   "offset_km": {
+    "dx": 2,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2032.0,
+    "y": 891.8
+   },
+   "bbox_px": {
+    "x0": 2032.0,
+    "y0": 871.1,
+    "x1": 2160.8,
+    "y1": 912.6
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.89
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Llanes",
+   "kind": "city",
+   "text": "Llanes",
+   "anchor_px": {
+    "x": 3575.4,
+    "y": 973.1
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 2.6
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3575.4,
+    "y": 926.9
+   },
+   "bbox_px": {
+    "x0": 3519.4,
+    "y0": 906.2,
+    "x1": 3631.4,
+    "y1": 947.7
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.89
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Pola de Laviana",
+   "kind": "city",
+   "text": "Pola de Laviana",
+   "anchor_px": {
+    "x": 2397.1,
+    "y": 1279.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": -2.2
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2397.1,
+    "y": 1318.1
+   },
+   "bbox_px": {
+    "x0": 2262.0,
+    "y0": 1297.4,
+    "x1": 2532.1,
+    "y1": 1338.9
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.89
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Cangas del Narcea",
+   "kind": "city",
+   "text": "Cangas del Narcea",
+   "anchor_px": {
+    "x": 943.1,
+    "y": 1492.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 2.2
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 943.1,
+    "y": 1452.9
+   },
+   "bbox_px": {
+    "x0": 779.8,
+    "y0": 1432.1,
+    "x1": 1106.4,
+    "y1": 1473.6
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.89
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Luarca",
+   "kind": "city",
+   "text": "Luarca",
+   "anchor_px": {
+    "x": 1033.2,
+    "y": 665.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 3.6
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1033.2,
+    "y": 601.6
+   },
+   "bbox_px": {
+    "x0": 975.0,
+    "y0": 580.8,
+    "x1": 1091.5,
+    "y1": 622.3
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.89
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Luanco",
+   "kind": "city",
+   "text": "Luanco",
+   "anchor_px": {
+    "x": 2087.6,
+    "y": 537.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 3,
+    "ty": 3.5
+   },
+   "text_px": {
+    "x": 2141.0,
+    "y": 475.7
+   },
+   "bbox_px": {
+    "x0": 2088.9,
+    "y0": 454.9,
+    "x1": 2268.0,
+    "y1": 536.4
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.89
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 2141.0,
+     "y": 475.7
+    },
+    "to_px": {
+     "x": 2087.6,
+     "y": 537.9
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Pola de Lena",
+   "kind": "city",
+   "text": "Pola de Lena",
+   "anchor_px": {
+    "x": 2011.2,
+    "y": 1442.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": -2.2
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2011.2,
+    "y": 1482.0
+   },
+   "bbox_px": {
+    "x0": 1899.8,
+    "y0": 1461.3,
+    "x1": 2122.6,
+    "y1": 1502.8
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.89
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Candás",
+   "kind": "city",
+   "text": "Candás",
+   "anchor_px": {
+    "x": 2119.1,
+    "y": 610.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 3,
+    "ty": 3
+   },
+   "text_px": {
+    "x": 2172.4,
+    "y": 557.3
+   },
+   "bbox_px": {
+    "x0": 2120.5,
+    "y0": 536.5,
+    "x1": 2302.4,
+    "y1": 609.2
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.89
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 2172.4,
+     "y": 557.3
+    },
+    "to_px": {
+     "x": 2119.1,
+     "y": 610.6
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "town:Cabañaquinta",
+   "kind": "city",
+   "text": "Cabañaquinta",
+   "anchor_px": {
+    "x": 2303.1,
+    "y": 1470.5
+   },
+   "offset_km": {
+    "dx": 2,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2338.6,
+    "y": 1470.5
+   },
+   "bbox_px": {
+    "x0": 2338.6,
+    "y0": 1449.8,
+    "x1": 2577.1,
+    "y1": 1491.3
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.89
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "neighbor:GALICIA",
+   "kind": "country",
+   "text": "GALICIA",
+   "anchor_px": {
+    "x": 212.8,
+    "y": 1747.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 212.8,
+    "y": 1747.8
+   },
+   "bbox_px": {
+    "x0": 90.1,
+    "y0": 1712.7,
+    "x1": 335.4,
+    "y1": 1782.9
+   },
+   "size_pt": 44,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:LEÓN",
+   "kind": "country",
+   "text": "LEÓN",
+   "anchor_px": {
+    "x": 1964.1,
+    "y": 1899.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1964.1,
+    "y": 1899.0
+   },
+   "bbox_px": {
+    "x0": 1882.1,
+    "y0": 1863.8,
+    "x1": 2046.1,
+    "y1": 1934.1
+   },
+   "size_pt": 44,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:CANTABRIA",
+   "kind": "country",
+   "text": "CANTABRIA",
+   "anchor_px": {
+    "x": 3759.9,
+    "y": 1334.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3759.9,
+    "y": 1334.5
+   },
+   "bbox_px": {
+    "x0": 3583.4,
+    "y0": 1299.4,
+    "x1": 3936.5,
+    "y1": 1369.6
+   },
+   "size_pt": 44,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:MAR CANTÁBRICO",
+   "kind": "country",
+   "text": "MAR CANTÁBRICO",
+   "anchor_px": {
+    "x": 2090.9,
+    "y": 282.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2090.9,
+    "y": 282.7
+   },
+   "bbox_px": {
+    "x0": 1761.5,
+    "y0": 241.2,
+    "x1": 2420.4,
+    "y1": 324.2
+   },
+   "size_pt": 52,
+   "weight": "semibold",
+   "color": "#7da7bf",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  }
+ ],
+ "locked": [
+  {
+   "id": "locked:footer",
+   "kind": "footer",
+   "text": "Villas y ciudades de Asturias · concejos de más de 10.000 habitantes (INE 2023)",
+   "bbox_px": {
+    "x0": 2349.6,
+    "y0": 2116.6,
+    "x1": 3968.0,
+    "y1": 2164.5
+   }
+  },
+  {
+   "id": "locked:attribution",
+   "kind": "attribution",
+   "text": "Datos: IGN España",
+   "bbox_px": {
+    "x0": 3724.0,
+    "y0": 2191.1,
+    "x1": 3968.0,
+    "y1": 2223.0
+   }
+  }
+ ]
+}

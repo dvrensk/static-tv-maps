@@ -6,8 +6,9 @@ a two-column ranked legend over the Atlantic.
 
 from dataclasses import dataclass
 
-from . import cities, draw, geo, style
-from .maps_spain import KM, _project_lonlat, spain_scene
+from . import cities, draw, geo, labeling
+from .maps_spain import spain_scene
+from .maps_spain import _draw_country_labels as _spain_country_labels
 
 LAND_FILL = "#efe8d8"        # soft parchment for every community
 LAND_EDGE = "#c6bfb1"        # light internal community borders
@@ -99,14 +100,7 @@ def _tier(pop):
 
 
 def _draw_country_labels(ax, frame):
-    fx0, fy0, fx1, fy1 = frame
-    for text, lon, lat, size, rotation in COUNTRY_LABELS:
-        x, y = _project_lonlat(lon, lat)
-        if fx0 < x < fx1 and fy0 < y < fy1:
-            t = draw.halo_text(ax, x, y, text, size, weight="semibold",
-                               color=style.NEIGHBOR_LABEL, halo_width=6,
-                               zorder=5)
-            t.set_rotation(rotation)
+    _spain_country_labels(ax, frame, labels=COUNTRY_LABELS)
 
 
 def map_spain_ciudades():
@@ -136,16 +130,17 @@ def map_spain_ciudades():
         ms, size = _tier(pop)
         draw.city_dot(ax, (x, y), size=ms, face=DOT_FACE, edge=DOT_EDGE)
         spec = CITY_LABELS[name]
-        size = spec.size or size
-        label = spec.wrap or name
-        if spec.tx is not None:
-            draw.numbered_callout(ax, (x, y), (x + spec.tx * KM, y + spec.ty * KM),
-                                  rank, label, size, ha=spec.ha, va=spec.va,
-                                  badge_face=DOT_FACE)
-        else:
-            draw.numbered_label(ax, (x + spec.dx * KM, y + spec.dy * KM), rank,
-                                label, size, ha=spec.ha, va=spec.va,
-                                badge_face=DOT_FACE)
+        is_callout = spec.tx is not None
+        labeling.emit(ax, labeling.Spec(
+            id=f"bigcity:{name}", kind="numbered", text=spec.wrap or name,
+            anchor=(x, y),
+            dx=0.0 if is_callout else spec.dx,
+            dy=0.0 if is_callout else spec.dy,
+            tx=spec.tx, ty=spec.ty, size=spec.size or size,
+            weight="extrabold", ha=spec.ha, va=spec.va,
+            badge={"number": rank, "face": DOT_FACE},
+            marker={"type": "dot", "baked": True},
+            editable=("dx", "dy", "tx", "ty", "size", "ha", "va")))
 
     # Ranking legend: two columns of 15 entries over the Atlantic, west of
     # Portugal. Long names continue on a second line (see LEGEND_WRAPS) so

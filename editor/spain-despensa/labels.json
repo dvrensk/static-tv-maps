@@ -1,0 +1,1657 @@
+{
+ "schema": 1,
+ "map": "spain-despensa",
+ "canvas": {
+  "width_px": 4000,
+  "height_px": 2250,
+  "dpi": 100
+ },
+ "km_per_px": 0.48262,
+ "canary_inset_px": {
+  "x0": 80.0,
+  "y0": 1694.4,
+  "x1": 1034.8,
+  "y1": 2171.2
+ },
+ "font": {
+  "family": "Inter",
+  "weights": {
+   "regular": 400,
+   "semibold": 600,
+   "extrabold": 800
+  }
+ },
+ "labels": [
+  {
+   "id": "zone:Guijuelo",
+   "kind": "zone",
+   "text": "Guijuelo",
+   "anchor_px": {
+    "x": 1414.6,
+    "y": 928.9
+   },
+   "offset_km": {
+    "dx": 0.7759683911055326,
+    "dy": 25.53492204597965
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1416.2,
+    "y": 876.0
+   },
+   "bbox_px": {
+    "x0": 1331.2,
+    "y0": 852.1,
+    "x1": 1501.2,
+    "y1": 900.0
+   },
+   "size_pt": 30,
+   "weight": "extrabold",
+   "color": "#8a3f1a",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.75
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Dehesa de Extremadura",
+   "kind": "zone",
+   "text": "Dehesa de\nExtremadura",
+   "anchor_px": {
+    "x": 1267.6,
+    "y": 1345.8
+   },
+   "offset_km": {
+    "dx": -3.2248169954152544,
+    "dy": -7.460782458172179
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1260.9,
+    "y": 1361.2
+   },
+   "bbox_px": {
+    "x0": 1119.2,
+    "y0": 1310.1,
+    "x1": 1402.7,
+    "y1": 1412.3
+   },
+   "size_pt": 32,
+   "weight": "extrabold",
+   "color": "#8a3f1a",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.0
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Jabugo",
+   "kind": "zone",
+   "text": "Jabugo",
+   "anchor_px": {
+    "x": 1209.2,
+    "y": 1526.2
+   },
+   "offset_km": {
+    "dx": -1.0715637301343959,
+    "dy": -27.215355538788252
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1206.9,
+    "y": 1582.6
+   },
+   "bbox_px": {
+    "x0": 1130.9,
+    "y0": 1558.6,
+    "x1": 1282.9,
+    "y1": 1606.5
+   },
+   "size_pt": 30,
+   "weight": "extrabold",
+   "color": "#8a3f1a",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.75
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Los Pedroches",
+   "kind": "zone",
+   "text": "Los Pedroches",
+   "anchor_px": {
+    "x": 1557.3,
+    "y": 1432.9
+   },
+   "offset_km": {
+    "dx": 0.5413839011064847,
+    "dy": 27.146073918289506
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1558.4,
+    "y": 1376.7
+   },
+   "bbox_px": {
+    "x0": 1419.1,
+    "y0": 1354.3,
+    "x1": 1697.6,
+    "y1": 1399.0
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#8a3f1a",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Jamón de Teruel",
+   "kind": "zone",
+   "text": "Jamón de Teruel",
+   "anchor_px": {
+    "x": 2216.9,
+    "y": 955.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2216.9,
+    "y": 955.4
+   },
+   "bbox_px": {
+    "x0": 2058.9,
+    "y0": 933.1,
+    "x1": 2374.9,
+    "y1": 977.8
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#8a3f1a",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Trevélez",
+   "kind": "zone",
+   "text": "Trevélez",
+   "anchor_px": {
+    "x": 1833.3,
+    "y": 1754.5
+   },
+   "offset_km": {
+    "dx": 22.251156770535687,
+    "dy": 19.934380409642124
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1879.4,
+    "y": 1713.2
+   },
+   "bbox_px": {
+    "x0": 1804.4,
+    "y0": 1692.4,
+    "x1": 1954.4,
+    "y1": 1733.9
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#8a3f1a",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.25
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Serón",
+   "kind": "zone",
+   "text": "Serón",
+   "anchor_px": {
+    "x": 1973.0,
+    "y": 1671.6
+   },
+   "offset_km": {
+    "dx": -0.1327434007646516,
+    "dy": 25.516901293735486
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1972.7,
+    "y": 1618.7
+   },
+   "bbox_px": {
+    "x0": 1920.7,
+    "y0": 1597.9,
+    "x1": 2024.7,
+    "y1": 1639.5
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#8a3f1a",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.25
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Jaén",
+   "kind": "zone",
+   "text": "Jaén",
+   "anchor_px": {
+    "x": 1865.7,
+    "y": 1529.2
+   },
+   "offset_km": {
+    "dx": -0.38077930914470925,
+    "dy": 3.293882576396689
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1864.9,
+    "y": 1522.4
+   },
+   "bbox_px": {
+    "x0": 1660.1,
+    "y0": 1493.6,
+    "x1": 2069.7,
+    "y1": 1589.0
+   },
+   "size_pt": 36,
+   "weight": "extrabold",
+   "color": "#5c682a",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": {
+    "text": "Cazorla · Segura · Mágina",
+    "size_pt": 24
+   },
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Baena y Priego",
+   "kind": "zone",
+   "text": "Baena y Priego",
+   "anchor_px": {
+    "x": 1652.4,
+    "y": 1628.9
+   },
+   "offset_km": {
+    "dx": -8.419340319040463,
+    "dy": -32.066573234350884
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1635.0,
+    "y": 1695.3
+   },
+   "bbox_px": {
+    "x0": 1503.9,
+    "y0": 1674.6,
+    "x1": 1766.0,
+    "y1": 1716.1
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#5c682a",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.25
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Bajo Aragón",
+   "kind": "zone",
+   "text": "Bajo Aragón",
+   "anchor_px": {
+    "x": 2362.2,
+    "y": 819.2
+   },
+   "offset_km": {
+    "dx": -0.9893464493702632,
+    "dy": 30.50324650610704
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2360.1,
+    "y": 755.9
+   },
+   "bbox_px": {
+    "x0": 2244.5,
+    "y0": 733.6,
+    "x1": 2475.7,
+    "y1": 778.3
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#5c682a",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Les Garrigues",
+   "kind": "zone",
+   "text": "Les Garrigues",
+   "anchor_px": {
+    "x": 2549.4,
+    "y": 714.2
+   },
+   "offset_km": {
+    "dx": -1.1404234682266834,
+    "dy": 25.541654616357757
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2547.1,
+    "y": 661.2
+   },
+   "bbox_px": {
+    "x0": 2424.0,
+    "y0": 640.5,
+    "x1": 2670.2,
+    "y1": 682.0
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#5c682a",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.25
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Gata-Hurdes",
+   "kind": "zone",
+   "text": "Gata-Hurdes",
+   "anchor_px": {
+    "x": 1279.9,
+    "y": 981.8
+   },
+   "offset_km": {
+    "dx": -7.5909490120401895,
+    "dy": -30.853049912726508
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1264.1,
+    "y": 1045.7
+   },
+   "bbox_px": {
+    "x0": 1150.1,
+    "y0": 1025.0,
+    "x1": 1378.2,
+    "y1": 1066.5
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#5c682a",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.25
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Montes de Toledo",
+   "kind": "zone",
+   "text": "Montes de Toledo",
+   "anchor_px": {
+    "x": 1642.3,
+    "y": 1192.8
+   },
+   "offset_km": {
+    "dx": -0.018663153228117152,
+    "dy": -0.6134857926331461
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1642.3,
+    "y": 1194.1
+   },
+   "bbox_px": {
+    "x0": 1485.4,
+    "y0": 1173.3,
+    "x1": 1799.2,
+    "y1": 1214.8
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#5c682a",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.25
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Huerta de Murcia",
+   "kind": "zone",
+   "text": "Huerta de Murcia",
+   "anchor_px": {
+    "x": 2223.3,
+    "y": 1521.3
+   },
+   "offset_km": {
+    "dx": 12.177316695859307,
+    "dy": -35.27162785729766
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2248.5,
+    "y": 1594.3
+   },
+   "bbox_px": {
+    "x0": 2083.1,
+    "y0": 1572.0,
+    "x1": 2414.0,
+    "y1": 1616.7
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#2f7332",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Cítricos",
+   "kind": "zone",
+   "text": "Cítricos",
+   "anchor_px": {
+    "x": 2371.5,
+    "y": 1177.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 61.37465839797491,
+    "ty": -5.292354777608998
+   },
+   "text_px": {
+    "x": 2498.6,
+    "y": 1188.7
+   },
+   "bbox_px": {
+    "x0": 2375.4,
+    "y0": 1164.8,
+    "x1": 2579.2,
+    "y1": 1212.7
+   },
+   "size_pt": 30,
+   "weight": "extrabold",
+   "color": "#2f7332",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.75
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 2498.6,
+     "y": 1188.7
+    },
+    "to_px": {
+     "x": 2371.5,
+     "y": 1177.7
+    },
+    "color": "#6b675f",
+    "width_pt": 2.2,
+    "shrink_from_pt": 26,
+    "shrink_to_pt": 4
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Fresas",
+   "kind": "zone",
+   "text": "Fresas",
+   "anchor_px": {
+    "x": 1148.0,
+    "y": 1673.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": -8.585182232546272,
+    "ty": -35.772080723560414
+   },
+   "text_px": {
+    "x": 1130.2,
+    "y": 1747.6
+   },
+   "bbox_px": {
+    "x0": 1067.0,
+    "y0": 1677.4,
+    "x1": 1193.4,
+    "y1": 1770.0
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#2f7332",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1130.2,
+     "y": 1747.6
+    },
+    "to_px": {
+     "x": 1148.0,
+     "y": 1673.5
+    },
+    "color": "#6b675f",
+    "width_pt": 2.2,
+    "shrink_from_pt": 26,
+    "shrink_to_pt": 4
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Espárrago y piquillo",
+   "kind": "zone",
+   "text": "Espárrago y piquillo",
+   "anchor_px": {
+    "x": 2081.5,
+    "y": 545.9
+   },
+   "offset_km": {
+    "dx": 40.136309408770295,
+    "dy": 12.852855277097785
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2164.6,
+    "y": 519.2
+   },
+   "bbox_px": {
+    "x0": 2164.6,
+    "y0": 498.5,
+    "x1": 2516.4,
+    "y1": 540.0
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#2f7332",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.25
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Pimentón de la Vera",
+   "kind": "zone",
+   "text": "Pimentón de la Vera",
+   "anchor_px": {
+    "x": 1406.1,
+    "y": 1035.7
+   },
+   "offset_km": {
+    "dx": 3.5297658028682344,
+    "dy": -25.124777875353583
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1413.4,
+    "y": 1087.7
+   },
+   "bbox_px": {
+    "x0": 1238.6,
+    "y0": 1067.0,
+    "x1": 1588.2,
+    "y1": 1108.5
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#2f7332",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.25
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Azafrán",
+   "kind": "zone",
+   "text": "Azafrán",
+   "anchor_px": {
+    "x": 1781.4,
+    "y": 1188.7
+   },
+   "offset_km": {
+    "dx": 0.16175506312132348,
+    "dy": 25.52607240821328
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1781.8,
+    "y": 1135.8
+   },
+   "bbox_px": {
+    "x0": 1710.1,
+    "y0": 1115.0,
+    "x1": 1853.4,
+    "y1": 1156.5
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#2f7332",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.25
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Sidra",
+   "kind": "zone",
+   "text": "Sidra",
+   "anchor_px": {
+    "x": 1454.9,
+    "y": 268.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 5.250522448468138,
+    "ty": 32.81143636370636
+   },
+   "text_px": {
+    "x": 1465.8,
+    "y": 200.4
+   },
+   "bbox_px": {
+    "x0": 1416.7,
+    "y0": 178.1,
+    "x1": 1514.9,
+    "y1": 264.5
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#2f7332",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1465.8,
+     "y": 200.4
+    },
+    "to_px": {
+     "x": 1454.9,
+     "y": 268.4
+    },
+    "color": "#6b675f",
+    "width_pt": 2.2,
+    "shrink_from_pt": 26,
+    "shrink_to_pt": 4
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Invernaderos de Almería",
+   "kind": "zone",
+   "text": "Invernaderos de Almería",
+   "anchor_px": {
+    "x": 1923.4,
+    "y": 1800.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 34.29568640716927,
+    "ty": -37.44701174875442
+   },
+   "text_px": {
+    "x": 1994.5,
+    "y": 1878.3
+   },
+   "bbox_px": {
+    "x0": 1761.1,
+    "y0": 1803.7,
+    "x1": 2227.9,
+    "y1": 1940.0
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#5f6870",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1994.5,
+     "y": 1878.3
+    },
+    "to_px": {
+     "x": 1923.4,
+     "y": 1800.7
+    },
+    "color": "#6b675f",
+    "width_pt": 2.2,
+    "shrink_from_pt": 26,
+    "shrink_to_pt": 4
+   },
+   "sub": {
+    "text": "el «mar de plástico»",
+    "size_pt": 24
+   },
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Queso manchego",
+   "kind": "zone",
+   "text": "Queso manchego",
+   "anchor_px": {
+    "x": 1972.5,
+    "y": 1246.2
+   },
+   "offset_km": {
+    "dx": 1.1641532182693482e-13,
+    "dy": -1.862645149230957e-12
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1972.5,
+    "y": 1246.2
+   },
+   "bbox_px": {
+    "x0": 1794.5,
+    "y0": 1222.3,
+    "x1": 2150.5,
+    "y1": 1270.2
+   },
+   "size_pt": 30,
+   "weight": "extrabold",
+   "color": "#8f6c12",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.75
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Cabrales",
+   "kind": "zone",
+   "text": "Cabrales",
+   "anchor_px": {
+    "x": 1571.9,
+    "y": 311.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 36.62365776106872,
+    "ty": 4.842694518735632
+   },
+   "text_px": {
+    "x": 1647.8,
+    "y": 301.4
+   },
+   "bbox_px": {
+    "x0": 1575.9,
+    "y0": 280.6,
+    "x1": 1805.1,
+    "y1": 322.2
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#8f6c12",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.25
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1647.8,
+     "y": 301.4
+    },
+    "to_px": {
+     "x": 1571.9,
+     "y": 311.4
+    },
+    "color": "#6b675f",
+    "width_pt": 2.2,
+    "shrink_from_pt": 26,
+    "shrink_to_pt": 4
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Idiazabal",
+   "kind": "zone",
+   "text": "Idiazabal",
+   "anchor_px": {
+    "x": 2009.7,
+    "y": 371.8
+   },
+   "offset_km": {
+    "dx": 0.21766060217376798,
+    "dy": -24.430312591264023
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2010.2,
+    "y": 422.5
+   },
+   "bbox_px": {
+    "x0": 1930.0,
+    "y0": 401.7,
+    "x1": 2090.4,
+    "y1": 443.2
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#8f6c12",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.25
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Marisco de las rías",
+   "kind": "zone",
+   "text": "Marisco\nde las rías",
+   "anchor_px": {
+    "x": 873.0,
+    "y": 469.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": -77.28034265461183,
+    "ty": -8.141156514492817
+   },
+   "text_px": {
+    "x": 712.9,
+    "y": 486.3
+   },
+   "bbox_px": {
+    "x0": 609.8,
+    "y0": 438.4,
+    "x1": 869.0,
+    "y1": 534.2
+   },
+   "size_pt": 30,
+   "weight": "extrabold",
+   "color": "#2c6491",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.75
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 712.9,
+     "y": 486.3
+    },
+    "to_px": {
+     "x": 873.0,
+     "y": 469.4
+    },
+    "color": "#6b675f",
+    "width_pt": 2.2,
+    "shrink_from_pt": 26,
+    "shrink_to_pt": 4
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "zone:Plátano de Canarias",
+   "kind": "zone",
+   "text": "Plátano de Canarias",
+   "anchor_px": {
+    "x": 393.0,
+    "y": 1970.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": -13.362165924536791,
+    "ty": -46.158447355926036
+   },
+   "text_px": {
+    "x": 365.3,
+    "y": 2066.4
+   },
+   "bbox_px": {
+    "x0": 192.7,
+    "y0": 1974.6,
+    "x1": 537.9,
+    "y1": 2086.4
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#2f7332",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 365.3,
+     "y": 2066.4
+    },
+    "to_px": {
+     "x": 393.0,
+     "y": 1970.8
+    },
+    "color": "#6b675f",
+    "width_pt": 2.0,
+    "shrink_from_pt": 22,
+    "shrink_to_pt": 4
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": true,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "rotation"
+   ]
+  },
+  {
+   "id": "country:PORTUGAL",
+   "kind": "country",
+   "text": "PORTUGAL",
+   "anchor_px": {
+    "x": 983.8,
+    "y": 1140.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 983.8,
+    "y": 1140.7
+   },
+   "bbox_px": {
+    "x0": 947.1,
+    "y0": 964.6,
+    "x1": 1020.5,
+    "y1": 1316.8
+   },
+   "size_pt": 46,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 90,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "country:FRANCIA",
+   "kind": "country",
+   "text": "FRANCIA",
+   "anchor_px": {
+    "x": 2665.8,
+    "y": 154.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2665.8,
+    "y": 154.5
+   },
+   "bbox_px": {
+    "x0": 2522.8,
+    "y0": 117.8,
+    "x1": 2808.8,
+    "y1": 191.3
+   },
+   "size_pt": 46,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "country:MARRUECOS",
+   "kind": "country",
+   "text": "MARRUECOS",
+   "anchor_px": {
+    "x": 1523.9,
+    "y": 2203.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1523.9,
+    "y": 2203.9
+   },
+   "bbox_px": {
+    "x0": 1361.4,
+    "y0": 2175.1,
+    "x1": 1686.4,
+    "y1": 2232.6
+   },
+   "size_pt": 36,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  }
+ ],
+ "locked": [
+  {
+   "id": "locked:inset-caption",
+   "kind": "inset-caption",
+   "text": "Canarias",
+   "bbox_px": {
+    "x0": 434.3,
+    "y0": 1703.9,
+    "x1": 680.4,
+    "y1": 1767.8
+   }
+  },
+  {
+   "id": "locked:swatch:0",
+   "kind": "swatch",
+   "text": "Jamón",
+   "bbox_px": {
+    "x0": 101.5,
+    "y0": 832.6,
+    "x1": 293.0,
+    "y1": 877.4
+   }
+  },
+  {
+   "id": "locked:swatch:1",
+   "kind": "swatch",
+   "text": "Aceite de oliva",
+   "bbox_px": {
+    "x0": 101.5,
+    "y0": 892.9,
+    "x1": 445.7,
+    "y1": 937.6
+   }
+  },
+  {
+   "id": "locked:swatch:2",
+   "kind": "swatch",
+   "text": "Huerta, fruta y especias",
+   "bbox_px": {
+    "x0": 101.5,
+    "y0": 953.2,
+    "x1": 622.3,
+    "y1": 997.9
+   }
+  },
+  {
+   "id": "locked:swatch:3",
+   "kind": "swatch",
+   "text": "Invernaderos",
+   "bbox_px": {
+    "x0": 101.5,
+    "y0": 1013.5,
+    "x1": 418.2,
+    "y1": 1058.2
+   }
+  },
+  {
+   "id": "locked:swatch:4",
+   "kind": "swatch",
+   "text": "Queso",
+   "bbox_px": {
+    "x0": 101.5,
+    "y0": 1073.8,
+    "x1": 288.0,
+    "y1": 1118.5
+   }
+  },
+  {
+   "id": "locked:swatch:5",
+   "kind": "swatch",
+   "text": "Marisco",
+   "bbox_px": {
+    "x0": 101.5,
+    "y0": 1134.0,
+    "x1": 316.3,
+    "y1": 1178.7
+   }
+  },
+  {
+   "id": "locked:footer",
+   "kind": "footer",
+   "text": "La despensa de España · jamón, aceite, huerta, queso y marisco (DOP/IGP)",
+   "bbox_px": {
+    "x0": 2453.4,
+    "y0": 2116.6,
+    "x1": 3968.0,
+    "y1": 2164.5
+   }
+  },
+  {
+   "id": "locked:attribution",
+   "kind": "attribution",
+   "text": "Datos: IGN España · Natural Earth · MAPA (DOP/IGP), zonas aproximadas",
+   "bbox_px": {
+    "x0": 3015.1,
+    "y0": 2191.1,
+    "x1": 3968.0,
+    "y1": 2223.0
+   }
+  }
+ ]
+}

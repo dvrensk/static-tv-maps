@@ -106,8 +106,11 @@ def _neighbor_labels(ax, frame):
         x, y = _project_lonlat(lon, lat)
         if fx0 < x < fx1 and fy0 < y < fy1:
             color = "#7da7bf" if text.startswith("MAR") else style.NEIGHBOR_LABEL
-            draw.halo_text(ax, x, y, text, size, weight="semibold",
-                           color=color, halo_width=6, zorder=5)
+            labeling.emit(ax, labeling.Spec(
+                id=f"neighbor:{text}", kind="country", text=text,
+                anchor=(x, y), size=size, weight="semibold", color=color,
+                halo_width=6, zorder=5,
+                editable=("dx", "dy", "size", "rotation")))
 
 
 def map_asturias_concejos(group=None):
@@ -287,12 +290,13 @@ def render_asturias_ciudades():
         ms, size = _town_tier(pop)
         draw.city_dot(ax, (x, y), size=ms, face=TOWN_COLOR, zorder=8)
         spec = TOWN_LABELS[town]
-        if spec.tx is not None:
-            draw.callout(ax, (x, y), (x + spec.tx * KM, y + spec.ty * KM),
-                         town, size, ha=spec.ha)
-        else:
-            draw.halo_text(ax, x + spec.dx * KM, y + spec.dy * KM, town, size,
-                           ha=spec.ha)
+        # The tier decides the size; TOWN_LABELS sizes are ignored on purpose.
+        labeling.emit(ax, labeling.Spec(
+            id=f"town:{town}", kind="city", text=town, anchor=(x, y),
+            dx=spec.dx, dy=spec.dy, tx=spec.tx, ty=spec.ty, size=size,
+            weight="semibold", ha=spec.ha,
+            marker={"type": "dot", "baked": True},
+            editable=("dx", "dy", "tx", "ty", "size", "ha", "va")))
 
     _neighbor_labels(ax, s["frame"])
     draw.draw_footer(ax, s["frame"],
@@ -470,21 +474,25 @@ def render_asturias_rios():
         x, y = _project_lonlat(lon, lat)
         draw.city_dot(ax, (x, y), size=13, face="#3a3733", zorder=9)
         spec = RIOS_TOWN_LABELS[town]
-        if spec.tx is not None:
-            draw.callout(ax, (x, y), (x + spec.tx * KM, y + spec.ty * KM),
-                         town, spec.size, ha=spec.ha)
-        else:
-            draw.halo_text(ax, x + spec.dx * KM, y + spec.dy * KM, town,
-                           spec.size, weight="extrabold", ha=spec.ha)
+        # Historical quirk kept for parity: these towns render extrabold as
+        # plain labels but semibold as callouts.
+        labeling.emit(ax, labeling.Spec(
+            id=f"rtown:{town}", kind="city", text=town, anchor=(x, y),
+            dx=spec.dx, dy=spec.dy, tx=spec.tx, ty=spec.ty, size=spec.size,
+            weight="extrabold", weight_callout="semibold", ha=spec.ha,
+            marker={"type": "dot", "baked": True},
+            editable=("dx", "dy", "tx", "ty", "size", "ha", "va")))
 
     # River names, in blue, running along each course.
     for name, spec in ASTURIAS_RIOS.items():
         x, y = _project_lonlat(spec.lon, spec.lat)
         color = RIVER if spec.main else RIVER_TRIB
-        t = draw.halo_text(ax, x, y, name, spec.size, weight="semibold",
-                           color=color, halo=CONCEJO_MUTED, halo_width=6,
-                           zorder=8)
-        t.set_rotation(spec.rotation)
+        labeling.emit(ax, labeling.Spec(
+            id=f"river:{name}", kind="river", text=name, anchor=(x, y),
+            size=spec.size, weight="semibold", color=color,
+            halo=CONCEJO_MUTED, halo_width=6, zorder=8,
+            rotation=spec.rotation,
+            editable=("dx", "dy", "size", "rotation")))
 
     _neighbor_labels(ax, s["frame"])
     draw.draw_footer(ax, s["frame"], "Ríos de Asturias")

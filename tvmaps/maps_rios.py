@@ -12,7 +12,7 @@ from dataclasses import dataclass
 
 import geopandas as gpd
 
-from . import cities, draw, geo
+from . import cities, draw, geo, labeling
 from .maps_fisica import (COAST, HAND_RANGES, LAND, LAND_EDGE, RANGE_ALPHA,
                           RANGE_FILL, RIVER, RIVER_FAINT, _project_line,
                           _spain_union)
@@ -127,9 +127,11 @@ def _label_rivers(ax, specs):
     for name, spec in specs.items():
         x, y = _project_lonlat(spec.lon, spec.lat)
         color = RIVER if spec.main else RIVER_TRIB
-        t = draw.halo_text(ax, x, y, name, spec.size, weight="semibold",
-                           color=color, halo=LAND, halo_width=5, zorder=8)
-        t.set_rotation(spec.rotation)
+        labeling.emit(ax, labeling.Spec(
+            id=f"river:{name}", kind="river", text=name, anchor=(x, y),
+            size=spec.size, weight="semibold", color=color, halo=LAND,
+            halo_width=5, zorder=8, rotation=spec.rotation,
+            editable=("dx", "dy", "size", "rotation")))
 
 
 def map_spain_rios():
@@ -155,10 +157,12 @@ def map_spain_rios():
     from .maps_fisica import RANGE_LABEL
     for r in RANGE_LABELS_RIOS:
         x, y = _project_lonlat(r.lon, r.lat)
-        t = draw.halo_text(ax, x, y, r.text, r.size, weight="extrabold",
-                           color=RANGE_LABEL, halo=LAND, halo_width=5,
-                           zorder=7)
-        t.set_rotation(r.rotation)
+        labeling.emit(ax, labeling.Spec(
+            id=f"range:{r.text.replace(chr(10), ' ')}", kind="range",
+            text=r.text, anchor=(x, y), size=r.size, weight="extrabold",
+            color=RANGE_LABEL, halo=LAND, halo_width=5, zorder=7,
+            rotation=r.rotation,
+            editable=("dx", "dy", "size", "rotation")))
 
     _draw_country_labels(ax, s["frame"])
     draw.draw_footer(ax, s["frame"], "Los ríos de España y sus montañas")
@@ -302,9 +306,11 @@ def map_spain_rios_ciudades():
     for key, spec in CIUDADES.items():
         x, y = pts[key]
         draw.city_dot(ax, (x, y), size=14, zorder=9)
-        draw.halo_text(ax, x + spec.dx * KM, y + spec.dy * KM, key,
-                       spec.size, weight="extrabold", va="center",
-                       ha=spec.ha, zorder=10)
+        labeling.emit(ax, labeling.Spec(
+            id=f"rcity:{key}", kind="city", text=key, anchor=(x, y),
+            dx=spec.dx, dy=spec.dy, size=spec.size, weight="extrabold",
+            ha=spec.ha, zorder=10, marker={"type": "dot", "baked": True},
+            editable=("dx", "dy", "tx", "ty", "size", "ha", "va")))
 
     _draw_country_labels(ax, s["frame"])
     draw.draw_footer(ax, s["frame"], "Ríos y las ciudades que bañan")

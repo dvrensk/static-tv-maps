@@ -1,0 +1,1027 @@
+{
+ "schema": 1,
+ "map": "spain-fisica",
+ "canvas": {
+  "width_px": 4000,
+  "height_px": 2250,
+  "dpi": 100
+ },
+ "km_per_px": 0.48262,
+ "canary_inset_px": {
+  "x0": 80.0,
+  "y0": 1694.4,
+  "x1": 1034.8,
+  "y1": 2171.2
+ },
+ "font": {
+  "family": "Inter",
+  "weights": {
+   "regular": 400,
+   "semibold": 600,
+   "extrabold": 800
+  }
+ },
+ "labels": [
+  {
+   "id": "river:Miño",
+   "kind": "river",
+   "text": "Miño",
+   "anchor_px": {
+    "x": 1063.0,
+    "y": 364.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1063.0,
+    "y": 364.8
+   },
+   "bbox_px": {
+    "x0": 1023.4,
+    "y0": 309.7,
+    "x1": 1102.6,
+    "y1": 420.0
+   },
+   "size_pt": 30,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -70,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Duero",
+   "kind": "river",
+   "text": "Duero",
+   "anchor_px": {
+    "x": 1701.3,
+    "y": 734.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1701.3,
+    "y": 734.8
+   },
+   "bbox_px": {
+    "x0": 1637.5,
+    "y0": 704.6,
+    "x1": 1765.0,
+    "y1": 765.0
+   },
+   "size_pt": 30,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -6,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Ebro",
+   "kind": "river",
+   "text": "Ebro",
+   "anchor_px": {
+    "x": 2045.3,
+    "y": 528.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2045.3,
+    "y": 528.0
+   },
+   "bbox_px": {
+    "x0": 1993.8,
+    "y0": 480.4,
+    "x1": 2096.7,
+    "y1": 575.5
+   },
+   "size_pt": 30,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -38,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Tajo",
+   "kind": "river",
+   "text": "Tajo",
+   "anchor_px": {
+    "x": 1421.3,
+    "y": 1120.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1421.3,
+    "y": 1120.2
+   },
+   "bbox_px": {
+    "x0": 1376.6,
+    "y0": 1091.9,
+    "x1": 1466.1,
+    "y1": 1148.5
+   },
+   "size_pt": 30,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -6,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Guadiana",
+   "kind": "river",
+   "text": "Guadiana",
+   "anchor_px": {
+    "x": 1326.6,
+    "y": 1287.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1326.6,
+    "y": 1287.6
+   },
+   "bbox_px": {
+    "x0": 1229.4,
+    "y0": 1255.4,
+    "x1": 1423.9,
+    "y1": 1319.8
+   },
+   "size_pt": 30,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -5,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Guadalquivir",
+   "kind": "river",
+   "text": "Guadalquivir",
+   "anchor_px": {
+    "x": 1463.0,
+    "y": 1581.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1463.0,
+    "y": 1581.6
+   },
+   "bbox_px": {
+    "x0": 1337.4,
+    "y0": 1506.0,
+    "x1": 1588.7,
+    "y1": 1657.2
+   },
+   "size_pt": 30,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -25,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Genil",
+   "kind": "river",
+   "text": "Genil",
+   "anchor_px": {
+    "x": 1635.1,
+    "y": 1686.1
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1635.1,
+    "y": 1686.1
+   },
+   "bbox_px": {
+    "x0": 1581.6,
+    "y0": 1652.5,
+    "x1": 1688.5,
+    "y1": 1719.8
+   },
+   "size_pt": 28,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 14,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Segura",
+   "kind": "river",
+   "text": "Segura",
+   "anchor_px": {
+    "x": 2109.8,
+    "y": 1474.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2109.8,
+    "y": 1474.9
+   },
+   "bbox_px": {
+    "x0": 2039.1,
+    "y0": 1443.2,
+    "x1": 2180.6,
+    "y1": 1506.5
+   },
+   "size_pt": 28,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -8,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Júcar",
+   "kind": "river",
+   "text": "Júcar",
+   "anchor_px": {
+    "x": 2159.8,
+    "y": 1209.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2159.8,
+    "y": 1209.6
+   },
+   "bbox_px": {
+    "x0": 2102.1,
+    "y0": 1176.5,
+    "x1": 2217.4,
+    "y1": 1242.7
+   },
+   "size_pt": 28,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -12,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Turia",
+   "kind": "river",
+   "text": "Turia",
+   "anchor_px": {
+    "x": 2234.6,
+    "y": 1120.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2234.6,
+    "y": 1120.7
+   },
+   "bbox_px": {
+    "x0": 2186.2,
+    "y0": 1069.1,
+    "x1": 2283.1,
+    "y1": 1172.4
+   },
+   "size_pt": 28,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -50,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "range:CORDILLERA CANTÁBRICA",
+   "kind": "range",
+   "text": "CORDILLERA CANTÁBRICA",
+   "anchor_px": {
+    "x": 1469.8,
+    "y": 348.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1469.8,
+    "y": 348.0
+   },
+   "bbox_px": {
+    "x0": 1153.1,
+    "y0": 309.8,
+    "x1": 1786.5,
+    "y1": 386.1
+   },
+   "size_pt": 34,
+   "weight": "extrabold",
+   "color": "#7a5c3d",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 2,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "range:PIRINEOS",
+   "kind": "range",
+   "text": "PIRINEOS",
+   "anchor_px": {
+    "x": 2486.2,
+    "y": 444.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2486.2,
+    "y": 444.9
+   },
+   "bbox_px": {
+    "x0": 2360.9,
+    "y0": 406.0,
+    "x1": 2611.5,
+    "y1": 483.7
+   },
+   "size_pt": 38,
+   "weight": "extrabold",
+   "color": "#7a5c3d",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -4,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "range:MACIZO GALAICO",
+   "kind": "range",
+   "text": "MACIZO\nGALAICO",
+   "anchor_px": {
+    "x": 1209.2,
+    "y": 499.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1209.2,
+    "y": 499.4
+   },
+   "bbox_px": {
+    "x0": 1112.5,
+    "y0": 451.5,
+    "x1": 1306.0,
+    "y1": 547.3
+   },
+   "size_pt": 30,
+   "weight": "extrabold",
+   "color": "#7a5c3d",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "range:SISTEMA CENTRAL",
+   "kind": "range",
+   "text": "SISTEMA CENTRAL",
+   "anchor_px": {
+    "x": 1558.8,
+    "y": 916.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1558.8,
+    "y": 916.5
+   },
+   "bbox_px": {
+    "x0": 1330.7,
+    "y0": 823.2,
+    "x1": 1787.0,
+    "y1": 1009.8
+   },
+   "size_pt": 34,
+   "weight": "extrabold",
+   "color": "#7a5c3d",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 17,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "range:SISTEMA IBÉRICO",
+   "kind": "range",
+   "text": "SISTEMA IBÉRICO",
+   "anchor_px": {
+    "x": 2104.8,
+    "y": 743.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2104.8,
+    "y": 743.5
+   },
+   "bbox_px": {
+    "x0": 1981.7,
+    "y0": 544.2,
+    "x1": 2228.0,
+    "y1": 942.8
+   },
+   "size_pt": 34,
+   "weight": "extrabold",
+   "color": "#7a5c3d",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -62,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "range:MONTES DE TOLEDO",
+   "kind": "range",
+   "text": "MONTES DE TOLEDO",
+   "anchor_px": {
+    "x": 1597.9,
+    "y": 1181.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1597.9,
+    "y": 1181.9
+   },
+   "bbox_px": {
+    "x0": 1383.1,
+    "y0": 1146.8,
+    "x1": 1812.7,
+    "y1": 1217.0
+   },
+   "size_pt": 30,
+   "weight": "extrabold",
+   "color": "#7a5c3d",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -3,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "range:SIERRA MORENA",
+   "kind": "range",
+   "text": "SIERRA MORENA",
+   "anchor_px": {
+    "x": 1521.3,
+    "y": 1421.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1521.3,
+    "y": 1421.9
+   },
+   "bbox_px": {
+    "x0": 1320.1,
+    "y0": 1384.3,
+    "x1": 1722.4,
+    "y1": 1459.5
+   },
+   "size_pt": 34,
+   "weight": "extrabold",
+   "color": "#7a5c3d",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 3,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "range:SISTEMAS BÉTICOS",
+   "kind": "range",
+   "text": "SISTEMAS BÉTICOS",
+   "anchor_px": {
+    "x": 1772.7,
+    "y": 1710.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1772.7,
+    "y": 1710.5
+   },
+   "bbox_px": {
+    "x0": 1535.5,
+    "y0": 1634.8,
+    "x1": 2010.0,
+    "y1": 1786.3
+   },
+   "size_pt": 34,
+   "weight": "extrabold",
+   "color": "#7a5c3d",
+   "halo": {
+    "color": "#efe8d8",
+    "width_pt": 5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 12,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "country:PORTUGAL",
+   "kind": "country",
+   "text": "PORTUGAL",
+   "anchor_px": {
+    "x": 983.8,
+    "y": 1140.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 983.8,
+    "y": 1140.7
+   },
+   "bbox_px": {
+    "x0": 947.1,
+    "y0": 964.6,
+    "x1": 1020.5,
+    "y1": 1316.8
+   },
+   "size_pt": 46,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 90,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "country:FRANCIA",
+   "kind": "country",
+   "text": "FRANCIA",
+   "anchor_px": {
+    "x": 2665.8,
+    "y": 154.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2665.8,
+    "y": 154.5
+   },
+   "bbox_px": {
+    "x0": 2522.8,
+    "y0": 117.8,
+    "x1": 2808.8,
+    "y1": 191.3
+   },
+   "size_pt": 46,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "country:MARRUECOS",
+   "kind": "country",
+   "text": "MARRUECOS",
+   "anchor_px": {
+    "x": 1523.9,
+    "y": 2203.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1523.9,
+    "y": 2203.9
+   },
+   "bbox_px": {
+    "x0": 1361.4,
+    "y0": 2175.1,
+    "x1": 1686.4,
+    "y1": 2232.6
+   },
+   "size_pt": 36,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  }
+ ],
+ "locked": [
+  {
+   "id": "locked:inset-caption",
+   "kind": "inset-caption",
+   "text": "Canarias",
+   "bbox_px": {
+    "x0": 434.3,
+    "y0": 1703.9,
+    "x1": 680.4,
+    "y1": 1767.8
+   }
+  },
+  {
+   "id": "locked:footer",
+   "kind": "footer",
+   "text": "Ríos y montañas principales de España",
+   "bbox_px": {
+    "x0": 3176.7,
+    "y0": 2116.6,
+    "x1": 3968.0,
+    "y1": 2164.5
+   }
+  },
+  {
+   "id": "locked:attribution",
+   "kind": "attribution",
+   "text": "Datos: IGN España · Natural Earth",
+   "bbox_px": {
+    "x0": 3530.6,
+    "y0": 2191.1,
+    "x1": 3968.0,
+    "y1": 2223.0
+   }
+  }
+ ]
+}

@@ -1,0 +1,3299 @@
+{
+ "schema": 1,
+ "map": "spain-provincias-numeros",
+ "canvas": {
+  "width_px": 4000,
+  "height_px": 2250,
+  "dpi": 100
+ },
+ "km_per_px": 0.48262,
+ "canary_inset_px": {
+  "x0": 80.0,
+  "y0": 1694.4,
+  "x1": 1034.8,
+  "y1": 2171.2
+ },
+ "font": {
+  "family": "Inter",
+  "weights": {
+   "regular": 400,
+   "semibold": 600,
+   "extrabold": 800
+  }
+ },
+ "labels": [
+  {
+   "id": "provnum:01",
+   "kind": "region",
+   "text": "01",
+   "anchor_px": {
+    "x": 1916.8,
+    "y": 392.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1916.8,
+    "y": 392.8
+   },
+   "bbox_px": {
+    "x0": 1887.8,
+    "y0": 364.0,
+    "x1": 1945.8,
+    "y1": 421.5
+   },
+   "size_pt": 36,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.0
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:02",
+   "kind": "region",
+   "text": "02",
+   "anchor_px": {
+    "x": 2053.7,
+    "y": 1338.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2053.7,
+    "y": 1338.3
+   },
+   "bbox_px": {
+    "x0": 2010.7,
+    "y0": 1301.6,
+    "x1": 2096.7,
+    "y1": 1375.0
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:03",
+   "kind": "region",
+   "text": "03",
+   "anchor_px": {
+    "x": 2293.3,
+    "y": 1408.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2293.3,
+    "y": 1408.8
+   },
+   "bbox_px": {
+    "x0": 2249.8,
+    "y0": 1372.1,
+    "x1": 2336.8,
+    "y1": 1445.5
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:04",
+   "kind": "region",
+   "text": "04",
+   "anchor_px": {
+    "x": 2021.3,
+    "y": 1711.1
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2021.3,
+    "y": 1711.1
+   },
+   "bbox_px": {
+    "x0": 1976.8,
+    "y0": 1674.4,
+    "x1": 2065.8,
+    "y1": 1747.9
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:05",
+   "kind": "region",
+   "text": "05",
+   "anchor_px": {
+    "x": 1560.0,
+    "y": 921.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1560.0,
+    "y": 921.3
+   },
+   "bbox_px": {
+    "x0": 1517.0,
+    "y0": 884.6,
+    "x1": 1603.0,
+    "y1": 958.0
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:06",
+   "kind": "region",
+   "text": "06",
+   "anchor_px": {
+    "x": 1268.9,
+    "y": 1379.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1268.9,
+    "y": 1379.6
+   },
+   "bbox_px": {
+    "x0": 1224.9,
+    "y0": 1342.9,
+    "x1": 1312.9,
+    "y1": 1416.3
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:07",
+   "kind": "region",
+   "text": "07",
+   "anchor_px": {
+    "x": 2954.5,
+    "y": 1125.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2954.5,
+    "y": 1125.0
+   },
+   "bbox_px": {
+    "x0": 2919.5,
+    "y0": 1093.0,
+    "x1": 2989.4,
+    "y1": 1156.9
+   },
+   "size_pt": 40,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.44
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:08",
+   "kind": "region",
+   "text": "08",
+   "anchor_px": {
+    "x": 2731.3,
+    "y": 670.1
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2731.3,
+    "y": 670.1
+   },
+   "bbox_px": {
+    "x0": 2687.3,
+    "y0": 633.4,
+    "x1": 2775.3,
+    "y1": 706.9
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:09",
+   "kind": "region",
+   "text": "09",
+   "anchor_px": {
+    "x": 1773.5,
+    "y": 507.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1773.5,
+    "y": 507.0
+   },
+   "bbox_px": {
+    "x0": 1729.5,
+    "y0": 470.3,
+    "x1": 1817.5,
+    "y1": 543.8
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:10",
+   "kind": "region",
+   "text": "10",
+   "anchor_px": {
+    "x": 1324.9,
+    "y": 1113.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1324.9,
+    "y": 1113.2
+   },
+   "bbox_px": {
+    "x0": 1287.9,
+    "y0": 1076.5,
+    "x1": 1361.9,
+    "y1": 1149.9
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:11",
+   "kind": "region",
+   "text": "11",
+   "anchor_px": {
+    "x": 1346.3,
+    "y": 1837.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1346.3,
+    "y": 1837.3
+   },
+   "bbox_px": {
+    "x0": 1317.3,
+    "y0": 1800.5,
+    "x1": 1375.3,
+    "y1": 1874.0
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:12",
+   "kind": "region",
+   "text": "12",
+   "anchor_px": {
+    "x": 2419.0,
+    "y": 952.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2419.0,
+    "y": 952.7
+   },
+   "bbox_px": {
+    "x0": 2384.0,
+    "y0": 916.0,
+    "x1": 2454.0,
+    "y1": 989.5
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:13",
+   "kind": "region",
+   "text": "13",
+   "anchor_px": {
+    "x": 1668.6,
+    "y": 1322.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1668.6,
+    "y": 1322.3
+   },
+   "bbox_px": {
+    "x0": 1633.1,
+    "y0": 1285.6,
+    "x1": 1704.1,
+    "y1": 1359.0
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:14",
+   "kind": "region",
+   "text": "14",
+   "anchor_px": {
+    "x": 1532.8,
+    "y": 1486.1
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1532.8,
+    "y": 1486.1
+   },
+   "bbox_px": {
+    "x0": 1496.3,
+    "y0": 1449.4,
+    "x1": 1569.3,
+    "y1": 1522.8
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:15",
+   "kind": "region",
+   "text": "15",
+   "anchor_px": {
+    "x": 934.9,
+    "y": 334.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 934.9,
+    "y": 334.6
+   },
+   "bbox_px": {
+    "x0": 899.9,
+    "y0": 297.9,
+    "x1": 969.9,
+    "y1": 371.3
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:16",
+   "kind": "region",
+   "text": "16",
+   "anchor_px": {
+    "x": 2019.7,
+    "y": 1084.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2019.7,
+    "y": 1084.9
+   },
+   "bbox_px": {
+    "x0": 1983.7,
+    "y0": 1048.2,
+    "x1": 2055.7,
+    "y1": 1121.6
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:17",
+   "kind": "region",
+   "text": "17",
+   "anchor_px": {
+    "x": 2883.2,
+    "y": 572.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2883.2,
+    "y": 572.0
+   },
+   "bbox_px": {
+    "x0": 2850.2,
+    "y0": 535.3,
+    "x1": 2916.2,
+    "y1": 608.7
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:18",
+   "kind": "region",
+   "text": "18",
+   "anchor_px": {
+    "x": 1792.1,
+    "y": 1721.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1792.1,
+    "y": 1721.9
+   },
+   "bbox_px": {
+    "x0": 1756.1,
+    "y0": 1685.1,
+    "x1": 1828.1,
+    "y1": 1758.6
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:19",
+   "kind": "region",
+   "text": "19",
+   "anchor_px": {
+    "x": 1905.4,
+    "y": 871.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1905.4,
+    "y": 871.8
+   },
+   "bbox_px": {
+    "x0": 1869.4,
+    "y0": 835.0,
+    "x1": 1941.4,
+    "y1": 908.5
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:20",
+   "kind": "region",
+   "text": "20",
+   "anchor_px": {
+    "x": 2008.5,
+    "y": 343.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2008.5,
+    "y": 343.6
+   },
+   "bbox_px": {
+    "x0": 1977.0,
+    "y0": 316.5,
+    "x1": 2040.0,
+    "y1": 370.7
+   },
+   "size_pt": 34,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:21",
+   "kind": "region",
+   "text": "21",
+   "anchor_px": {
+    "x": 1152.3,
+    "y": 1607.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1152.3,
+    "y": 1607.2
+   },
+   "bbox_px": {
+    "x0": 1117.3,
+    "y0": 1570.5,
+    "x1": 1187.3,
+    "y1": 1643.9
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:22",
+   "kind": "region",
+   "text": "22",
+   "anchor_px": {
+    "x": 2393.1,
+    "y": 551.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2393.1,
+    "y": 551.5
+   },
+   "bbox_px": {
+    "x0": 2352.1,
+    "y0": 514.8,
+    "x1": 2434.1,
+    "y1": 588.2
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:23",
+   "kind": "region",
+   "text": "23",
+   "anchor_px": {
+    "x": 1757.5,
+    "y": 1523.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1757.5,
+    "y": 1523.0
+   },
+   "bbox_px": {
+    "x0": 1716.0,
+    "y0": 1486.3,
+    "x1": 1799.0,
+    "y1": 1559.7
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:24",
+   "kind": "region",
+   "text": "24",
+   "anchor_px": {
+    "x": 1356.8,
+    "y": 456.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1356.8,
+    "y": 456.6
+   },
+   "bbox_px": {
+    "x0": 1314.8,
+    "y0": 419.9,
+    "x1": 1398.8,
+    "y1": 493.4
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:25",
+   "kind": "region",
+   "text": "25",
+   "anchor_px": {
+    "x": 2598.4,
+    "y": 559.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2598.4,
+    "y": 559.8
+   },
+   "bbox_px": {
+    "x0": 2557.4,
+    "y0": 523.0,
+    "x1": 2639.4,
+    "y1": 596.5
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:26",
+   "kind": "region",
+   "text": "26",
+   "anchor_px": {
+    "x": 1916.6,
+    "y": 527.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1916.6,
+    "y": 527.4
+   },
+   "bbox_px": {
+    "x0": 1884.6,
+    "y0": 498.7,
+    "x1": 1948.6,
+    "y1": 556.2
+   },
+   "size_pt": 36,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.0
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:27",
+   "kind": "region",
+   "text": "27",
+   "anchor_px": {
+    "x": 1131.3,
+    "y": 378.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1131.3,
+    "y": 378.7
+   },
+   "bbox_px": {
+    "x0": 1092.3,
+    "y0": 342.0,
+    "x1": 1170.3,
+    "y1": 415.4
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:28",
+   "kind": "region",
+   "text": "28",
+   "anchor_px": {
+    "x": 1744.9,
+    "y": 947.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1744.9,
+    "y": 947.0
+   },
+   "bbox_px": {
+    "x0": 1709.4,
+    "y0": 915.0,
+    "x1": 1780.4,
+    "y1": 978.9
+   },
+   "size_pt": 40,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.44
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:29",
+   "kind": "region",
+   "text": "29",
+   "anchor_px": {
+    "x": 1563.3,
+    "y": 1780.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1563.3,
+    "y": 1780.9
+   },
+   "bbox_px": {
+    "x0": 1521.3,
+    "y0": 1744.2,
+    "x1": 1605.3,
+    "y1": 1817.7
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:30",
+   "kind": "region",
+   "text": "30",
+   "anchor_px": {
+    "x": 2157.8,
+    "y": 1536.1
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2157.8,
+    "y": 1536.1
+   },
+   "bbox_px": {
+    "x0": 2114.3,
+    "y0": 1499.4,
+    "x1": 2201.3,
+    "y1": 1572.9
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:31",
+   "kind": "region",
+   "text": "31",
+   "anchor_px": {
+    "x": 2096.5,
+    "y": 443.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2096.5,
+    "y": 443.2
+   },
+   "bbox_px": {
+    "x0": 2061.0,
+    "y0": 406.5,
+    "x1": 2132.0,
+    "y1": 479.9
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:32",
+   "kind": "region",
+   "text": "32",
+   "anchor_px": {
+    "x": 1122.6,
+    "y": 550.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1122.6,
+    "y": 550.7
+   },
+   "bbox_px": {
+    "x0": 1081.1,
+    "y0": 514.0,
+    "x1": 1164.1,
+    "y1": 587.4
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:33",
+   "kind": "region",
+   "text": "33",
+   "anchor_px": {
+    "x": 1408.9,
+    "y": 295.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1408.9,
+    "y": 295.2
+   },
+   "bbox_px": {
+    "x0": 1366.9,
+    "y0": 258.5,
+    "x1": 1450.9,
+    "y1": 331.9
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:34",
+   "kind": "region",
+   "text": "34",
+   "anchor_px": {
+    "x": 1611.8,
+    "y": 555.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1611.8,
+    "y": 555.3
+   },
+   "bbox_px": {
+    "x0": 1568.8,
+    "y0": 518.6,
+    "x1": 1654.8,
+    "y1": 592.0
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:36",
+   "kind": "region",
+   "text": "36",
+   "anchor_px": {
+    "x": 938.6,
+    "y": 441.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 938.6,
+    "y": 441.3
+   },
+   "bbox_px": {
+    "x0": 902.1,
+    "y0": 409.3,
+    "x1": 975.1,
+    "y1": 473.2
+   },
+   "size_pt": 40,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.44
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:37",
+   "kind": "region",
+   "text": "37",
+   "anchor_px": {
+    "x": 1304.6,
+    "y": 856.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1304.6,
+    "y": 856.8
+   },
+   "bbox_px": {
+    "x0": 1265.1,
+    "y0": 820.1,
+    "x1": 1344.1,
+    "y1": 893.6
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:39",
+   "kind": "region",
+   "text": "39",
+   "anchor_px": {
+    "x": 1688.7,
+    "y": 330.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1688.7,
+    "y": 330.4
+   },
+   "bbox_px": {
+    "x0": 1652.2,
+    "y0": 298.5,
+    "x1": 1725.2,
+    "y1": 362.3
+   },
+   "size_pt": 40,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.44
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:40",
+   "kind": "region",
+   "text": "40",
+   "anchor_px": {
+    "x": 1688.3,
+    "y": 787.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1688.3,
+    "y": 787.3
+   },
+   "bbox_px": {
+    "x0": 1643.8,
+    "y0": 750.6,
+    "x1": 1732.8,
+    "y1": 824.0
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:41",
+   "kind": "region",
+   "text": "41",
+   "anchor_px": {
+    "x": 1368.7,
+    "y": 1658.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1368.7,
+    "y": 1658.6
+   },
+   "bbox_px": {
+    "x0": 1333.7,
+    "y0": 1621.9,
+    "x1": 1403.8,
+    "y1": 1695.3
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:42",
+   "kind": "region",
+   "text": "42",
+   "anchor_px": {
+    "x": 1963.8,
+    "y": 687.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1963.8,
+    "y": 687.7
+   },
+   "bbox_px": {
+    "x0": 1921.3,
+    "y0": 651.0,
+    "x1": 2006.3,
+    "y1": 724.4
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:43",
+   "kind": "region",
+   "text": "43",
+   "anchor_px": {
+    "x": 2509.6,
+    "y": 806.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2509.6,
+    "y": 806.4
+   },
+   "bbox_px": {
+    "x0": 2466.6,
+    "y0": 769.7,
+    "x1": 2552.6,
+    "y1": 843.1
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:44",
+   "kind": "region",
+   "text": "44",
+   "anchor_px": {
+    "x": 2239.6,
+    "y": 926.1
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2239.6,
+    "y": 926.1
+   },
+   "bbox_px": {
+    "x0": 2195.6,
+    "y0": 889.4,
+    "x1": 2283.6,
+    "y1": 962.8
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:45",
+   "kind": "region",
+   "text": "45",
+   "anchor_px": {
+    "x": 1641.7,
+    "y": 1087.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1641.7,
+    "y": 1087.5
+   },
+   "bbox_px": {
+    "x0": 1599.2,
+    "y0": 1050.8,
+    "x1": 1684.2,
+    "y1": 1124.2
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:46",
+   "kind": "region",
+   "text": "46",
+   "anchor_px": {
+    "x": 2289.7,
+    "y": 1232.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2289.7,
+    "y": 1232.8
+   },
+   "bbox_px": {
+    "x0": 2246.2,
+    "y0": 1196.1,
+    "x1": 2333.2,
+    "y1": 1269.6
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:47",
+   "kind": "region",
+   "text": "47",
+   "anchor_px": {
+    "x": 1563.9,
+    "y": 704.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1563.9,
+    "y": 704.2
+   },
+   "bbox_px": {
+    "x0": 1523.4,
+    "y0": 667.5,
+    "x1": 1604.4,
+    "y1": 740.9
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:48",
+   "kind": "region",
+   "text": "48",
+   "anchor_px": {
+    "x": 1925.9,
+    "y": 316.1
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1925.9,
+    "y": 316.1
+   },
+   "bbox_px": {
+    "x0": 1893.9,
+    "y0": 288.9,
+    "x1": 1957.9,
+    "y1": 343.2
+   },
+   "size_pt": 34,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:49",
+   "kind": "region",
+   "text": "49",
+   "anchor_px": {
+    "x": 1396.1,
+    "y": 646.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1396.1,
+    "y": 646.9
+   },
+   "bbox_px": {
+    "x0": 1352.6,
+    "y0": 610.2,
+    "x1": 1439.6,
+    "y1": 683.7
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:50",
+   "kind": "region",
+   "text": "50",
+   "anchor_px": {
+    "x": 2219.0,
+    "y": 693.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2219.0,
+    "y": 693.3
+   },
+   "bbox_px": {
+    "x0": 2176.0,
+    "y0": 656.6,
+    "x1": 2262.0,
+    "y1": 730.0
+   },
+   "size_pt": 46,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:51",
+   "kind": "region",
+   "text": "51",
+   "anchor_px": {
+    "x": 1442.5,
+    "y": 2001.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": -45,
+    "ty": 20
+   },
+   "text_px": {
+    "x": 1349.2,
+    "y": 1959.6
+   },
+   "bbox_px": {
+    "x0": 1303.2,
+    "y0": 1935.6,
+    "x1": 1440.7,
+    "y1": 2000.2
+   },
+   "size_pt": 30,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.33
+   },
+   "ha": "right",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1349.2,
+     "y": 1959.6
+    },
+    "to_px": {
+     "x": 1442.5,
+     "y": 2001.0
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:52",
+   "kind": "region",
+   "text": "52",
+   "anchor_px": {
+    "x": 1892.3,
+    "y": 2144.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 20,
+    "ty": 35
+   },
+   "text_px": {
+    "x": 1933.8,
+    "y": 2072.1
+   },
+   "bbox_px": {
+    "x0": 1893.3,
+    "y0": 2048.1,
+    "x1": 1987.8,
+    "y1": 2142.8
+   },
+   "size_pt": 30,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.33
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1933.8,
+     "y": 2072.1
+    },
+    "to_px": {
+     "x": 1892.3,
+     "y": 2144.6
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:35",
+   "kind": "region",
+   "text": "35",
+   "anchor_px": {
+    "x": 849.0,
+    "y": 1970.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 849.0,
+    "y": 1970.7
+   },
+   "bbox_px": {
+    "x0": 815.5,
+    "y0": 1940.4,
+    "x1": 882.5,
+    "y1": 2001.1
+   },
+   "size_pt": 38,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.22
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": true,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "provnum:38",
+   "kind": "region",
+   "text": "38",
+   "anchor_px": {
+    "x": 411.3,
+    "y": 1990.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 411.3,
+    "y": 1990.2
+   },
+   "bbox_px": {
+    "x0": 376.8,
+    "y0": 1959.8,
+    "x1": 445.8,
+    "y1": 2020.5
+   },
+   "size_pt": 38,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.22
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": true,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "country:PORTUGAL",
+   "kind": "country",
+   "text": "PORTUGAL",
+   "anchor_px": {
+    "x": 983.8,
+    "y": 1140.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 983.8,
+    "y": 1140.7
+   },
+   "bbox_px": {
+    "x0": 947.1,
+    "y0": 964.6,
+    "x1": 1020.5,
+    "y1": 1316.8
+   },
+   "size_pt": 46,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 90,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "country:FRANCIA",
+   "kind": "country",
+   "text": "FRANCIA",
+   "anchor_px": {
+    "x": 2665.8,
+    "y": 154.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2665.8,
+    "y": 154.5
+   },
+   "bbox_px": {
+    "x0": 2522.8,
+    "y0": 117.8,
+    "x1": 2808.8,
+    "y1": 191.3
+   },
+   "size_pt": 46,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "country:MARRUECOS",
+   "kind": "country",
+   "text": "MARRUECOS",
+   "anchor_px": {
+    "x": 1523.9,
+    "y": 2203.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1523.9,
+    "y": 2203.9
+   },
+   "bbox_px": {
+    "x0": 1361.4,
+    "y0": 2175.1,
+    "x1": 1686.4,
+    "y1": 2232.6
+   },
+   "size_pt": 36,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  }
+ ],
+ "locked": [
+  {
+   "id": "locked:inset-caption",
+   "kind": "inset-caption",
+   "text": "Islas Canarias",
+   "bbox_px": {
+    "x0": 363.8,
+    "y0": 1703.9,
+    "x1": 750.9,
+    "y1": 1767.8
+   }
+  },
+  {
+   "id": "locked:legend:0",
+   "kind": "legend",
+   "text": "01 Álava",
+   "bbox_px": {
+    "x0": 81.0,
+    "y0": 315.0,
+    "x1": 231.1,
+    "y1": 354.9
+   }
+  },
+  {
+   "id": "locked:legend:1",
+   "kind": "legend",
+   "text": "02 Albacete",
+   "bbox_px": {
+    "x0": 74.0,
+    "y0": 362.9,
+    "x1": 289.0,
+    "y1": 402.8
+   }
+  },
+  {
+   "id": "locked:legend:2",
+   "kind": "legend",
+   "text": "03 Alicante",
+   "bbox_px": {
+    "x0": 75.0,
+    "y0": 410.8,
+    "x1": 276.0,
+    "y1": 450.7
+   }
+  },
+  {
+   "id": "locked:legend:3",
+   "kind": "legend",
+   "text": "04 Almería",
+   "bbox_px": {
+    "x0": 73.0,
+    "y0": 458.8,
+    "x1": 267.2,
+    "y1": 498.7
+   }
+  },
+  {
+   "id": "locked:legend:4",
+   "kind": "legend",
+   "text": "05 Ávila",
+   "bbox_px": {
+    "x0": 76.0,
+    "y0": 506.7,
+    "x1": 218.6,
+    "y1": 546.6
+   }
+  },
+  {
+   "id": "locked:legend:5",
+   "kind": "legend",
+   "text": "06 Badajoz",
+   "bbox_px": {
+    "x0": 75.0,
+    "y0": 554.6,
+    "x1": 274.4,
+    "y1": 594.5
+   }
+  },
+  {
+   "id": "locked:legend:6",
+   "kind": "legend",
+   "text": "07 Islas Baleares",
+   "bbox_px": {
+    "x0": 77.7,
+    "y0": 602.5,
+    "x1": 371.6,
+    "y1": 642.4
+   }
+  },
+  {
+   "id": "locked:legend:7",
+   "kind": "legend",
+   "text": "08 Barcelona",
+   "bbox_px": {
+    "x0": 75.0,
+    "y0": 650.4,
+    "x1": 309.2,
+    "y1": 690.3
+   }
+  },
+  {
+   "id": "locked:legend:8",
+   "kind": "legend",
+   "text": "09 Burgos",
+   "bbox_px": {
+    "x0": 75.0,
+    "y0": 698.3,
+    "x1": 259.2,
+    "y1": 738.2
+   }
+  },
+  {
+   "id": "locked:legend:9",
+   "kind": "legend",
+   "text": "10 Cáceres",
+   "bbox_px": {
+    "x0": 81.0,
+    "y0": 746.2,
+    "x1": 279.2,
+    "y1": 786.2
+   }
+  },
+  {
+   "id": "locked:legend:10",
+   "kind": "legend",
+   "text": "11 Cádiz",
+   "bbox_px": {
+    "x0": 88.0,
+    "y0": 794.2,
+    "x1": 235.0,
+    "y1": 834.1
+   }
+  },
+  {
+   "id": "locked:legend:11",
+   "kind": "legend",
+   "text": "12 Castellón",
+   "bbox_px": {
+    "x0": 81.0,
+    "y0": 842.1,
+    "x1": 296.7,
+    "y1": 882.0
+   }
+  },
+  {
+   "id": "locked:legend:12",
+   "kind": "legend",
+   "text": "13 Ciudad Real",
+   "bbox_px": {
+    "x0": 82.0,
+    "y0": 890.0,
+    "x1": 339.9,
+    "y1": 929.9
+   }
+  },
+  {
+   "id": "locked:legend:13",
+   "kind": "legend",
+   "text": "14 Córdoba",
+   "bbox_px": {
+    "x0": 80.0,
+    "y0": 937.9,
+    "x1": 285.6,
+    "y1": 977.8
+   }
+  },
+  {
+   "id": "locked:legend:14",
+   "kind": "legend",
+   "text": "15 A Coruña",
+   "bbox_px": {
+    "x0": 83.0,
+    "y0": 985.8,
+    "x1": 296.0,
+    "y1": 1025.7
+   }
+  },
+  {
+   "id": "locked:legend:15",
+   "kind": "legend",
+   "text": "16 Cuenca",
+   "bbox_px": {
+    "x0": 82.0,
+    "y0": 1033.7,
+    "x1": 268.3,
+    "y1": 1073.7
+   }
+  },
+  {
+   "id": "locked:legend:16",
+   "kind": "legend",
+   "text": "17 Girona",
+   "bbox_px": {
+    "x0": 84.0,
+    "y0": 1081.7,
+    "x1": 249.2,
+    "y1": 1121.6
+   }
+  },
+  {
+   "id": "locked:legend:17",
+   "kind": "legend",
+   "text": "18 Granada",
+   "bbox_px": {
+    "x0": 82.0,
+    "y0": 1129.6,
+    "x1": 280.7,
+    "y1": 1169.5
+   }
+  },
+  {
+   "id": "locked:legend:18",
+   "kind": "legend",
+   "text": "19 Guadalajara",
+   "bbox_px": {
+    "x0": 82.0,
+    "y0": 1177.5,
+    "x1": 338.7,
+    "y1": 1217.4
+   }
+  },
+  {
+   "id": "locked:legend:19",
+   "kind": "legend",
+   "text": "20 Gipuzkoa",
+   "bbox_px": {
+    "x0": 74.0,
+    "y0": 1225.4,
+    "x1": 296.6,
+    "y1": 1265.3
+   }
+  },
+  {
+   "id": "locked:legend:20",
+   "kind": "legend",
+   "text": "21 Huelva",
+   "bbox_px": {
+    "x0": 81.0,
+    "y0": 1273.3,
+    "x1": 256.0,
+    "y1": 1313.2
+   }
+  },
+  {
+   "id": "locked:legend:21",
+   "kind": "legend",
+   "text": "22 Huesca",
+   "bbox_px": {
+    "x0": 74.0,
+    "y0": 1321.2,
+    "x1": 267.3,
+    "y1": 1361.2
+   }
+  },
+  {
+   "id": "locked:legend:22",
+   "kind": "legend",
+   "text": "23 Jaén",
+   "bbox_px": {
+    "x0": 75.0,
+    "y0": 1369.2,
+    "x1": 220.0,
+    "y1": 1409.1
+   }
+  },
+  {
+   "id": "locked:legend:23",
+   "kind": "legend",
+   "text": "24 León",
+   "bbox_px": {
+    "x0": 73.5,
+    "y0": 1417.1,
+    "x1": 222.0,
+    "y1": 1457.0
+   }
+  },
+  {
+   "id": "locked:legend:24",
+   "kind": "legend",
+   "text": "25 Lleida",
+   "bbox_px": {
+    "x0": 76.0,
+    "y0": 1465.0,
+    "x1": 239.0,
+    "y1": 1504.9
+   }
+  },
+  {
+   "id": "locked:legend:25",
+   "kind": "legend",
+   "text": "26 La Rioja",
+   "bbox_px": {
+    "x0": 75.0,
+    "y0": 1512.9,
+    "x1": 270.0,
+    "y1": 1552.8
+   }
+  },
+  {
+   "id": "locked:legend:26",
+   "kind": "legend",
+   "text": "27 Lugo",
+   "bbox_px": {
+    "x0": 3377.0,
+    "y0": 450.0,
+    "x1": 3523.0,
+    "y1": 489.9
+   }
+  },
+  {
+   "id": "locked:legend:27",
+   "kind": "legend",
+   "text": "28 Madrid",
+   "bbox_px": {
+    "x0": 3375.0,
+    "y0": 497.9,
+    "x1": 3558.2,
+    "y1": 537.8
+   }
+  },
+  {
+   "id": "locked:legend:28",
+   "kind": "legend",
+   "text": "29 Málaga",
+   "bbox_px": {
+    "x0": 3375.0,
+    "y0": 545.8,
+    "x1": 3562.0,
+    "y1": 585.7
+   }
+  },
+  {
+   "id": "locked:legend:29",
+   "kind": "legend",
+   "text": "30 Murcia",
+   "bbox_px": {
+    "x0": 3375.0,
+    "y0": 593.8,
+    "x1": 3555.2,
+    "y1": 633.7
+   }
+  },
+  {
+   "id": "locked:legend:30",
+   "kind": "legend",
+   "text": "31 Navarra",
+   "bbox_px": {
+    "x0": 3382.0,
+    "y0": 641.7,
+    "x1": 3572.2,
+    "y1": 681.6
+   }
+  },
+  {
+   "id": "locked:legend:31",
+   "kind": "legend",
+   "text": "32 Ourense",
+   "bbox_px": {
+    "x0": 3375.0,
+    "y0": 689.6,
+    "x1": 3581.2,
+    "y1": 729.5
+   }
+  },
+  {
+   "id": "locked:legend:32",
+   "kind": "legend",
+   "text": "33 Asturias",
+   "bbox_px": {
+    "x0": 3376.0,
+    "y0": 737.5,
+    "x1": 3577.0,
+    "y1": 777.4
+   }
+  },
+  {
+   "id": "locked:legend:33",
+   "kind": "legend",
+   "text": "34 Palencia",
+   "bbox_px": {
+    "x0": 3374.0,
+    "y0": 785.4,
+    "x1": 3581.7,
+    "y1": 825.3
+   }
+  },
+  {
+   "id": "locked:legend:34",
+   "kind": "legend",
+   "text": "35 Las Palmas",
+   "bbox_px": {
+    "x0": 3377.0,
+    "y0": 833.3,
+    "x1": 3627.7,
+    "y1": 873.2
+   }
+  },
+  {
+   "id": "locked:legend:35",
+   "kind": "legend",
+   "text": "36 Pontevedra",
+   "bbox_px": {
+    "x0": 3376.0,
+    "y0": 881.3,
+    "x1": 3631.8,
+    "y1": 921.2
+   }
+  },
+  {
+   "id": "locked:legend:36",
+   "kind": "legend",
+   "text": "37 Salamanca",
+   "bbox_px": {
+    "x0": 3378.0,
+    "y0": 929.2,
+    "x1": 3622.3,
+    "y1": 969.1
+   }
+  },
+  {
+   "id": "locked:legend:37",
+   "kind": "legend",
+   "text": "38 Santa Cruz de Tenerife",
+   "bbox_px": {
+    "x0": 3376.0,
+    "y0": 977.1,
+    "x1": 3823.8,
+    "y1": 1017.0
+   }
+  },
+  {
+   "id": "locked:legend:38",
+   "kind": "legend",
+   "text": "39 Cantabria",
+   "bbox_px": {
+    "x0": 3376.0,
+    "y0": 1025.0,
+    "x1": 3602.4,
+    "y1": 1064.9
+   }
+  },
+  {
+   "id": "locked:legend:39",
+   "kind": "legend",
+   "text": "40 Segovia",
+   "bbox_px": {
+    "x0": 3373.0,
+    "y0": 1072.9,
+    "x1": 3573.4,
+    "y1": 1112.8
+   }
+  },
+  {
+   "id": "locked:legend:40",
+   "kind": "legend",
+   "text": "41 Sevilla",
+   "bbox_px": {
+    "x0": 3381.6,
+    "y0": 1120.8,
+    "x1": 3547.4,
+    "y1": 1160.7
+   }
+  },
+  {
+   "id": "locked:legend:41",
+   "kind": "legend",
+   "text": "42 Soria",
+   "bbox_px": {
+    "x0": 3373.0,
+    "y0": 1168.7,
+    "x1": 3525.2,
+    "y1": 1208.7
+   }
+  },
+  {
+   "id": "locked:legend:42",
+   "kind": "legend",
+   "text": "43 Tarragona",
+   "bbox_px": {
+    "x0": 3374.0,
+    "y0": 1216.7,
+    "x1": 3610.5,
+    "y1": 1256.6
+   }
+  },
+  {
+   "id": "locked:legend:43",
+   "kind": "legend",
+   "text": "44 Teruel",
+   "bbox_px": {
+    "x0": 3372.0,
+    "y0": 1264.6,
+    "x1": 3543.3,
+    "y1": 1304.5
+   }
+  },
+  {
+   "id": "locked:legend:44",
+   "kind": "legend",
+   "text": "45 Toledo",
+   "bbox_px": {
+    "x0": 3375.0,
+    "y0": 1312.5,
+    "x1": 3553.3,
+    "y1": 1352.4
+   }
+  },
+  {
+   "id": "locked:legend:45",
+   "kind": "legend",
+   "text": "46 Valencia",
+   "bbox_px": {
+    "x0": 3374.0,
+    "y0": 1360.4,
+    "x1": 3582.0,
+    "y1": 1400.3
+   }
+  },
+  {
+   "id": "locked:legend:46",
+   "kind": "legend",
+   "text": "47 Valladolid",
+   "bbox_px": {
+    "x0": 3376.0,
+    "y0": 1408.3,
+    "x1": 3603.0,
+    "y1": 1448.2
+   }
+  },
+  {
+   "id": "locked:legend:47",
+   "kind": "legend",
+   "text": "48 Bizkaia",
+   "bbox_px": {
+    "x0": 3374.0,
+    "y0": 1456.2,
+    "x1": 3559.0,
+    "y1": 1496.2
+   }
+  },
+  {
+   "id": "locked:legend:48",
+   "kind": "legend",
+   "text": "49 Zamora",
+   "bbox_px": {
+    "x0": 3374.0,
+    "y0": 1504.2,
+    "x1": 3567.7,
+    "y1": 1544.1
+   }
+  },
+  {
+   "id": "locked:legend:49",
+   "kind": "legend",
+   "text": "50 Zaragoza",
+   "bbox_px": {
+    "x0": 3376.0,
+    "y0": 1552.1,
+    "x1": 3598.0,
+    "y1": 1592.0
+   }
+  },
+  {
+   "id": "locked:legend:50",
+   "kind": "legend",
+   "text": "51 Ceuta",
+   "bbox_px": {
+    "x0": 3383.0,
+    "y0": 1600.0,
+    "x1": 3538.2,
+    "y1": 1639.9
+   }
+  },
+  {
+   "id": "locked:legend:51",
+   "kind": "legend",
+   "text": "52 Melilla",
+   "bbox_px": {
+    "x0": 3376.0,
+    "y0": 1647.9,
+    "x1": 3548.0,
+    "y1": 1687.8
+   }
+  },
+  {
+   "id": "locked:footer",
+   "kind": "footer",
+   "text": "Provincias de España · el número es el prefijo del código postal",
+   "bbox_px": {
+    "x0": 2693.7,
+    "y0": 2116.6,
+    "x1": 3968.0,
+    "y1": 2164.5
+   }
+  },
+  {
+   "id": "locked:attribution",
+   "kind": "attribution",
+   "text": "Datos: IGN España · Natural Earth",
+   "bbox_px": {
+    "x0": 3530.6,
+    "y0": 2191.1,
+    "x1": 3968.0,
+    "y1": 2223.0
+   }
+  }
+ ]
+}

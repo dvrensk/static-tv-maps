@@ -1,0 +1,1113 @@
+{
+ "schema": 1,
+ "map": "asturias-rios",
+ "canvas": {
+  "width_px": 4000,
+  "height_px": 2250,
+  "dpi": 100
+ },
+ "km_per_px": 0.056263,
+ "canary_inset_px": null,
+ "font": {
+  "family": "Inter",
+  "weights": {
+   "regular": 400,
+   "semibold": 600,
+   "extrabold": 800
+  }
+ },
+ "labels": [
+  {
+   "id": "rtown:Oviedo",
+   "kind": "city",
+   "text": "Oviedo",
+   "anchor_px": {
+    "x": 2000.3,
+    "y": 1046.5
+   },
+   "offset_km": {
+    "dx": 3,
+    "dy": -1
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2053.6,
+    "y": 1064.2
+   },
+   "bbox_px": {
+    "x0": 2053.6,
+    "y0": 1041.9,
+    "x1": 2189.6,
+    "y1": 1086.6
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.11
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "rtown:Gijón",
+   "kind": "city",
+   "text": "Gijón",
+   "anchor_px": {
+    "x": 2275.4,
+    "y": 693.9
+   },
+   "offset_km": {
+    "dx": 3,
+    "dy": 3
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2328.8,
+    "y": 640.6
+   },
+   "bbox_px": {
+    "x0": 2328.8,
+    "y0": 618.3,
+    "x1": 2428.8,
+    "y1": 663.0
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.11
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "rtown:Ribadesella",
+   "kind": "city",
+   "text": "Ribadesella",
+   "anchor_px": {
+    "x": 3138.7,
+    "y": 882.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 4,
+    "ty": 6
+   },
+   "text_px": {
+    "x": 3209.8,
+    "y": 775.7
+   },
+   "bbox_px": {
+    "x0": 3139.8,
+    "y0": 756.6,
+    "x1": 3392.1,
+    "y1": 880.7
+   },
+   "size_pt": 24,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.67
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 3209.8,
+     "y": 775.7
+    },
+    "to_px": {
+     "x": 3138.7,
+     "y": 882.4
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "rtown:San Esteban de Pravia",
+   "kind": "city",
+   "text": "San Esteban de Pravia",
+   "anchor_px": {
+    "x": 1668.9,
+    "y": 649.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": -4,
+    "ty": 8
+   },
+   "text_px": {
+    "x": 1597.8,
+    "y": 507.0
+   },
+   "bbox_px": {
+    "x0": 1245.7,
+    "y0": 487.9,
+    "x1": 1668.0,
+    "y1": 647.4
+   },
+   "size_pt": 24,
+   "weight": "semibold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.67
+   },
+   "ha": "right",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1597.8,
+     "y": 507.0
+    },
+    "to_px": {
+     "x": 1668.9,
+     "y": 649.2
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": {
+    "type": "dot",
+    "baked": true
+   },
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha",
+    "va"
+   ]
+  },
+  {
+   "id": "river:Nalón",
+   "kind": "river",
+   "text": "Nalón",
+   "anchor_px": {
+    "x": 2518.7,
+    "y": 1308.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2518.7,
+    "y": 1308.0
+   },
+   "bbox_px": {
+    "x0": 2447.6,
+    "y0": 1253.9,
+    "x1": 2589.9,
+    "y1": 1362.2
+   },
+   "size_pt": 34,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#ece5d4",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -27,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Narcea",
+   "kind": "river",
+   "text": "Narcea",
+   "anchor_px": {
+    "x": 1124.8,
+    "y": 1640.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1124.8,
+    "y": 1640.2
+   },
+   "bbox_px": {
+    "x0": 1063.8,
+    "y0": 1560.1,
+    "x1": 1185.8,
+    "y1": 1720.3
+   },
+   "size_pt": 32,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#ece5d4",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 60,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Navia",
+   "kind": "river",
+   "text": "Navia",
+   "anchor_px": {
+    "x": 460.5,
+    "y": 1265.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 460.5,
+    "y": 1265.0
+   },
+   "bbox_px": {
+    "x0": 412.1,
+    "y0": 1198.3,
+    "x1": 508.9,
+    "y1": 1331.7
+   },
+   "size_pt": 32,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#ece5d4",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 66,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Sella",
+   "kind": "river",
+   "text": "Sella",
+   "anchor_px": {
+    "x": 3200.0,
+    "y": 1203.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3200.0,
+    "y": 1203.9
+   },
+   "bbox_px": {
+    "x0": 3166.4,
+    "y0": 1150.9,
+    "x1": 3233.6,
+    "y1": 1256.8
+   },
+   "size_pt": 30,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#ece5d4",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -78,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Deva",
+   "kind": "river",
+   "text": "Deva",
+   "anchor_px": {
+    "x": 3848.4,
+    "y": 1237.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3848.4,
+    "y": 1237.5
+   },
+   "bbox_px": {
+    "x0": 3813.6,
+    "y0": 1185.2,
+    "x1": 3883.1,
+    "y1": 1289.7
+   },
+   "size_pt": 28,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#ece5d4",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 74,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Eo",
+   "kind": "river",
+   "text": "Eo",
+   "anchor_px": {
+    "x": 235.5,
+    "y": 834.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 235.5,
+    "y": 834.7
+   },
+   "bbox_px": {
+    "x0": 211.5,
+    "y0": 812.4,
+    "x1": 259.5,
+    "y1": 857.1
+   },
+   "size_pt": 28,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#ece5d4",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Esva",
+   "kind": "river",
+   "text": "Esva",
+   "anchor_px": {
+    "x": 1038.0,
+    "y": 776.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1038.0,
+    "y": 776.4
+   },
+   "bbox_px": {
+    "x0": 1003.4,
+    "y0": 730.8,
+    "x1": 1072.5,
+    "y1": 822.1
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#3f7fb5",
+   "halo": {
+    "color": "#ece5d4",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 68,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Piloña",
+   "kind": "river",
+   "text": "Piloña",
+   "anchor_px": {
+    "x": 2758.3,
+    "y": 1004.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2758.3,
+    "y": 1004.7
+   },
+   "bbox_px": {
+    "x0": 2695.9,
+    "y0": 967.1,
+    "x1": 2820.7,
+    "y1": 1042.4
+   },
+   "size_pt": 28,
+   "weight": "semibold",
+   "color": "#6b9cc7",
+   "halo": {
+    "color": "#ece5d4",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 16,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Nora",
+   "kind": "river",
+   "text": "Nora",
+   "anchor_px": {
+    "x": 1917.2,
+    "y": 948.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1917.2,
+    "y": 948.7
+   },
+   "bbox_px": {
+    "x0": 1866.5,
+    "y0": 912.1,
+    "x1": 1967.9,
+    "y1": 985.4
+   },
+   "size_pt": 28,
+   "weight": "semibold",
+   "color": "#6b9cc7",
+   "halo": {
+    "color": "#ece5d4",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -20,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Trubia",
+   "kind": "river",
+   "text": "Trubia",
+   "anchor_px": {
+    "x": 1689.0,
+    "y": 1276.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1689.0,
+    "y": 1276.6
+   },
+   "bbox_px": {
+    "x0": 1643.1,
+    "y0": 1220.2,
+    "x1": 1735.0,
+    "y1": 1332.9
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#6b9cc7",
+   "halo": {
+    "color": "#ece5d4",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 58,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Pigüeña",
+   "kind": "river",
+   "text": "Pigüeña",
+   "anchor_px": {
+    "x": 1304.2,
+    "y": 1321.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1304.2,
+    "y": 1321.2
+   },
+   "bbox_px": {
+    "x0": 1251.3,
+    "y0": 1250.2,
+    "x1": 1357.2,
+    "y1": 1392.2
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#6b9cc7",
+   "halo": {
+    "color": "#ece5d4",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 60,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Caudal",
+   "kind": "river",
+   "text": "Caudal",
+   "anchor_px": {
+    "x": 1869.8,
+    "y": 1273.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1869.8,
+    "y": 1273.2
+   },
+   "bbox_px": {
+    "x0": 1810.5,
+    "y0": 1218.7,
+    "x1": 1929.1,
+    "y1": 1327.6
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#6b9cc7",
+   "halo": {
+    "color": "#ece5d4",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": -40,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Cares",
+   "kind": "river",
+   "text": "Cares",
+   "anchor_px": {
+    "x": 3479.2,
+    "y": 1299.1
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3479.2,
+    "y": 1299.1
+   },
+   "bbox_px": {
+    "x0": 3425.0,
+    "y0": 1255.8,
+    "x1": 3533.4,
+    "y1": 1342.4
+   },
+   "size_pt": 26,
+   "weight": "semibold",
+   "color": "#6b9cc7",
+   "halo": {
+    "color": "#ece5d4",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 30,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "river:Piles",
+   "kind": "river",
+   "text": "Piles",
+   "anchor_px": {
+    "x": 2351.6,
+    "y": 741.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2351.6,
+    "y": 741.8
+   },
+   "bbox_px": {
+    "x0": 2313.6,
+    "y0": 722.6,
+    "x1": 2389.6,
+    "y1": 760.9
+   },
+   "size_pt": 24,
+   "weight": "semibold",
+   "color": "#6b9cc7",
+   "halo": {
+    "color": "#ece5d4",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:GALICIA",
+   "kind": "country",
+   "text": "GALICIA",
+   "anchor_px": {
+    "x": 212.8,
+    "y": 1747.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 212.8,
+    "y": 1747.8
+   },
+   "bbox_px": {
+    "x0": 90.1,
+    "y0": 1712.7,
+    "x1": 335.4,
+    "y1": 1782.9
+   },
+   "size_pt": 44,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:LEÓN",
+   "kind": "country",
+   "text": "LEÓN",
+   "anchor_px": {
+    "x": 1964.1,
+    "y": 1899.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1964.1,
+    "y": 1899.0
+   },
+   "bbox_px": {
+    "x0": 1882.1,
+    "y0": 1863.8,
+    "x1": 2046.1,
+    "y1": 1934.1
+   },
+   "size_pt": 44,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:CANTABRIA",
+   "kind": "country",
+   "text": "CANTABRIA",
+   "anchor_px": {
+    "x": 3759.9,
+    "y": 1334.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3759.9,
+    "y": 1334.5
+   },
+   "bbox_px": {
+    "x0": 3583.4,
+    "y0": 1299.4,
+    "x1": 3936.5,
+    "y1": 1369.6
+   },
+   "size_pt": 44,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:MAR CANTÁBRICO",
+   "kind": "country",
+   "text": "MAR CANTÁBRICO",
+   "anchor_px": {
+    "x": 2090.9,
+    "y": 282.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2090.9,
+    "y": 282.7
+   },
+   "bbox_px": {
+    "x0": 1761.5,
+    "y0": 241.2,
+    "x1": 2420.4,
+    "y1": 324.2
+   },
+   "size_pt": 52,
+   "weight": "semibold",
+   "color": "#7da7bf",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  }
+ ],
+ "locked": [
+  {
+   "id": "locked:footer",
+   "kind": "footer",
+   "text": "Ríos de Asturias",
+   "bbox_px": {
+    "x0": 3640.0,
+    "y0": 2116.6,
+    "x1": 3968.0,
+    "y1": 2164.5
+   }
+  },
+  {
+   "id": "locked:attribution",
+   "kind": "attribution",
+   "text": "Datos: OpenStreetMap",
+   "bbox_px": {
+    "x0": 3670.7,
+    "y0": 2191.1,
+    "x1": 3968.0,
+    "y1": 2223.0
+   }
+  }
+ ]
+}

@@ -2,9 +2,8 @@
 
 from dataclasses import dataclass
 
-from . import cities, draw, geo, style
+from . import cities, draw, geo, labeling, style
 from .maps_spain import (
-    KM,
     _draw_country_labels,
     _province_colors,
     spain_scene,
@@ -42,18 +41,20 @@ def _capital_xy(scene):
     return pts
 
 
-def _draw_city(ax, xy, name, spec, marker="dot"):
+def _draw_city(ax, xy, name, spec, marker="dot", ns="city"):
     if marker == "star":
         draw.city_star(ax, xy)
     else:
         draw.city_dot(ax, xy)
-    text = spec.text or name
-    if spec.tx is not None:
-        draw.callout(ax, xy, (xy[0] + spec.tx * KM, xy[1] + spec.ty * KM),
-                     text, spec.size, weight="extrabold", ha=spec.ha)
-    else:
-        draw.halo_text(ax, xy[0] + spec.dx * KM, xy[1] + spec.dy * KM, text,
-                       spec.size, weight="extrabold", ha=spec.ha, va=spec.va)
+    # In the callout branch dx/dy are ignored (the leader targets the dot).
+    is_callout = spec.tx is not None
+    labeling.emit(ax, labeling.Spec(
+        id=f"{ns}:{name}", kind="city", text=spec.text or name, anchor=xy,
+        dx=0.0 if is_callout else spec.dx,
+        dy=0.0 if is_callout else spec.dy,
+        tx=spec.tx, ty=spec.ty, size=spec.size, weight="extrabold",
+        ha=spec.ha, va=spec.va, marker={"type": marker, "baked": True},
+        editable=("dx", "dy", "tx", "ty", "size", "ha", "va")))
 
 
 # ---------------------------------------------------------------------------

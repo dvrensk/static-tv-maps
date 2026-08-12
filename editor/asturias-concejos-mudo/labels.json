@@ -1,0 +1,229 @@
+{
+ "schema": 1,
+ "map": "asturias-concejos-mudo",
+ "canvas": {
+  "width_px": 4000,
+  "height_px": 2250,
+  "dpi": 100
+ },
+ "km_per_px": 0.056263,
+ "canary_inset_px": null,
+ "font": {
+  "family": "Inter",
+  "weights": {
+   "regular": 400,
+   "semibold": 600,
+   "extrabold": 800
+  }
+ },
+ "labels": [
+  {
+   "id": "neighbor:GALICIA",
+   "kind": "country",
+   "text": "GALICIA",
+   "anchor_px": {
+    "x": 212.8,
+    "y": 1747.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 212.8,
+    "y": 1747.8
+   },
+   "bbox_px": {
+    "x0": 90.1,
+    "y0": 1712.7,
+    "x1": 335.4,
+    "y1": 1782.9
+   },
+   "size_pt": 44,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:LEÓN",
+   "kind": "country",
+   "text": "LEÓN",
+   "anchor_px": {
+    "x": 1964.1,
+    "y": 1899.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1964.1,
+    "y": 1899.0
+   },
+   "bbox_px": {
+    "x0": 1882.1,
+    "y0": 1863.8,
+    "x1": 2046.1,
+    "y1": 1934.1
+   },
+   "size_pt": 44,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:CANTABRIA",
+   "kind": "country",
+   "text": "CANTABRIA",
+   "anchor_px": {
+    "x": 3759.9,
+    "y": 1334.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3759.9,
+    "y": 1334.5
+   },
+   "bbox_px": {
+    "x0": 3583.4,
+    "y0": 1299.4,
+    "x1": 3936.5,
+    "y1": 1369.6
+   },
+   "size_pt": 44,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:MAR CANTÁBRICO",
+   "kind": "country",
+   "text": "MAR CANTÁBRICO",
+   "anchor_px": {
+    "x": 2090.9,
+    "y": 282.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2090.9,
+    "y": 282.7
+   },
+   "bbox_px": {
+    "x0": 1761.5,
+    "y0": 241.2,
+    "x1": 2420.4,
+    "y1": 324.2
+   },
+   "size_pt": 52,
+   "weight": "semibold",
+   "color": "#7da7bf",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  }
+ ],
+ "locked": [
+  {
+   "id": "locked:footer",
+   "kind": "footer",
+   "text": "Mapa mudo · Concejos de Asturias",
+   "bbox_px": {
+    "x0": 3261.6,
+    "y0": 2116.6,
+    "x1": 3968.0,
+    "y1": 2164.5
+   }
+  },
+  {
+   "id": "locked:attribution",
+   "kind": "attribution",
+   "text": "Datos: IGN España",
+   "bbox_px": {
+    "x0": 3724.0,
+    "y0": 2191.1,
+    "x1": 3968.0,
+    "y1": 2223.0
+   }
+  }
+ ]
+}

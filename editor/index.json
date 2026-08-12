@@ -1,0 +1,145 @@
+{
+ "schema": 1,
+ "maps": [
+  {
+   "name": "asturias-ciudades",
+   "base": "editor/asturias-ciudades/base.png",
+   "manifest": "editor/asturias-ciudades/labels.json",
+   "output": "output/asturias-ciudades.png",
+   "labels": 23
+  },
+  {
+   "name": "asturias-comarcas",
+   "base": "editor/asturias-comarcas/base.png",
+   "manifest": "editor/asturias-comarcas/labels.json",
+   "output": "output/asturias-comarcas.png",
+   "labels": 12
+  },
+  {
+   "name": "asturias-concejos-1",
+   "base": "editor/asturias-concejos-1/base.png",
+   "manifest": "editor/asturias-concejos-1/labels.json",
+   "output": "output/asturias-concejos-1.png",
+   "labels": 43
+  },
+  {
+   "name": "asturias-concejos-2",
+   "base": "editor/asturias-concejos-2/base.png",
+   "manifest": "editor/asturias-concejos-2/labels.json",
+   "output": "output/asturias-concejos-2.png",
+   "labels": 43
+  },
+  {
+   "name": "asturias-concejos-mudo",
+   "base": "editor/asturias-concejos-mudo/base.png",
+   "manifest": "editor/asturias-concejos-mudo/labels.json",
+   "output": "output/asturias-concejos-mudo.png",
+   "labels": 4
+  },
+  {
+   "name": "asturias-rios",
+   "base": "editor/asturias-rios/base.png",
+   "manifest": "editor/asturias-rios/labels.json",
+   "output": "output/asturias-rios.png",
+   "labels": 22
+  },
+  {
+   "name": "spain-capitales-comunidades",
+   "base": "editor/spain-capitales-comunidades/base.png",
+   "manifest": "editor/spain-capitales-comunidades/labels.json",
+   "output": "output/spain-capitales-comunidades.png",
+   "labels": 23
+  },
+  {
+   "name": "spain-capitales-provincias",
+   "base": "editor/spain-capitales-provincias/base.png",
+   "manifest": "editor/spain-capitales-provincias/labels.json",
+   "output": "output/spain-capitales-provincias.png",
+   "labels": 55
+  },
+  {
+   "name": "spain-ciudades",
+   "base": "editor/spain-ciudades/base.png",
+   "manifest": "editor/spain-ciudades/labels.json",
+   "output": "output/spain-ciudades.png",
+   "labels": 33
+  },
+  {
+   "name": "spain-comunidades",
+   "base": "editor/spain-comunidades/base.png",
+   "manifest": "editor/spain-comunidades/labels.json",
+   "output": "output/spain-comunidades.png",
+   "labels": 21
+  },
+  {
+   "name": "spain-comunidades-mudo",
+   "base": "editor/spain-comunidades-mudo/base.png",
+   "manifest": "editor/spain-comunidades-mudo/labels.json",
+   "output": "output/spain-comunidades-mudo.png",
+   "labels": 3
+  },
+  {
+   "name": "spain-despensa",
+   "base": "editor/spain-despensa/base.png",
+   "manifest": "editor/spain-despensa/labels.json",
+   "output": "output/spain-despensa.png",
+   "labels": 29
+  },
+  {
+   "name": "spain-fisica",
+   "base": "editor/spain-fisica/base.png",
+   "manifest": "editor/spain-fisica/labels.json",
+   "output": "output/spain-fisica.png",
+   "labels": 21
+  },
+  {
+   "name": "spain-provincias-1",
+   "base": "editor/spain-provincias-1/base.png",
+   "manifest": "editor/spain-provincias-1/labels.json",
+   "output": "output/spain-provincias-1.png",
+   "labels": 29
+  },
+  {
+   "name": "spain-provincias-2",
+   "base": "editor/spain-provincias-2/base.png",
+   "manifest": "editor/spain-provincias-2/labels.json",
+   "output": "output/spain-provincias-2.png",
+   "labels": 29
+  },
+  {
+   "name": "spain-provincias-mudo",
+   "base": "editor/spain-provincias-mudo/base.png",
+   "manifest": "editor/spain-provincias-mudo/labels.json",
+   "output": "output/spain-provincias-mudo.png",
+   "labels": 3
+  },
+  {
+   "name": "spain-provincias-numeros",
+   "base": "editor/spain-provincias-numeros/base.png",
+   "manifest": "editor/spain-provincias-numeros/labels.json",
+   "output": "output/spain-provincias-numeros.png",
+   "labels": 55
+  },
+  {
+   "name": "spain-rios",
+   "base": "editor/spain-rios/base.png",
+   "manifest": "editor/spain-rios/labels.json",
+   "output": "output/spain-rios.png",
+   "labels": 31
+  },
+  {
+   "name": "spain-rios-ciudades",
+   "base": "editor/spain-rios-ciudades/base.png",
+   "manifest": "editor/spain-rios-ciudades/labels.json",
+   "output": "output/spain-rios-ciudades.png",
+   "labels": 34
+  },
+  {
+   "name": "spain-vinos",
+   "base": "editor/spain-vinos/base.png",
+   "manifest": "editor/spain-vinos/labels.json",
+   "output": "output/spain-vinos.png",
+   "labels": 21
+  }
+ ]
+}

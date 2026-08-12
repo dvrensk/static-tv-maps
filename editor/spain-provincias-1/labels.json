@@ -1,0 +1,1463 @@
+{
+ "schema": 1,
+ "map": "spain-provincias-1",
+ "canvas": {
+  "width_px": 4000,
+  "height_px": 2250,
+  "dpi": 100
+ },
+ "km_per_px": 0.48262,
+ "canary_inset_px": {
+  "x0": 80.0,
+  "y0": 1694.4,
+  "x1": 1034.8,
+  "y1": 2171.2
+ },
+ "font": {
+  "family": "Inter",
+  "weights": {
+   "regular": 400,
+   "semibold": 600,
+   "extrabold": 800
+  }
+ },
+ "labels": [
+  {
+   "id": "prov:01",
+   "kind": "region",
+   "text": "Álava",
+   "anchor_px": {
+    "x": 1916.8,
+    "y": 392.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1916.8,
+    "y": 392.8
+   },
+   "bbox_px": {
+    "x0": 1866.3,
+    "y0": 372.0,
+    "x1": 1967.2,
+    "y1": 413.5
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.89
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:02",
+   "kind": "region",
+   "text": "Albacete",
+   "anchor_px": {
+    "x": 2053.7,
+    "y": 1338.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2053.7,
+    "y": 1338.3
+   },
+   "bbox_px": {
+    "x0": 1929.2,
+    "y0": 1306.4,
+    "x1": 2178.2,
+    "y1": 1370.2
+   },
+   "size_pt": 40,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.44
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:04",
+   "kind": "region",
+   "text": "Almería",
+   "anchor_px": {
+    "x": 2021.3,
+    "y": 1711.1
+   },
+   "offset_km": {
+    "dx": 30,
+    "dy": -10
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2083.5,
+    "y": 1731.9
+   },
+   "bbox_px": {
+    "x0": 1990.4,
+    "y0": 1704.7,
+    "x1": 2176.6,
+    "y1": 1759.0
+   },
+   "size_pt": 34,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:05",
+   "kind": "region",
+   "text": "Ávila",
+   "anchor_px": {
+    "x": 1560.0,
+    "y": 921.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1560.0,
+    "y": 921.3
+   },
+   "bbox_px": {
+    "x0": 1506.1,
+    "y0": 895.8,
+    "x1": 1614.0,
+    "y1": 946.9
+   },
+   "size_pt": 32,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.56
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:07",
+   "kind": "region",
+   "text": "Islas Baleares",
+   "anchor_px": {
+    "x": 2954.5,
+    "y": 1125.0
+   },
+   "offset_km": {
+    "dx": -30,
+    "dy": -75
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2892.3,
+    "y": 1280.4
+   },
+   "bbox_px": {
+    "x0": 2729.7,
+    "y0": 1253.2,
+    "x1": 3054.9,
+    "y1": 1307.5
+   },
+   "size_pt": 34,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:10",
+   "kind": "region",
+   "text": "Cáceres",
+   "anchor_px": {
+    "x": 1324.9,
+    "y": 1113.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1324.9,
+    "y": 1113.2
+   },
+   "bbox_px": {
+    "x0": 1210.7,
+    "y0": 1081.3,
+    "x1": 1439.2,
+    "y1": 1145.1
+   },
+   "size_pt": 40,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.44
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:14",
+   "kind": "region",
+   "text": "Córdoba",
+   "anchor_px": {
+    "x": 1532.8,
+    "y": 1486.1
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1532.8,
+    "y": 1486.1
+   },
+   "bbox_px": {
+    "x0": 1419.8,
+    "y0": 1455.8,
+    "x1": 1645.8,
+    "y1": 1516.5
+   },
+   "size_pt": 38,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.22
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:15",
+   "kind": "region",
+   "text": "A Coruña",
+   "anchor_px": {
+    "x": 934.9,
+    "y": 334.6
+   },
+   "offset_km": {
+    "dx": 15,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 965.9,
+    "y": 334.6
+   },
+   "bbox_px": {
+    "x0": 863.4,
+    "y0": 309.0,
+    "x1": 1068.4,
+    "y1": 360.1
+   },
+   "size_pt": 32,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.56
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:17",
+   "kind": "region",
+   "text": "Girona",
+   "anchor_px": {
+    "x": 2883.2,
+    "y": 572.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2883.2,
+    "y": 572.0
+   },
+   "bbox_px": {
+    "x0": 2800.9,
+    "y0": 543.3,
+    "x1": 2965.5,
+    "y1": 600.7
+   },
+   "size_pt": 36,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.0
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:18",
+   "kind": "region",
+   "text": "Granada",
+   "anchor_px": {
+    "x": 1792.1,
+    "y": 1721.9
+   },
+   "offset_km": {
+    "dx": -30,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1729.9,
+    "y": 1721.9
+   },
+   "bbox_px": {
+    "x0": 1625.4,
+    "y0": 1693.1,
+    "x1": 1834.4,
+    "y1": 1750.6
+   },
+   "size_pt": 36,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.0
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:21",
+   "kind": "region",
+   "text": "Huelva",
+   "anchor_px": {
+    "x": 1152.3,
+    "y": 1607.2
+   },
+   "offset_km": {
+    "dx": 10,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1173.0,
+    "y": 1607.2
+   },
+   "bbox_px": {
+    "x0": 1089.5,
+    "y0": 1580.0,
+    "x1": 1256.5,
+    "y1": 1634.3
+   },
+   "size_pt": 34,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:22",
+   "kind": "region",
+   "text": "Huesca",
+   "anchor_px": {
+    "x": 2393.1,
+    "y": 551.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2393.1,
+    "y": 551.5
+   },
+   "bbox_px": {
+    "x0": 2288.9,
+    "y0": 519.6,
+    "x1": 2497.4,
+    "y1": 583.5
+   },
+   "size_pt": 40,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.44
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:24",
+   "kind": "region",
+   "text": "León",
+   "anchor_px": {
+    "x": 1356.8,
+    "y": 456.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1356.8,
+    "y": 456.6
+   },
+   "bbox_px": {
+    "x0": 1289.3,
+    "y0": 424.7,
+    "x1": 1424.3,
+    "y1": 488.6
+   },
+   "size_pt": 40,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.44
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:28",
+   "kind": "region",
+   "text": "Madrid",
+   "anchor_px": {
+    "x": 1744.9,
+    "y": 947.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1744.9,
+    "y": 947.0
+   },
+   "bbox_px": {
+    "x0": 1666.4,
+    "y0": 921.4,
+    "x1": 1823.5,
+    "y1": 972.5
+   },
+   "size_pt": 32,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.56
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:30",
+   "kind": "region",
+   "text": "Murcia",
+   "anchor_px": {
+    "x": 2157.8,
+    "y": 1536.1
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2157.8,
+    "y": 1536.1
+   },
+   "bbox_px": {
+    "x0": 2066.0,
+    "y0": 1505.8,
+    "x1": 2249.5,
+    "y1": 1566.5
+   },
+   "size_pt": 38,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.22
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:31",
+   "kind": "region",
+   "text": "Navarra",
+   "anchor_px": {
+    "x": 2096.5,
+    "y": 443.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2096.5,
+    "y": 443.2
+   },
+   "bbox_px": {
+    "x0": 1998.2,
+    "y0": 414.5,
+    "x1": 2194.9,
+    "y1": 471.9
+   },
+   "size_pt": 36,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.0
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:32",
+   "kind": "region",
+   "text": "Ourense",
+   "anchor_px": {
+    "x": 1122.6,
+    "y": 550.7
+   },
+   "offset_km": {
+    "dx": 10,
+    "dy": -15
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1143.4,
+    "y": 581.8
+   },
+   "bbox_px": {
+    "x0": 1042.0,
+    "y0": 554.6,
+    "x1": 1244.7,
+    "y1": 608.9
+   },
+   "size_pt": 34,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:33",
+   "kind": "region",
+   "text": "Asturias",
+   "anchor_px": {
+    "x": 1408.9,
+    "y": 295.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1408.9,
+    "y": 295.2
+   },
+   "bbox_px": {
+    "x0": 1296.7,
+    "y0": 264.9,
+    "x1": 1521.0,
+    "y1": 325.5
+   },
+   "size_pt": 38,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.22
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:42",
+   "kind": "region",
+   "text": "Soria",
+   "anchor_px": {
+    "x": 1963.8,
+    "y": 687.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1963.8,
+    "y": 687.7
+   },
+   "bbox_px": {
+    "x0": 1899.2,
+    "y0": 659.0,
+    "x1": 2028.3,
+    "y1": 716.4
+   },
+   "size_pt": 36,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.0
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:43",
+   "kind": "region",
+   "text": "Tarragona",
+   "anchor_px": {
+    "x": 2509.6,
+    "y": 806.4
+   },
+   "offset_km": {
+    "dx": -10,
+    "dy": 20
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2488.9,
+    "y": 765.0
+   },
+   "bbox_px": {
+    "x0": 2366.5,
+    "y0": 737.8,
+    "x1": 2611.3,
+    "y1": 792.1
+   },
+   "size_pt": 34,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:44",
+   "kind": "region",
+   "text": "Teruel",
+   "anchor_px": {
+    "x": 2239.6,
+    "y": 926.1
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2239.6,
+    "y": 926.1
+   },
+   "bbox_px": {
+    "x0": 2156.2,
+    "y0": 895.8,
+    "x1": 2323.0,
+    "y1": 956.4
+   },
+   "size_pt": 38,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.22
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:45",
+   "kind": "region",
+   "text": "Toledo",
+   "anchor_px": {
+    "x": 1641.7,
+    "y": 1087.5
+   },
+   "offset_km": {
+    "dx": 30,
+    "dy": -8
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1703.9,
+    "y": 1104.1
+   },
+   "bbox_px": {
+    "x0": 1614.5,
+    "y0": 1073.7,
+    "x1": 1793.3,
+    "y1": 1134.4
+   },
+   "size_pt": 38,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.22
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:46",
+   "kind": "region",
+   "text": "Valencia",
+   "anchor_px": {
+    "x": 2289.7,
+    "y": 1232.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2289.7,
+    "y": 1232.8
+   },
+   "bbox_px": {
+    "x0": 2181.8,
+    "y0": 1204.1,
+    "x1": 2397.6,
+    "y1": 1261.6
+   },
+   "size_pt": 36,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.0
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:47",
+   "kind": "region",
+   "text": "Valladolid",
+   "anchor_px": {
+    "x": 1563.9,
+    "y": 704.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1563.9,
+    "y": 704.2
+   },
+   "bbox_px": {
+    "x0": 1439.9,
+    "y0": 675.4,
+    "x1": 1687.8,
+    "y1": 732.9
+   },
+   "size_pt": 36,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.0
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:51",
+   "kind": "region",
+   "text": "Ceuta",
+   "anchor_px": {
+    "x": 1442.5,
+    "y": 2001.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": -55,
+    "ty": 25
+   },
+   "text_px": {
+    "x": 1328.5,
+    "y": 1949.2
+   },
+   "bbox_px": {
+    "x0": 1212.3,
+    "y0": 1926.9,
+    "x1": 1440.7,
+    "y1": 2000.2
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.11
+   },
+   "ha": "right",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1328.5,
+     "y": 1949.2
+    },
+    "to_px": {
+     "x": 1442.5,
+     "y": 2001.0
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "prov:35",
+   "kind": "region",
+   "text": "Las Palmas",
+   "anchor_px": {
+    "x": 849.0,
+    "y": 1970.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": -55
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 849.0,
+    "y": 2084.7
+   },
+   "bbox_px": {
+    "x0": 726.9,
+    "y0": 2059.1,
+    "x1": 971.1,
+    "y1": 2110.2
+   },
+   "size_pt": 32,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.56
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": true,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "country:PORTUGAL",
+   "kind": "country",
+   "text": "PORTUGAL",
+   "anchor_px": {
+    "x": 983.8,
+    "y": 1140.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 983.8,
+    "y": 1140.7
+   },
+   "bbox_px": {
+    "x0": 947.1,
+    "y0": 964.6,
+    "x1": 1020.5,
+    "y1": 1316.8
+   },
+   "size_pt": 46,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 90,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "country:FRANCIA",
+   "kind": "country",
+   "text": "FRANCIA",
+   "anchor_px": {
+    "x": 2665.8,
+    "y": 154.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2665.8,
+    "y": 154.5
+   },
+   "bbox_px": {
+    "x0": 2522.8,
+    "y0": 117.8,
+    "x1": 2808.8,
+    "y1": 191.3
+   },
+   "size_pt": 46,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "country:MARRUECOS",
+   "kind": "country",
+   "text": "MARRUECOS",
+   "anchor_px": {
+    "x": 1523.9,
+    "y": 2203.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1523.9,
+    "y": 2203.9
+   },
+   "bbox_px": {
+    "x0": 1361.4,
+    "y0": 2175.1,
+    "x1": 1686.4,
+    "y1": 2232.6
+   },
+   "size_pt": 36,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  }
+ ],
+ "locked": [
+  {
+   "id": "locked:inset-caption",
+   "kind": "inset-caption",
+   "text": "Islas Canarias",
+   "bbox_px": {
+    "x0": 363.8,
+    "y0": 1703.9,
+    "x1": 750.9,
+    "y1": 1767.8
+   }
+  },
+  {
+   "id": "locked:footer",
+   "kind": "footer",
+   "text": "Provincias de España (nombres 1 de 2) · colores por comunidad autónoma",
+   "bbox_px": {
+    "x0": 2468.0,
+    "y0": 2116.6,
+    "x1": 3968.0,
+    "y1": 2164.5
+   }
+  },
+  {
+   "id": "locked:attribution",
+   "kind": "attribution",
+   "text": "Datos: IGN España · Natural Earth",
+   "bbox_px": {
+    "x0": 3530.6,
+    "y0": 2191.1,
+    "x1": 3968.0,
+    "y1": 2223.0
+   }
+  }
+ ]
+}

@@ -5,7 +5,7 @@ from dataclasses import dataclass
 import geopandas as gpd
 from shapely.geometry import LineString
 
-from . import draw, geo
+from . import draw, geo, labeling
 from .maps_spain import KM, _draw_country_labels, _project_lonlat, spain_scene
 
 # Palette for the physical map.
@@ -139,15 +139,19 @@ def map_spain_fisica():
     # Labels.
     for name, spec in RIVER_LABELS.items():
         x, y = _project_lonlat(spec.lon, spec.lat)
-        t = draw.halo_text(ax, x, y, name, spec.size, weight="semibold",
-                           color=RIVER, halo=LAND, halo_width=5, zorder=8)
-        t.set_rotation(spec.rotation)
+        labeling.emit(ax, labeling.Spec(
+            id=f"river:{name}", kind="river", text=name, anchor=(x, y),
+            size=spec.size, weight="semibold", color=RIVER, halo=LAND,
+            halo_width=5, zorder=8, rotation=spec.rotation,
+            editable=("dx", "dy", "size", "rotation")))
     for r in RANGE_LABELS:
         x, y = _project_lonlat(r.lon, r.lat)
-        t = draw.halo_text(ax, x, y, r.text, r.size, weight="extrabold",
-                           color=RANGE_LABEL, halo=LAND, halo_width=5,
-                           zorder=7)
-        t.set_rotation(r.rotation)
+        labeling.emit(ax, labeling.Spec(
+            id=f"range:{r.text.replace(chr(10), ' ')}", kind="range",
+            text=r.text, anchor=(x, y), size=r.size, weight="extrabold",
+            color=RANGE_LABEL, halo=LAND, halo_width=5, zorder=7,
+            rotation=r.rotation,
+            editable=("dx", "dy", "size", "rotation")))
 
     _draw_country_labels(ax, s["frame"])
     draw.draw_footer(ax, s["frame"], "Ríos y montañas principales de España")

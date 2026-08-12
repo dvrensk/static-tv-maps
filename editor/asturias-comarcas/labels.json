@@ -1,0 +1,613 @@
+{
+ "schema": 1,
+ "map": "asturias-comarcas",
+ "canvas": {
+  "width_px": 4000,
+  "height_px": 2250,
+  "dpi": 100
+ },
+ "km_per_px": 0.056263,
+ "canary_inset_px": null,
+ "font": {
+  "family": "Inter",
+  "weights": {
+   "regular": 400,
+   "semibold": 600,
+   "extrabold": 800
+  }
+ },
+ "labels": [
+  {
+   "id": "comarca:Avilés",
+   "kind": "region",
+   "text": "Avilés",
+   "anchor_px": {
+    "x": 1691.8,
+    "y": 772.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 8
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1691.8,
+    "y": 630.7
+   },
+   "bbox_px": {
+    "x0": 1611.1,
+    "y0": 600.3,
+    "x1": 1772.5,
+    "y1": 661.0
+   },
+   "size_pt": 38,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.22
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "comarca:Caudal",
+   "kind": "region",
+   "text": "Caudal",
+   "anchor_px": {
+    "x": 2139.2,
+    "y": 1475.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2139.2,
+    "y": 1475.5
+   },
+   "bbox_px": {
+    "x0": 2033.7,
+    "y0": 1440.3,
+    "x1": 2244.7,
+    "y1": 1510.6
+   },
+   "size_pt": 44,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.89
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "comarca:Eo-Navia",
+   "kind": "region",
+   "text": "Eo-Navia",
+   "anchor_px": {
+    "x": 527.4,
+    "y": 862.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 527.4,
+    "y": 862.9
+   },
+   "bbox_px": {
+    "x0": 376.5,
+    "y0": 824.6,
+    "x1": 678.2,
+    "y1": 901.2
+   },
+   "size_pt": 48,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.33
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "comarca:Gijón",
+   "kind": "region",
+   "text": "Gijón",
+   "anchor_px": {
+    "x": 2468.8,
+    "y": 816.2
+   },
+   "offset_km": {
+    "dx": -10,
+    "dy": 2
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2291.1,
+    "y": 780.7
+   },
+   "bbox_px": {
+    "x0": 2223.1,
+    "y0": 750.4,
+    "x1": 2359.1,
+    "y1": 811.0
+   },
+   "size_pt": 38,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.22
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "comarca:Nalón",
+   "kind": "region",
+   "text": "Nalón",
+   "anchor_px": {
+    "x": 2685.7,
+    "y": 1450.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2685.7,
+    "y": 1450.2
+   },
+   "bbox_px": {
+    "x0": 2598.2,
+    "y0": 1415.1,
+    "x1": 2773.2,
+    "y1": 1485.3
+   },
+   "size_pt": 44,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 4.89
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "comarca:Narcea",
+   "kind": "region",
+   "text": "Narcea",
+   "anchor_px": {
+    "x": 950.3,
+    "y": 1288.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 950.3,
+    "y": 1288.8
+   },
+   "bbox_px": {
+    "x0": 832.9,
+    "y0": 1250.5,
+    "x1": 1067.7,
+    "y1": 1327.1
+   },
+   "size_pt": 48,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.33
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "comarca:Oriente",
+   "kind": "region",
+   "text": "Oriente",
+   "anchor_px": {
+    "x": 3055.0,
+    "y": 1158.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3055.0,
+    "y": 1158.4
+   },
+   "bbox_px": {
+    "x0": 2931.3,
+    "y0": 1120.1,
+    "x1": 3178.8,
+    "y1": 1196.7
+   },
+   "size_pt": 48,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.33
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "comarca:Oviedo",
+   "kind": "region",
+   "text": "Oviedo",
+   "anchor_px": {
+    "x": 1631.0,
+    "y": 1283.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1631.0,
+    "y": 1283.3
+   },
+   "bbox_px": {
+    "x0": 1513.5,
+    "y0": 1245.0,
+    "x1": 1748.5,
+    "y1": 1321.6
+   },
+   "size_pt": 48,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 5.33
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "neighbor:GALICIA",
+   "kind": "country",
+   "text": "GALICIA",
+   "anchor_px": {
+    "x": 212.8,
+    "y": 1747.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 212.8,
+    "y": 1747.8
+   },
+   "bbox_px": {
+    "x0": 90.1,
+    "y0": 1712.7,
+    "x1": 335.4,
+    "y1": 1782.9
+   },
+   "size_pt": 44,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:LEÓN",
+   "kind": "country",
+   "text": "LEÓN",
+   "anchor_px": {
+    "x": 1964.1,
+    "y": 1899.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1964.1,
+    "y": 1899.0
+   },
+   "bbox_px": {
+    "x0": 1882.1,
+    "y0": 1863.8,
+    "x1": 2046.1,
+    "y1": 1934.1
+   },
+   "size_pt": 44,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:CANTABRIA",
+   "kind": "country",
+   "text": "CANTABRIA",
+   "anchor_px": {
+    "x": 3759.9,
+    "y": 1334.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3759.9,
+    "y": 1334.5
+   },
+   "bbox_px": {
+    "x0": 3583.4,
+    "y0": 1299.4,
+    "x1": 3936.5,
+    "y1": 1369.6
+   },
+   "size_pt": 44,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:MAR CANTÁBRICO",
+   "kind": "country",
+   "text": "MAR CANTÁBRICO",
+   "anchor_px": {
+    "x": 2090.9,
+    "y": 282.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2090.9,
+    "y": 282.7
+   },
+   "bbox_px": {
+    "x0": 1761.5,
+    "y0": 241.2,
+    "x1": 2420.4,
+    "y1": 324.2
+   },
+   "size_pt": 52,
+   "weight": "semibold",
+   "color": "#7da7bf",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  }
+ ],
+ "locked": [
+  {
+   "id": "locked:footer",
+   "kind": "footer",
+   "text": "Comarcas de Asturias (ocho comarcas funcionales, decreto 11/91)",
+   "bbox_px": {
+    "x0": 2634.6,
+    "y0": 2116.6,
+    "x1": 3968.0,
+    "y1": 2164.5
+   }
+  },
+  {
+   "id": "locked:attribution",
+   "kind": "attribution",
+   "text": "Datos: IGN España",
+   "bbox_px": {
+    "x0": 3724.0,
+    "y0": 2191.1,
+    "x1": 3968.0,
+    "y1": 2223.0
+   }
+  }
+ ]
+}

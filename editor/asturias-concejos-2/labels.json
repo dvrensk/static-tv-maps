@@ -1,0 +1,2197 @@
+{
+ "schema": 1,
+ "map": "asturias-concejos-2",
+ "canvas": {
+  "width_px": 4000,
+  "height_px": 2250,
+  "dpi": 100
+ },
+ "km_per_px": 0.056263,
+ "canary_inset_px": null,
+ "font": {
+  "family": "Inter",
+  "weights": {
+   "regular": 400,
+   "semibold": 600,
+   "extrabold": 800
+  }
+ },
+ "labels": [
+  {
+   "id": "concejo:33003",
+   "kind": "region",
+   "text": "Amieva",
+   "anchor_px": {
+    "x": 3007.8,
+    "y": 1269.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3007.8,
+    "y": 1269.7
+   },
+   "bbox_px": {
+    "x0": 2941.8,
+    "y0": 1249.7,
+    "x1": 3073.8,
+    "y1": 1289.6
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33005",
+   "kind": "region",
+   "text": "Belmonte\nde Miranda",
+   "anchor_px": {
+    "x": 1391.8,
+    "y": 1204.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1391.8,
+    "y": 1204.8
+   },
+   "bbox_px": {
+    "x0": 1285.2,
+    "y0": 1160.1,
+    "x1": 1498.4,
+    "y1": 1249.5
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33006",
+   "kind": "region",
+   "text": "Bimenes",
+   "anchor_px": {
+    "x": 2400.5,
+    "y": 1132.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2400.5,
+    "y": 1132.8
+   },
+   "bbox_px": {
+    "x0": 2326.0,
+    "y0": 1112.8,
+    "x1": 2475.0,
+    "y1": 1152.7
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33010",
+   "kind": "region",
+   "text": "Candamo",
+   "anchor_px": {
+    "x": 1692.0,
+    "y": 864.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1692.0,
+    "y": 864.7
+   },
+   "bbox_px": {
+    "x0": 1610.0,
+    "y0": 844.8,
+    "x1": 1774.0,
+    "y1": 884.7
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33012",
+   "kind": "region",
+   "text": "Cangas\nde Onís",
+   "anchor_px": {
+    "x": 3109.8,
+    "y": 1134.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3109.8,
+    "y": 1134.7
+   },
+   "bbox_px": {
+    "x0": 3036.3,
+    "y0": 1090.0,
+    "x1": 3183.3,
+    "y1": 1179.4
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33013",
+   "kind": "region",
+   "text": "Caravia",
+   "anchor_px": {
+    "x": 2950.1,
+    "y": 884.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 2,
+    "ty": 10
+   },
+   "text_px": {
+    "x": 2985.6,
+    "y": 706.5
+   },
+   "bbox_px": {
+    "x0": 2950.4,
+    "y0": 687.3,
+    "x1": 3113.3,
+    "y1": 882.3
+   },
+   "size_pt": 24,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.67
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 2985.6,
+     "y": 706.5
+    },
+    "to_px": {
+     "x": 2950.1,
+     "y": 884.2
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33015",
+   "kind": "region",
+   "text": "Caso",
+   "anchor_px": {
+    "x": 2710.1,
+    "y": 1463.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2710.1,
+    "y": 1463.7
+   },
+   "bbox_px": {
+    "x0": 2661.6,
+    "y0": 1441.4,
+    "x1": 2758.6,
+    "y1": 1486.1
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33016",
+   "kind": "region",
+   "text": "Castrillón",
+   "anchor_px": {
+    "x": 1806.2,
+    "y": 677.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 10,
+    "ty": 14
+   },
+   "text_px": {
+    "x": 1983.9,
+    "y": 428.5
+   },
+   "bbox_px": {
+    "x0": 1807.3,
+    "y0": 407.7,
+    "x1": 2156.0,
+    "y1": 675.7
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.89
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1983.9,
+     "y": 428.5
+    },
+    "to_px": {
+     "x": 1806.2,
+     "y": 677.3
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33017",
+   "kind": "region",
+   "text": "Castropol",
+   "anchor_px": {
+    "x": 334.7,
+    "y": 690.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 334.7,
+    "y": 690.9
+   },
+   "bbox_px": {
+    "x0": 250.7,
+    "y0": 671.0,
+    "x1": 418.7,
+    "y1": 710.9
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33019",
+   "kind": "region",
+   "text": "Colunga",
+   "anchor_px": {
+    "x": 2814.7,
+    "y": 865.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2814.7,
+    "y": 865.5
+   },
+   "bbox_px": {
+    "x0": 2743.2,
+    "y0": 845.5,
+    "x1": 2886.2,
+    "y1": 885.4
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33023",
+   "kind": "region",
+   "text": "El Franco",
+   "anchor_px": {
+    "x": 596.5,
+    "y": 682.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 596.5,
+    "y": 682.4
+   },
+   "bbox_px": {
+    "x0": 518.1,
+    "y0": 662.4,
+    "x1": 674.9,
+    "y1": 702.3
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33024",
+   "kind": "region",
+   "text": "Gijón",
+   "anchor_px": {
+    "x": 2287.6,
+    "y": 790.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2287.6,
+    "y": 790.3
+   },
+   "bbox_px": {
+    "x0": 2234.1,
+    "y0": 766.4,
+    "x1": 2341.1,
+    "y1": 814.3
+   },
+   "size_pt": 30,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.33
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33025",
+   "kind": "region",
+   "text": "Gozón",
+   "anchor_px": {
+    "x": 2014.2,
+    "y": 580.1
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": -2
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2014.2,
+    "y": 615.6
+   },
+   "bbox_px": {
+    "x0": 1957.5,
+    "y0": 594.8,
+    "x1": 2070.9,
+    "y1": 636.4
+   },
+   "size_pt": 26,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.89
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33028",
+   "kind": "region",
+   "text": "Ibias",
+   "anchor_px": {
+    "x": 516.3,
+    "y": 1625.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 516.3,
+    "y": 1625.7
+   },
+   "bbox_px": {
+    "x0": 470.8,
+    "y0": 1603.4,
+    "x1": 561.8,
+    "y1": 1648.1
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33029",
+   "kind": "region",
+   "text": "Illano",
+   "anchor_px": {
+    "x": 553.2,
+    "y": 1035.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 553.2,
+    "y": 1035.6
+   },
+   "bbox_px": {
+    "x0": 506.2,
+    "y0": 1015.6,
+    "x1": 600.2,
+    "y1": 1055.6
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33031",
+   "kind": "region",
+   "text": "Langreo",
+   "anchor_px": {
+    "x": 2199.0,
+    "y": 1157.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2199.0,
+    "y": 1157.5
+   },
+   "bbox_px": {
+    "x0": 2128.4,
+    "y0": 1137.5,
+    "x1": 2269.5,
+    "y1": 1177.5
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33032",
+   "kind": "region",
+   "text": "Laviana",
+   "anchor_px": {
+    "x": 2438.2,
+    "y": 1300.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2438.2,
+    "y": 1300.4
+   },
+   "bbox_px": {
+    "x0": 2370.5,
+    "y0": 1280.5,
+    "x1": 2505.9,
+    "y1": 1320.4
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33034",
+   "kind": "region",
+   "text": "Valdés",
+   "anchor_px": {
+    "x": 1181.7,
+    "y": 754.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1181.7,
+    "y": 754.2
+   },
+   "bbox_px": {
+    "x0": 1116.4,
+    "y0": 731.9,
+    "x1": 1247.0,
+    "y1": 776.6
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33035",
+   "kind": "region",
+   "text": "Llanera",
+   "anchor_px": {
+    "x": 2038.8,
+    "y": 881.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2038.8,
+    "y": 881.3
+   },
+   "bbox_px": {
+    "x0": 1974.2,
+    "y0": 861.3,
+    "x1": 2103.5,
+    "y1": 901.2
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33036",
+   "kind": "region",
+   "text": "Llanes",
+   "anchor_px": {
+    "x": 3328.8,
+    "y": 991.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3328.8,
+    "y": 991.6
+   },
+   "bbox_px": {
+    "x0": 3265.8,
+    "y0": 969.2,
+    "x1": 3391.8,
+    "y1": 1013.9
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33037",
+   "kind": "region",
+   "text": "Mieres",
+   "anchor_px": {
+    "x": 2100.7,
+    "y": 1300.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2100.7,
+    "y": 1300.3
+   },
+   "bbox_px": {
+    "x0": 2041.2,
+    "y0": 1280.3,
+    "x1": 2160.2,
+    "y1": 1320.3
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33038",
+   "kind": "region",
+   "text": "Morcín",
+   "anchor_px": {
+    "x": 1922.9,
+    "y": 1219.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1922.9,
+    "y": 1219.8
+   },
+   "bbox_px": {
+    "x0": 1862.9,
+    "y0": 1199.9,
+    "x1": 1982.9,
+    "y1": 1239.8
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33042",
+   "kind": "region",
+   "text": "Noreña",
+   "anchor_px": {
+    "x": 2199.6,
+    "y": 984.6
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 7,
+    "ty": 9
+   },
+   "text_px": {
+    "x": 2324.0,
+    "y": 824.6
+   },
+   "bbox_px": {
+    "x0": 2200.8,
+    "y0": 805.5,
+    "x1": 2445.1,
+    "y1": 983.0
+   },
+   "size_pt": 24,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.67
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 2324.0,
+     "y": 824.6
+    },
+    "to_px": {
+     "x": 2199.6,
+     "y": 984.6
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33043",
+   "kind": "region",
+   "text": "Onís",
+   "anchor_px": {
+    "x": 3260.1,
+    "y": 1161.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3260.1,
+    "y": 1161.4
+   },
+   "bbox_px": {
+    "x0": 3221.1,
+    "y0": 1141.4,
+    "x1": 3299.1,
+    "y1": 1181.3
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33046",
+   "kind": "region",
+   "text": "Peñamellera\nAlta",
+   "anchor_px": {
+    "x": 3619.1,
+    "y": 1178.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3619.1,
+    "y": 1178.4
+   },
+   "bbox_px": {
+    "x0": 3511.6,
+    "y0": 1138.5,
+    "x1": 3726.6,
+    "y1": 1218.4
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33048",
+   "kind": "region",
+   "text": "Pesoz",
+   "anchor_px": {
+    "x": 527.3,
+    "y": 1159.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": -4,
+    "ty": -16
+   },
+   "text_px": {
+    "x": 456.2,
+    "y": 1444.3
+   },
+   "bbox_px": {
+    "x0": 365.1,
+    "y0": 1161.9,
+    "x1": 526.8,
+    "y1": 1461.9
+   },
+   "size_pt": 22,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.5
+   },
+   "ha": "right",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 456.2,
+     "y": 1444.3
+    },
+    "to_px": {
+     "x": 527.3,
+     "y": 1159.9
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33049",
+   "kind": "region",
+   "text": "Piloña",
+   "anchor_px": {
+    "x": 2737.6,
+    "y": 1124.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2737.6,
+    "y": 1124.8
+   },
+   "bbox_px": {
+    "x0": 2678.6,
+    "y0": 1102.5,
+    "x1": 2796.6,
+    "y1": 1147.2
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33053",
+   "kind": "region",
+   "text": "Quirós",
+   "anchor_px": {
+    "x": 1804.8,
+    "y": 1455.1
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1804.8,
+    "y": 1455.1
+   },
+   "bbox_px": {
+    "x0": 1741.4,
+    "y0": 1432.8,
+    "x1": 1868.3,
+    "y1": 1477.5
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33054",
+   "kind": "region",
+   "text": "Las\nRegueras",
+   "anchor_px": {
+    "x": 1819.5,
+    "y": 923.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1819.5,
+    "y": 923.5
+   },
+   "bbox_px": {
+    "x0": 1738.0,
+    "y0": 883.6,
+    "x1": 1901.0,
+    "y1": 963.4
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33056",
+   "kind": "region",
+   "text": "Ribadesella",
+   "anchor_px": {
+    "x": 3152.9,
+    "y": 933.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3152.9,
+    "y": 933.0
+   },
+   "bbox_px": {
+    "x0": 3052.8,
+    "y0": 913.1,
+    "x1": 3253.1,
+    "y1": 953.0
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33058",
+   "kind": "region",
+   "text": "Riosa",
+   "anchor_px": {
+    "x": 1925.2,
+    "y": 1346.2
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1925.2,
+    "y": 1346.2
+   },
+   "bbox_px": {
+    "x0": 1878.2,
+    "y0": 1326.3,
+    "x1": 1972.2,
+    "y1": 1366.2
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33059",
+   "kind": "region",
+   "text": "Salas",
+   "anchor_px": {
+    "x": 1384.9,
+    "y": 914.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1384.9,
+    "y": 914.9
+   },
+   "bbox_px": {
+    "x0": 1332.9,
+    "y0": 892.5,
+    "x1": 1436.9,
+    "y1": 937.2
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33061",
+   "kind": "region",
+   "text": "San Martín\nde Oscos",
+   "anchor_px": {
+    "x": 427.0,
+    "y": 1138.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 4
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 427.0,
+    "y": 1067.2
+   },
+   "bbox_px": {
+    "x0": 335.6,
+    "y0": 1028.9,
+    "x1": 518.3,
+    "y1": 1105.5
+   },
+   "size_pt": 24,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.67
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33063",
+   "kind": "region",
+   "text": "San Tirso\nde Abres",
+   "anchor_px": {
+    "x": 140.8,
+    "y": 885.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": 5,
+    "ty": 13
+   },
+   "text_px": {
+    "x": 229.7,
+    "y": 654.4
+   },
+   "bbox_px": {
+    "x0": 141.5,
+    "y0": 619.3,
+    "x1": 373.7,
+    "y1": 883.6
+   },
+   "size_pt": 22,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.5
+   },
+   "ha": "left",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 229.7,
+     "y": 654.4
+    },
+    "to_px": {
+     "x": 140.8,
+     "y": 885.4
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33064",
+   "kind": "region",
+   "text": "Santo\nAdriano",
+   "anchor_px": {
+    "x": 1800.4,
+    "y": 1184.9
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1800.4,
+    "y": 1184.9
+   },
+   "bbox_px": {
+    "x0": 1739.3,
+    "y0": 1149.7,
+    "x1": 1861.4,
+    "y1": 1220.0
+   },
+   "size_pt": 22,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33065",
+   "kind": "region",
+   "text": "Sariego",
+   "anchor_px": {
+    "x": 2449.4,
+    "y": 971.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2449.4,
+    "y": 971.0
+   },
+   "bbox_px": {
+    "x0": 2390.9,
+    "y0": 953.4,
+    "x1": 2508.0,
+    "y1": 988.5
+   },
+   "size_pt": 22,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.5
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33069",
+   "kind": "region",
+   "text": "Soto del\nBarco",
+   "anchor_px": {
+    "x": 1714.7,
+    "y": 709.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": {
+    "tx": -12,
+    "ty": 18
+   },
+   "text_px": {
+    "x": 1501.4,
+    "y": 389.9
+   },
+   "bbox_px": {
+    "x0": 1368.7,
+    "y0": 351.6,
+    "x1": 1713.5,
+    "y1": 708.2
+   },
+   "size_pt": 24,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.67
+   },
+   "ha": "right",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": {
+    "from_px": {
+     "x": 1501.4,
+     "y": 389.9
+    },
+    "to_px": {
+     "x": 1714.7,
+     "y": 709.8
+    },
+    "color": "#55524d",
+    "width_pt": 2.2,
+    "shrink_from_pt": 8,
+    "shrink_to_pt": 2
+   },
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33070",
+   "kind": "region",
+   "text": "Tapia",
+   "anchor_px": {
+    "x": 474.8,
+    "y": 700.4
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 474.8,
+    "y": 700.4
+   },
+   "bbox_px": {
+    "x0": 427.6,
+    "y0": 680.4,
+    "x1": 522.1,
+    "y1": 720.3
+   },
+   "size_pt": 25,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 2.78
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "concejo:33073",
+   "kind": "region",
+   "text": "Tineo",
+   "anchor_px": {
+    "x": 1019.4,
+    "y": 1031.3
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1019.4,
+    "y": 1031.3
+   },
+   "bbox_px": {
+    "x0": 965.4,
+    "y0": 1009.0,
+    "x1": 1073.4,
+    "y1": 1053.7
+   },
+   "size_pt": 28,
+   "weight": "extrabold",
+   "color": "#26241f",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 3.11
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "tx",
+    "ty",
+    "size",
+    "ha"
+   ]
+  },
+  {
+   "id": "neighbor:GALICIA",
+   "kind": "country",
+   "text": "GALICIA",
+   "anchor_px": {
+    "x": 212.8,
+    "y": 1747.8
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 212.8,
+    "y": 1747.8
+   },
+   "bbox_px": {
+    "x0": 90.1,
+    "y0": 1712.7,
+    "x1": 335.4,
+    "y1": 1782.9
+   },
+   "size_pt": 44,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:LEÓN",
+   "kind": "country",
+   "text": "LEÓN",
+   "anchor_px": {
+    "x": 1964.1,
+    "y": 1899.0
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 1964.1,
+    "y": 1899.0
+   },
+   "bbox_px": {
+    "x0": 1882.1,
+    "y0": 1863.8,
+    "x1": 2046.1,
+    "y1": 1934.1
+   },
+   "size_pt": 44,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:CANTABRIA",
+   "kind": "country",
+   "text": "CANTABRIA",
+   "anchor_px": {
+    "x": 3759.9,
+    "y": 1334.5
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 3759.9,
+    "y": 1334.5
+   },
+   "bbox_px": {
+    "x0": 3583.4,
+    "y0": 1299.4,
+    "x1": 3936.5,
+    "y1": 1369.6
+   },
+   "size_pt": 44,
+   "weight": "semibold",
+   "color": "#a09f99",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  },
+  {
+   "id": "neighbor:MAR CANTÁBRICO",
+   "kind": "country",
+   "text": "MAR CANTÁBRICO",
+   "anchor_px": {
+    "x": 2090.9,
+    "y": 282.7
+   },
+   "offset_km": {
+    "dx": 0.0,
+    "dy": 0.0
+   },
+   "callout_km": null,
+   "text_px": {
+    "x": 2090.9,
+    "y": 282.7
+   },
+   "bbox_px": {
+    "x0": 1761.5,
+    "y0": 241.2,
+    "x1": 2420.4,
+    "y1": 324.2
+   },
+   "size_pt": 52,
+   "weight": "semibold",
+   "color": "#7da7bf",
+   "halo": {
+    "color": "#ffffff",
+    "width_pt": 6
+   },
+   "ha": "center",
+   "va": "center",
+   "rotation": 0.0,
+   "linespacing": 0.95,
+   "leader": null,
+   "sub": null,
+   "badge": null,
+   "marker": null,
+   "in_canary_inset": false,
+   "editable": [
+    "dx",
+    "dy",
+    "size",
+    "rotation"
+   ]
+  }
+ ],
+ "locked": [
+  {
+   "id": "locked:footer",
+   "kind": "footer",
+   "text": "Concejos de Asturias (nombres 2 de 2)",
+   "bbox_px": {
+    "x0": 3175.5,
+    "y0": 2116.6,
+    "x1": 3968.0,
+    "y1": 2164.5
+   }
+  },
+  {
+   "id": "locked:attribution",
+   "kind": "attribution",
+   "text": "Datos: IGN España",
+   "bbox_px": {
+    "x0": 3724.0,
+    "y0": 2191.1,
+    "x1": 3968.0,
+    "y1": 2223.0
+   }
+  }
+ ]
+}

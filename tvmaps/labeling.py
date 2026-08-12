@@ -58,6 +58,12 @@ class Spec:
     zorder: float | None = None  # None => draw helper default
     badge: dict | None = None   # {"number": int, "face": "#..."} => numbered label
     marker: dict | None = None  # descriptive only; dots/stars stay baked
+    # Custom leader line (product zones): {"color", "width", "shrinkA",
+    # "shrinkB", "zorder"}. When set, callouts draw their own annotate with
+    # these parameters instead of going through draw.callout.
+    leader_style: dict | None = None
+    # Smaller second line under the main text: {"text": str, "size": float}.
+    sub: dict | None = None
     in_inset: bool = False
     editable: tuple = ("dx", "dy", "tx", "ty", "size", "ha")
 
@@ -193,6 +199,19 @@ def emit(ax, spec: Spec):
                 ha=spec.ha, va=spec.va, badge_face=spec.badge["face"],
                 weight=weight,
                 **({"zorder": spec.zorder} if spec.zorder is not None else {}))
+    elif is_callout and spec.leader_style is not None:
+        ls = spec.leader_style
+        tx, ty = x + spec.tx * KM, y + spec.ty * KM
+        ax.annotate("", xy=(x, y), xytext=(tx, ty), zorder=ls["zorder"],
+                    arrowprops=dict(arrowstyle="-", color=ls["color"],
+                                    linewidth=ls["width"],
+                                    shrinkA=ls["shrinkA"],
+                                    shrinkB=ls["shrinkB"]))
+        t = draw.halo_text(
+            ax, tx, ty, spec.text, spec.size, weight=weight, color=color,
+            halo=halo, halo_width=spec.halo_width, ha=spec.ha, va=spec.va,
+            linespacing=spec.linespacing,
+            **({"zorder": spec.zorder} if spec.zorder is not None else {}))
     elif is_callout:
         t = draw.callout(
             ax, (x, y), (x + spec.tx * KM, y + spec.ty * KM), spec.text,
@@ -207,6 +226,21 @@ def emit(ax, spec: Spec):
             **({"zorder": spec.zorder} if spec.zorder is not None else {}))
     if spec.rotation:
         t.set_rotation(spec.rotation)
+    if spec.sub is not None:
+        # Second line under the main text; the offset formula matches the
+        # historical maps_productos layout exactly.
+        x0, x1 = ax.get_xlim()
+        kper_px = (x1 - x0) / style.WIDTH_PX
+        n_lines = spec.text.count("\n") + 1
+        sub_dy = ((spec.size * (0.45 + 0.95 * (n_lines - 1))
+                   + spec.sub["size"] * 0.75) * (style.DPI / 72) * kper_px)
+        sx = x + (spec.tx * KM if is_callout else 0)
+        sy = y + (spec.ty * KM if is_callout else 0)
+        st = draw.halo_text(
+            ax, sx, sy - sub_dy, spec.sub["text"], spec.sub["size"],
+            weight="semibold", color=color, halo_width=4, ha=spec.ha,
+            **({"zorder": spec.zorder} if spec.zorder is not None else {}))
+        st.set_rotation(spec.rotation)
 
     if exporting:
         new = [c for c in ax.get_children() if id(c) not in before]
@@ -301,20 +335,35 @@ def _record(ax, spec: Spec, weight, x, y, is_callout, artists):
         "va": spec.va,
         "rotation": spec.rotation,
         "linespacing": spec.linespacing,
-        "leader": ({
-            "from_px": {"x": txp, "y": typ},
-            "to_px": {"x": _to_px(ax, x, y)[0], "y": _to_px(ax, x, y)[1]},
-            "color": spec.line_color,
-            "width_pt": 2.2,
-            "shrink_from_pt": 8,
-            "shrink_to_pt": 2,
-        } if is_callout else None),
+        "leader": (_leader_info(ax, spec, x, y, txp, typ)
+                   if is_callout else None),
+        "sub": ({"text": spec.sub["text"], "size_pt": spec.sub["size"]}
+                if spec.sub is not None else None),
         "badge": _badge_geometry(ax, spec, weight, tx_x, tx_y, artists),
         "marker": spec.marker,
         "in_canary_inset": _in_inset(tx_x, tx_y),
         "editable": list(spec.editable),
     }
     CTX.records.append(entry)
+
+
+def _leader_info(ax, spec, x, y, txp, typ):
+    axp, ayp = _to_px(ax, x, y)
+    if spec.leader_style is not None:
+        ls = spec.leader_style
+        width, shrink_from, shrink_to = ls["width"], ls["shrinkA"], ls["shrinkB"]
+        color = ls["color"]
+    else:
+        width, shrink_from, shrink_to = 2.2, 8, 2
+        color = spec.line_color
+    return {
+        "from_px": {"x": txp, "y": typ},
+        "to_px": {"x": axp, "y": ayp},
+        "color": color,
+        "width_pt": width,
+        "shrink_from_pt": shrink_from,
+        "shrink_to_pt": shrink_to,
+    }
 
 
 def _badge_geometry(ax, spec, weight, tx_x, tx_y, artists):
