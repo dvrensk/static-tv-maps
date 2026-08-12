@@ -21,6 +21,23 @@ requirements:
 
 - `generate.py` — CLI. `python generate.py all | <map-name> | --list [--jpg]`.
   Map names are derived from `render_*` functions in `tvmaps/maps_*.py`.
+  `python generate.py export all | <map-name>` writes
+  `editor/<map>/{base.png,labels.json}` (see below).
+- `tvmaps/labeling.py` — normalized label layer. Every hand-tuned label is
+  drawn through `labeling.emit(ax, Spec(...))`, which (a) applies any
+  committed `overrides/<map>.json` on top of the Python literals, and
+  (b) in export mode suppresses the label from the image and records it in
+  a pixel-coordinate manifest instead. The external layout editor (tvOS
+  app, `tvos/`) works from `editor/<map>/` and writes `overrides/`;
+  protocol in `docs/editor-protocol.md`. New labels must go through
+  `emit()` with a stable id, or the editor won't see them.
+- `overrides/` — per-map JSON label patches written by the editor; applied
+  at render time, warn-and-skip on bad entries. The Python literals stay
+  canonical; fold long-lived overrides back into them when convenient.
+  `.github/workflows/label-overrides.yml` re-renders affected maps when
+  overrides land on main.
+- `tests/` — `python -m unittest discover tests` (manifest schema, drag
+  math, override behaviors).
 - `tvmaps/style.py` — canvas constants, palette (keyed by INE community
   code), `COUNTRY_COLORS` for the América Central maps (keyed by ISO alpha-2),
   display-name overrides, font loading (bundled Inter in `assets/fonts/`).

@@ -1,0 +1,78 @@
+name: apply-label-overrides
+
+# When the layout editor (tvOS app) commits an overrides/<map>.json, re-render
+# the affected maps and re-export their editor manifests, then commit the
+# results back. The bot commit only touches output/ and editor/, so it never
+# re-triggers this workflow.
+
+on:
+  push:
+    branches: [main]
+    paths: ["overrides/**.json"]
+  workflow_dispatch:
+    inputs:
+      maps:
+        description: "Space-separated map names (empty = all with overrides)"
+        required: false
+        default: ""
+
+concurrency:
+  group: label-overrides
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  rerender:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Determine affected maps
+        id: maps
+        run: |
+          if [ -n "${{ github.event.inputs.maps }}" ]; then
+            maps="${{ github.event.inputs.maps }}"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            maps=$(ls overrides/*.json 2>/dev/null \
+                   | sed -E 's|overrides/(.+)\.json|\1|' | tr '\n' ' ')
+          else
+            maps=$(git diff --name-only HEAD^ HEAD -- overrides/ \
+                   | sed -E 's|overrides/(.+)\.json|\1|' | sort -u | tr '\n' ' ')
+          fi
+          echo "maps=$maps" >> "$GITHUB_OUTPUT"
+          echo "Affected maps: $maps"
+
+      - name: Re-render and re-export
+        run: |
+          for m in ${{ steps.maps.outputs.maps }}; do
+            python generate.py "$m"
+            python generate.py export "$m"
+            if python generate.py --list-political | grep -qx "$m"; then
+              python generate.py "$m" --theme sobrio
+              python generate.py "$m" --theme galaxia
+            fi
+          done
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output editor
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
+            exit 0
+          fi
+          git commit -m "Re-render after label overrides: ${{ steps.maps.outputs.maps }}"
+          git pull --rebase origin main
+          git push
