@@ -107,7 +107,7 @@
       <div class="sub" id="sel-info">Tab or click to select · “/” to search</div>
     </div>
     <fieldset id="fields" disabled>
-      <legend>values <span class="kbd">(arrows move; Shift ×5, Alt ¼)</span></legend>
+      <legend>values <span class="kbd" id="step-hint">(arrows move; Shift ×5, Alt ¼)</span></legend>
       <label for="f-size" data-row="size">size</label><input id="f-size" data-row="size" type="number" step="2">
       <label for="f-size2" data-row="size2">icon size</label><input id="f-size2" data-row="size2" type="number" step="2">
       <label for="f-dx" data-row="dx">dx km</label><input id="f-dx" data-row="dx" type="number" step="1">
@@ -157,8 +157,9 @@
       <h3>Keyboard shortcuts</h3>
       <table class="keys">
         <tr><td>Tab / Shift+Tab · n / p</td><td>next / previous label</td></tr>
+        <tr><td>N / P</td><td>next / previous map</td></tr>
         <tr><td>/</td><td>search labels by name</td></tr>
-        <tr><td>arrows</td><td>move 1 km (Shift: 5 km, Alt: 0.25 km)</td></tr>
+        <tr><td>arrows</td><td>move (a scale-aware km step; Shift ×5, Alt ¼)</td></tr>
         <tr><td>t / a</td><td>with a leader line: move the text / the anchor</td></tr>
         <tr><td>c</td><td>leader line on/off</td></tr>
         <tr><td>+ / −</td><td>font size ±2</td></tr>
@@ -204,6 +205,16 @@ const state = {
 function pxPerKm() {
   const f = state.bundle.frame;
   return 1000 * state.bundle.width_px / (f[2] - f[0]);
+}
+function baseStepKm() {
+  // Arrows should move a label by roughly the same amount on screen on
+  // every map (~4 px at full resolution), expressed as a round km value.
+  const raw = 4 / pxPerKm();
+  const ladder = [0.05, 0.1, 0.2, 0.25, 0.5, 1, 2, 5, 10, 20];
+  let best = ladder[0];
+  for (const v of ladder)
+    if (Math.abs(Math.log(raw / v)) < Math.abs(Math.log(raw / best))) best = v;
+  return best;
 }
 function toPx(m) {   // metres (data coords) -> full-res px
   const f = state.bundle.frame, W = state.bundle.width_px, H = state.bundle.height_px;
@@ -553,6 +564,18 @@ function select(e, focusView = false) {
   redraw();
   if (e && focusView) centerOn(e);
 }
+function confirmDiscard() {
+  const n = state.entries.filter(isDirty).length;
+  return !n || window.confirm(`${n} unsaved change(s) will be lost. Continue?`);
+}
+function cycleMap(delta) {
+  if (!confirmDiscard()) return;
+  const names = state.maps.map(m => m.name);
+  const i = names.indexOf(state.map);
+  const next = names[(i + delta + names.length) % names.length];
+  $("map-select").value = next;
+  loadMap(next);
+}
 function cycle(delta) {
   const vis = visibleEntries();
   if (!vis.length) return;
@@ -581,6 +604,8 @@ document.addEventListener("keydown", ev => {
   switch (ev.key) {
     case "n": cycle(1); return;
     case "p": cycle(-1); return;
+    case "N": cycleMap(1); return;
+    case "P": cycleMap(-1); return;
     case "/": ev.preventDefault(); openSearch(); return;
     case "?": $("help").classList.toggle("hidden"); return;
     case "r": toggleReal(); return;
@@ -589,7 +614,7 @@ document.addEventListener("keydown", ev => {
     case "0": fitView(); return;
   }
   if (!e) return;
-  const step = ev.shiftKey ? 5 : ev.altKey ? 0.25 : 1;
+  const step = baseStepKm() * (ev.shiftKey ? 5 : ev.altKey ? 0.25 : 1);
   switch (ev.key) {
     case "ArrowUp": ev.preventDefault(); nudge(e, 0, step); break;
     case "ArrowDown": ev.preventDefault(); nudge(e, 0, -step); break;
@@ -888,6 +913,8 @@ async function loadMap(name) {
   $("stage").style.height = "900px";
   fitView();
   redraw();
+  $("step-hint").textContent =
+    `(arrows ${baseStepKm()} km · Shift ×5 · Alt ¼)`;
   msg(bundle.title);
 }
 
@@ -901,7 +928,11 @@ async function init() {
     o.value = m.name; o.textContent = m.title;
     sel.appendChild(o);
   }
-  sel.onchange = () => { sel.blur(); loadMap(sel.value); };
+  sel.onchange = () => {
+    sel.blur();
+    if (!confirmDiscard()) { sel.value = state.map; return; }
+    loadMap(sel.value);
+  };
   const last = localStorage.getItem("tuner-map");
   const first = data.maps.find(m => m.name === last) ? last : data.maps[0].name;
   sel.value = first;
