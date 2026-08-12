@@ -162,9 +162,9 @@ COMARCA_NAME_ALIASES = {"Tapia de Casariego": "Tapia"}
 COMARCA_LABELS = {
     "Eo-Navia": Label(48),
     "Narcea": Label(48),
-    "Avilés": Label(38, dy=8),
+    "Avilés": Label(48),
     "Oviedo": Label(48),
-    "Gijón": Label(38, dx=-10, dy=2),
+    "Gijón": Label(48, dx=-10, dy=2),
     "Caudal": Label(44),
     "Nalón": Label(44),
     "Oriente": Label(48),
@@ -217,10 +217,10 @@ CONCEJO_MUTED = "#ece5d4"
 def _town_tier(pop):
     """(dot size, label size) by population."""
     if pop >= 100_000:
-        return 26, 36
+        return 26, 50
     if pop >= 20_000:
-        return 20, 30
-    return 14, 26
+        return 20, 42
+    return 14, 36
 
 
 # Text placement per town, offsets in km from the dot. Plain dx/dy places the
@@ -337,7 +337,7 @@ def render_asturias_ciudades_concejos():
     for floor, color, text in TIER_FILL:
         ax.plot(lx, ly, marker="s", ms=30, mfc=color, mec="#7a6f5e", mew=1.8,
                 zorder=20)
-        draw.halo_text(ax, lx + 0.012 * fw, ly, text, 28, weight="semibold",
+        draw.halo_text(ax, lx + 0.012 * fw, ly, text, 34, weight="semibold",
                        color="#3c3933", ha="left", va="center", zorder=20)
         ly -= step
 
@@ -381,20 +381,20 @@ class RiverSpec:
 # lon/lat is where the name sits, rotation follows the local course. All
 # hand-tuned so no name touches another name or crosses its own line awkwardly.
 ASTURIAS_RIOS = {
-    "Nalón":   RiverSpec(-5.48, 43.238, -27, 34),
-    "Narcea":  RiverSpec(-6.435, 43.045, 60, 32),
-    "Navia":   RiverSpec(-6.905, 43.220, 66, 32),
-    "Sella":   RiverSpec(-5.010, 43.300, -78, 30),
-    "Deva":    RiverSpec(-4.560, 43.290, 74, 28),
-    "Eo":      RiverSpec(-7.075, 43.432, 0, 28),
-    "Esva":    RiverSpec(-6.520, 43.480, 68, 26),
-    "Piloña":  RiverSpec(-5.320, 43.395, 16, 28, main=False),
-    "Nora":    RiverSpec(-5.905, 43.410, -20, 28, main=False),
-    "Trubia":  RiverSpec(-6.055, 43.240, 58, 26, main=False),
-    "Pigüeña": RiverSpec(-6.320, 43.210, 60, 26, main=False),
-    "Caudal":  RiverSpec(-5.930, 43.245, -40, 26, main=False),
-    "Cares":   RiverSpec(-4.815, 43.255, 30, 26, main=False),
-    "Piles":   RiverSpec(-5.608, 43.522, 0, 24, main=False),
+    "Nalón":   RiverSpec(-5.48, 43.238, -27, 68),
+    "Narcea":  RiverSpec(-6.435, 43.045, 60, 64),
+    "Navia":   RiverSpec(-6.905, 43.220, 66, 64),
+    "Sella":   RiverSpec(-5.010, 43.300, -78, 60),
+    "Deva":    RiverSpec(-4.560, 43.290, 74, 56),
+    "Eo":      RiverSpec(-7.075, 43.432, 0, 56),
+    "Esva":    RiverSpec(-6.520, 43.480, 68, 52),
+    "Piloña":  RiverSpec(-5.320, 43.395, 16, 56, main=False),
+    "Nora":    RiverSpec(-5.905, 43.410, -20, 56, main=False),
+    "Trubia":  RiverSpec(-6.055, 43.240, 58, 52, main=False),
+    "Pigüeña": RiverSpec(-6.320, 43.210, 60, 52, main=False),
+    "Caudal":  RiverSpec(-5.930, 43.245, -40, 52, main=False),
+    "Cares":   RiverSpec(-4.815, 43.255, 30, 52, main=False),
+    "Piles":   RiverSpec(-5.608, 43.522, 0, 48, main=False),
 }
 
 # A few reference points so the rivers can be read against known places.
@@ -407,10 +407,10 @@ RIOS_TOWNS = {
 }
 
 RIOS_TOWN_LABELS = {
-    "Oviedo": Label(28, dx=3, dy=-1, ha="left"),
-    "Gijón": Label(28, dx=3, dy=3, ha="left"),
-    "Ribadesella": Label(24, tx=4, ty=6, ha="left"),
-    "San Esteban de Pravia": Label(24, tx=-4, ty=8, ha="right"),
+    "Oviedo": Label(56, dx=3, dy=-1, ha="left"),
+    "Gijón": Label(56, dx=3, dy=3, ha="left"),
+    "Ribadesella": Label(48, tx=4, ty=6, ha="left"),
+    "San Esteban de Pravia": Label(48, tx=-4, ty=8, ha="right"),
 }
 
 

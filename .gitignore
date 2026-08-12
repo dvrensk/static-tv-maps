@@ -13,3 +13,5 @@ venv/
 # User-supplied brand logos for spain-marcas-logos (copyrighted artwork)
 assets/logos/*
 !assets/logos/README.md
+
+.vscode
