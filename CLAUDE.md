@@ -87,6 +87,12 @@ Conventions:
 - Committed data means `make data` is only needed to refresh sources.
 - In Claude's remote sandbox there is no Docker daemon — use the venv path
   and say so rather than claiming the image was tested.
+- Most development happens in Claude on the web; the user renders locally
+  via Docker. Rendering in a different environment recompresses the PNGs
+  and shifts antialiasing by ±1/255 — byte churn with no visible change.
+  `make unchurn` (venv; or `.venv/bin/python scripts/unchurn.py`) restores
+  modified images in `output/` that are visually identical to the committed
+  version. Run it after a full re-render so only real changes get committed.
 
 ## Ideas not yet built
 

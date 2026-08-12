@@ -16,12 +16,13 @@ DOCKER_RUN = docker run --rm -v $(PWD):/app -u $(shell id -u):$(shell id -g) $(I
 VENV = .venv
 PY = $(VENV)/bin/python
 
-.PHONY: help setup data maps maps-sobrio maps-galaxia map list shell clean local-setup local-data local-maps local-map
+.PHONY: help setup data maps maps-sobrio maps-galaxia map list shell clean unchurn local-setup local-data local-maps local-map
 
 help:
 	@echo "Docker targets:  setup, data, maps, map M=<name>, list, shell"
 	@echo "Local targets:   local-setup, local-data, local-maps, local-map M=<name>"
 	@echo "Other:           clean (remove rendered maps)"
+	@echo "                 unchurn (revert re-rendered images whose pixels didn't change; needs local-setup)"
 
 setup:
 	docker build -t $(IMAGE) .
@@ -63,3 +64,7 @@ local-map:
 
 clean:
 	rm -f output/*.png output/*.jpg
+
+# Runs on the host (needs git), so it uses the venv, not Docker.
+unchurn:
+	$(PY) scripts/unchurn.py
