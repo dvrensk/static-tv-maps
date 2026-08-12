@@ -16,7 +16,7 @@ from dataclasses import dataclass
 import matplotlib.patheffects as pe
 from matplotlib import font_manager as fm
 
-from . import draw, geo, style
+from . import draw, geo, hooks, style
 from .maps_spain import KM, _draw_country_labels, _prov_name, spain_scene
 
 LAND_EDGE = "#c6bfb1"        # light internal province borders
@@ -140,11 +140,12 @@ def _draw_icon_name(ax, x, y, icon, name, icon_size, name_size,
                    color=NAME_COLOR, ha="center", va="top", zorder=11)
 
 
-def build_icon_map(icons, footer):
+def build_icon_map(icons, footer, table_id=None):
     """Shared renderer: pale political base + one icon/name pair per province.
 
     `icons` is a prov_code -> IconSpec mapping; modules with a different
     editorial angle (maps_cotidiano) reuse this with their own table.
+    `table_id` names the table for the label tuner (each module its own).
     """
     s = spain_scene()
     fig, ax = draw.new_map(s["frame"])
@@ -168,8 +169,13 @@ def build_icon_map(icons, footer):
             spec = icons.get(row.prov_code)
             if spec is None:
                 continue
+            spec = hooks.spec_for(table_id, row.prov_code, spec)
             name = _prov_name(row.prov_code, row)
             ax0, ay0 = geo.label_point(row.geometry)
+            hooks.capture(table_id, row.prov_code, name, (ax0, ay0), spec,
+                          icon=spec.icon)
+            if hooks.SUPPRESS:
+                continue
             ax0, ay0 = ax0 + spec.dx * KM, ay0 + spec.dy * KM
             if spec.tx is not None:
                 tx, ty = ax0 + spec.tx * KM, ay0 + spec.ty * KM
@@ -189,6 +195,10 @@ def build_icon_map(icons, footer):
     return fig
 
 
+def map_spain_provincias_iconos():
+    return build_icon_map(ICONS, "España · lo más típico de cada provincia",
+                          table_id="ICONOS")
+
+
 def render_spain_provincias_iconos():
-    fig = build_icon_map(ICONS, "España · lo más típico de cada provincia")
-    return draw.save(fig, "spain-provincias-iconos")
+    return draw.save(map_spain_provincias_iconos(), "spain-provincias-iconos")

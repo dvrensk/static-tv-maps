@@ -17,7 +17,7 @@ on the map, so a viewer can pair flag and country without reading a legend.
 
 from dataclasses import dataclass
 
-from . import draw, geo, style
+from . import draw, geo, hooks, style
 
 KM = 1000.0
 FLAGS = geo.ROOT / "assets" / "flags"
@@ -246,8 +246,13 @@ def _draw_flag_panel(ax, frame, capital_names):
                     COUNTRY_NAMES[iso], capital_names[iso])
 
 
-def _label_place(ax, xy, text, spec, weight="extrabold"):
+def _label_place(ax, xy, text, spec, weight="extrabold", table_id=None,
+                 key=None):
     """Place `text` for a feature anchored at `xy`, per the Place spec."""
+    spec = hooks.spec_for(table_id, key, spec)
+    hooks.capture(table_id, key, text, xy, spec)
+    if hooks.SUPPRESS:
+        return
     x, y = xy[0] + spec.dx * KM, xy[1] + spec.dy * KM
     if spec.tx is not None:
         draw.callout(ax, (x, y), (x + spec.tx * KM, y + spec.ty * KM), text,
@@ -270,7 +275,8 @@ def map_centroamerica():
     for _, row in main.iterrows():
         spec = COUNTRY_LABELS[row.iso]
         xy = geo.label_point(row.geometry, tol=1000.0)
-        _label_place(ax, xy, spec.text or COUNTRY_NAMES[row.iso], spec)
+        _label_place(ax, xy, spec.text or COUNTRY_NAMES[row.iso], spec,
+                     table_id="COUNTRY_LABELS", key=row.iso)
 
     _draw_canal(ax, CANAL_LABEL)
 
@@ -279,7 +285,8 @@ def map_centroamerica():
         spec = CAPITAL_LABELS[row.iso]
         xy = (row.geometry.x, row.geometry.y)
         draw.city_star(ax, xy, size=30)
-        _label_place(ax, xy, spec.text or row["name"], spec)
+        _label_place(ax, xy, spec.text or row["name"], spec,
+                     table_id="CAPITAL_LABELS", key=row.iso)
 
     _draw_flag_panel(ax, s["frame"], capital_names)
 
@@ -471,7 +478,8 @@ def map_mexico_centroamerica_caribe():
     for _, row in main.iterrows():
         spec = EXT_COUNTRY_LABELS[row.iso]
         xy = geo.label_point(row.geometry, tol=1000.0)
-        _label_place(ax, xy, spec.text or COUNTRY_NAMES[row.iso], spec)
+        _label_place(ax, xy, spec.text or COUNTRY_NAMES[row.iso], spec,
+                     table_id="EXT_COUNTRY_LABELS", key=row.iso)
 
     _draw_canal(ax, EXT_CANAL_LABEL, crs=geo.MEXICO_CARIBE_CRS, width=4.0,
                 casing=9.0)

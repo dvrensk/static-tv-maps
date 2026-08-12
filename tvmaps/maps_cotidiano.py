@@ -93,6 +93,11 @@ ICONS = {
 }
 
 
+def map_spain_provincias_cotidiano():
+    return build_icon_map(ICONS, "España · el día a día de cada provincia",
+                          table_id="COTIDIANO")
+
+
 def render_spain_provincias_cotidiano():
-    fig = build_icon_map(ICONS, "España · el día a día de cada provincia")
-    return draw.save(fig, "spain-provincias-cotidiano")
+    return draw.save(map_spain_provincias_cotidiano(),
+                     "spain-provincias-cotidiano")

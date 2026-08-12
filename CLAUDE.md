@@ -48,10 +48,16 @@ requirements:
   ajustador"): a stdlib HTTP server plus a single-page editor that drags
   labels over a cached base render and writes values back into the
   `maps_*.py` tables via libcst (comments/formatting preserved).
-  `tvmaps/hooks.py` is the seam the maps expose for it: every offset-idiom
+  `tvmaps/hooks.py` is the seam the maps expose for it: every tunable
   label call goes through `hooks.spec_for()` / `hooks.capture()`, a no-op
   during generate.py runs. New label tables must be registered in
   `tvmaps/tuner/registry.py` and routed through the hooks to be tunable.
+  Three editing idioms: "offset" (km dx/dy + optional callout), "block"
+  (tx/ty text blocks with a fixed leader: moda/marcas/editoriales) and
+  "absolute" (lon/lat + rotation: river and range names). Containers may
+  be dicts, key_field-keyed lists, (data, spec) tuples or single specs —
+  see registry.Table. The Gijón street maps are not registered (nested
+  config dicts, no map_* Figure function).
 - `tests/` — tuner write-back round-trip tests (`make test`). The key
   invariant: saving unchanged values must leave every file byte-identical.
 

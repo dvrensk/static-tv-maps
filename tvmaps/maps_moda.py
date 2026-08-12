@@ -16,7 +16,7 @@ from dataclasses import dataclass
 import geopandas as gpd
 from shapely.geometry import Point
 
-from . import draw, geo, style
+from . import draw, geo, hooks, style
 from .maps_ciudades import COAST_EDGE, LAND_EDGE, LAND_FILL
 from .maps_spain import KM, _draw_country_labels, _project_lonlat, spain_scene
 
@@ -103,10 +103,16 @@ def _project_canary(lon, lat):
             .to_crs(geo.CANARY_CRS).iloc[0].coords[0])
 
 
-def _draw_firm(ax, dot_xy, anchor_xy, firm, data_per_px):
+def _draw_firm(ax, dot_xy, anchor_xy, firm, data_per_px, table_id="FIRMS"):
     dot_face, brand_color = KIND[firm.kind]
     dx, dy = dot_xy
     ax_, ay = anchor_xy
+
+    hooks.capture(table_id, firm.city, "\n".join([firm.city] + firm.brands),
+                  dot_xy, firm, leader=firm.leader)
+    if hooks.SUPPRESS:
+        draw.city_dot(ax, dot_xy, size=firm.dot, face=dot_face, edge="#ffffff")
+        return
 
     if firm.leader:
         ax.annotate("", xy=(dx, dy), xytext=(ax_, ay), zorder=9,
@@ -156,15 +162,18 @@ def map_spain_moda():
 
     # Peninsula + Baleares firms.
     for firm in FIRMS:
+        firm = hooks.spec_for("FIRMS", firm.city, firm)
         dx, dy = _project_lonlat(firm.lon, firm.lat)
         anchor = (dx + firm.tx * KM, dy + firm.ty * KM)
         _draw_firm(ax, (dx, dy), anchor, firm, data_per_px)
 
     # Canary firm, projected through the inset transform.
     tf = s["canary_tf"]
-    dx, dy = geo.canary_xy(_project_canary(CANARY_FIRM.lon, CANARY_FIRM.lat), tf)
-    anchor = (dx + CANARY_FIRM.tx * KM, dy + CANARY_FIRM.ty * KM)
-    _draw_firm(ax, (dx, dy), anchor, CANARY_FIRM, data_per_px)
+    canary = hooks.spec_for("CANARY_FIRM", "CANARY_FIRM", CANARY_FIRM)
+    dx, dy = geo.canary_xy(_project_canary(canary.lon, canary.lat), tf)
+    anchor = (dx + canary.tx * KM, dy + canary.ty * KM)
+    _draw_firm(ax, (dx, dy), anchor, canary, data_per_px,
+               table_id="CANARY_FIRM")
 
     # Kind legend over the Atlantic, above the Canary inset box.
     _kind_legend(ax, s["frame"], 0.03, 0.66)

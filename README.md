@@ -89,12 +89,17 @@ search by name) everything works from the keyboard — arrows nudge in km
 (`Shift` ×5, `Alt` ¼), `c` toggles the leader-line callout, `t`/`a` switch
 between moving the text and the anchor, `w`/`x`/`q`/`e` snap the name
 above/below/left/right, `g` sends a name to the other map of a split pair,
-`+`/`-` change the size, `u` reverts the label, and `?` lists everything.
-The browser preview is a close approximation; `r` asks the warm server for
-a real matplotlib render in about a second. `Ctrl+S` writes the values back
-into the `maps_*.py` tables — only the numbers change, comments and
-formatting survive — and shows the diff. Final maps still come from
-`generate.py`.
+`+`/`-` change the size, `[`/`]` rotate river and range names, `u` reverts
+the label, and `?` lists everything. The browser preview is a close
+approximation; `r` asks the warm server for a real matplotlib render in
+about a second. `Ctrl+S` (`⌘S` on a Mac) writes the values back into the
+`maps_*.py` tables — only the numbers change, comments and formatting
+survive — and shows the diff. Final maps still come from `generate.py`.
+
+Nearly every map is tunable: regions, capitals, cities, towns, icons,
+brand/publisher blocks, América Central, and the river and mountain-range
+names (which move by lon/lat and rotate). The Gijón street maps are the one
+exception for now — their nested per-map configs need their own pass.
 
 Run it with `--host 0.0.0.0` (what `make tune` does) and it works from a
 phone or tablet on the same network too: tap to select, drag to place, and

@@ -22,13 +22,14 @@ more room than a column of text lines.
 """
 
 import unicodedata
+from dataclasses import dataclass
 from pathlib import Path
 
 import matplotlib.image as mpimg
 from matplotlib.offsetbox import AnnotationBbox, OffsetImage
 from matplotlib.patches import FancyBboxPatch
 
-from . import draw, geo, style
+from . import draw, geo, hooks, style
 from .maps_marcas import HUBS
 from .maps_productos import _base_map
 from .maps_spain import KM, _draw_country_labels, _project_lonlat, spain_scene
@@ -119,31 +120,38 @@ DEFAULT_BRAND_COLOR = "#4a4f55"   # neutral slate for anything unlisted
 # "right" columns grow west, "center" straddle the anchor). Any hub missing
 # here falls back to its maps_marcas placement.
 # ---------------------------------------------------------------------------
+@dataclass
+class Place:
+    tx: float = 0.0
+    ty: float = 0.0
+    ha: str = "left"
+
+
 PLACE = {
-    "A Coruña · Arteixo":       (-162, 43, "right"),   # W, over the Atlantic
-    "Redondela · Vigo":         (-114, 17, "right"),   # W, over the Atlantic
-    "Siero":                    (-128, 102, "center"), # N, Cantabrian sea
-    "Santander":                (15, 94, "center"),    # N, into the sea
-    "Bilbao":                   (66, 30, "left"),      # E, over the Bay of Biscay
-    "Arrasate · Mondragón":     (97, -54, "left"),     # E, over France
-    "Burgos":                   (-98, 30, "right"),    # W, over the meseta
-    "Zaragoza":                 (-130, -11, "center"), # empty Ebro valley
-    "Manresa":                  (-46, 146, "center"),  # N, Catalan interior
-    "Sabadell":                 (-27, 39, "right"),    # interior ladder
-    "Palau-solità":             (20, 116, "center"),   # N, interior
-    "Barcelona":                (83, 76, "left"),      # E, over the Mediterranean
-    "Martorell":                (-13, -15, "right"),   # interior ladder
-    "Sant Sadurní":             (-88, -71, "right"),   # interior ladder
-    "Gavà":                     (73, -151, "left"),    # SE, over the sea
-    "Vila-real":                (79, 28, "left"),      # E, over the sea
-    "Valencia":                 (100, 4, "left"),      # E, over the sea
-    "Jumilla":                  (-66, 38, "right"),    # NW, empty interior
-    "Alhama de Murcia":         (72, 16, "left"),      # SE, over the sea
-    "Jerez de la Frontera":     (96, 123, "center"),   # N, empty interior
-    "El Puerto de Santa María": (133, 31, "left"),     # E, empty interior
-    "Inca":                     (81, 20, "left"),      # E, over the sea
-    "Palma":                    (29, -48, "center"),   # S, over the sea
-    "Madrid":                   (68, 66, "left"),      # E/SE, empty Mancha
+    "A Coruña · Arteixo":       Place(-162, 43, "right"),   # W, over the Atlantic
+    "Redondela · Vigo":         Place(-114, 17, "right"),   # W, over the Atlantic
+    "Siero":                    Place(-128, 102, "center"), # N, Cantabrian sea
+    "Santander":                Place(15, 94, "center"),    # N, into the sea
+    "Bilbao":                   Place(66, 30, "left"),      # E, over the Bay of Biscay
+    "Arrasate · Mondragón":     Place(97, -54, "left"),     # E, over France
+    "Burgos":                   Place(-98, 30, "right"),    # W, over the meseta
+    "Zaragoza":                 Place(-130, -11, "center"), # empty Ebro valley
+    "Manresa":                  Place(-46, 146, "center"),  # N, Catalan interior
+    "Sabadell":                 Place(-27, 39, "right"),    # interior ladder
+    "Palau-solità":             Place(20, 116, "center"),   # N, interior
+    "Barcelona":                Place(83, 76, "left"),      # E, over the Mediterranean
+    "Martorell":                Place(-13, -15, "right"),   # interior ladder
+    "Sant Sadurní":             Place(-88, -71, "right"),   # interior ladder
+    "Gavà":                     Place(73, -151, "left"),    # SE, over the sea
+    "Vila-real":                Place(79, 28, "left"),      # E, over the sea
+    "Valencia":                 Place(100, 4, "left"),      # E, over the sea
+    "Jumilla":                  Place(-66, 38, "right"),    # NW, empty interior
+    "Alhama de Murcia":         Place(72, 16, "left"),      # SE, over the sea
+    "Jerez de la Frontera":     Place(96, 123, "center"),   # N, empty interior
+    "El Puerto de Santa María": Place(133, 31, "left"),     # E, empty interior
+    "Inca":                     Place(81, 20, "left"),      # E, over the sea
+    "Palma":                    Place(29, -48, "center"),   # S, over the sea
+    "Madrid":                   Place(68, 66, "left"),      # E/SE, empty Mancha
 }
 
 
@@ -259,7 +267,15 @@ def _record(frame, city, name, cx, cy, half_w, half_h):
 
 def _draw_hub(ax, frame, hub):
     x, y = _project_lonlat(*hub.lonlat)
-    tx, ty, ha = PLACE.get(hub.city, (hub.tx, hub.ty, hub.ha))
+    p = PLACE.get(hub.city) or Place(hub.tx, hub.ty, hub.ha)
+    p = hooks.spec_for("PLACE", hub.city, p)
+    hooks.capture("PLACE", hub.city, "\n".join([hub.city] + hub.brands),
+                  (x, y), p, leader=True, tier_size=CHIP_TEXT_SIZE)
+    if hooks.SUPPRESS:
+        draw.city_dot(ax, (x, y), size=13, face=DOT_FACE, edge=DOT_EDGE,
+                      zorder=9)
+        return
+    tx, ty, ha = p.tx, p.ty, p.ha
     bx, by = x + tx * KM, y + ty * KM     # by = top of the block (city caption)
 
     dperpx = (frame[2] - frame[0]) / style.WIDTH_PX

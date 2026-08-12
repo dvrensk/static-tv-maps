@@ -5,36 +5,38 @@ the suite leaves the working tree exactly as it found it.
 """
 
 import copy
+from dataclasses import MISSING
 from pathlib import Path
 
 import pytest
 
 from tvmaps.tuner import registry, writeback
 
-MODULES = sorted({t.module for t in registry.TABLES.values()})
-
 
 @pytest.fixture(autouse=True)
 def restore_sources():
-    paths = [Path(registry.table_module(t).__file__) for t in registry.TABLES]
+    paths = {Path(registry.table_module(t).__file__) for t in registry.TABLES}
     files = {p: p.read_text(encoding="utf-8") for p in paths}
-    tables = {t: copy.deepcopy(registry.table_dict(t)) for t in registry.TABLES}
+    snapshots = {t: copy.deepcopy(registry.table_source(t))
+                 for t in registry.TABLES}
     yield
     for p, text in files.items():
         if p.read_text(encoding="utf-8") != text:
             p.write_text(text, encoding="utf-8")
-    for t, snapshot in tables.items():
-        d = registry.table_dict(t)
-        d.clear()
-        d.update(snapshot)
+    for t, snapshot in snapshots.items():
+        tab = registry.TABLES[t]
+        setattr(registry.table_module(t), tab.source_var, snapshot)
 
 
 def edit(table, key, changed, **fields):
-    entry = registry.table_dict(table).get(key)
-    base = ({f: getattr(entry, f) for f in registry.editable_fields(table)}
-            if entry is not None else
-            {f: registry.field_defaults(table)[f]
-             for f in registry.editable_fields(table)})
+    entry = registry.entries(table).get(key)
+    defaults = registry.field_defaults(table)
+    base = {}
+    for f in registry.editable_fields(table):
+        if entry is not None:
+            base[f] = getattr(entry, f)
+        else:
+            base[f] = None if defaults[f] is MISSING else defaults[f]
     base.update(fields)
     return {table: {key: {"fields": base, "changed": changed}}}
 
@@ -45,10 +47,10 @@ def source_of(table):
 
 def test_unchanged_save_writes_nothing():
     """Saving current values back (every field marked changed) must not
-    touch any file — for every entry of every table."""
+    touch any file — for every entry of every table, all containers."""
     edits = {}
     for table in registry.TABLES:
-        for key in registry.table_dict(table):
+        for key in registry.entries(table):
             e = edit(table, key, changed=registry.editable_fields(table))
             edits.setdefault(table, {}).update(e[table])
     before = {t: source_of(t) for t in registry.TABLES}
@@ -69,7 +71,7 @@ def test_edit_existing_entry_minimal_diff():
     assert 'Label(40, tx=-20, ty=80),' in added[0]
     assert "# Cantabria" in added[0], "trailing comment must survive"
     # In-memory table matches the file.
-    assert registry.table_dict("CCAA_LABELS")["06"].ty == 80
+    assert registry.entries("CCAA_LABELS")["06"].ty == 80
 
 
 def test_comment_column_is_preserved():
@@ -110,16 +112,16 @@ def test_size_edit_on_bare_call_inserts_positional():
 
 
 def test_insert_auto_concejo_entry():
-    assert "Tineo" not in registry.table_dict("CONCEJO_OVERRIDES")
+    assert "Tineo" not in registry.entries("CONCEJO_OVERRIDES")
     writeback.apply_edits(edit("CONCEJO_OVERRIDES", "Tineo",
                                changed=["size", "dx"], size=30, dx=4.5))
     src = source_of("CONCEJO_OVERRIDES")
     assert '    "Tineo": Label(30, dx=4.5),\n' in src
-    assert registry.table_dict("CONCEJO_OVERRIDES")["Tineo"].dx == 4.5
+    assert registry.entries("CONCEJO_OVERRIDES")["Tineo"].dx == 4.5
 
 
 def test_insert_auto_num_entry_gets_name_comment():
-    assert "33" not in registry.table_dict("NUM_LABELS")
+    assert "33" not in registry.entries("NUM_LABELS")
     writeback.apply_edits(edit("NUM_LABELS", "33", changed=["dy"],
                                size=46, dy=-10))
     src = source_of("NUM_LABELS")
@@ -133,7 +135,7 @@ def test_cityspec_positional_args_stay_bound():
     line = next(l for l in source_of("CIUDADES").splitlines()
                 if '"Zaragoza": CitySpec' in l)
     assert "CitySpec(0, 16)," in line
-    spec = registry.table_dict("CIUDADES")["Zaragoza"]
+    spec = registry.entries("CIUDADES")["Zaragoza"]
     assert spec.dx == 0 and spec.dy == 16
 
 
@@ -151,6 +153,57 @@ def test_group_flip():
                                group="B"))
     line = next(l for l in source_of("PROV_LABELS").splitlines() if '"33"' in l)
     assert 'PLabel(38, group="B"),' in line
+
+
+# --- absolute idiom (lon/lat + rotation) -----------------------------------
+
+def test_river_rotation_and_position_edit():
+    """RiverSpec passes lon/lat/rotation positionally; all three rewrite in
+    place and required lon/lat are never dropped."""
+    writeback.apply_edits(edit("RIOS_LABELS", "Duero",
+                               changed=["lon", "lat", "rotation"],
+                               lon=-4.1234, lat=41.5, rotation=-12.5))
+    line = next(l for l in source_of("RIOS_LABELS").splitlines()
+                if '"Duero"' in l)
+    assert "RiverSpec(-4.1234, 41.5, -12.5)," in line
+    assert registry.entries("RIOS_LABELS")["Duero"].rotation == -12.5
+
+
+def test_range_list_entry_matched_by_text():
+    """RANGE_LABELS_RIOS is a list; entries are matched by their text arg."""
+    writeback.apply_edits(edit("RANGE_LABELS_RIOS", "PIRINEOS",
+                               changed=["rotation"], rotation=7))
+    line = next(l for l in source_of("RANGE_LABELS_RIOS").splitlines()
+                if '"PIRINEOS"' in l)
+    assert 'RangeSpec("PIRINEOS", 0.55, 42.63, 7, 32),' in line
+
+
+def test_hand_river_spec_inside_tuple():
+    """HAND_RIVERS nests its spec in a (course, RiverSpec) tuple."""
+    writeback.apply_edits(edit("HAND_RIVERS", "Nervión",
+                               changed=["rotation"], rotation=-55))
+    src = source_of("HAND_RIVERS")
+    assert "RiverSpec(-3.27, 43.05, -55, 26))," in src
+    assert registry.entries("HAND_RIVERS")["Nervión"].rotation == -55
+
+
+def test_single_spec_assignment():
+    """CANARY_FIRM is a bare single-spec assignment."""
+    writeback.apply_edits(edit("CANARY_FIRM", "CANARY_FIRM",
+                               changed=["tx"], tx=25))
+    assert "tx=25" in source_of("CANARY_FIRM")
+    assert registry.entries("CANARY_FIRM")["CANARY_FIRM"].tx == 25
+
+
+def test_hub_list_entry_matched_by_city():
+    writeback.apply_edits(edit("HUBS", "Bilbao", changed=["tx"], tx=99))
+    assert registry.entries("HUBS")["Bilbao"].tx == 99
+    assert "tx=99" in source_of("HUBS")
+
+
+def test_no_insert_into_list_tables():
+    with pytest.raises(ValueError):
+        writeback.apply_edits(edit("HUBS", "Nowhere", changed=["tx"], tx=1))
 
 
 def test_edited_module_still_parses_everywhere():

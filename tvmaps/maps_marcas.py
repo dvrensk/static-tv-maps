@@ -16,7 +16,7 @@ labels into open water so nothing collides.
 
 from dataclasses import dataclass
 
-from . import draw, geo, style
+from . import draw, geo, hooks, style
 from .maps_productos import _base_map
 from .maps_spain import KM, _draw_country_labels, _project_lonlat, spain_scene
 
@@ -124,7 +124,14 @@ HUBS = [
 
 
 def _draw_hub(ax, frame, hub):
+    hub = hooks.spec_for("HUBS", hub.city, hub)
     x, y = _project_lonlat(*hub.lonlat)
+    hooks.capture("HUBS", hub.city, "\n".join([hub.city] + hub.brands),
+                  (x, y), hub, leader=hub.leader)
+    if hooks.SUPPRESS:
+        draw.city_dot(ax, (x, y), size=13, face=DOT_FACE, edge=DOT_EDGE,
+                      zorder=9)
+        return
     bx, by = x + hub.tx * KM, y + hub.ty * KM   # by = top of the text block
     dperpx = (frame[2] - frame[0]) / style.WIDTH_PX
 

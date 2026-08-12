@@ -22,7 +22,7 @@ All companies were verified at their headquarter city (elaboración propia):
 
 from dataclasses import dataclass, field
 
-from . import cities, draw, geo, style
+from . import cities, draw, geo, hooks, style
 from .maps_spain import KM, _project_lonlat, spain_scene
 
 # Parchment base, borrowed from the neighbouring maps.
@@ -152,9 +152,13 @@ REGIONALS = {
 
 
 def _regional(ax, pts, key, spec):
+    spec = hooks.spec_for("REGIONALS", key, spec)
     x, y = pts[key]
     color = EDIT_COLOR if spec.cat == "edit" else DISC_COLOR
     draw.city_dot(ax, (x, y), size=15, face=color, edge="#ffffff")
+    hooks.capture("REGIONALS", key, f"{spec.company}\n{key}", (x, y), spec)
+    if hooks.SUPPRESS:
+        return
     text = f"{spec.company}\n{key}"
     if spec.tx is not None:
         tx, ty = x + spec.tx * KM, y + spec.ty * KM

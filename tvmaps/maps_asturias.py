@@ -507,8 +507,13 @@ def map_asturias_rios():
 
     # River names, in blue, running along each course.
     for name, spec in ASTURIAS_RIOS.items():
+        spec = hooks.spec_for("ASTURIAS_RIOS", name, spec)
         x, y = _project_lonlat(spec.lon, spec.lat)
         color = RIVER if spec.main else RIVER_TRIB
+        hooks.capture("ASTURIAS_RIOS", name, name, (x, y), spec,
+                      color=color, halo=CONCEJO_MUTED)
+        if hooks.SUPPRESS:
+            continue
         t = draw.halo_text(ax, x, y, name, spec.size, weight="semibold",
                            color=color, halo=CONCEJO_MUTED, halo_width=6,
                            zorder=8)

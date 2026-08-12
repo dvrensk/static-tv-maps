@@ -13,6 +13,7 @@ Edits arrive as {table_id: {key: {"fields": {...}, "changed": [...]}}} where
 user actually touched (only those are rewritten on existing entries).
 """
 
+import ast
 import difflib
 from dataclasses import fields as dc_fields, replace
 from pathlib import Path
@@ -34,6 +35,8 @@ def _fmt_value(v) -> str:
 
 
 def _values_equal(a, b) -> bool:
+    if isinstance(a, bool) != isinstance(b, bool):
+        return False
     if isinstance(a, (int, float)) and isinstance(b, (int, float)):
         return float(a) == float(b)
     return a == b
@@ -86,6 +89,16 @@ def _find_arg(args, field, field_order):
     return None, None
 
 
+def _arg_equals(arg, value) -> bool:
+    """True when the arg's current literal already IS `value` — then the node
+    is left untouched, preserving the author's formatting (43.220, -5.0)."""
+    try:
+        current = ast.literal_eval(_CODEGEN.code_for_node(arg.value))
+    except (ValueError, SyntaxError):
+        return False
+    return _values_equal(current, value)
+
+
 def _edit_call(call, fields, changed, defaults, editable):
     """Update a Label(...)-style Call: rewrite only the changed fields,
     dropping keyword arguments that return to their dataclass default."""
@@ -99,6 +112,8 @@ def _edit_call(call, fields, changed, defaults, editable):
                       and field not in KEEP_EXPLICIT)
         src = _fmt_value(value)
         idx, positional = _find_arg(args, field, field_order)
+        if idx is not None and _arg_equals(args[idx], value):
+            continue  # unchanged in substance: keep the author's spelling
         if idx is not None:
             if is_default and not positional:
                 del args[idx]
@@ -135,38 +150,99 @@ def _repad_comment(el, delta):
                 whitespace=cst.SimpleWhitespace(" " * pad)))))
 
 
+def _call_key(call, table_id) -> str | None:
+    """The entry key carried inside a Call, for list containers: the value of
+    the table's key_field argument (positional or keyword)."""
+    t = registry.TABLES[table_id]
+    field_order = list(registry.field_defaults(table_id))
+    idx, _ = _find_arg(list(call.args), t.key_field, field_order)
+    if idx is None:
+        return None
+    value = call.args[idx].value
+    return value.evaluated_value if isinstance(value, cst.SimpleString) else None
+
+
+def _tuple_call(node, factory):
+    """(index, Call) of the factory call inside a Tuple, or (None, None)."""
+    if isinstance(node, cst.Tuple):
+        for i, el in enumerate(node.elements):
+            v = el.value
+            if (isinstance(v, cst.Call) and isinstance(v.func, cst.Name)
+                    and v.func.value == factory):
+                return i, v
+    return None, None
+
+
 class _Transformer(cst.CSTTransformer):
-    """Applies edits to module-level `VAR = { "key": Factory(...) }` tables."""
+    """Applies edits to module-level label tables, whatever their shape:
+    dicts of Calls, dicts of (data, Call) tuples, lists of Calls keyed by a
+    field, and bare single-Call assignments."""
 
     def __init__(self, edits):
-        self.edits = edits  # {var: {key: (fields, changed)}}
+        self.edits = edits  # {source_var: (table_id, {key: (fields, changed)})}
+
+    def _edited(self, table_id, call, pair):
+        defaults = registry.field_defaults(table_id)
+        editable = set(registry.editable_fields(table_id))
+        return _edit_call(call, pair[0], pair[1], defaults, editable)
 
     def leave_Assign(self, original, updated):
         target = original.targets[0].target
         if not (isinstance(target, cst.Name) and target.value in self.edits):
             return updated
-        if not isinstance(updated.value, cst.Dict):
+        table_id, table_edits = self.edits[target.value]
+        t = registry.TABLES[table_id]
+
+        if t.container == "single" and isinstance(updated.value, cst.Call):
+            pair = table_edits.get(t.id)
+            if pair:
+                return updated.with_changes(
+                    value=self._edited(table_id, updated.value, pair))
             return updated
-        table_id = target.value
-        table_edits = self.edits[table_id]
-        defaults = registry.field_defaults(table_id)
-        editable = set(registry.editable_fields(table_id))
-        elements = []
-        for el in updated.value.elements:
-            if (isinstance(el, cst.DictElement)
-                    and isinstance(el.key, cst.SimpleString)
-                    and isinstance(el.value, cst.Call)):
-                key = el.key.evaluated_value
-                if key in table_edits:
-                    fields, changed = table_edits[key]
-                    call = _edit_call(el.value, fields, changed, defaults,
-                                      editable)
-                    delta = (len(_CODEGEN.code_for_node(el.value))
-                             - len(_CODEGEN.code_for_node(call)))
-                    el = _repad_comment(el.with_changes(value=call), delta)
-            elements.append(el)
-        return updated.with_changes(
-            value=updated.value.with_changes(elements=elements))
+
+        if t.container in ("dict", "tuple2") and isinstance(updated.value, cst.Dict):
+            elements = []
+            for el in updated.value.elements:
+                if (isinstance(el, cst.DictElement)
+                        and isinstance(el.key, cst.SimpleString)):
+                    key = el.key.evaluated_value
+                    pair = table_edits.get(key)
+                    if pair and isinstance(el.value, cst.Call):
+                        call = self._edited(table_id, el.value, pair)
+                        delta = (len(_CODEGEN.code_for_node(el.value))
+                                 - len(_CODEGEN.code_for_node(call)))
+                        el = _repad_comment(el.with_changes(value=call), delta)
+                    elif pair and t.container == "tuple2":
+                        i, call = _tuple_call(el.value, t.factory)
+                        if call is not None:
+                            new_call = self._edited(table_id, call, pair)
+                            tup_els = list(el.value.elements)
+                            tup_els[i] = tup_els[i].with_changes(value=new_call)
+                            el = el.with_changes(
+                                value=el.value.with_changes(elements=tup_els))
+                    elements.append(el)
+                else:
+                    elements.append(el)
+            return updated.with_changes(
+                value=updated.value.with_changes(elements=elements))
+
+        if t.container == "list" and isinstance(updated.value, cst.List):
+            elements = []
+            for el in updated.value.elements:
+                v = el.value
+                if isinstance(v, cst.Call):
+                    key = _call_key(v, table_id)
+                    pair = table_edits.get(key)
+                    if pair:
+                        call = self._edited(table_id, v, pair)
+                        delta = (len(_CODEGEN.code_for_node(v))
+                                 - len(_CODEGEN.code_for_node(call)))
+                        el = _repad_comment(el.with_changes(value=call), delta)
+                elements.append(el)
+            return updated.with_changes(
+                value=updated.value.with_changes(elements=elements))
+
+        return updated
 
 
 def _entry_line(table_id, key, fields) -> str:
@@ -194,9 +270,10 @@ def _entry_line(table_id, key, fields) -> str:
 
 def _insert_entries(source: str, table_id: str, entries) -> str:
     """Append new entries just before the table's closing brace."""
+    var = registry.TABLES[table_id].source_var
     lines = source.splitlines(keepends=True)
     start = next(i for i, ln in enumerate(lines)
-                 if ln.startswith(f"{table_id} = {{"))
+                 if ln.startswith(f"{var} = {{"))
     depth = 0
     for i in range(start, len(lines)):
         depth += lines[i].count("{") - lines[i].count("}")
@@ -223,13 +300,18 @@ def apply_edits(edits: dict) -> list:
         old = path.read_text(encoding="utf-8")
         updates, inserts = {}, {}
         for table_id in table_ids:
-            table = registry.table_dict(table_id)
+            t = registry.TABLES[table_id]
+            existing = registry.entries(table_id)
             for key, edit in edits[table_id].items():
                 pair = (edit["fields"], list(edit["changed"]))
-                if key in table:
-                    updates.setdefault(table_id, {})[key] = pair
-                else:
+                if key in existing:
+                    updates.setdefault(t.source_var, (table_id, {}))[1][key] = pair
+                elif t.container == "dict":
                     inserts.setdefault(table_id, []).append((key, pair))
+                else:
+                    raise ValueError(
+                        f"{table_id}: unknown entry {key!r} (cannot insert "
+                        f"into a {t.container} table)")
         new = old
         if updates:
             new = cst.parse_module(new).visit(_Transformer(updates)).code
@@ -251,13 +333,14 @@ def apply_edits(edits: dict) -> list:
         tmp.write_text(new, encoding="utf-8")
         tmp.replace(path)
     for table_id, table_edits in edits.items():
-        table = registry.table_dict(table_id)
+        existing = registry.entries(table_id)
         cls = registry.factory_class(table_id)
         editable = set(registry.editable_fields(table_id))
         for key, edit in table_edits.items():
             values = {f: v for f, v in edit["fields"].items() if f in editable}
-            if key in table:
-                table[key] = replace(table[key], **values)
+            if key in existing:
+                registry.set_entry(table_id, key,
+                                   replace(existing[key], **values))
             else:
-                table[key] = cls(**values)
+                registry.set_entry(table_id, key, cls(**values))
     return results

@@ -123,10 +123,15 @@ def _draw_rivers(ax, riv, spain, specs):
                 capstyle="round")
 
 
-def _label_rivers(ax, specs):
+def _label_rivers(ax, specs, table_id=None):
     for name, spec in specs.items():
+        spec = hooks.spec_for(table_id, name, spec)
         x, y = _project_lonlat(spec.lon, spec.lat)
         color = RIVER if spec.main else RIVER_TRIB
+        hooks.capture(table_id, name, name, (x, y), spec,
+                      color=color, halo=LAND)
+        if hooks.SUPPRESS:
+            continue
         t = draw.halo_text(ax, x, y, name, spec.size, weight="semibold",
                            color=color, halo=LAND, halo_width=5, zorder=8)
         t.set_rotation(spec.rotation)
@@ -150,11 +155,16 @@ def map_spain_rios():
     _draw_rivers(ax, riv, spain, RIOS_LABELS)
     gpd.GeoSeries([_project_line(GUADALQUIVIR_MOUTH)], crs=geo.MAIN_CRS).plot(
         ax=ax, color=RIVER, linewidth=MAIN_LW, zorder=6, capstyle="round")
-    _label_rivers(ax, RIOS_LABELS)
+    _label_rivers(ax, RIOS_LABELS, table_id="RIOS_LABELS")
 
     from .maps_fisica import RANGE_LABEL
     for r in RANGE_LABELS_RIOS:
+        r = hooks.spec_for("RANGE_LABELS_RIOS", r.text, r)
         x, y = _project_lonlat(r.lon, r.lat)
+        hooks.capture("RANGE_LABELS_RIOS", r.text, r.text, (x, y), r,
+                      color=RANGE_LABEL, halo=LAND)
+        if hooks.SUPPRESS:
+            continue
         t = draw.halo_text(ax, x, y, r.text, r.size, weight="extrabold",
                            color=RANGE_LABEL, halo=LAND, halo_width=5,
                            zorder=7)
@@ -283,13 +293,13 @@ def map_spain_rios_ciudades():
     riv = geo.load("rivers20").to_crs(geo.MAIN_CRS)
     riv = riv[riv["name"].isin(CIUDADES_RIVER_LABELS)]
     _draw_rivers(ax, riv, spain, CIUDADES_RIVER_LABELS)
-    _label_rivers(ax, CIUDADES_RIVER_LABELS)
+    _label_rivers(ax, CIUDADES_RIVER_LABELS, table_id="CIUDADES_RIVER_LABELS")
 
     # Hand-traced Nervión and Llobregat, plus the muted Tajo estuary to Lisboa.
     for name, (course, spec) in HAND_RIVERS.items():
         gpd.GeoSeries([_project_line(course)], crs=geo.MAIN_CRS).plot(
             ax=ax, color=RIVER, linewidth=MAIN_LW, zorder=6, capstyle="round")
-        _label_rivers(ax, {name: spec})
+        _label_rivers(ax, {name: spec}, table_id="HAND_RIVERS")
     gpd.GeoSeries([_project_line(TAJO_ESTUARIO)], crs=geo.MAIN_CRS).plot(
         ax=ax, color=RIVER_FAINT, linewidth=MAIN_LW - 0.4, zorder=6,
         capstyle="round")

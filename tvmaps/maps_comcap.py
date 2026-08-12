@@ -10,7 +10,7 @@ city-states, so their single name doubles as region and capital (a star marks
 the city).
 """
 
-from . import cities, draw, geo, style
+from . import cities, draw, geo, hooks, style
 from .maps_spain import (
     Label,
     _draw_country_labels,
@@ -92,7 +92,10 @@ def _draw_capital(ax, xy, name):
     draw.city_star(ax, xy)
     if name in STAR_ONLY:
         return
-    spec = CAP_LABELS[name]
+    spec = hooks.spec_for("CAP_LABELS", name, CAP_LABELS[name])
+    hooks.capture("CAP_LABELS", name, spec.text or name, xy, spec)
+    if hooks.SUPPRESS:
+        return
     text = spec.text or name
     if spec.tx is not None:
         draw.callout(ax, xy, (xy[0] + spec.tx * KM, xy[1] + spec.ty * KM),
@@ -130,7 +133,8 @@ def map_spain_comunidades_capitales():
 
     # Community names (big, dark, extrabold).
     _label_regions(ax, s["ccaa_pen"], "acom_code",
-                   lambda c, r: style.CCAA_DISPLAY[c], COMM_LABELS)
+                   lambda c, r: style.CCAA_DISPLAY[c], COMM_LABELS,
+                   table_id="COMM_LABELS")
 
     # Capitals (gold star + smaller bronze name).
     xy = _capital_xy(s)

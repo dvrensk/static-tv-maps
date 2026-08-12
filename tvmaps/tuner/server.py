@@ -56,6 +56,35 @@ def _render(map_name, overrides=None, suppress=False, capture=False,
     return buf.getvalue(), captured
 
 
+def _add_lonlat_jacobians(map_name, entries):
+    """For absolute (lon/lat + rotation) labels: a local linear map between
+    metres in the map CRS and degrees, so the browser can drag in pixels and
+    produce lon/lat without a projection library."""
+    absolute = [e for e in entries
+                if registry.TABLES[e["table"]].idiom == "absolute"]
+    if not absolute:
+        return
+    import geopandas as gpd
+    from shapely.geometry import Point
+
+    EPS = 0.01  # degrees
+    pts = []
+    for e in absolute:
+        lon, lat = e["fields"]["lon"], e["fields"]["lat"]
+        pts += [Point(lon, lat), Point(lon + EPS, lat), Point(lon, lat + EPS)]
+    proj = gpd.GeoSeries(pts, crs="EPSG:4326").to_crs(registry.map_crs(map_name))
+    for i, e in enumerate(absolute):
+        p0, px, py = proj[3 * i], proj[3 * i + 1], proj[3 * i + 2]
+        m = [[(px.x - p0.x) / EPS, (py.x - p0.x) / EPS],
+             [(px.y - p0.y) / EPS, (py.y - p0.y) / EPS]]  # metres per degree
+        det = m[0][0] * m[1][1] - m[0][1] * m[1][0]
+        e["extra"]["m_per_deg"] = m
+        e["extra"]["deg_per_m"] = [
+            [m[1][1] / det, -m[0][1] / det],
+            [-m[1][0] / det, m[0][0] / det],
+        ]
+
+
 def _bundle(map_name):
     cached = _base_cache.get(map_name)
     if cached is None:
@@ -68,13 +97,17 @@ def _bundle(map_name):
             if handle in seen:
                 continue
             seen.add(handle)
+            display = registry.display_name(rec["table"], rec["key"])
+            if display == rec["key"] and rec["text"]:
+                display = rec["text"].split("\n")[0]
             entries.append(dict(
                 table=rec["table"], key=rec["key"], text=rec["text"],
-                display=registry.display_name(rec["table"], rec["key"]),
+                display=display,
                 anchor=rec["anchor"], fields=rec["fields"],
                 extra=rec["extra"],
-                auto=rec["key"] not in registry.table_dict(rec["table"]),
+                auto=rec["key"] not in registry.entries(rec["table"]),
             ))
+        _add_lonlat_jacobians(map_name, entries)
         frame = registry.map_frame(map_name)
         bundle = dict(
             name=map_name, title=m.title, group=m.group,

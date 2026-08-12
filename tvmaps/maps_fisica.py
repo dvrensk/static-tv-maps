@@ -5,7 +5,7 @@ from dataclasses import dataclass
 import geopandas as gpd
 from shapely.geometry import LineString
 
-from . import draw, geo
+from . import draw, geo, hooks
 from .maps_spain import KM, _draw_country_labels, _project_lonlat, spain_scene
 
 # Palette for the physical map.
@@ -138,12 +138,22 @@ def map_spain_fisica():
 
     # Labels.
     for name, spec in RIVER_LABELS.items():
+        spec = hooks.spec_for("RIVER_LABELS", name, spec)
         x, y = _project_lonlat(spec.lon, spec.lat)
+        hooks.capture("RIVER_LABELS", name, name, (x, y), spec,
+                      color=RIVER, halo=LAND)
+        if hooks.SUPPRESS:
+            continue
         t = draw.halo_text(ax, x, y, name, spec.size, weight="semibold",
                            color=RIVER, halo=LAND, halo_width=5, zorder=8)
         t.set_rotation(spec.rotation)
     for r in RANGE_LABELS:
+        r = hooks.spec_for("RANGE_LABELS", r.text, r)
         x, y = _project_lonlat(r.lon, r.lat)
+        hooks.capture("RANGE_LABELS", r.text, r.text, (x, y), r,
+                      color=RANGE_LABEL, halo=LAND)
+        if hooks.SUPPRESS:
+            continue
         t = draw.halo_text(ax, x, y, r.text, r.size, weight="extrabold",
                            color=RANGE_LABEL, halo=LAND, halo_width=5,
                            zorder=7)

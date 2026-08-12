@@ -108,21 +108,29 @@
     </div>
     <fieldset id="fields" disabled>
       <legend>values <span class="kbd">(arrows move; Shift ×5, Alt ¼)</span></legend>
-      <label for="f-size">size</label><input id="f-size" type="number" step="2">
-      <label for="f-dx">dx km</label><input id="f-dx" type="number" step="1">
-      <label for="f-dy">dy km</label><input id="f-dy" type="number" step="1">
-      <label for="f-tx">tx km</label><input id="f-tx" type="number" step="1">
-      <label for="f-ty">ty km</label><input id="f-ty" type="number" step="1">
-      <label for="f-ha">ha</label>
-      <select id="f-ha"><option>left</option><option>center</option><option>right</option></select>
-      <label for="f-va">va</label>
-      <select id="f-va"><option>top</option><option>center</option><option>bottom</option></select>
-      <label for="f-group">map</label>
-      <select id="f-group"><option value="A">1 (A)</option><option value="B">2 (B)</option></select>
+      <label for="f-size" data-row="size">size</label><input id="f-size" data-row="size" type="number" step="2">
+      <label for="f-size2" data-row="size2">icon size</label><input id="f-size2" data-row="size2" type="number" step="2">
+      <label for="f-dx" data-row="dx">dx km</label><input id="f-dx" data-row="dx" type="number" step="1">
+      <label for="f-dy" data-row="dy">dy km</label><input id="f-dy" data-row="dy" type="number" step="1">
+      <label for="f-tx" data-row="tx">tx km</label><input id="f-tx" data-row="tx" type="number" step="1">
+      <label for="f-ty" data-row="ty">ty km</label><input id="f-ty" data-row="ty" type="number" step="1">
+      <label for="f-lon" data-row="lon">lon</label><input id="f-lon" data-row="lon" type="number" step="0.01">
+      <label for="f-lat" data-row="lat">lat</label><input id="f-lat" data-row="lat" type="number" step="0.01">
+      <label for="f-rot" data-row="rot">angle°</label><input id="f-rot" data-row="rot" type="number" step="2">
+      <label for="f-ha" data-row="ha">ha</label>
+      <select id="f-ha" data-row="ha"><option>left</option><option>center</option><option>right</option></select>
+      <label for="f-va" data-row="va">va</label>
+      <select id="f-va" data-row="va"><option>top</option><option>center</option><option>bottom</option></select>
+      <label for="f-group" data-row="group">map</label>
+      <select id="f-group" data-row="group"><option value="A">1 (A)</option><option value="B">2 (B)</option></select>
     </fieldset>
     <div class="row">
       <button id="btn-callout" title="c">Leader on/off</button>
       <button id="btn-target" title="t / a">Move: text</button>
+    </div>
+    <div class="row" id="rot-row">
+      <button id="btn-rot-l" title="[">⟲ rotate</button>
+      <button id="btn-rot-r" title="]">rotate ⟳</button>
     </div>
     <div class="row">
       <button data-snap="up" title="w">Above</button>
@@ -158,6 +166,7 @@
         <tr><td>g</td><td>send to the other map (group A/B)</td></tr>
         <tr><td>w / x / q / e</td><td>snap above / below / left / right</td></tr>
         <tr><td>u</td><td>revert this label's changes</td></tr>
+        <tr><td>[ / ]</td><td>rotate river/range names 2° (Shift: 10°, Alt: ½°)</td></tr>
         <tr><td>r</td><td>real render on/off</td></tr>
         <tr><td id="key-save">Ctrl+S</td><td>save to the source files</td></tr>
         <tr><td>z / Shift+Z · 0</td><td>zoom in / out · fit view</td></tr>
@@ -204,12 +213,23 @@ function toPx(m) {   // metres (data coords) -> full-res px
 const kmToPx = km => [km[0] * pxPerKm(), -km[1] * pxPerKm()];
 
 function schemaOf(e) { return state.bundle.schemas[e.table]; }
+function idiomOf(e) { return schemaOf(e).idiom; }
 function sizeOf(e) {
-  const s = schemaOf(e);
-  if (!s.editable.includes("size")) return e.extra.tier_size || 28;
-  return e.fields.size ?? e.extra.tier_size ?? 28;
+  const sf = schemaOf(e).size_field;
+  if (!sf) return e.extra.tier_size || 28;
+  return e.fields[sf] ?? e.extra.tier_size ?? 28;
 }
-function isCallout(e) { return e.fields.tx !== null && e.fields.tx !== undefined; }
+function isCallout(e) {
+  return idiomOf(e) === "offset"
+    && e.fields.tx !== null && e.fields.tx !== undefined;
+}
+const round1 = v => Math.round(v * 10) / 10;
+const round4 = v => Math.round(v * 10000) / 10000;
+function moveLonLat(e, dxKm, dyKm) {
+  const j = e.extra.deg_per_m;
+  e.fields.lon = round4(e.fields.lon + (j[0][0] * dxKm + j[0][1] * dyKm) * 1000);
+  e.fields.lat = round4(e.fields.lat + (j[1][0] * dxKm + j[1][1] * dyKm) * 1000);
+}
 function isDirty(e) { return JSON.stringify(e.fields) !== JSON.stringify(e.orig); }
 function onThisMap(e) {
   const g = state.bundle.group;
@@ -227,6 +247,25 @@ function el(name, attrs, parent) {
 function labelLayout(e) {
   // Returns positions in full-res px: base (shifted anchor) and text spot.
   const anchor = toPx(e.anchor);
+  if (idiomOf(e) === "absolute") {
+    // anchor was captured at the bundle's lon/lat; live position follows the
+    // edited lon/lat through the per-entry linear projection.
+    const m = e.extra.m_per_deg;
+    const dLon = e.fields.lon - e.anchorRef.lon;
+    const dLat = e.fields.lat - e.anchorRef.lat;
+    const dxm = m[0][0] * dLon + m[0][1] * dLat;
+    const dym = m[1][0] * dLon + m[1][1] * dLat;
+    const d = kmToPx([dxm / 1000, dym / 1000]);
+    const pos = [anchor[0] + d[0], anchor[1] + d[1]];
+    return { base: pos, text: pos, callout: false };
+  }
+  if (idiomOf(e) === "block") {
+    const t = kmToPx([e.fields.tx || 0, e.fields.ty || 0]);
+    const text = [anchor[0] + t[0], anchor[1] + t[1]];
+    const leader = e.extra.leader !== false
+      && ((e.fields.tx || 0) !== 0 || (e.fields.ty || 0) !== 0);
+    return { base: anchor, text, callout: leader };
+  }
   const d = kmToPx([e.fields.dx || 0, e.fields.dy || 0]);
   const base = [anchor[0] + d[0], anchor[1] + d[1]];
   if (!isCallout(e)) return { base, text: base, callout: false };
@@ -243,6 +282,7 @@ function renderEntry(e) {
   const lines = (e.text || e.key).split("\n");
   const lh = size * 0.95;
   const anchorMode = state.sel === e && state.target === "anchor";
+  const absolute = idiomOf(e) === "absolute";
 
   if (lay.callout) {
     const [x1, y1] = lay.base, [x2, y2] = lay.text;
@@ -255,32 +295,56 @@ function renderEntry(e) {
     }, g);
   }
 
-  // Anchor handle: subtle always (regions have no dot in the base map),
-  // highlighted when it is the drag/nudge target.
-  el("circle", {
-    cx: lay.base[0], cy: lay.base[1], r: anchorMode ? 12 : 7,
-    fill: anchorMode ? "#1a73e8" : "rgba(40,40,40,.35)",
-    stroke: "#ffffff", "stroke-width": anchorMode ? 3 : 1.5,
-    "data-role": "anchor", style: "cursor: move",
-  }, g);
+  // Anchor handle for the offset idiom (regions have no dot in the base
+  // map); highlighted when it is the drag/nudge target. Absolute and block
+  // labels have no separate anchor to move.
+  if (idiomOf(e) === "offset") {
+    el("circle", {
+      cx: lay.base[0], cy: lay.base[1], r: anchorMode ? 12 : 7,
+      fill: anchorMode ? "#1a73e8" : "rgba(40,40,40,.35)",
+      stroke: "#ffffff", "stroke-width": anchorMode ? 3 : 1.5,
+      "data-role": "anchor", style: "cursor: move",
+    }, g);
+  }
 
   const ha = e.fields.ha || "center";
-  const va = s.has_va ? (e.fields.va || "center") : "center";
+  const va = s.has_va ? (e.fields.va || "center")
+           : idiomOf(e) === "block" ? "top" : "center";
   const blockH = lines.length * lh;
   let cy = lay.text[1];
   if (va === "bottom") cy -= blockH / 2;
   else if (va === "top") cy += blockH / 2;
 
+  // Rotated labels live in their own group so the focus ring rotates too.
+  const rot = absolute ? (e.fields.rotation || 0) : 0;
+  const holder = rot
+    ? el("g", { transform: `rotate(${-rot} ${lay.text[0]} ${cy})` }, g)
+    : g;
+
+  if (e.extra.icon) {
+    // Icon glyph stacked above the name (maps_iconos._draw_icon_name).
+    const gapPx = kmToPx([1.5, 0])[0];
+    const iconPx = (e.fields.icon_size || 56) * PT2PX;
+    const ic = el("text", {
+      x: lay.text[0], y: lay.text[1] - gapPx - iconPx / 2,
+      "text-anchor": "middle", "dominant-baseline": "central",
+      style: `font-size: ${iconPx}px;`, "paint-order": "stroke",
+      stroke: "#ffffff", "stroke-width": Math.max(4, (e.fields.icon_size || 56) / 9) * PT2PX,
+    }, holder);
+    ic.textContent = e.extra.icon;
+    cy = lay.text[1] + gapPx + blockH / 2;
+  }
+
   let tx = lay.text[0];
   const badgeR = s.numbered ? 0.9 * size : 0;
   const textNode = el("text", {
     "text-anchor": { left: "start", center: "middle", right: "end" }[ha],
-    fill: LABEL_COLOR, stroke: HALO,
+    fill: e.extra.color || LABEL_COLOR, stroke: e.extra.halo || HALO,
     "stroke-width": Math.max(2.5, sizeOf(e) / 9) * PT2PX,
     "paint-order": "stroke", "stroke-linejoin": "round",
     style: `font: ${s.weight === "semibold" ? 600 : 800} ${size}px Inter, sans-serif;`,
     "data-role": "text",
-  }, g);
+  }, holder);
   if (s.numbered) {
     // Rank badge + left-aligned name, approximating draw.numbered_label.
     const gap = 0.9 * badgeR;
@@ -315,7 +379,7 @@ function renderEntry(e) {
         x: b.x - 10, y: b.y - 10, width: b.width + 20, height: b.height + 20,
         fill: "none", stroke: anchorMode ? "#9ab8d8" : "#1a73e8",
         "stroke-width": 4, "stroke-dasharray": "14 10", rx: 8,
-      }, g);
+      }, holder);
     });
   } else if (isDirty(e)) {
     el("circle", { cx: lay.base[0], cy: lay.base[1], r: 7,
@@ -361,11 +425,28 @@ function syncPanel() {
     inp.disabled = !on;
     if (document.activeElement !== inp) inp.value = v ?? "";
   };
-  set("f-size", sizeOf(e), s.editable.includes("size"));
+  const idiom = s.idiom;
+  const rows = {
+    size: !!s.size_field, size2: "icon_size" in s.fields,
+    dx: idiom === "offset", dy: idiom === "offset",
+    tx: idiom === "block" || s.has_callout,
+    ty: idiom === "block" || s.has_callout,
+    lon: idiom === "absolute", lat: idiom === "absolute",
+    rot: idiom === "absolute",
+    ha: s.editable.includes("ha"), va: s.has_va, group: s.has_group,
+  };
+  for (const [row, on] of Object.entries(rows))
+    document.querySelectorAll(`[data-row="${row}"]`).forEach(
+      n => n.style.display = on ? "" : "none");
+  set("f-size", sizeOf(e), !!s.size_field);
+  set("f-size2", e.fields.icon_size);
   set("f-dx", e.fields.dx ?? 0);
   set("f-dy", e.fields.dy ?? 0);
-  set("f-tx", e.fields.tx, s.has_callout && isCallout(e));
-  set("f-ty", e.fields.ty, s.has_callout && isCallout(e));
+  set("f-tx", e.fields.tx, idiom === "block" || isCallout(e));
+  set("f-ty", e.fields.ty, idiom === "block" || isCallout(e));
+  set("f-lon", e.fields.lon);
+  set("f-lat", e.fields.lat);
+  set("f-rot", e.fields.rotation ?? 0);
   set("f-ha", e.fields.ha || "center", s.editable.includes("ha"));
   set("f-va", e.fields.va || "center", s.has_va);
   set("f-group", e.fields.group || "A", s.has_group);
@@ -373,6 +454,7 @@ function syncPanel() {
   $("btn-callout").textContent = isCallout(e) ? "Remove leader (c)" : "Add leader (c)";
   $("btn-target").disabled = !isCallout(e);
   $("btn-target").textContent = "Move: " + (state.target === "anchor" ? "anchor (t↔a)" : "text (t↔a)");
+  $("rot-row").style.display = idiom === "absolute" ? "" : "none";
 }
 
 // ---- edits ----------------------------------------------------------------
@@ -389,7 +471,10 @@ function setField(e, field, value) {
 }
 function nudge(e, dxKm, dyKm) {
   const r = v => Math.round(v * 100) / 100;
-  if (isCallout(e) && state.target === "text") {
+  if (idiomOf(e) === "absolute") {
+    leaveReal(); moveLonLat(e, dxKm, dyKm); redraw(); return;
+  }
+  if (idiomOf(e) === "block" || (isCallout(e) && state.target === "text")) {
     setFieldPair(e, "tx", r((e.fields.tx || 0) + dxKm), "ty", r((e.fields.ty || 0) + dyKm));
   } else {
     setFieldPair(e, "dx", r((e.fields.dx || 0) + dxKm), "dy", r((e.fields.dy || 0) + dyKm));
@@ -419,7 +504,14 @@ function toggleCallout(e) {
 function snapDistanceKm(e) {
   return Math.max(1, Math.round(10 * sizeOf(e) * PT2PX / pxPerKm()) / 10);
 }
+function rotate(e, deg) {
+  if (idiomOf(e) !== "absolute") return;
+  leaveReal();
+  e.fields.rotation = round1((e.fields.rotation || 0) + deg);
+  redraw();
+}
 function snap(e, dir) {
+  if (idiomOf(e) === "absolute") return;
   const k = snapDistanceKm(e);
   const v = { up: [0, k], down: [0, -k], left: [-k, 0], right: [k, 0] }[dir];
   const ha = { up: "center", down: "center", left: "right", right: "left" }[dir];
@@ -516,12 +608,15 @@ document.addEventListener("keydown", ev => {
     case "q": snap(e, "left"); break;
     case "e": snap(e, "right"); break;
     case "u": resetEntry(e); break;
+    case "[": rotate(e, ev.shiftKey ? 10 : ev.altKey ? 0.5 : 2); break;
+    case "]": rotate(e, -(ev.shiftKey ? 10 : ev.altKey ? 0.5 : 2)); break;
   }
 });
 
 function bumpSize(e, d) {
-  if (!schemaOf(e).editable.includes("size")) return;
-  setField(e, "size", Math.min(200, Math.max(12, sizeOf(e) + d)));
+  const sf = schemaOf(e).size_field;
+  if (!sf) return;
+  setField(e, sf, Math.min(200, Math.max(12, sizeOf(e) + d)));
 }
 function cycleField(e, field, values) {
   if (!schemaOf(e).editable.includes(field)) return;
@@ -633,7 +728,11 @@ $("viewport").addEventListener("pointermove", ev => {
   drag.moved = true;
   const r = v => Math.round(v * 10) / 10;
   const f = e.fields, s = drag.startFields;
-  if (isCallout(e) && drag.role === "text") {
+  if (idiomOf(e) === "absolute") {
+    const j = e.extra.deg_per_m, dxm = dxKm * 1000, dym = dyKm * 1000;
+    f.lon = round4(s.lon + j[0][0] * dxm + j[0][1] * dym);
+    f.lat = round4(s.lat + j[1][0] * dxm + j[1][1] * dym);
+  } else if (idiomOf(e) === "block" || (isCallout(e) && drag.role === "text")) {
     f.tx = r((s.tx || 0) + dxKm); f.ty = r((s.ty || 0) + dyKm);
   } else {
     f.dx = r((s.dx || 0) + dxKm); f.dy = r((s.dy || 0) + dyKm);
@@ -778,8 +877,9 @@ async function loadMap(name) {
   if (!res.ok) { toast(bundle.error); return; }
   state.bundle = bundle;
   state.entries = bundle.entries.map((e, i) => ({
-    ...e, id: `${e.table} ${e.key}`,
+    ...e, id: `${e.table} ${e.key}`,
     orig: JSON.parse(JSON.stringify(e.fields)),
+    anchorRef: { lon: e.fields.lon, lat: e.fields.lat },
   }));
   state.baseURL = `/api/map/${name}/base.png?v=${Date.now()}`;
   state.real = false;
@@ -819,17 +919,24 @@ $("btn-target").onclick = () => {
     redraw();
   }
 };
+$("btn-rot-l").onclick = () => state.sel && rotate(state.sel, 2);
+$("btn-rot-r").onclick = () => state.sel && rotate(state.sel, -2);
 $("btn-reset").onclick = () => state.sel && resetEntry(state.sel);
 $("btn-deselect").onclick = () => select(null);
 document.querySelectorAll("[data-snap]").forEach(b =>
   b.onclick = () => state.sel && snap(state.sel, b.dataset.snap));
-for (const [id, field] of [["f-size", "size"], ["f-dx", "dx"], ["f-dy", "dy"],
-                           ["f-tx", "tx"], ["f-ty", "ty"]]) {
+for (const [id, field] of [["f-size", null], ["f-size2", "icon_size"],
+                           ["f-dx", "dx"], ["f-dy", "dy"],
+                           ["f-tx", "tx"], ["f-ty", "ty"],
+                           ["f-lon", "lon"], ["f-lat", "lat"],
+                           ["f-rot", "rotation"]]) {
   $(id).addEventListener("change", ev => {
     if (!state.sel) return;
+    const f = field || schemaOf(state.sel).size_field;
+    if (!f) return;
     const v = ev.target.value === "" ? null : Number(ev.target.value);
     if (v !== null && !Number.isFinite(v)) return;
-    setField(state.sel, field, v);
+    setField(state.sel, f, v);
   });
 }
 for (const [id, field] of [["f-ha", "ha"], ["f-va", "va"], ["f-group", "group"]]) {
