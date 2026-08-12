@@ -6,7 +6,7 @@ a two-column ranked legend over the Atlantic.
 
 from dataclasses import dataclass
 
-from . import cities, draw, geo, style
+from . import cities, draw, geo, hooks, style
 from .maps_spain import KM, _project_lonlat, spain_scene
 
 LAND_FILL = "#efe8d8"        # soft parchment for every community
@@ -135,7 +135,11 @@ def map_spain_ciudades():
             x, y = pts[name]
         ms, size = _tier(pop)
         draw.city_dot(ax, (x, y), size=ms, face=DOT_FACE, edge=DOT_EDGE)
-        spec = CITY_LABELS[name]
+        spec = hooks.spec_for("CITY_LABELS", name, CITY_LABELS[name])
+        hooks.capture("CITY_LABELS", name, spec.wrap or name, (x, y), spec,
+                      tier_size=size, rank=rank)
+        if hooks.SUPPRESS:
+            continue
         size = spec.size or size
         label = spec.wrap or name
         if spec.tx is not None:

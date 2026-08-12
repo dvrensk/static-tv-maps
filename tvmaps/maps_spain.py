@@ -2,9 +2,11 @@
 
 from dataclasses import dataclass
 
-from . import draw, geo, style
+from . import draw, geo, hooks, style
 
 KM = 1000.0  # offsets below are given in km for readability
+
+_SCENE = None
 
 
 def _project_lonlat(lon, lat):
@@ -21,7 +23,12 @@ def _project_lonlat(lon, lat):
 
 def spain_scene():
     """Everything shared by the Spain-wide maps: projected layers, the 16:9
-    frame, and the Canary Islands translated into the lower-left corner."""
+    frame, and the Canary Islands translated into the lower-left corner.
+    Memoized: the result is deterministic and no map mutates it, and reusing
+    it makes back-to-back renders (generate.py all, the tuner) much faster."""
+    global _SCENE
+    if _SCENE is not None:
+        return _SCENE
     ccaa = geo.load("comunidades")
     prov = geo.load("provincias")
     countries = geo.load("context_countries").to_crs(geo.MAIN_CRS)
@@ -37,7 +44,7 @@ def spain_scene():
     ccaa_can, box, tf = geo.place_canary(ccaa[ccaa.acom_code == "05"], frame, max_x=limit)
     prov_can, _, _ = geo.place_canary(prov[prov.acom_code == "05"], frame, max_x=limit)
 
-    return dict(
+    _SCENE = dict(
         frame=frame,
         countries=countries,
         ccaa_pen=ccaa_pen,
@@ -47,6 +54,7 @@ def spain_scene():
         canary_box=box,
         canary_tf=tf,
     )
+    return _SCENE
 
 
 COUNTRY_LABELS = [
@@ -104,14 +112,21 @@ CCAA_LABELS = {
 }
 
 
-def _label_regions(ax, gdf, code_field, name_lookup, specs, default_size=54):
+def _label_regions(ax, gdf, code_field, name_lookup, specs, table_id=None,
+                   group=None):
     for _, row in gdf.iterrows():
         code = row[code_field]
         spec = specs.get(code)
         if spec is None:
             continue
+        spec = hooks.spec_for(table_id, code, spec)
+        if group is not None and getattr(spec, "group", group) != group:
+            continue
         text = name_lookup(code, row)
         x, y = geo.label_point(row.geometry)
+        hooks.capture(table_id, code, text, (x, y), spec)
+        if hooks.SUPPRESS:
+            continue
         x, y = x + spec.dx * KM, y + spec.dy * KM
         if spec.tx is not None:
             draw.callout(ax, (x, y), (x + spec.tx * KM, y + spec.ty * KM),
@@ -134,7 +149,8 @@ def map_spain_comunidades(labels=True):
 
     if labels:
         _label_regions(ax, s["ccaa_pen"], "acom_code",
-                       lambda c, r: style.CCAA_DISPLAY[c], CCAA_LABELS)
+                       lambda c, r: style.CCAA_DISPLAY[c], CCAA_LABELS,
+                       table_id="CCAA_LABELS")
         footer = "Comunidades autónomas de España"
     else:
         footer = "Mapa mudo · Comunidades autónomas de España"
@@ -263,9 +279,10 @@ def map_spain_provincias(group=None):
     draw.draw_layer(ax, s["ccaa_can"], "none", style.BORDER_DARK, 2.2, zorder=5)
 
     if group:
-        specs = {c: sp for c, sp in PROV_LABELS.items() if sp.group == group}
-        _label_regions(ax, s["prov_pen"], "prov_code", _prov_name, specs)
-        _label_regions(ax, s["prov_can"], "prov_code", _prov_name, specs)
+        _label_regions(ax, s["prov_pen"], "prov_code", _prov_name, PROV_LABELS,
+                       table_id="PROV_LABELS", group=group)
+        _label_regions(ax, s["prov_can"], "prov_code", _prov_name, PROV_LABELS,
+                       table_id="PROV_LABELS", group=group)
         n = "1" if group == "A" else "2"
         footer = (f"Provincias de España (nombres {n} de 2) · "
                   "colores por comunidad autónoma")
@@ -317,7 +334,8 @@ def map_spain_provincias_numeros():
 
     specs = {code: NUM_LABELS.get(code, Label(46)) for code in PROV_LABELS}
     for layer in (s["prov_pen"], s["prov_can"]):
-        _label_regions(ax, layer, "prov_code", lambda c, r: c, specs)
+        _label_regions(ax, layer, "prov_code", lambda c, r: c, specs,
+                       table_id="NUM_LABELS")
 
     # Name legend: 01-26 over the Atlantic (above the Canary inset box),
     # 27-52 over the Mediterranean along the right edge.

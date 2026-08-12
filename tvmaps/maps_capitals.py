@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 
-from . import cities, draw, geo, style
+from . import cities, draw, geo, hooks, style
 from .maps_spain import (
     KM,
     _draw_country_labels,
@@ -42,11 +42,15 @@ def _capital_xy(scene):
     return pts
 
 
-def _draw_city(ax, xy, name, spec, marker="dot"):
+def _draw_city(ax, xy, name, spec, marker="dot", table_id=None):
     if marker == "star":
         draw.city_star(ax, xy)
     else:
         draw.city_dot(ax, xy)
+    spec = hooks.spec_for(table_id, name, spec)
+    hooks.capture(table_id, name, spec.text or name, xy, spec)
+    if hooks.SUPPRESS:
+        return
     text = spec.text or name
     if spec.tx is not None:
         draw.callout(ax, xy, (xy[0] + spec.tx * KM, xy[1] + spec.ty * KM),
@@ -147,7 +151,8 @@ def map_spain_capitales_provincias():
 
     xy = _capital_xy(s)
     for name in cities.PROV_CAPITALS.values():
-        _draw_city(ax, xy[name], name, PROV_CAPITAL_LABELS[name])
+        _draw_city(ax, xy[name], name, PROV_CAPITAL_LABELS[name],
+                   table_id="PROV_CAPITAL_LABELS")
 
     _draw_country_labels(ax, s["frame"])
     draw.draw_footer(ax, s["frame"],
@@ -208,7 +213,7 @@ def map_spain_capitales_comunidades():
     for keys in cities.CCAA_CAPITALS.values():
         for name in keys:
             _draw_city(ax, xy[name], name, CCAA_CAPITAL_LABELS[name],
-                       marker="star")
+                       marker="star", table_id="CCAA_CAPITAL_LABELS")
 
     _draw_country_labels(ax, s["frame"])
     draw.draw_footer(ax, s["frame"],

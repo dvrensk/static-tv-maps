@@ -105,13 +105,25 @@ def canary_xy(xy, transform):
     return (ox + (xy[0] - ox) * scale + dx, oy + (xy[1] - oy) * scale + dy)
 
 
+# polylabel is iterative and label anchors never change for a given geometry,
+# so cache them (keyed by geometry WKB): repeated renders in one process
+# (generate.py all, the label tuner) skip the recomputation.
+_LABEL_POINTS: dict = {}
+
+
 def label_point(geom, tol: float = 1500.0):
     """A good interior anchor for a label: pole of inaccessibility of the
     largest polygon of the geometry."""
-    if geom.geom_type == "MultiPolygon":
-        geom = max(geom.geoms, key=lambda g: g.area)
+    key = (geom.wkb, tol)
+    cached = _LABEL_POINTS.get(key)
+    if cached is not None:
+        return cached
+    g = geom
+    if g.geom_type == "MultiPolygon":
+        g = max(g.geoms, key=lambda p: p.area)
     try:
-        p = polylabel(geom, tolerance=tol)
+        p = polylabel(g, tolerance=tol)
     except Exception:
-        p = geom.representative_point()
+        p = g.representative_point()
+    _LABEL_POINTS[key] = (p.x, p.y)
     return p.x, p.y

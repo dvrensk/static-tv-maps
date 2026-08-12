@@ -1,7 +1,9 @@
 """Asturias maps: the 78 concejos, labels split over two maps."""
 
-from . import cities, draw, geo, style
+from . import cities, draw, geo, hooks, style
 from .maps_spain import KM, Label, _label_regions
+
+_SCENE = None
 
 NEIGHBOR_LABELS = [  # lon, lat
     ("GALICIA", -7.06, 43.11, 44),
@@ -74,7 +76,8 @@ SMALL_AREA_KM2 = 150
 
 def _concejo_specs(conc, group):
     """Split the concejos into two label groups by alternating area rank, so
-    each map labels ~39 concejos of mixed sizes spread across the region."""
+    each map labels ~39 concejos of mixed sizes spread across the region.
+    Keyed by concejo name — the key used in CONCEJO_OVERRIDES."""
     order = conc.geometry.area.sort_values(ascending=False).index
     specs = {}
     for rank, idx in enumerate(order):
@@ -86,16 +89,20 @@ def _concejo_specs(conc, group):
         if spec is None:
             small = row.geometry.area / 1e6 < SMALL_AREA_KM2
             spec = Label(SMALL_SIZE if small else DEFAULT_SIZE)
-        specs[row.mun_code] = spec
+        specs[row.mun_name] = spec
     return specs
 
 
 def asturias_scene():
+    global _SCENE
+    if _SCENE is not None:
+        return _SCENE
     conc = geo.load("asturias_concejos").to_crs(geo.MAIN_CRS)
     prov = geo.load("provincias").to_crs(geo.MAIN_CRS)
     context = prov[prov.prov_code.isin(["27", "24", "39", "36", "32", "34"])]
     frame = geo.compute_frame(conc.total_bounds, pad=(0.02, 0.06, 0.02, 0.15))
-    return dict(frame=frame, conc=conc, context=context)
+    _SCENE = dict(frame=frame, conc=conc, context=context)
+    return _SCENE
 
 
 def _neighbor_labels(ax, frame):
@@ -123,8 +130,9 @@ def map_asturias_concejos(group=None):
 
     if group:
         specs = _concejo_specs(s["conc"], group)
-        _label_regions(ax, s["conc"], "mun_code",
-                       lambda c, r: wrap_name(r.mun_name), specs)
+        _label_regions(ax, s["conc"], "mun_name",
+                       lambda c, r: wrap_name(r.mun_name), specs,
+                       table_id="CONCEJO_OVERRIDES")
         n = "1" if group == "A" else "2"
         footer = f"Concejos de Asturias (nombres {n} de 2)"
     else:
@@ -177,14 +185,26 @@ def _comarca_labels(ax, com, frame):
     m_per_pt = (frame[2] - frame[0]) / style.WIDTH_PX * style.DPI / 72.0
     for _, row in com.iterrows():
         name = row.comarca
-        spec = COMARCA_LABELS[name]
-        x, y = geo.label_point(row.geometry)
-        x, y = x + spec.dx * KM, y + spec.dy * KM
+        spec = hooks.spec_for("COMARCA_LABELS", name, COMARCA_LABELS[name])
+        x0, y0 = geo.label_point(row.geometry)
+        hooks.capture("COMARCA_LABELS", name, name, (x0, y0), spec)
+        if hooks.SUPPRESS:
+            continue
+        x, y = x0 + spec.dx * KM, y0 + spec.dy * KM
         pop = f"({cities.format_population(cities.comarca_population(name))})"
         pop_size = max(24, round(spec.size * 0.6))
         gap = 0.62 * (spec.size + pop_size) * m_per_pt  # between line centres
-        draw.halo_text(ax, x, y + gap / 2, name, spec.size, weight="extrabold")
-        draw.halo_text(ax, x, y - gap / 2, pop, pop_size, weight="semibold")
+        if spec.tx is not None:
+            tx, ty = x + spec.tx * KM, y + spec.ty * KM
+            draw.callout(ax, (x, y), (tx, ty), name, spec.size,
+                         weight="extrabold", ha=spec.ha)
+            draw.halo_text(ax, tx, ty - gap, pop, pop_size, weight="semibold",
+                           ha=spec.ha)
+        else:
+            draw.halo_text(ax, x, y + gap / 2, name, spec.size,
+                           weight="extrabold")
+            draw.halo_text(ax, x, y - gap / 2, pop, pop_size,
+                           weight="semibold")
 
 
 def _comarcas_gdf(conc):
@@ -200,7 +220,7 @@ def _comarcas_gdf(conc):
     return conc, conc.dissolve(by="comarca", as_index=False)
 
 
-def render_asturias_comarcas():
+def map_asturias_comarcas():
     s = asturias_scene()
     fig, ax = draw.new_map(s["frame"])
     draw.draw_context(ax, s["context"])
@@ -219,7 +239,11 @@ def render_asturias_comarcas():
                      "Comarcas de Asturias (ocho comarcas funcionales, "
                      "decreto 11/91) · población INE 2025")
     draw.draw_attribution(ax, s["frame"], "Datos: IGN España")
-    return draw.save(fig, "asturias-comarcas")
+    return fig
+
+
+def render_asturias_comarcas():
+    return draw.save(map_asturias_comarcas(), "asturias-comarcas")
 
 
 # ---------------------------------------------------------------------------
@@ -265,7 +289,7 @@ TOWN_LABELS = {
 }
 
 
-def render_asturias_ciudades():
+def map_asturias_ciudades():
     s = asturias_scene()
     fig, ax = draw.new_map(s["frame"])
     draw.draw_context(ax, s["context"])
@@ -280,7 +304,10 @@ def render_asturias_ciudades():
         x, y = points[town]
         ms, size = _town_tier(pop)
         draw.city_dot(ax, (x, y), size=ms, face=TOWN_COLOR, zorder=8)
-        spec = TOWN_LABELS[town]
+        spec = hooks.spec_for("TOWN_LABELS", town, TOWN_LABELS[town])
+        hooks.capture("TOWN_LABELS", town, town, (x, y), spec, tier_size=size)
+        if hooks.SUPPRESS:
+            continue
         if spec.tx is not None:
             draw.callout(ax, (x, y), (x + spec.tx * KM, y + spec.ty * KM),
                          town, size, ha=spec.ha)
@@ -293,7 +320,11 @@ def render_asturias_ciudades():
                      "Villas y ciudades de Asturias · concejos de más de "
                      "10.000 habitantes (INE 2023)")
     draw.draw_attribution(ax, s["frame"], "Datos: IGN España")
-    return draw.save(fig, "asturias-ciudades")
+    return fig
+
+
+def render_asturias_ciudades():
+    return draw.save(map_asturias_ciudades(), "asturias-ciudades")
 
 
 # Choropleth twin of the towns map: the whole concejo of each town over 10 000
@@ -430,7 +461,7 @@ RIOS_TOWN_LABELS = {
 }
 
 
-def render_asturias_rios():
+def map_asturias_rios():
     from .maps_spain import _project_lonlat
 
     s = asturias_scene()
@@ -463,7 +494,10 @@ def render_asturias_rios():
     for town, (lon, lat) in RIOS_TOWNS.items():
         x, y = _project_lonlat(lon, lat)
         draw.city_dot(ax, (x, y), size=13, face="#3a3733", zorder=9)
-        spec = RIOS_TOWN_LABELS[town]
+        spec = hooks.spec_for("RIOS_TOWN_LABELS", town, RIOS_TOWN_LABELS[town])
+        hooks.capture("RIOS_TOWN_LABELS", town, town, (x, y), spec)
+        if hooks.SUPPRESS:
+            continue
         if spec.tx is not None:
             draw.callout(ax, (x, y), (x + spec.tx * KM, y + spec.ty * KM),
                          town, spec.size, ha=spec.ha)
@@ -483,4 +517,8 @@ def render_asturias_rios():
     _neighbor_labels(ax, s["frame"])
     draw.draw_footer(ax, s["frame"], "Ríos de Asturias")
     draw.draw_attribution(ax, s["frame"], "Datos: OpenStreetMap")
-    return draw.save(fig, "asturias-rios")
+    return fig
+
+
+def render_asturias_rios():
+    return draw.save(map_asturias_rios(), "asturias-rios")

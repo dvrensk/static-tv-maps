@@ -12,7 +12,7 @@ from dataclasses import dataclass
 
 import geopandas as gpd
 
-from . import cities, draw, geo
+from . import cities, draw, geo, hooks
 from .maps_fisica import (COAST, HAND_RANGES, LAND, LAND_EDGE, RANGE_ALPHA,
                           RANGE_FILL, RIVER, RIVER_FAINT, _project_line,
                           _spain_union)
@@ -302,6 +302,10 @@ def map_spain_rios_ciudades():
     for key, spec in CIUDADES.items():
         x, y = pts[key]
         draw.city_dot(ax, (x, y), size=14, zorder=9)
+        spec = hooks.spec_for("CIUDADES", key, spec)
+        hooks.capture("CIUDADES", key, key, (x, y), spec)
+        if hooks.SUPPRESS:
+            continue
         draw.halo_text(ax, x + spec.dx * KM, y + spec.dy * KM, key,
                        spec.size, weight="extrabold", va="center",
                        ha=spec.ha, zorder=10)
