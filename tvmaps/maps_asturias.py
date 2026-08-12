@@ -157,8 +157,8 @@ COMARCA_NAME_ALIASES = {"Tapia de Casariego": "Tapia"}
 # Comarca colors live in style.py (both themes), keyed by comarca name; every
 # pair of neighbouring comarcas differs clearly in hue.
 
-# Label tuning per comarca; the small coastal comarcas (Avilés, Gijón) get
-# leader-line callouts into the sea. Offsets in km.
+# Label tuning per comarca. Offsets in km. The tight coastal comarcas
+# (Avilés, Gijón) keep smaller names nudged into their widest part.
 COMARCA_LABELS = {
     "Eo-Navia": Label(48),
     "Narcea": Label(48),
@@ -169,6 +169,22 @@ COMARCA_LABELS = {
     "Nalón": Label(44),
     "Oriente": Label(48),
 }
+
+
+def _comarca_labels(ax, com, frame):
+    """Comarca name plus its padrón population (rounded to the nearest
+    thousand) on a second, smaller line, both centred on the tuned anchor."""
+    m_per_pt = (frame[2] - frame[0]) / style.WIDTH_PX * style.DPI / 72.0
+    for _, row in com.iterrows():
+        name = row.comarca
+        spec = COMARCA_LABELS[name]
+        x, y = geo.label_point(row.geometry)
+        x, y = x + spec.dx * KM, y + spec.dy * KM
+        pop = f"({cities.format_population(cities.comarca_population(name))})"
+        pop_size = max(24, round(spec.size * 0.6))
+        gap = 0.62 * (spec.size + pop_size) * m_per_pt  # between line centres
+        draw.halo_text(ax, x, y + gap / 2, name, spec.size, weight="extrabold")
+        draw.halo_text(ax, x, y - gap / 2, pop, pop_size, weight="semibold")
 
 
 def _comarcas_gdf(conc):
@@ -197,11 +213,11 @@ def render_asturias_comarcas():
     draw.draw_layer(ax, com, "none", style.BORDER_DARK, 4.0, zorder=3)
     draw.draw_layer(ax, conc.dissolve(), "none", style.BORDER_DARK, 5.0, zorder=3)
 
-    _label_regions(ax, com, "comarca", lambda c, r: c, COMARCA_LABELS)
+    _comarca_labels(ax, com, s["frame"])
     _neighbor_labels(ax, s["frame"])
     draw.draw_footer(ax, s["frame"],
                      "Comarcas de Asturias (ocho comarcas funcionales, "
-                     "decreto 11/91)")
+                     "decreto 11/91) · población INE 2025")
     draw.draw_attribution(ax, s["frame"], "Datos: IGN España")
     return draw.save(fig, "asturias-comarcas")
 

@@ -137,6 +137,97 @@ ASTURIAS_COMARCAS = {
 }
 
 
+# Padrón population of every concejo of Asturias, INE 1 January 2025
+# (tabla 2886, "Asturias: Población por municipios y sexo",
+# https://www.ine.es/jaxiT3/Tabla.htm?t=2886). Names as in ASTURIAS_COMARCAS.
+# Total: 1 013 529 (Asturias). Used to sum populations per comarca.
+CONCEJO_POPULATION = {
+    "Allande": 1_506,
+    "Aller": 10_011,
+    "Amieva": 591,
+    "Avilés": 75_517,
+    "Belmonte de Miranda": 1_366,
+    "Bimenes": 1_639,
+    "Boal": 1_372,
+    "Cabrales": 1_884,
+    "Cabranes": 1_094,
+    "Candamo": 1_902,
+    "Cangas de Onís": 6_344,
+    "Cangas del Narcea": 11_282,
+    "Caravia": 486,
+    "Carreño": 10_292,
+    "Caso": 1_437,
+    "Castrillón": 21_998,
+    "Castropol": 3_202,
+    "Coaña": 3_321,
+    "Colunga": 3_143,
+    "Corvera de Asturias": 15_785,
+    "Cudillero": 4_867,
+    "Degaña": 768,
+    "El Franco": 3_728,
+    "Gijón": 269_894,
+    "Gozón": 10_407,
+    "Grado": 9_681,
+    "Grandas de Salime": 767,
+    "Ibias": 1_084,
+    "Illano": 277,
+    "Illas": 1_048,
+    "Langreo": 38_612,
+    "Las Regueras": 1_892,
+    "Laviana": 12_352,
+    "Lena": 10_382,
+    "Llanera": 14_020,
+    "Llanes": 13_486,
+    "Mieres": 36_373,
+    "Morcín": 2_460,
+    "Muros de Nalón": 1_955,
+    "Nava": 5_244,
+    "Navia": 8_031,
+    "Noreña": 5_131,
+    "Onís": 739,
+    "Oviedo": 223_968,
+    "Parres": 5_150,
+    "Pesoz": 134,
+    "Peñamellera Alta": 500,
+    "Peñamellera Baja": 1_194,
+    "Piloña": 6_716,
+    "Ponga": 576,
+    "Pravia": 7_792,
+    "Proaza": 686,
+    "Quirós": 1_142,
+    "Ribadedeva": 1_693,
+    "Ribadesella": 5_591,
+    "Ribera de Arriba": 1_852,
+    "Riosa": 1_686,
+    "Salas": 4_771,
+    "San Martín de Oscos": 337,
+    "San Martín del Rey Aurelio": 15_531,
+    "San Tirso de Abres": 396,
+    "Santa Eulalia de Oscos": 420,
+    "Santo Adriano": 281,
+    "Sariego": 1_252,
+    "Siero": 53_049,
+    "Sobrescobio": 838,
+    "Somiedo": 1_031,
+    "Soto del Barco": 3_801,
+    "Tapia de Casariego": 3_538,
+    "Taramundi": 545,
+    "Teverga": 1_495,
+    "Tineo": 8_679,
+    "Valdés": 10_776,
+    "Vegadeo": 3_928,
+    "Villanueva de Oscos": 244,
+    "Villaviciosa": 15_379,
+    "Villayón": 1_054,
+    "Yernes y Tameza": 134,
+}
+
+
+def comarca_population(comarca: str) -> int:
+    """Padrón population of a functional comarca (sum of its concejos)."""
+    return sum(CONCEJO_POPULATION[c] for c in ASTURIAS_COMARCAS[comarca])
+
+
 def format_population(n: int) -> str:
     """Round to the nearest thousand, Spanish thousands separators."""
     rounded = round(n / 1000) * 1000
