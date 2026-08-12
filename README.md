@@ -72,6 +72,34 @@ make local-maps
 Or directly: `python generate.py all [--jpg]`. The `--jpg` flag also writes
 JPEG copies, for TVs that only accept JPEG.
 
+## Tuning labels interactively ("el ajustador")
+
+Label placement lives as data in `tvmaps/maps_*.py` (`Label(size, dx, dy,
+tx, ty, ha)`, offsets in km). Instead of editing numbers and re-rendering,
+run the tuner:
+
+```bash
+make tune          # Docker — then open http://localhost:8321/
+make local-tune    # venv
+```
+
+It shows each map with every label as a draggable overlay. It is
+keyboard-first: after selecting a label (click once, or `Tab` / `/` to
+search by name) everything works from the keyboard — arrows nudge in km
+(`Shift` ×5, `Alt` ¼), `c` toggles the leader-line callout, `t`/`a` switch
+between moving the text and the anchor, `w`/`x`/`q`/`e` snap the name
+above/below/left/right, `g` sends a name to the other map of a split pair,
+`+`/`-` change the size, `u` reverts the label, and `?` lists everything.
+The browser preview is a close approximation; `r` asks the warm server for
+a real matplotlib render in about a second. `Ctrl+S` writes the values back
+into the `maps_*.py` tables — only the numbers change, comments and
+formatting survive — and shows the diff. Final maps still come from
+`generate.py`.
+
+Run it with `--host 0.0.0.0` (what `make tune` does) and it works from a
+phone or tablet on the same network too: tap to select, drag to place, and
+the side-panel buttons mirror every keyboard command.
+
 ### Color themes
 
 The political maps (communities, provinces, capitals, Asturias concejos and

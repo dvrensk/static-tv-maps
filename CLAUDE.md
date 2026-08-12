@@ -44,11 +44,24 @@ requirements:
   (committed), plus the flag PNGs in `assets/flags/` (committed, one per ISO
   alpha-2 code). Rendering never needs the network.
 - `output/` — rendered maps, committed.
+- `tune.py` + `tvmaps/tuner/` — the interactive label tuner ("el
+  ajustador"): a stdlib HTTP server plus a single-page editor that drags
+  labels over a cached base render and writes values back into the
+  `maps_*.py` tables via libcst (comments/formatting preserved).
+  `tvmaps/hooks.py` is the seam the maps expose for it: every offset-idiom
+  label call goes through `hooks.spec_for()` / `hooks.capture()`, a no-op
+  during generate.py runs. New label tables must be registered in
+  `tvmaps/tuner/registry.py` and routed through the hooks to be tunable.
+- `tests/` — tuner write-back round-trip tests (`make test`). The key
+  invariant: saving unchanged values must leave every file byte-identical.
 
 ## Working on maps
 
 The iteration loop: render (`.venv/bin/python generate.py <map>`, ~1 s per
-map), open the PNG, adjust, repeat. Label tuning is all data:
+map), open the PNG, adjust, repeat. For placement work the user drives
+`make tune` / `make local-tune` instead (see README): a browser editor with
+keyboard nudging, ~1 s ground-truth re-renders from a warm process, and
+saves that patch the tables in place. Label tuning is all data:
 
 - `Label(size, dx, dy)` — nudge the in-region anchor; **offsets are in km**.
 - `Label(size, tx, ty, ha=...)` — draw the name away from the feature with a

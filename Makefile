@@ -10,18 +10,22 @@
 # Local workflow (venv, no Docker):
 #   make local-setup
 #   make local-maps
+#
+# Interactive label tuning ("el ajustador"):
+#   make tune        Docker; open http://localhost:8321/
+#   make local-tune  venv
 
 IMAGE = static-tv-maps
 DOCKER_RUN = docker run --rm -v $(PWD):/app -u $(shell id -u):$(shell id -g) $(IMAGE)
 VENV = .venv
 PY = $(VENV)/bin/python
 
-.PHONY: help setup data maps maps-sobrio maps-galaxia map list shell clean unchurn local-setup local-data local-maps local-map
+.PHONY: help setup data maps maps-sobrio maps-galaxia map list shell clean unchurn local-setup local-data local-maps local-map tune local-tune test
 
 help:
-	@echo "Docker targets:  setup, data, maps, map M=<name>, list, shell"
-	@echo "Local targets:   local-setup, local-data, local-maps, local-map M=<name>"
-	@echo "Other:           clean (remove rendered maps)"
+	@echo "Docker targets:  setup, data, maps, map M=<name>, list, shell, tune"
+	@echo "Local targets:   local-setup, local-data, local-maps, local-map M=<name>, local-tune"
+	@echo "Other:           test (tuner round-trip tests), clean (remove rendered maps)"
 	@echo "                 unchurn (revert re-rendered images whose pixels didn't change; needs local-setup)"
 
 setup:
@@ -61,6 +65,18 @@ local-maps:
 
 local-map:
 	$(PY) generate.py $(M)
+
+# Interactive label tuning. The container needs the port published and the
+# repo mounted so saves land in your working tree.
+tune:
+	docker run --rm -v $(PWD):/app -u $(shell id -u):$(shell id -g) \
+		-p 8321:8321 $(IMAGE) python tune.py --host 0.0.0.0
+
+local-tune:
+	$(PY) tune.py
+
+test:
+	$(PY) -m pytest tests/ -q
 
 clean:
 	rm -f output/*.png output/*.jpg

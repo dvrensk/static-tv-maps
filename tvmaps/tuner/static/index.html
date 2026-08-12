@@ -555,14 +555,20 @@ function fillSearch(q) {
     li.onclick = () => { $("search").classList.add("hidden"); select(e, true); };
     list.appendChild(li);
   });
+  if (!hits.length && q) {
+    const li = document.createElement("li");
+    li.textContent = "sin resultados en este mapa";
+    li.style.color = "var(--dim)";
+    list.appendChild(li);
+  }
   list._hits = hits;
 }
 $("search-input").addEventListener("input", ev => { searchHot = 0; fillSearch(ev.target.value); });
 $("search-input").addEventListener("keydown", ev => {
   const hits = $("search-list")._hits || [];
-  if (ev.key === "Enter" && hits[searchHot]) {
+  if (ev.key === "Enter") {
     $("search").classList.add("hidden");
-    select(hits[searchHot], true);
+    if (hits[searchHot]) select(hits[searchHot], true);
   } else if (ev.key === "ArrowDown") { ev.preventDefault(); searchHot = Math.min(searchHot + 1, hits.length - 1); fillSearch(ev.target.value); }
   else if (ev.key === "ArrowUp") { ev.preventDefault(); searchHot = Math.max(searchHot - 1, 0); fillSearch(ev.target.value); }
 });
@@ -596,7 +602,9 @@ $("viewport").addEventListener("pointerdown", ev => {
   } else {
     drag = { pan: true, start: [ev.clientX, ev.clientY], v0: { ...state.view } };
   }
-  ev.target.setPointerCapture?.(ev.pointerId);
+  // Capture on the viewport, not the SVG node: redraw() replaces the nodes
+  // mid-gesture and a detached capture target would swallow the moves.
+  $("viewport").setPointerCapture?.(ev.pointerId);
 });
 
 $("viewport").addEventListener("pointermove", ev => {
@@ -791,7 +799,7 @@ async function init() {
     o.value = m.name; o.textContent = m.title;
     sel.appendChild(o);
   }
-  sel.onchange = () => loadMap(sel.value);
+  sel.onchange = () => { sel.blur(); loadMap(sel.value); };
   const last = localStorage.getItem("tuner-map");
   const first = data.maps.find(m => m.name === last) ? last : data.maps[0].name;
   sel.value = first;

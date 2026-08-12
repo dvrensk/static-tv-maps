@@ -3,3 +3,5 @@ matplotlib>=3.9
 shapely>=2.0
 pyogrio>=0.9
 requests>=2.31
+libcst>=1.0  # tune.py: writes tuned label values back into the source
+pytest>=8.0  # make test: tuner round-trip tests
