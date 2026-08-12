@@ -1,0 +1,39 @@
+name: tvos
+
+# Build the Map Editor tvOS app and run its unit tests in the simulator.
+# This is the autonomous iteration loop for Swift changes made from
+# environments without Xcode.
+
+on:
+  push:
+    paths:
+      - "tvos/**"
+      - ".github/workflows/tvos.yml"
+  workflow_dispatch:
+
+jobs:
+  build-test:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen --spec tvos/project.yml --project tvos
+
+      - name: List available simulators
+        run: xcrun simctl list devices available | grep -i "apple tv" || true
+
+      - name: Build and test
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project tvos/MapEditor.xcodeproj \
+            -scheme MapEditor \
+            -destination 'platform=tvOS Simulator,name=Apple TV' \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_IDENTITY="" \
+            test 2>&1 | tail -100

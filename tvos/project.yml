@@ -1,0 +1,50 @@
+name: MapEditor
+options:
+  bundleIdPrefix: dev.vrensk
+  deploymentTarget:
+    tvOS: "17.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    DEVELOPMENT_TEAM: ""     # set your team in Xcode, or via xcodegen env
+
+targets:
+  MapEditor:
+    type: application
+    platform: tvOS
+    sources:
+      - path: MapEditor
+    info:
+      path: MapEditor/Info.plist
+      properties:
+        CFBundleDisplayName: Map Editor
+        UIAppFonts:
+          - Inter-Regular.ttf
+          - Inter-SemiBold.ttf
+          - Inter-ExtraBold.ttf
+        UIUserInterfaceStyle: Automatic
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.vrensk.tvmaps.MapEditor
+        TARGETED_DEVICE_FAMILY: "3"
+        ENABLE_PREVIEWS: YES
+
+  MapEditorTests:
+    type: bundle.unit-test
+    platform: tvOS
+    sources:
+      - path: MapEditorTests
+    dependencies:
+      - target: MapEditor
+
+schemes:
+  MapEditor:
+    build:
+      targets:
+        MapEditor: all
+        MapEditorTests: [test]
+    test:
+      targets:
+        - MapEditorTests
