@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -86,12 +86,12 @@
 </head>
 <body>
 <header>
-  <select id="map-select" title="Mapa"></select>
-  <button id="btn-real" title="Vista real (r)">Vista real</button>
-  <button id="btn-save" class="primary" title="Guardar (Ctrl+S)">Guardar</button>
-  <button id="btn-search" title="Buscar (/)">Buscar</button>
-  <button id="btn-help" title="Ayuda (?)">?</button>
-  <span id="status"><span id="dirty-count"></span> <span id="msg">cargando…</span></span>
+  <select id="map-select" title="Map"></select>
+  <button id="btn-real" title="Real render (r)">Real render</button>
+  <button id="btn-save" class="primary" title="Save">Save</button>
+  <button id="btn-search" title="Search (/)">Search</button>
+  <button id="btn-help" title="Help (?)">?</button>
+  <span id="status"><span id="dirty-count"></span> <span id="msg">loading…</span></span>
 </header>
 <main>
   <div id="viewport">
@@ -99,16 +99,16 @@
       <img id="base" alt="">
       <svg id="overlay" viewBox="0 0 4000 2250" preserveAspectRatio="none"></svg>
     </div>
-    <div id="banner">vista del navegador aproximada — pulsa <b>r</b> para la vista real</div>
+    <div id="banner">browser preview is approximate — press <b>r</b> for a real render</div>
   </div>
   <aside>
     <div>
-      <h2 id="sel-name">— nada seleccionado —</h2>
-      <div class="sub" id="sel-info">Tab o clic para seleccionar · «/» busca</div>
+      <h2 id="sel-name">— nothing selected —</h2>
+      <div class="sub" id="sel-info">Tab or click to select · “/” to search</div>
     </div>
     <fieldset id="fields" disabled>
-      <legend>valores <span class="kbd">(flechas mueven; Mayús ×5, Alt ¼)</span></legend>
-      <label for="f-size">tamaño</label><input id="f-size" type="number" step="2">
+      <legend>values <span class="kbd">(arrows move; Shift ×5, Alt ¼)</span></legend>
+      <label for="f-size">size</label><input id="f-size" type="number" step="2">
       <label for="f-dx">dx km</label><input id="f-dx" type="number" step="1">
       <label for="f-dy">dy km</label><input id="f-dy" type="number" step="1">
       <label for="f-tx">tx km</label><input id="f-tx" type="number" step="1">
@@ -117,22 +117,22 @@
       <select id="f-ha"><option>left</option><option>center</option><option>right</option></select>
       <label for="f-va">va</label>
       <select id="f-va"><option>top</option><option>center</option><option>bottom</option></select>
-      <label for="f-group">mapa</label>
+      <label for="f-group">map</label>
       <select id="f-group"><option value="A">1 (A)</option><option value="B">2 (B)</option></select>
     </fieldset>
     <div class="row">
-      <button id="btn-callout" title="c">Guía on/off</button>
-      <button id="btn-target" title="t / a">Mover: texto</button>
+      <button id="btn-callout" title="c">Leader on/off</button>
+      <button id="btn-target" title="t / a">Move: text</button>
     </div>
     <div class="row">
-      <button data-snap="up" title="w">Arriba</button>
-      <button data-snap="down" title="x">Abajo</button>
-      <button data-snap="left" title="q">Izda.</button>
-      <button data-snap="right" title="e">Dcha.</button>
+      <button data-snap="up" title="w">Above</button>
+      <button data-snap="down" title="x">Below</button>
+      <button data-snap="left" title="q">Left</button>
+      <button data-snap="right" title="e">Right</button>
     </div>
     <div class="row">
-      <button id="btn-reset" title="u">Deshacer etiqueta</button>
-      <button id="btn-deselect" title="Esc">Soltar</button>
+      <button id="btn-reset" title="u">Reset label</button>
+      <button id="btn-deselect" title="Esc">Deselect</button>
     </div>
     <div class="sub" id="dirty-list"></div>
   </aside>
@@ -140,36 +140,36 @@
 <div id="overlays">
   <div id="search" class="hidden">
     <div class="card">
-      <input id="search-input" placeholder="Buscar etiqueta… (Entrar selecciona)" autocomplete="off">
+      <input id="search-input" placeholder="Search labels… (Enter selects)" autocomplete="off">
       <ul id="search-list"></ul>
     </div>
   </div>
   <div id="help" class="hidden">
     <div class="card">
-      <h3>Atajos de teclado</h3>
+      <h3>Keyboard shortcuts</h3>
       <table class="keys">
-        <tr><td>Tab / Mayús+Tab · n / p</td><td>siguiente / anterior etiqueta</td></tr>
-        <tr><td>/</td><td>buscar etiqueta por nombre</td></tr>
-        <tr><td>flechas</td><td>mover 1 km (Mayús: 5 km, Alt: 0,25 km)</td></tr>
-        <tr><td>t / a</td><td>con guía: mover el texto / el ancla</td></tr>
-        <tr><td>c</td><td>línea guía on/off</td></tr>
-        <tr><td>+ / −</td><td>tamaño de letra ±2</td></tr>
-        <tr><td>h · v</td><td>alineación horizontal · vertical</td></tr>
-        <tr><td>g</td><td>cambiar de mapa (grupo A/B)</td></tr>
-        <tr><td>w / x / q / e</td><td>encajar arriba / abajo / izquierda / derecha</td></tr>
-        <tr><td>u</td><td>deshacer los cambios de la etiqueta</td></tr>
-        <tr><td>r</td><td>vista real (render de verdad) on/off</td></tr>
-        <tr><td>Ctrl+S</td><td>guardar en los ficheros</td></tr>
-        <tr><td>z / Mayús+Z · 0</td><td>zoom + / − · encuadrar</td></tr>
-        <tr><td>Esc</td><td>soltar selección / cerrar diálogos</td></tr>
+        <tr><td>Tab / Shift+Tab · n / p</td><td>next / previous label</td></tr>
+        <tr><td>/</td><td>search labels by name</td></tr>
+        <tr><td>arrows</td><td>move 1 km (Shift: 5 km, Alt: 0.25 km)</td></tr>
+        <tr><td>t / a</td><td>with a leader line: move the text / the anchor</td></tr>
+        <tr><td>c</td><td>leader line on/off</td></tr>
+        <tr><td>+ / −</td><td>font size ±2</td></tr>
+        <tr><td>h · v</td><td>horizontal · vertical alignment</td></tr>
+        <tr><td>g</td><td>send to the other map (group A/B)</td></tr>
+        <tr><td>w / x / q / e</td><td>snap above / below / left / right</td></tr>
+        <tr><td>u</td><td>revert this label's changes</td></tr>
+        <tr><td>r</td><td>real render on/off</td></tr>
+        <tr><td id="key-save">Ctrl+S</td><td>save to the source files</td></tr>
+        <tr><td>z / Shift+Z · 0</td><td>zoom in / out · fit view</td></tr>
+        <tr><td>Esc</td><td>deselect / close dialogs</td></tr>
       </table>
-      <p class="sub">Con el ratón o el dedo: clic selecciona, arrastrar mueve;
-      arrastrar el fondo desplaza; rueda o pellizco para zoom.</p>
+      <p class="sub">Mouse or touch: click selects, drag moves; dragging the
+      background pans; wheel or pinch zooms.</p>
     </div>
   </div>
   <div id="savedlg" class="hidden">
     <div class="card">
-      <h3>Guardado</h3>
+      <h3>Saved</h3>
       <div id="save-body"></div>
     </div>
   </div>
@@ -342,20 +342,20 @@ function redraw() {
 function syncPanel() {
   const e = state.sel;
   const n = state.entries.filter(isDirty).length;
-  $("dirty-count").textContent = n ? `${n} sin guardar ·` : "";
+  $("dirty-count").textContent = n ? `${n} unsaved ·` : "";
   $("dirty-list").textContent = n
-    ? "Cambiado: " + state.entries.filter(isDirty).map(x => x.display || x.key).join(", ")
+    ? "Changed: " + state.entries.filter(isDirty).map(x => x.display || x.key).join(", ")
     : "";
   $("fields").disabled = !e;
   if (!e) {
-    $("sel-name").textContent = "— nada seleccionado —";
-    $("sel-info").textContent = "Tab o clic para seleccionar · «/» busca";
+    $("sel-name").textContent = "— nothing selected —";
+    $("sel-info").textContent = "Tab or click to select · “/” to search";
     return;
   }
   const s = schemaOf(e);
   $("sel-name").textContent = (e.display || e.key).replace("\n", " ");
   $("sel-info").textContent = `${e.table} · ${e.key}` + (e.auto ? " · auto" : "")
-    + (isDirty(e) ? " · cambiado" : "");
+    + (isDirty(e) ? " · modified" : "");
   const set = (id, v, on = true) => {
     const inp = $(id);
     inp.disabled = !on;
@@ -370,9 +370,9 @@ function syncPanel() {
   set("f-va", e.fields.va || "center", s.has_va);
   set("f-group", e.fields.group || "A", s.has_group);
   $("btn-callout").disabled = !s.has_callout;
-  $("btn-callout").textContent = isCallout(e) ? "Quitar guía (c)" : "Poner guía (c)";
+  $("btn-callout").textContent = isCallout(e) ? "Remove leader (c)" : "Add leader (c)";
   $("btn-target").disabled = !isCallout(e);
-  $("btn-target").textContent = "Mover: " + (state.target === "anchor" ? "ancla (t↔a)" : "texto (t↔a)");
+  $("btn-target").textContent = "Move: " + (state.target === "anchor" ? "anchor (t↔a)" : "text (t↔a)");
 }
 
 // ---- edits ----------------------------------------------------------------
@@ -477,10 +477,12 @@ document.addEventListener("keydown", ev => {
     if (state.real) { leaveReal(); return; }
     select(null); return;
   }
+  if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === "s") {
+    ev.preventDefault(); save(); return;
+  }
   if (!$("search").classList.contains("hidden")) return; // search has its own keys
   if (inInput) return;
   if (ev.key === "Tab") { ev.preventDefault(); cycle(ev.shiftKey ? -1 : 1); return; }
-  if (ev.ctrlKey && ev.key.toLowerCase() === "s") { ev.preventDefault(); save(); return; }
   if (ev.ctrlKey || ev.metaKey) return;
 
   const e = state.sel;
@@ -530,7 +532,7 @@ function flipGroup(e) {
   if (!schemaOf(e).has_group) return;
   const to = e.fields.group === "A" ? "B" : "A";
   setField(e, "group", to);
-  toast(`«${e.display || e.key}» pasa al mapa ${to === "A" ? 1 : 2}`);
+  toast(`“${e.display || e.key}” moves to map ${to === "A" ? 1 : 2}`);
   if (!onThisMap(e)) select(null);
 }
 
@@ -557,7 +559,7 @@ function fillSearch(q) {
   });
   if (!hits.length && q) {
     const li = document.createElement("li");
-    li.textContent = "sin resultados en este mapa";
+    li.textContent = "no matches on this map";
     li.style.color = "var(--dim)";
     list.appendChild(li);
   }
@@ -691,7 +693,7 @@ function centerOn(e) {
 // ---- server round-trips -----------------------------------------------------
 async function toggleReal() {
   if (state.real) { leaveReal(); return; }
-  msg("renderizando…");
+  msg("rendering…");
   try {
     const res = await fetch(`/api/map/${state.map}/render`, {
       method: "POST", headers: { "Content-Type": "application/json" },
@@ -703,7 +705,7 @@ async function toggleReal() {
     $("base").src = state.realURL;
     $("overlay").classList.add("hidden");
     state.real = true;
-    msg("vista real — cualquier edición vuelve al modo edición");
+    msg("real render — any edit returns to editing");
   } catch (err) { toast("Error: " + err.message); msg(""); }
 }
 
@@ -717,8 +719,8 @@ async function save() {
     for (const f of schemaOf(e).editable) fields[f] = e.fields[f] ?? null;
     (edits[e.table] = edits[e.table] || {})[e.key] = { fields, changed };
   }
-  if (!Object.keys(edits).length) { toast("Nada que guardar"); return; }
-  msg("guardando…");
+  if (!Object.keys(edits).length) { toast("Nothing to save"); return; }
+  msg("saving…");
   try {
     const res = await fetch("/api/save", {
       method: "POST", headers: { "Content-Type": "application/json" },
@@ -731,15 +733,15 @@ async function save() {
     }
     redraw();
     showDiffs(body.files);
-    toast("Guardado en los ficheros");
+    toast("Saved to the source files");
     msg("");
-  } catch (err) { toast("Error al guardar: " + err.message); msg(""); }
+  } catch (err) { toast("Save failed: " + err.message); msg(""); }
 }
 
 function showDiffs(files) {
   const body = $("save-body");
   body.replaceChildren();
-  if (!files.length) { body.textContent = "Sin cambios en los ficheros."; }
+  if (!files.length) { body.textContent = "No file changes."; }
   for (const f of files) {
     const h = document.createElement("div");
     h.textContent = f.path;
@@ -767,7 +769,7 @@ function toast(t) {
 }
 
 async function loadMap(name) {
-  msg("cargando " + name + "…");
+  msg("loading " + name + "…");
   select(null);
   state.map = name;
   localStorage.setItem("tuner-map", name);
@@ -835,7 +837,7 @@ for (const [id, field] of [["f-ha", "ha"], ["f-va", "va"], ["f-group", "group"]]
     if (!state.sel) return;
     setField(state.sel, field, ev.target.value);
     if (field === "group" && !onThisMap(state.sel)) {
-      toast("La etiqueta pasa al otro mapa");
+      toast("The label moves to the other map");
       select(null);
     }
   });
@@ -845,6 +847,12 @@ for (const id of ["search", "help", "savedlg"])
     if (ev.target === $(id)) $(id).classList.add("hidden");
   });
 window.addEventListener("resize", fitView);
+
+// Show the platform's own save chord (⌘S on a Mac, Ctrl+S elsewhere).
+const IS_MAC = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+const SAVE_KEY = IS_MAC ? "⌘S" : "Ctrl+S";
+$("btn-save").title = `Save (${SAVE_KEY})`;
+$("key-save").textContent = SAVE_KEY;
 
 init();
 </script>
