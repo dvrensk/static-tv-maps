@@ -1,6 +1,6 @@
 """Asturias maps: the 78 concejos, labels split over two maps."""
 
-from . import cities, draw, geo, style
+from . import cities, draw, geo, labeling, style
 from .maps_spain import KM, Label, _label_regions
 
 NEIGHBOR_LABELS = [  # lon, lat
@@ -124,7 +124,7 @@ def map_asturias_concejos(group=None):
     if group:
         specs = _concejo_specs(s["conc"], group)
         _label_regions(ax, s["conc"], "mun_code",
-                       lambda c, r: wrap_name(r.mun_name), specs)
+                       lambda c, r: wrap_name(r.mun_name), specs, ns="concejo")
         n = "1" if group == "A" else "2"
         footer = f"Concejos de Asturias (nombres {n} de 2)"
     else:
@@ -173,18 +173,24 @@ COMARCA_LABELS = {
 
 def _comarca_labels(ax, com, frame):
     """Comarca name plus its padrón population (rounded to the nearest
-    thousand) on a second, smaller line, both centred on the tuned anchor."""
+    thousand) on a second, smaller line, both centred on the tuned anchor.
+    The two lines are separate editable labels sharing the anchor."""
     m_per_pt = (frame[2] - frame[0]) / style.WIDTH_PX * style.DPI / 72.0
     for _, row in com.iterrows():
         name = row.comarca
         spec = COMARCA_LABELS[name]
-        x, y = geo.label_point(row.geometry)
-        x, y = x + spec.dx * KM, y + spec.dy * KM
+        anchor = geo.label_point(row.geometry)
         pop = f"({cities.format_population(cities.comarca_population(name))})"
         pop_size = max(24, round(spec.size * 0.6))
         gap = 0.62 * (spec.size + pop_size) * m_per_pt  # between line centres
-        draw.halo_text(ax, x, y + gap / 2, name, spec.size, weight="extrabold")
-        draw.halo_text(ax, x, y - gap / 2, pop, pop_size, weight="semibold")
+        labeling.emit(ax, labeling.Spec(
+            id=f"comarca:{name}", kind="region", text=name, anchor=anchor,
+            dx=spec.dx, dy=spec.dy + gap / 2 / KM,
+            size=spec.size, weight="extrabold"))
+        labeling.emit(ax, labeling.Spec(
+            id=f"comarca-pop:{name}", kind="region", text=pop, anchor=anchor,
+            dx=spec.dx, dy=spec.dy - gap / 2 / KM,
+            size=pop_size, weight="semibold"))
 
 
 def _comarcas_gdf(conc):

@@ -10,7 +10,7 @@ import matplotlib.patheffects as pe
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
 
-from . import style
+from . import labeling, style
 
 OUTPUT = Path(__file__).resolve().parent.parent / "output"
 
@@ -28,6 +28,7 @@ def new_map(frame):
     ax.axis("off")
     ax.set_facecolor(style.OCEAN)
     fig.patch.set_facecolor(style.OCEAN)
+    labeling.on_new_map(fig, ax, frame)
     return fig, ax
 
 
@@ -69,14 +70,16 @@ def callout(ax, anchor, text_xy, text, size, weight="semibold",
 def draw_title(ax, frame, title, subtitle=None):
     fx0, fy0, fx1, fy1 = frame
     fw, fh = fx1 - fx0, fy1 - fy0
-    halo_text(ax, fx0 + 0.5 * fw, fy1 - 0.045 * fh, title, 92,
-              weight="extrabold", color=style.TITLE_COLOR, halo_width=16,
-              va="top", zorder=20)
+    t = halo_text(ax, fx0 + 0.5 * fw, fy1 - 0.045 * fh, title, 92,
+                  weight="extrabold", color=style.TITLE_COLOR, halo_width=16,
+                  va="top", zorder=20)
+    labeling.record_locked("title", title, [t])
     if subtitle:
         # Bottom-right corner, above the attribution line, where there is sea.
-        halo_text(ax, fx1 - 0.008 * fw, fy0 + 0.042 * fh, subtitle, 36,
-                  weight="semibold", color="#55524d", halo_width=7,
-                  ha="right", va="bottom", zorder=20)
+        t = halo_text(ax, fx1 - 0.008 * fw, fy0 + 0.042 * fh, subtitle, 36,
+                      weight="semibold", color="#55524d", halo_width=7,
+                      ha="right", va="bottom", zorder=20)
+        labeling.record_locked("subtitle", subtitle, [t])
 
 
 def _corner_x(frame, side):
@@ -90,17 +93,19 @@ def _corner_x(frame, side):
 def draw_attribution(ax, frame, text="Datos: IGN España · Natural Earth",
                      side="right"):
     x, ha = _corner_x(frame, side)
-    halo_text(ax, x, frame[1] + 0.012 * (frame[3] - frame[1]), text,
-              20, weight="regular", color="#8a8880", halo_width=4,
-              ha=ha, va="bottom", zorder=20)
+    t = halo_text(ax, x, frame[1] + 0.012 * (frame[3] - frame[1]), text,
+                  20, weight="regular", color="#8a8880", halo_width=4,
+                  ha=ha, va="bottom", zorder=20)
+    labeling.record_locked("attribution", text, [t])
 
 
 def draw_footer(ax, frame, text, side="right"):
     """Small caption in a bottom corner saying what the map shows."""
     x, ha = _corner_x(frame, side)
-    halo_text(ax, x, frame[1] + 0.038 * (frame[3] - frame[1]), text,
-              30, weight="semibold", color="#5d5a54", halo_width=6,
-              ha=ha, va="bottom", zorder=20)
+    t = halo_text(ax, x, frame[1] + 0.038 * (frame[3] - frame[1]), text,
+                  30, weight="semibold", color="#5d5a54", halo_width=6,
+                  ha=ha, va="bottom", zorder=20)
+    labeling.record_locked("footer", text, [t])
 
 
 def draw_inset_box(ax, box, label=None, zorder=3):
@@ -114,10 +119,12 @@ def draw_inset_box(ax, box, label=None, zorder=3):
         zorder=zorder,
     )
     ax.add_patch(patch)
+    labeling.on_inset_box(box)
     if label:
-        halo_text(ax, x0 + 0.5 * (x1 - x0), y1 - 0.02 * (y1 - y0), label, 40,
-                  weight="extrabold", color="#55524d", ha="center", va="top",
-                  zorder=zorder + 7)
+        t = halo_text(ax, x0 + 0.5 * (x1 - x0), y1 - 0.02 * (y1 - y0), label,
+                      40, weight="extrabold", color="#55524d", ha="center",
+                      va="top", zorder=zorder + 7)
+        labeling.record_locked("inset-caption", label, [t])
     return patch
 
 
@@ -265,11 +272,15 @@ def legend_column(ax, frame, x_frac, y_top_frac, rows, size=26,
     y = y_top_frac
     for num, text in rows:
         yy = fy0 + y * fh
+        artists = []
         if num is not None:
-            halo_text(ax, x_num, yy, str(num), size, weight="extrabold",
-                      color=color, ha="right", va="top", zorder=20)
-        halo_text(ax, x_text, yy, text, size, weight="semibold",
-                  color=color, ha="left", va="top", zorder=20)
+            artists.append(halo_text(ax, x_num, yy, str(num), size,
+                                     weight="extrabold", color=color,
+                                     ha="right", va="top", zorder=20))
+        artists.append(halo_text(ax, x_text, yy, text, size, weight="semibold",
+                                 color=color, ha="left", va="top", zorder=20))
+        labeling.record_locked("legend", f"{num} {text}" if num is not None
+                               else text, artists)
         y -= row_frac
     return y
 
@@ -280,6 +291,9 @@ SAVE_JPG = False
 
 
 def save(fig, name: str) -> Path:
+    ctx = labeling.current()
+    if ctx is not None and ctx.mode == "export":
+        return labeling.save_export(fig, name)
     OUTPUT.mkdir(exist_ok=True)
     path = OUTPUT / f"{name}{style.THEME_SUFFIX}.png"
     fig.savefig(path, dpi=style.DPI, facecolor=fig.get_facecolor())

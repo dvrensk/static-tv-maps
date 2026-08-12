@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 
-from . import draw, geo, style
+from . import draw, geo, labeling, style
 
 KM = 1000.0  # offsets below are given in km for readability
 
@@ -56,14 +56,17 @@ COUNTRY_LABELS = [
 ]
 
 
-def _draw_country_labels(ax, frame):
+def _draw_country_labels(ax, frame, labels=COUNTRY_LABELS):
     fx0, fy0, fx1, fy1 = frame
-    for text, lon, lat, size, rotation in COUNTRY_LABELS:
+    for text, lon, lat, size, rotation in labels:
         x, y = _project_lonlat(lon, lat)
         if fx0 < x < fx1 and fy0 < y < fy1:
-            t = draw.halo_text(ax, x, y, text, size, weight="semibold",
-                               color=style.NEIGHBOR_LABEL, halo_width=6, zorder=5)
-            t.set_rotation(rotation)
+            labeling.emit(ax, labeling.Spec(
+                id=f"country:{text}", kind="country", text=text,
+                anchor=(x, y), size=size, weight="semibold",
+                color=style.NEIGHBOR_LABEL, halo_width=6, zorder=5,
+                rotation=rotation,
+                editable=("dx", "dy", "size", "rotation")))
 
 
 # ---------------------------------------------------------------------------
@@ -104,20 +107,18 @@ CCAA_LABELS = {
 }
 
 
-def _label_regions(ax, gdf, code_field, name_lookup, specs, default_size=54):
+def _label_regions(ax, gdf, code_field, name_lookup, specs, ns="region"):
     for _, row in gdf.iterrows():
         code = row[code_field]
         spec = specs.get(code)
         if spec is None:
             continue
         text = name_lookup(code, row)
-        x, y = geo.label_point(row.geometry)
-        x, y = x + spec.dx * KM, y + spec.dy * KM
-        if spec.tx is not None:
-            draw.callout(ax, (x, y), (x + spec.tx * KM, y + spec.ty * KM),
-                         text, spec.size, weight="extrabold", ha=spec.ha)
-        else:
-            draw.halo_text(ax, x, y, text, spec.size, weight="extrabold")
+        labeling.emit(ax, labeling.Spec(
+            id=f"{ns}:{code}", kind="region", text=text,
+            anchor=geo.label_point(row.geometry),
+            dx=spec.dx, dy=spec.dy, tx=spec.tx, ty=spec.ty,
+            size=spec.size, weight="extrabold", ha=spec.ha))
 
 
 def map_spain_comunidades(labels=True):
@@ -134,7 +135,8 @@ def map_spain_comunidades(labels=True):
 
     if labels:
         _label_regions(ax, s["ccaa_pen"], "acom_code",
-                       lambda c, r: style.CCAA_DISPLAY[c], CCAA_LABELS)
+                       lambda c, r: style.CCAA_DISPLAY[c], CCAA_LABELS,
+                       ns="ccaa")
         footer = "Comunidades autónomas de España"
     else:
         footer = "Mapa mudo · Comunidades autónomas de España"
@@ -264,8 +266,10 @@ def map_spain_provincias(group=None):
 
     if group:
         specs = {c: sp for c, sp in PROV_LABELS.items() if sp.group == group}
-        _label_regions(ax, s["prov_pen"], "prov_code", _prov_name, specs)
-        _label_regions(ax, s["prov_can"], "prov_code", _prov_name, specs)
+        _label_regions(ax, s["prov_pen"], "prov_code", _prov_name, specs,
+                       ns="prov")
+        _label_regions(ax, s["prov_can"], "prov_code", _prov_name, specs,
+                       ns="prov")
         n = "1" if group == "A" else "2"
         footer = (f"Provincias de España (nombres {n} de 2) · "
                   "colores por comunidad autónoma")
@@ -317,7 +321,8 @@ def map_spain_provincias_numeros():
 
     specs = {code: NUM_LABELS.get(code, Label(46)) for code in PROV_LABELS}
     for layer in (s["prov_pen"], s["prov_can"]):
-        _label_regions(ax, layer, "prov_code", lambda c, r: c, specs)
+        _label_regions(ax, layer, "prov_code", lambda c, r: c, specs,
+                       ns="provnum")
 
     # Name legend: 01-26 over the Atlantic (above the Canary inset box),
     # 27-52 over the Mediterranean along the right edge.
