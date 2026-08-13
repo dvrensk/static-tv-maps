@@ -91,24 +91,24 @@ class Label:
 
 
 CCAA_LABELS = {
-    "01": Label(),                      # Andalucía
+    "01": Label(dx=30),                 # Andalucía
     "02": Label(),                      # Aragón
     "03": Label(46),                    # Asturias
-    "04": Label(44, dx=-30, dy=-75),    # Islas Baleares — at sea below Mallorca
-    "06": Label(40, tx=-20, ty=75),     # Cantabria — callout into the sea
-    "07": Label(),                      # Castilla y León
+    "04": Label(52, dx=9.6, dy=-74.1),  # Islas Baleares — at sea below Mallorca
+    "06": Label(46, tx=-8, ty=75, dy=14), # Cantabria — callout into the sea
+    "07": Label(dx=12, dy=-0.2),        # Castilla y León
     "08": Label(54, dx=-35),            # Castilla-La Mancha
-    "09": Label(),                      # Cataluña
-    "10": Label(38, dx=28, dy=-25),     # Comunidad Valenciana
-    "11": Label(52, dx=-25, dy=-20),    # Extremadura
+    "09": Label(dx=22, dy=12),          # Cataluña
+    "10": Label(52, dx=132.8, dy=47.8), # Comunidad Valenciana
+    "11": Label(52, dx=-25, dy=-16),    # Extremadura
     "12": Label(48),                    # Galicia
-    "13": Label(40),                    # Madrid
-    "14": Label(40),                    # Murcia
-    "15": Label(40),                    # Navarra
-    "16": Label(40, tx=75, ty=100),     # País Vasco — callout into the sea
-    "17": Label(30),                    # La Rioja
-    "18": Label(34, tx=-55, ty=25, ha="right"),    # Ceuta
-    "19": Label(34, tx=25, ty=45, ha="left"),      # Melilla
+    "13": Label(48),                    # Madrid
+    "14": Label(42, dx=8, dy=-12),      # Murcia
+    "15": Label(46, dx=30, dy=24, tx=83.3, ty=66.5), # Navarra
+    "16": Label(46, tx=57, ty=78, dy=22), # País Vasco — callout into the sea
+    "17": Label(40),                    # La Rioja
+    "18": Label(38, tx=45.6, ty=27.8, ha="left"),  # Ceuta
+    "19": Label(38, tx=25, ty=45, ha="left"),      # Melilla
 }
 
 
@@ -314,7 +314,7 @@ NUM_LABELS = {
     "36": Label(40),                                      # Pontevedra
     "07": Label(40),                                      # Baleares (on Mallorca)
     "35": Label(38), "38": Label(38),                     # Canarias
-    "51": Label(30, tx=-45, ty=20, ha="right"),           # Ceuta
+    "51": Label(30, tx=44.2, ty=-30, ha="left"),          # Ceuta
     "52": Label(30, tx=20, ty=35, ha="left"),             # Melilla
 }
 

@@ -111,11 +111,11 @@ COUNTRY_NAMES = {
 # Country names on the map. Belice and El Salvador are too narrow for their
 # name, so they get leader lines out to the water.
 COUNTRY_LABELS = {
-    "GT": Place(52, dx=25, dy=190),        # up into the Petén
-    "BZ": Place(42, tx=250, ty=40, ha="left"),      # east, into the Caribbean
+    "GT": Place(52, dx=25, dy=94),         # up into the Petén
+    "BZ": Place(42, tx=108, ty=52, ha="left"),      # east, into the Caribbean
     # East end of the country, then down into the Golfo de Fonseca: the only
     # water nearby that the San Salvador label does not already occupy.
-    "SV": Place(42, dx=95, dy=-20, tx=20, ty=-150),
+    "SV": Place(42, dx=95, dy=-20, tx=-24, ty=-128),
     "HN": Place(52, dx=10, dy=35),
     "NI": Place(52, dy=45),
     "CR": Place(44, dx=-45, dy=-70),
@@ -124,12 +124,12 @@ COUNTRY_LABELS = {
 
 # Capitals: star + name. Offsets in km from the point.
 CAPITAL_LABELS = {
-    "GT": Place(34, dx=-24, dy=-14, ha="right", text="Ciudad de\nGuatemala"),
-    "BZ": Place(34, dx=-22, dy=0, ha="right"),
-    "SV": Place(34, dx=-10, dy=-42),
-    "HN": Place(34, dx=22, dy=-16, ha="left"),
-    "NI": Place(34, dx=-20, dy=-24, ha="right"),
-    "CR": Place(34, dx=20, dy=24, ha="left"),
+    "GT": Place(34, dx=-30, dy=10, ha="right", text="Ciudad de\nGuatemala"),
+    "BZ": Place(34, dx=96, dy=-30, ha="right"),
+    "SV": Place(34, dx=-40, dy=-30),
+    "HN": Place(34, dx=-22, dy=36, ha="left"),
+    "NI": Place(34, dx=140, dy=-16, ha="right"),
+    "CR": Place(34, dx=-46, dy=34, ha="left"),
     # East of its star, to leave the canal's leader line a clear run north-east.
     "PA": Place(34, dx=28, dy=8, ha="left", text="Ciudad de\nPanamá"),
 }
@@ -377,19 +377,19 @@ def ext_panel_rect(frame):
 
 
 EXT_COUNTRY_LABELS = {
-    "MX": Place(78, dy=60),
-    "GT": Place(30, dx=50, dy=95),
-    "BZ": Place(28, tx=125, ty=25, ha="left"),
-    "SV": Place(28, dx=45, dy=-10, tx=-20, ty=-115),
-    "HN": Place(32, dx=5, dy=15),
+    "MX": Place(48, dy=60),
+    "GT": Place(32, dx=15, dy=59.4),
+    "BZ": Place(32, ha="left", dx=125, dy=25),
+    "SV": Place(32, dx=38.2, dy=-120, ha="right"),
+    "HN": Place(32, dx=25, dy=20),
     "NI": Place(32, dy=25),
-    "CR": Place(28, tx=-135, ty=-105, ha="right"),
-    "PA": Place(28, dx=-30, tx=-60, ty=110),   # north, into the Caribbean
-    "CU": Place(44, dx=-30, dy=-10),
+    "CR": Place(32, ha="right", dx=-55, dy=-125),
+    "PA": Place(32, dx=5, dy=194.1),           # north, into the Caribbean
+    "CU": Place(44, dx=-445, dy=5),
     # Both Antilles labels go north into the Atlantic; keep them clear of each
     # other by stacking República Dominicana higher than Puerto Rico.
-    "DO": Place(26, tx=0, ty=190, text="República\nDominicana"),
-    "PR": Place(26, tx=0, ty=105),
+    "DO": Place(32, text="República\nDominicana", dx=-10, dy=-270.9),
+    "PR": Place(32, dx=40, dy=-100),
 }
 
 EXT_CONTEXT_LABELS = [

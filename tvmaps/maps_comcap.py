@@ -35,22 +35,22 @@ STAR_ONLY = {"Ceuta", "Melilla", "Madrid", "Murcia"}
 # collide. Offsets in km; (tx, ty) means a leader-line callout into open sea.
 COMM_LABELS = {
     "01": Label(54, dx=95, dy=12),        # Andalucía — E of Sevilla
-    "02": Label(52, dy=-78),              # Aragón — S toward Teruel (star N)
-    "03": Label(42, tx=-82, ty=58),       # Asturias — callout NW into sea (Oviedo central)
-    "04": Label(40, dx=-8, dy=-88),       # Islas Baleares — sea S of Mallorca
-    "06": Label(38, tx=-72, ty=70),       # Cantabria — callout NW into sea
-    "07": Label(52, dx=20, dy=-72),       # Castilla y León — S-centre, clear of NE cluster
-    "08": Label(54, dx=-25, dy=-45),      # Castilla-La Mancha — S-centre
-    "09": Label(54, dx=-28),              # Cataluña — inland (Barcelona coast)
-    "10": Label(38, dx=8, dy=36),         # Comunidad Valenciana — N (Castellón)
-    "11": Label(52, dy=66),               # Extremadura — N (Mérida central)
-    "12": Label(48, dx=58),               # Galicia — E (Santiago W coast)
-    "13": Label(40, dy=26),               # Madrid — N of the star
-    "14": Label(40, dx=-34, dy=30),       # Murcia — NW of the star
-    "15": Label(40, dy=-50),              # Navarra — S (Pamplona N)
-    "16": Label(40, tx=80, ty=104),       # País Vasco — callout NE into sea
-    "17": Label(28, dx=-14, dy=-16),      # La Rioja — region body
-    "18": Label(34, tx=-55, ty=25, ha="right"),   # Ceuta — callout
+    "02": Label(52, dy=-40, dx=-4),       # Aragón — S toward Teruel (star N)
+    "03": Label(48, tx=-28, ty=58, dx=-34, dy=22), # Asturias — callout NW into sea (Oviedo central)
+    "04": Label(48, dx=8, dy=-80),        # Islas Baleares — sea S of Mallorca
+    "06": Label(48, tx=-34, ty=84, dy=20), # Cantabria — callout NW into sea
+    "07": Label(52, dx=-10, dy=12),       # Castilla y León — S-centre, clear of NE cluster
+    "08": Label(54, dx=-25, dy=-23),      # Castilla-La Mancha — S-centre
+    "09": Label(54, dx=28, dy=18),        # Cataluña — inland (Barcelona coast)
+    "10": Label(46, dx=124.6, dy=59.7),   # Comunidad Valenciana — N (Castellón)
+    "11": Label(52, dy=22, dx=-34),       # Extremadura — N (Mérida central)
+    "12": Label(48, dx=2, dy=-34),        # Galicia — E (Santiago W coast)
+    "13": Label(44, dy=26),               # Madrid — N of the star
+    "14": Label(42, dx=-10, dy=26),       # Murcia — NW of the star
+    "15": Label(48, dy=26, dx=54, tx=52, ty=60), # Navarra — S (Pamplona N)
+    "16": Label(48, tx=32, ty=58, dy=30, dx=-8), # País Vasco — callout NE into sea
+    "17": Label(40, dx=-48, dy=6),        # La Rioja — region body
+    "18": Label(34, tx=39.6, ty=-26, ha="left", dx=12, dy=-2), # Ceuta — callout
     "19": Label(34, tx=25, ty=45, ha="left"),     # Melilla — callout
 }
 
@@ -58,26 +58,26 @@ COMM_LABELS = {
 # --- Capital placements (gold star + smaller bronze name) -------------------
 CAP_LABELS = {
     # Andalucía / Extremadura / south
-    "Sevilla": CityLabel(30, dx=-8, dy=-9, ha="right"),   # name is to the E
-    "Mérida": CityLabel(30, dy=-14),                      # name is to the N
+    "Sevilla": CityLabel(30, dx=28, dy=-21, ha="right"),  # name is to the E
+    "Mérida": CityLabel(30, dy=-20),                      # name is to the N
     # Ebro / Aragón / Cataluña / Levante
-    "Zaragoza": CityLabel(30, dy=-14),                    # name is to the S
-    "Barcelona": CityLabel(30, dx=10, dy=-7, ha="left"),  # sea to the SE
-    "Valencia": CityLabel(30, dx=10, dy=-5, ha="left"),   # sea to the E
+    "Zaragoza": CityLabel(30, dy=-20, dx=2),              # name is to the S
+    "Barcelona": CityLabel(30, dx=12, dy=-3, ha="left"),  # sea to the SE
+    "Valencia": CityLabel(30, dx=12, dy=-3, ha="left"),   # sea to the E
     # Cornisa cantábrica
-    "Oviedo": CityLabel(30, dy=-14),                      # name is to the W
-    "Santander": CityLabel(30, dy=-15),                   # name callout above
-    "Vitoria-Gasteiz": CityLabel(28, dx=-9, dy=-2, ha="right"),   # W of star
-    "Pamplona": CityLabel(28, dy=14),                    # name is to the S
-    "Logroño": CityLabel(26, dx=9, dy=6, ha="left"),
+    "Oviedo": CityLabel(30, dy=-18, dx=-6),               # name is to the W
+    "Santander": CityLabel(30, dy=-27, dx=-18),           # name callout above
+    "Vitoria-Gasteiz": CityLabel(28, dx=64, dy=16.3, ha="right"), # W of star
+    "Pamplona": CityLabel(28, dy=-16, dx=4),             # name is to the S
+    "Logroño": CityLabel(28, ha="left", dy=-18.2, dx=-13),
     # Castilla y León / La Mancha
-    "Valladolid": CityLabel(30, dy=14),                  # name is to the S
-    "Toledo": CityLabel(30, dy=-14),                     # name is centre-S
+    "Valladolid": CityLabel(30, dy=-22),                 # name is to the S
+    "Toledo": CityLabel(30, dy=-18, dx=-4),              # name is centre-S
     # Galicia
-    "Santiago de Compostela": CityLabel(28, dx=-6, dy=-26, ha="right",
+    "Santiago de Compostela": CityLabel(28, dx=94, dy=-10, ha="right",
                                         text="Santiago\nde Compostela"),
     # Baleares
-    "Palma": CityLabel(30, dx=2, dy=-16),                # bay below
+    "Palma": CityLabel(30, dx=2, dy=-20),                # bay below
     # Canarias (inside the inset)
     "Las Palmas de Gran Canaria": CityLabel(28, dx=9, dy=-27, ha="left",
                                             text="Las Palmas de\nGran Canaria"),
