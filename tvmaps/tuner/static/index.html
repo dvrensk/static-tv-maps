@@ -908,7 +908,10 @@ async function loadMap(name) {
     anchorRef: { lon: e.fields.lon, lat: e.fields.lat },
   }));
   state.baseURL = `/api/map/${name}/base.png?v=${Date.now()}`;
+  // Always land in editing view, even when leaving a real-render view of
+  // the previous map (the overlay would otherwise stay hidden).
   state.real = false;
+  $("overlay").classList.remove("hidden");
   $("base").src = state.baseURL;
   $("stage").style.width = "1600px";
   $("stage").style.height = "900px";
