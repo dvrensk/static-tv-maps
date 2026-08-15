@@ -6,7 +6,9 @@ import Foundation
 struct RepoClient {
     var owner = "dvrensk"
     var repo = "static-tv-maps"
-    var branch = "main"
+    // Temporarily pinned to the development branch; move back to "main"
+    // once the editor work merges.
+    var branch = "claude/apple-tv-map-editor-iocet6"
     var session: URLSession = .shared
     var token: () -> String? = { Keychain.string(for: Keychain.tokenKey) }
 

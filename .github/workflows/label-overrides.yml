@@ -7,7 +7,9 @@ name: apply-label-overrides
 
 on:
   push:
-    branches: [main]
+    # main plus the editor development branch, while the tvOS app is
+    # pinned to it (see tvos/MapEditor/Services/RepoClient.swift).
+    branches: [main, "claude/apple-tv-map-editor-iocet6"]
     paths: ["overrides/**.json"]
   workflow_dispatch:
     inputs:
@@ -74,5 +76,5 @@ jobs:
             exit 0
           fi
           git commit -m "Re-render after label overrides: ${{ steps.maps.outputs.maps }}"
-          git pull --rebase origin main
-          git push
+          git pull --rebase origin "${{ github.ref_name }}"
+          git push origin "HEAD:${{ github.ref_name }}"

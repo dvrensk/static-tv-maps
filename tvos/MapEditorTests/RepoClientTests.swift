@@ -28,6 +28,7 @@ final class RepoClientTests: XCTestCase {
         let config = URLSessionConfiguration.ephemeral
         config.protocolClasses = [StubProtocol.self]
         var client = RepoClient(session: URLSession(configuration: config))
+        client.branch = "test-branch"
         client.token = { "test-token" }
         return client
     }
@@ -90,7 +91,7 @@ final class RepoClientTests: XCTestCase {
         let payload = try XCTUnwrap(
             try JSONSerialization.jsonObject(with: body) as? [String: Any])
         XCTAssertEqual(payload["sha"] as? String, "old-sha")
-        XCTAssertEqual(payload["branch"] as? String, "main")
+        XCTAssertEqual(payload["branch"] as? String, "test-branch")
         let sent = try XCTUnwrap(Data(base64Encoded:
             payload["content"] as! String))
         let decoded = try JSONDecoder().decode(OverridesFile.self, from: sent)
