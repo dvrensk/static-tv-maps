@@ -170,9 +170,9 @@ COMARCA_NAME_ALIASES = {"Tapia de Casariego": "Tapia"}
 COMARCA_LABELS = {
     "Eo-Navia": Label(56),
     "Narcea": Label(56, dy=-6),
-    "Avilés": Label(56, dx=-0.5, dy=2.25),
+    "Avilés": Label(56, dx=-0.5, dy=1.75),
     "Oviedo": Label(56),
-    "Gijón": Label(56, dx=-6.25, dy=2),
+    "Gijón": Label(56, dx=-6, dy=1.5),
     "Caudal": Label(56),
     "Nalón": Label(56),
     "Oriente": Label(56),
@@ -490,8 +490,8 @@ ASTURIAS_RIOS = {
 # The two rivers painted on the comarcas map so "Eo-Navia" explains itself
 # (see _comarca_rivers). Same spec shape as ASTURIAS_RIOS; labels say "Río …".
 COMARCA_RIOS = {
-    "Eo": RiverSpec(-7.13, 43.425, 75, 34),
-    "Navia": RiverSpec(-6.84, 43.28, 55, 34),
+    "Eo": RiverSpec(-7.08, 43.4222, 43, 34),
+    "Navia": RiverSpec(-6.6854, 43.465, 77, 34),
 }
 
 # A few reference points so the rivers can be read against known places.
