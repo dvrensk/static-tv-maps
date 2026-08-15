@@ -224,7 +224,7 @@ def numbered_label(ax, xy, number, text, size, ha="center", va="center",
     name_w, data_per_px = _name_width_data(ax, text.replace("\n", " "), size,
                                            weight)
     r = 0.9 * size * (style.DPI / 72) * data_per_px   # badge radius, data units
-    gap = 0.45 * r
+    gap = 0.45 * r   # keep in sync with the tuner preview (index.html)
     group_w = 2 * r + gap + name_w
     x, y = xy
     left = x if ha == "left" else x - group_w if ha == "right" else x - group_w / 2

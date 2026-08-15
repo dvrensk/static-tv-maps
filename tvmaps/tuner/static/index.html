@@ -323,7 +323,13 @@ function renderEntry(e) {
            : idiomOf(e) === "block" ? "top" : "center";
   const blockH = lines.length * lh;
   let cy = lay.text[1];
-  if (va === "bottom") cy -= blockH / 2;
+  if (s.numbered) {
+    // draw.numbered_label anchors the group by the BADGE radius, not the
+    // text block height.
+    const r = 0.9 * size;
+    if (va === "bottom") cy -= r;
+    else if (va === "top") cy += r;
+  } else if (va === "bottom") cy -= blockH / 2;
   else if (va === "top") cy += blockH / 2;
 
   // Rotated labels live in their own group so the focus ring rotates too.
@@ -357,9 +363,11 @@ function renderEntry(e) {
     "data-role": "text",
   }, holder);
   if (s.numbered) {
-    // Rank badge + left-aligned name, approximating draw.numbered_label.
-    const gap = 0.9 * badgeR;
-    const nameW = measureText(lines, size);
+    // Rank badge + left-aligned name, mirroring draw.numbered_label:
+    // gap = 0.45·r (keep in sync with draw.py), width measured on the
+    // name joined to a single line, exactly as _name_width_data does.
+    const gap = 0.45 * badgeR;
+    const nameW = measureText([lines.join(" ")], size);
     const groupW = 2 * badgeR + gap + nameW;
     const left = ha === "left" ? lay.text[0]
                : ha === "right" ? lay.text[0] - groupW
