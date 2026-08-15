@@ -17,9 +17,9 @@ DOT_EDGE = "#ffffff"
 
 # Population tiers: (min population, dot ms, label size).
 TIERS = [
-    (1_000_000, 26, 40),
-    (400_000, 20, 34),
-    (0, 14, 29),
+    (1_000_000, 26, 46),
+    (400_000, 20, 40),
+    (0, 14, 34),
 ]
 
 # PORTUGAL is moved north (horizontal, near Braga) because the usual
@@ -54,40 +54,40 @@ class CityLabel:
 
 
 CITY_LABELS = {
-    "Madrid": CityLabel(dy=16, va="bottom"),
-    "Barcelona": CityLabel(dx=16, ha="left"),                 # sea east
-    "Valencia": CityLabel(dx=13, ha="left"),                  # sea east
-    "Zaragoza": CityLabel(dy=13, va="bottom"),
-    "Sevilla": CityLabel(dy=13, va="bottom"),
-    "Málaga": CityLabel(dy=-13, va="top"),                    # sea south
-    "Murcia": CityLabel(dx=-11, ha="right"),
-    "Palma": CityLabel(dy=-13, va="top"),                     # bay south
+    "Madrid": CityLabel(dy=12, va="bottom"),
+    "Barcelona": CityLabel(dx=12, ha="left"),                 # sea east
+    "Valencia": CityLabel(dx=10, ha="left"),                  # sea east
+    "Zaragoza": CityLabel(dy=10, va="bottom"),
+    "Sevilla": CityLabel(dy=10, va="bottom"),
+    "Málaga": CityLabel(dy=-10, va="top"),                    # sea south
+    "Murcia": CityLabel(dx=-8, ha="right"),
+    "Palma": CityLabel(dx=4, ha="left"),                     # east, over the island
     "Las Palmas de Gran Canaria": CityLabel(         # callout up-right, clear
-        tx=28, ty=74, va="bottom", ha="left", size=25,   # of the Santa Cruz
+        tx=28, ty=82, va="bottom", ha="left", size=29,   # of the Santa Cruz
         wrap="Las Palmas de\nGran Canaria"),              # label and box edge
-    "Alicante": CityLabel(dx=10, ha="left"),                  # sea east
-    "Bilbao": CityLabel(dy=8, va="bottom"),                   # sea above
-    "Córdoba": CityLabel(dy=10, va="bottom"),
-    "Valladolid": CityLabel(dy=10, va="bottom"),
-    "Vigo": CityLabel(dx=-10, ha="right"),                    # sea west
-    "Gijón": CityLabel(dy=11, va="bottom"),                   # sea above
-    "Vitoria-Gasteiz": CityLabel(dy=-14, va="top"),
-    "A Coruña": CityLabel(dx=-10, ha="right"),                # sea west
-    "Elche": CityLabel(dx=-10, ha="right"),
-    "Granada": CityLabel(dy=10, va="bottom"),
-    "Oviedo": CityLabel(dy=-10, va="top"),
-    "Cartagena": CityLabel(dy=-12, va="top"),                 # sea south
-    "Jerez de la Frontera": CityLabel(dy=12, va="bottom"),
+    "Alicante": CityLabel(dx=8, ha="left"),                  # sea east
+    "Bilbao": CityLabel(dy=6, va="bottom"),                   # sea above
+    "Córdoba": CityLabel(dy=8, va="bottom"),
+    "Valladolid": CityLabel(dy=8, va="bottom"),
+    "Vigo": CityLabel(dx=-8, ha="right"),                    # sea west
+    "Gijón": CityLabel(dy=8, va="bottom"),                   # sea above
+    "Vitoria-Gasteiz": CityLabel(dy=-11, va="top"),
+    "A Coruña": CityLabel(dx=-8, ha="right"),                # sea west
+    "Elche": CityLabel(dx=-8, ha="right"),
+    "Granada": CityLabel(dy=8, va="bottom"),
+    "Oviedo": CityLabel(dy=-8, va="top"),
+    "Cartagena": CityLabel(dy=-9, va="top"),                 # sea south
+    "Jerez de la Frontera": CityLabel(dy=9, va="bottom"),
     "Santa Cruz de Tenerife": CityLabel(              # over sea NW of Tenerife
-        dx=-52, dy=26, va="bottom", ha="left", size=25,
+        dx=-62, dy=26, va="bottom", ha="left", size=29,
         wrap="Santa Cruz\nde Tenerife"),
-    "Pamplona": CityLabel(dx=11, ha="left"),
-    "Almería": CityLabel(dy=-12, va="top"),                   # sea south
+    "Pamplona": CityLabel(dx=8, ha="left"),
+    "Almería": CityLabel(dy=-9, va="top"),                   # sea south
     "San Sebastián": CityLabel(tx=-2, ty=55, va="bottom"),    # callout to sea
-    "Castellón de la Plana": CityLabel(dx=11, ha="left"),     # sea east
-    "Burgos": CityLabel(dy=-10, va="top"),
-    "Santander": CityLabel(dy=14, va="bottom"),               # sea above
-    "Albacete": CityLabel(dy=10, va="bottom"),
+    "Castellón de la Plana": CityLabel(dx=8, ha="left"),     # sea east
+    "Burgos": CityLabel(dy=-8, va="top"),
+    "Santander": CityLabel(dy=11, va="bottom"),               # sea above
+    "Albacete": CityLabel(dy=8, va="bottom"),
 }
 
 
