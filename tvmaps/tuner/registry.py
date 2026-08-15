@@ -43,6 +43,8 @@ class Table:
     numbered: bool = False       # rank-badge labels (spain-ciudades)
     size_field: str | None = "size"  # None → size comes from a tier/constant
     exclude: tuple = ()          # extra non-editable fields for this table
+    pos_field: str | None = None # absolute idiom with the position stored as
+                                 # a (lon, lat) tuple field (Zone.label)
 
     @property
     def source_var(self):
@@ -105,6 +107,14 @@ TABLES = {
               container="tuple2", idiom="absolute", weight="semibold"),
         Table("ASTURIAS_RIOS", "tvmaps.maps_asturias", "RiverSpec",
               idiom="absolute", weight="semibold"),
+        Table("WINE_ZONES", "tvmaps.maps_productos", "WineDO",
+              container="list", key_field="key", idiom="absolute",
+              pos_field="label", exclude=("cat", "name", "sub", "sub_size")),
+        Table("DESPENSA_ZONES", "tvmaps.maps_productos", "Zone",
+              container="list", key_field="name", idiom="absolute",
+              pos_field="label",
+              exclude=("cat", "axis", "buffer_km", "clip", "sub",
+                       "sub_size")),
         Table("COMARCA_RIOS", "tvmaps.maps_asturias", "RiverSpec",
               idiom="absolute", weight="semibold"),
     ]
@@ -195,6 +205,14 @@ MAPS = {
         Map("asturias-rios", "Ríos de Asturias",
             "tvmaps.maps_asturias", "map_asturias_rios",
             ("RIOS_TOWN_LABELS", "ASTURIAS_RIOS"), scene=_AST),
+        Map("asturias-ciudades-concejos", "Ciudades por concejo (tiers)",
+            "tvmaps.maps_asturias", "map_asturias_ciudades_concejos",
+            ("TOWN_LABELS",), scene=_AST),
+        Map("spain-vinos", "El vino en España",
+            "tvmaps.maps_productos", "map_spain_vinos", ("WINE_ZONES",)),
+        Map("spain-despensa", "La despensa de España",
+            "tvmaps.maps_productos", "map_spain_despensa",
+            ("DESPENSA_ZONES",)),
         Map("centroamerica", "América Central",
             "tvmaps.maps_centroamerica", "map_centroamerica",
             ("COUNTRY_LABELS", "CAPITAL_LABELS"), scene=_CA,
@@ -261,9 +279,22 @@ def required_fields(table_id) -> set:
 
 
 def editable_fields(table_id) -> list:
-    skip = NON_EDITABLE | set(TABLES[table_id].exclude)
+    t = TABLES[table_id]
+    skip = NON_EDITABLE | set(t.exclude) | {t.key_field, t.pos_field}
     return [f.name for f in dc_fields(factory_class(table_id))
             if f.name not in skip]
+
+
+def to_spec_fields(table_id, key, fields: dict) -> dict:
+    """Translate the editor's field dict to real dataclass fields: tables
+    with a pos_field expose virtual lon/lat that fold back into the tuple."""
+    pos = TABLES[table_id].pos_field
+    if not pos or ("lon" not in fields and "lat" not in fields):
+        return fields
+    out = {k: v for k, v in fields.items() if k not in ("lon", "lat")}
+    cur = getattr(entries(table_id)[key], pos)
+    out[pos] = (fields.get("lon", cur[0]), fields.get("lat", cur[1]))
+    return out
 
 
 _PROV_NAMES = None
@@ -315,6 +346,10 @@ def schema(table_id) -> dict:
     defaults = {k: (None if v is MISSING else v)
                 for k, v in field_defaults(table_id).items()}
     editable = editable_fields(table_id)
+    if t.pos_field:
+        defaults.pop(t.pos_field, None)
+        defaults.update(lon=None, lat=None)
+        editable = editable + ["lon", "lat"]
     return dict(
         factory=t.factory,
         fields=defaults,

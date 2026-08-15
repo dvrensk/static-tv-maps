@@ -387,7 +387,7 @@ def _tier_fill(pop):
     return TIER_FILL[-1][1]
 
 
-def render_asturias_ciudades_concejos():
+def map_asturias_ciudades_concejos():
     s = asturias_scene()
     fig, ax = draw.new_map(s["frame"])
     draw.draw_context(ax, s["context"])
@@ -410,7 +410,11 @@ def render_asturias_ciudades_concejos():
         x, y = points[town]
         _ms, size = _town_tier(pop)
         draw.city_dot(ax, (x, y), size=11, zorder=8)
-        spec = TOWN_LABELS[town]
+        spec = hooks.spec_for("TOWN_LABELS", town, TOWN_LABELS[town])
+        hooks.capture("TOWN_LABELS", town, town, (x, y), spec, tier_size=size)
+        if hooks.SUPPRESS:
+            continue
+        size = spec.size or size
         if spec.tx is not None:
             draw.callout(ax, (x, y), (x + spec.tx * KM, y + spec.ty * KM),
                          town, size, ha=spec.ha)
@@ -436,7 +440,12 @@ def render_asturias_ciudades_concejos():
                      "Los concejos más poblados de Asturias · más de "
                      "10.000 habitantes (INE 2023)")
     draw.draw_attribution(ax, s["frame"], "Datos: IGN España")
-    return draw.save(fig, "asturias-ciudades-concejos")
+    return fig
+
+
+def render_asturias_ciudades_concejos():
+    return draw.save(map_asturias_ciudades_concejos(),
+                     "asturias-ciudades-concejos")
 
 
 # ---------------------------------------------------------------------------

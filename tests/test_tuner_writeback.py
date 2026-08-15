@@ -195,6 +195,20 @@ def test_hand_river_spec_inside_tuple():
     assert registry.entries("HAND_RIVERS")["Nervión"].rotation == -55
 
 
+def test_zone_position_tuple_rewrite():
+    """WINE_ZONES stores its position as label=(lon, lat); the editor's
+    virtual lon/lat fold back into the tuple."""
+    spec = registry.entries("WINE_ZONES")["Rioja"]
+    e = edit("WINE_ZONES", "Rioja", changed=["rotation"], rotation=9)
+    e["WINE_ZONES"]["Rioja"]["fields"].update(lon=-2.5, lat=42.6)
+    e["WINE_ZONES"]["Rioja"]["changed"] += ["lon", "lat"]
+    writeback.apply_edits(e)
+    line = next(l for l in source_of("WINE_ZONES").splitlines()
+                if '"Rioja"' in l and "WineDO" in l)
+    assert "label=(-2.5, 42.6)" in line and "rotation=9" in line
+    assert registry.entries("WINE_ZONES")["Rioja"].label == (-2.5, 42.6)
+
+
 def test_single_spec_assignment():
     """CANARY_FIRM is a bare single-spec assignment."""
     writeback.apply_edits(edit("CANARY_FIRM", "CANARY_FIRM",

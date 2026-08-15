@@ -20,7 +20,7 @@ from matplotlib.colors import to_rgba
 from shapely import affinity
 from shapely.geometry import LineString, Point
 
-from . import draw, geo, style
+from . import draw, geo, hooks, style
 from .maps_spain import KM, _draw_country_labels, _project_lonlat, spain_scene
 
 # Parchment base, borrowed from the physical map.
@@ -73,9 +73,10 @@ def _blob_geom(axis, buffer_km):
     return base.buffer(buffer_km * KM)
 
 
-def _draw_zones(ax, zones, spain, frame, zorder=5):
+def _draw_zones(ax, zones, spain, frame, zorder=5, table_id=None):
     kper_px = (frame[2] - frame[0]) / style.WIDTH_PX  # data units per pixel
     for z in zones:
+        z = hooks.spec_for(table_id, z.name, z)
         fill, label_color = CATS[z.cat]
         geom = _blob_geom(z.axis, z.buffer_km)
         if z.clip:
@@ -84,6 +85,9 @@ def _draw_zones(ax, zones, spain, frame, zorder=5):
             ax=ax, facecolor=to_rgba(fill, FILL_ALPHA),
             edgecolor=to_rgba(fill, 0.9), linewidth=1.6, zorder=zorder)
         x, y = _project_lonlat(*z.label)
+        hooks.capture(table_id, z.name, z.name, (x, y), z, color=label_color)
+        if hooks.SUPPRESS:
+            continue
         if z.leader:
             anchor = geom.centroid
             ax.annotate("", xy=(anchor.x, anchor.y), xytext=(x, y),
@@ -269,7 +273,8 @@ def _leader_anchor(geom, x, y):
     return min(parts, key=lambda g: g.distance(Point(x, y))).centroid
 
 
-def _draw_wine_zones(ax, zones, geoms, spain, frame, zorder=5):
+def _draw_wine_zones(ax, zones, geoms, spain, frame, zorder=5,
+                     table_id=None):
     """Draw wine DOs from their real polygons (`geoms`: key -> geometry in
     MAIN_CRS), reusing the label / leader / sub-line style of _draw_zones."""
     kper_px = (frame[2] - frame[0]) / style.WIDTH_PX  # data units per pixel
@@ -278,12 +283,16 @@ def _draw_wine_zones(ax, zones, geoms, spain, frame, zorder=5):
         if geom is None or geom.is_empty:
             print(f"  !! wine DO polygon missing: {z.key}")
             continue
+        z = hooks.spec_for(table_id, z.key, z)
         fill, label_color = CATS[z.cat]
         geom = geom.intersection(spain)
         gpd.GeoSeries([geom], crs=geo.MAIN_CRS).plot(
             ax=ax, facecolor=to_rgba(fill, FILL_ALPHA),
             edgecolor=to_rgba(fill, 0.9), linewidth=1.6, zorder=zorder)
         x, y = _project_lonlat(*z.label)
+        hooks.capture(table_id, z.key, z.text, (x, y), z, color=label_color)
+        if hooks.SUPPRESS:
+            continue
         if z.leader:
             anchor = _leader_anchor(geom, x, y)
             ax.annotate("", xy=(anchor.x, anchor.y), xytext=(x, y),
@@ -342,7 +351,8 @@ def map_spain_vinos():
     s = spain_scene()
     fig, ax, spain = _base_map(s)
     geoms, wgs = _load_wine_do()
-    _draw_wine_zones(ax, WINE_ZONES, geoms, spain, s["frame"])
+    _draw_wine_zones(ax, WINE_ZONES, geoms, spain, s["frame"],
+                     table_id="WINE_ZONES")
     # Malvasía de Lanzarote, inside the Canary inset (real Lanzarote DO shape).
     _draw_canary_wine(ax, s, "vino_blanco", wgs["Lanzarote"],
                       "Malvasía de Lanzarote", (-14.7, 28.55), size=25)
@@ -453,7 +463,8 @@ DESPENSA_LEGEND = [
 def map_spain_despensa():
     s = spain_scene()
     fig, ax, spain = _base_map(s)
-    _draw_zones(ax, DESPENSA_ZONES, spain, s["frame"])
+    _draw_zones(ax, DESPENSA_ZONES, spain, s["frame"],
+                table_id="DESPENSA_ZONES")
     # Plátano de Canarias: La Palma and north Tenerife, inside the inset.
     _draw_canary_zone(ax, s, "huerta",
                       [(-17.85, 28.65), (-16.7, 28.35)], 9,

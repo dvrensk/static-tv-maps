@@ -100,6 +100,10 @@ def _bundle(map_name):
             display = registry.display_name(rec["table"], rec["key"])
             if display == rec["key"] and rec["text"]:
                 display = rec["text"].split("\n")[0]
+            pos = registry.TABLES[rec["table"]].pos_field
+            if pos and rec["fields"]:
+                lon, lat = rec["fields"].pop(pos)
+                rec["fields"].update(lon=lon, lat=lat)
             entries.append(dict(
                 table=rec["table"], key=rec["key"], text=rec["text"],
                 display=display,
@@ -130,6 +134,8 @@ def _validate_overrides(raw):
         if table_id not in registry.TABLES:
             raise ValueError(f"unknown table {table_id!r}")
         editable = set(registry.editable_fields(table_id))
+        if registry.TABLES[table_id].pos_field:
+            editable |= {"lon", "lat"}
         defaults = registry.field_defaults(table_id)
         for key, fields in keys.items():
             clean = {}
@@ -228,6 +234,11 @@ class Handler(BaseHTTPRequestHandler):
                     return self._error(404, f"unknown map {name!r}")
                 body = self._read_json()
                 overrides = _validate_overrides(body.get("overrides", {}))
+                overrides = {
+                    t: {k: registry.to_spec_fields(t, k, f)
+                        for k, f in keys.items()}
+                    for t, keys in overrides.items()
+                }
                 png, _ = _render(name, overrides=overrides)
                 self._send(200, png, "image/png")
             elif path == "/api/save":

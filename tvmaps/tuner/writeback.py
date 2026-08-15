@@ -30,6 +30,8 @@ def _fmt_value(v) -> str:
         return "True" if v else "False"
     if isinstance(v, str):
         return '"' + v.replace('"', '\\"') + '"'
+    if isinstance(v, (tuple, list)):
+        return "(" + ", ".join(_fmt_value(x) for x in v) + ")"
     f = float(v)
     return str(int(f)) if f == int(f) else f"{f:g}"
 
@@ -184,6 +186,9 @@ class _Transformer(cst.CSTTransformer):
     def _edited(self, table_id, call, pair):
         defaults = registry.field_defaults(table_id)
         editable = set(registry.editable_fields(table_id))
+        pos = registry.TABLES[table_id].pos_field
+        if pos:
+            editable.add(pos)  # written via the virtual lon/lat fields
         return _edit_call(call, pair[0], pair[1], defaults, editable)
 
     def leave_Assign(self, original, updated):
@@ -284,6 +289,19 @@ def _insert_entries(source: str, table_id: str, entries) -> str:
     return "".join(lines[:end] + new + lines[end:])
 
 
+def _translate(table_id, key, edit):
+    """Fold the editor's virtual lon/lat back into a pos_field tuple. Tables
+    whose lon/lat are real dataclass fields pass through untouched."""
+    pos = registry.TABLES[table_id].pos_field
+    if not pos:
+        return edit["fields"], list(edit["changed"])
+    fields = registry.to_spec_fields(table_id, key, edit["fields"])
+    changed = [f for f in edit["changed"] if f not in ("lon", "lat")]
+    if set(edit["changed"]) & {"lon", "lat"}:
+        changed.append(pos)
+    return fields, changed
+
+
 def apply_edits(edits: dict) -> list:
     """Patch the source files and the in-memory tables. Returns a list of
     {path, diff} for every modified file."""
@@ -303,7 +321,8 @@ def apply_edits(edits: dict) -> list:
             t = registry.TABLES[table_id]
             existing = registry.entries(table_id)
             for key, edit in edits[table_id].items():
-                pair = (edit["fields"], list(edit["changed"]))
+                fields, changed = _translate(table_id, key, edit)
+                pair = (fields, changed)
                 if key in existing:
                     updates.setdefault(t.source_var, (table_id, {}))[1][key] = pair
                 elif t.container == "dict":
@@ -335,9 +354,11 @@ def apply_edits(edits: dict) -> list:
     for table_id, table_edits in edits.items():
         existing = registry.entries(table_id)
         cls = registry.factory_class(table_id)
-        editable = set(registry.editable_fields(table_id))
+        pos = registry.TABLES[table_id].pos_field
+        editable = set(registry.editable_fields(table_id)) | ({pos} if pos else set())
         for key, edit in table_edits.items():
-            values = {f: v for f, v in edit["fields"].items() if f in editable}
+            fields, _ = _translate(table_id, key, edit)
+            values = {f: v for f, v in fields.items() if f in editable}
             if key in existing:
                 registry.set_entry(table_id, key,
                                    replace(existing[key], **values))
