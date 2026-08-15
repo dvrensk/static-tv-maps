@@ -105,6 +105,8 @@ TABLES = {
               container="tuple2", idiom="absolute", weight="semibold"),
         Table("ASTURIAS_RIOS", "tvmaps.maps_asturias", "RiverSpec",
               idiom="absolute", weight="semibold"),
+        Table("COMARCA_RIOS", "tvmaps.maps_asturias", "RiverSpec",
+              idiom="absolute", weight="semibold"),
     ]
 }
 
@@ -186,7 +188,7 @@ MAPS = {
             scene=_AST),
         Map("asturias-comarcas", "Comarcas de Asturias",
             "tvmaps.maps_asturias", "map_asturias_comarcas",
-            ("COMARCA_LABELS",), scene=_AST),
+            ("COMARCA_LABELS", "COMARCA_RIOS"), scene=_AST),
         Map("asturias-ciudades", "Villas y ciudades de Asturias",
             "tvmaps.maps_asturias", "map_asturias_ciudades", ("TOWN_LABELS",),
             scene=_AST),

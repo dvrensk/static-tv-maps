@@ -220,6 +220,38 @@ def _comarcas_gdf(conc):
     return conc, conc.dissolve(by="comarca", as_index=False)
 
 
+def _comarca_rivers(ax, com):
+    """The Eo and the Navia, painted so the name "Eo-Navia" explains itself.
+    White-cased blue lines, clipped to the Eo-Navia comarca so the courses
+    stay tied to the name (the upper Navia wanders through Galicia)."""
+    import geopandas as gpd
+
+    from .maps_spain import _project_lonlat
+
+    riv = geo.load("asturias_rivers").to_crs(geo.MAIN_CRS)
+    riv = riv[riv["name"].isin(COMARCA_RIOS)]
+    comarca = com[com.comarca == "Eo-Navia"].geometry.iloc[0]
+    clip = comarca.buffer(1.5 * KM)
+    courses = gpd.GeoSeries([g.intersection(clip) for g in riv.geometry],
+                            crs=geo.MAIN_CRS)
+    courses.plot(ax=ax, color="#ffffff", linewidth=7.0, zorder=4,
+                 capstyle="round")
+    courses.plot(ax=ax, color=RIVER, linewidth=4.2, zorder=4,
+                 capstyle="round")
+
+    for name, spec in COMARCA_RIOS.items():
+        spec = hooks.spec_for("COMARCA_RIOS", name, spec)
+        x, y = _project_lonlat(spec.lon, spec.lat)
+        hooks.capture("COMARCA_RIOS", name, f"Río {name}", (x, y), spec,
+                      color=RIVER, halo="#ffffff")
+        if hooks.SUPPRESS:
+            continue
+        t = draw.halo_text(ax, x, y, f"Río {name}", spec.size,
+                           weight="semibold", color=RIVER, halo_width=6,
+                           zorder=9)
+        t.set_rotation(spec.rotation)
+
+
 def map_asturias_comarcas():
     s = asturias_scene()
     fig, ax = draw.new_map(s["frame"])
@@ -233,6 +265,7 @@ def map_asturias_comarcas():
     draw.draw_layer(ax, com, "none", style.BORDER_DARK, 4.0, zorder=3)
     draw.draw_layer(ax, conc.dissolve(), "none", style.BORDER_DARK, 5.0, zorder=3)
 
+    _comarca_rivers(ax, com)
     _comarca_labels(ax, com, s["frame"])
     _neighbor_labels(ax, s["frame"])
     draw.draw_footer(ax, s["frame"],
@@ -452,6 +485,13 @@ ASTURIAS_RIOS = {
     "Caudal":  RiverSpec(-5.8711, 43.2469, -34, 52, main=False),
     "Cares":   RiverSpec(-4.7902, 43.3263, 17, 52, main=False),
     "Piles":   RiverSpec(-5.5736, 43.5165, 0, 48, main=False),
+}
+
+# The two rivers painted on the comarcas map so "Eo-Navia" explains itself
+# (see _comarca_rivers). Same spec shape as ASTURIAS_RIOS; labels say "Río …".
+COMARCA_RIOS = {
+    "Eo": RiverSpec(-7.13, 43.425, 75, 34),
+    "Navia": RiverSpec(-6.84, 43.28, 55, 34),
 }
 
 # A few reference points so the rivers can be read against known places.

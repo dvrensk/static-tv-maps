@@ -61,6 +61,9 @@ def test_unchanged_save_writes_nothing():
 
 
 def test_edit_existing_entry_minimal_diff():
+    # ty=80 differs from whatever the table currently holds (tuned values
+    # change over time, so assert shape, not exact literals).
+    assert registry.entries("CCAA_LABELS")["06"].ty != 80
     result = writeback.apply_edits(edit("CCAA_LABELS", "06",
                                         changed=["ty"], ty=80))
     assert len(result) == 1
@@ -68,7 +71,7 @@ def test_edit_existing_entry_minimal_diff():
     removed = [l for l in diff.splitlines() if l.startswith("-") and not l.startswith("---")]
     added = [l for l in diff.splitlines() if l.startswith("+") and not l.startswith("+++")]
     assert len(removed) == 1 and len(added) == 1
-    assert 'Label(40, tx=-20, ty=80),' in added[0]
+    assert "ty=80" in added[0]
     assert "# Cantabria" in added[0], "trailing comment must survive"
     # In-memory table matches the file.
     assert registry.entries("CCAA_LABELS")["06"].ty == 80
@@ -106,9 +109,14 @@ def test_callout_on_appends_kwargs():
 
 
 def test_size_edit_on_bare_call_inserts_positional():
-    writeback.apply_edits(edit("CCAA_LABELS", "01", changed=["size"], size=48))
-    line = next(l for l in source_of("CCAA_LABELS").splitlines() if '"01"' in l)
-    assert "Label(48)," in line
+    # Pick an entry whose size is still the dataclass default (written
+    # without a positional size); the edit must insert one at the front.
+    key = next(k for k, sp in registry.entries("CCAA_LABELS").items()
+               if sp.size == 54)
+    writeback.apply_edits(edit("CCAA_LABELS", key, changed=["size"], size=48))
+    line = next(l for l in source_of("CCAA_LABELS").splitlines()
+                if f'"{key}"' in l)
+    assert "Label(48" in line
 
 
 def test_insert_auto_concejo_entry():
