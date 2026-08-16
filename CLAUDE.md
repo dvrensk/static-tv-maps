@@ -57,9 +57,12 @@ requirements:
   "absolute" (lon/lat + rotation: river and range names). Containers may
   be dicts, key_field-keyed lists, (data, spec) tuples or single specs —
   see registry.Table. The Gijón street maps are not registered (nested
-  config dicts, no map_* Figure function).
+  config dicts, no map_* Figure function). Full architecture, invariants
+  and the add-a-table recipe: `docs/tuner-architecture.md`.
 - `tests/` — tuner write-back round-trip tests (`make test`). The key
   invariant: saving unchanged values must leave every file byte-identical.
+  Tests must assert diff *shape*, never memorize tuned label values — the
+  user retunes them constantly through the ajustador.
 
 ## Working on maps
 
@@ -133,8 +136,17 @@ Conventions:
   suffix. Modules read `style.CCAA_COLORS` / `style.CONCEJO_PALETTE` /
   `style.COMARCA_COLORS` at render time, which `style.set_theme()` swaps.
 - Names: common Castilian (see `PROVINCE_DISPLAY` / `CCAA_DISPLAY`).
+- City dots are factual: positions come from `data/processed/cities.geojson`
+  (Nominatim city centres). Bilbao's dot is ~10 km inland because Bilbao is
+  ~10 km inland — never move a dot to "look right"; move its label. Base
+  label sizes come from per-map tier tables (`TIERS` in maps_ciudades,
+  `_town_tier` in maps_asturias); an explicit per-label size overrides the
+  tier (`TownLabel` / ciudades `CityLabel` with `size=None` defaults).
 - Every visible collision matters: after any change, re-render and actually
-  look at the image at full size before committing.
+  look at the image at full size before committing. For code changes that
+  should not change pixels, prove it: render before/after in the SAME
+  environment (git stash the change for the baseline) and pixel-compare —
+  comparing against committed PNGs only measures cross-machine churn.
 
 ## Environment
 
@@ -146,6 +158,13 @@ Conventions:
 - Committed data means `make data` is only needed to refresh sources.
 - In Claude's remote sandbox there is no Docker daemon — use the venv path
   and say so rather than claiming the image was tested.
+- Commits from Claude sessions are authored as the repo owner (SessionStart
+  hook in `.claude/settings.json` sets the git identity); Claude is credited
+  via the Co-Authored-By trailer.
+- In the remote sandbox the tuner can be driven end-to-end with Playwright
+  (Chromium at `/opt/pw-browsers/chromium`); see docs/tuner-architecture.md.
+  Restart a running tuner after changing tier tables or render code — the
+  warm process bakes them into its base cache.
 - Most development happens in Claude on the web; the user renders locally
   via Docker. Rendering in a different environment recompresses the PNGs
   and shifts antialiasing by ±1/255 — byte churn with no visible change.
@@ -156,6 +175,7 @@ Conventions:
 ## Ideas not yet built
 
 - Provinces one-map variant with all 50 names (callouts to margins).
-- Province-capital maps (city dots + names), rivers/mountains physical maps.
-- Gijón (city/parroquias) maps once a good source is picked.
-- Comarcas of Asturias grouping map.
+- Tuner support for the Gijón street maps (nested configs — see the "known
+  gaps" section of docs/tuner-architecture.md for what it takes).
+- Hosting the tuner on the user's web box, and/or a GitHub-commit save mode
+  so label tuning works fully from a phone without a running server.
