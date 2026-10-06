@@ -11,6 +11,7 @@ Natural Earth mislabelings were corrected).
 from dataclasses import dataclass
 
 import geopandas as gpd
+import pandas as pd
 
 from . import cities, draw, geo, hooks
 from .maps_fisica import (COAST, HAND_RANGES, LAND, LAND_EDGE, RANGE_ALPHA,
@@ -189,6 +190,9 @@ def render_spain_rios():
 # pairing would look wrong and is left out.)
 # Label positions retuned so the names keep clear of the city dots.
 CIUDADES_RIVER_LABELS = {
+    "Nalón": RiverSpec(-5.45, 43.2, -35, 27),
+    "Navia": RiverSpec(-6.75, 43.25, 70, 27),
+    "Sella": RiverSpec(-4.82, 43.28, -78, 27),
     "Duero": RiverSpec(-4.05, 41.42, -6),
     "Pisuerga": RiverSpec(-4.48, 42.45, -80, 27, main=False),
     "Tormes": RiverSpec(-5.45, 40.55, -35, 27, main=False),
@@ -229,6 +233,13 @@ HAND_RIVERS = {
                    (1.9, 41.55), (1.93, 41.47), (2.03, 41.38), (2.11, 41.32),
                    (2.138, 41.298)],
                   RiverSpec(1.66, 41.68, -70, 27)),
+    # source Meira → Lugo → Portomarín → Ourense → Ribadavia → Tui → A Guarda
+    # (NE's Miño runs ~30 km west of Ourense, so it is traced by hand).
+    "Miño": ([(-7.30, 43.20), (-7.45, 43.10), (-7.55, 43.00), (-7.58, 42.90),
+              (-7.62, 42.81), (-7.70, 42.60), (-7.72, 42.45), (-7.864, 42.337),
+              (-8.14, 42.29), (-8.30, 42.18), (-8.52, 42.08), (-8.64, 42.05),
+              (-8.80, 41.97), (-8.87, 41.90)],
+             RiverSpec(-7.87, 42.75, -65, 26)),
     # Congost headwater → Granollers → Montcada → mouth NE of Barcelona, so
     # the city sits between its two rivers.
     "Besòs": ([(2.38, 41.77), (2.32, 41.68), (2.29, 41.61), (2.23, 41.52),
@@ -236,11 +247,15 @@ HAND_RIVERS = {
               RiverSpec(2.45, 41.62, -58, 25)),
 }
 
-# Cities missing from data/processed/cities.geojson (the two Portuguese
-# river mouths the user wants on the map), hardcoded lon/lat.
+# Cities missing from (or misplaced in) data/processed/cities.geojson: the
+# two Portuguese river mouths the user wants on the map, plus Ourense.
+# Hardcoded lon/lat.
 EXTRA_CITIES = {
     "Lisboa": (-9.1393, 38.7223),
     "Oporto": (-8.6291, 41.1579),
+    # The gazetteer geocoded Ourense ~35 km east of the city (-7.54, 42.19),
+    # well off the Miño it is on this map to illustrate; real centre here.
+    "Ourense": (-7.8641, 42.3358),
 }
 
 
@@ -292,6 +307,9 @@ def map_spain_rios_ciudades():
 
     riv = geo.load("rivers20").to_crs(geo.MAIN_CRS)
     riv = riv[riv["name"].isin(CIUDADES_RIVER_LABELS)]
+    # Navia and Sella are not in rivers20: take them from the OSM Asturias set.
+    ast = geo.load("asturias_rivers").to_crs(geo.MAIN_CRS)
+    riv = pd.concat([riv, ast[ast["name"].isin(("Navia", "Sella"))]])
     _draw_rivers(ax, riv, spain, CIUDADES_RIVER_LABELS)
     _label_rivers(ax, CIUDADES_RIVER_LABELS, table_id="CIUDADES_RIVER_LABELS")
 

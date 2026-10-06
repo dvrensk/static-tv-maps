@@ -317,7 +317,7 @@ def render_centroamerica():
 
 # Column-major reading order: Mexico + the isthmus fill the first two columns,
 # the Antilles the third.
-EXT_ORDER = ["MX", "GT", "BZ", "SV", "HN", "NI", "CR", "PA", "CU", "DO", "PR"]
+EXT_ORDER = ["MX", "GT", "SV", "BZ", "HN", "NI", "CR", "PA", "CU", "DO", "PR"]
 
 # Mainland framing box (lon/lat): drops Isla del Coco and the Islas del Cisne.
 EXT_CORE_BOX = (-118.0, 6.9, -64.9, 33.0)
@@ -396,7 +396,7 @@ EXT_CONTEXT_LABELS = [
     ("ESTADOS UNIDOS", -101.5, 31.6, 50, 0),
     ("BAHAMAS", -77.4, 24.6, 30, 0),
     ("HAITÍ", -72.75, 19.05, 26, 0),
-    ("JAMAICA", -77.3, 18.15, 26, 0),
+    ("JAMAICA", -77.3, 17.1, 26, 0),
     ("COLOMBIA", -74.6, 7.4, 40, 0),
     ("VENEZUELA", -68.3, 8.2, 40, 0),
 ]
