@@ -115,7 +115,9 @@ def style_rgb(hex_color):
     return [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
 
 
-def _render(theme_name, footer):
+def _render(theme_name, footer, big="letras", name=None):
+    """`big` picks which white-key name is the large, unboxed one: "letras"
+    (A B C, solfège in pills) or "solfeo" (Do Re Mi, letters in pills)."""
     t = THEMES[theme_name]
     W, H = style.WIDTH_PX, style.HEIGHT_PX
     n = len(WHITE)
@@ -178,18 +180,24 @@ def _render(theme_name, footer):
             ax.add_patch(lip)
 
         cx = x + kw / 2
-        if i >= FIRST_LABEL:
+        letter = note if i >= FIRST_LABEL else None
+        solfeo = (SOLFEO[note] if SOLFEO_RANGE[0] <= i <= SOLFEO_RANGE[1]
+                  else None)
+        large, boxed = (letter, solfeo) if big == "letras" else (solfeo, letter)
+        if large:
+            # "Sol" is the widest name; 98 pt keeps it clear of the key edges.
+            size = 140 if big == "letras" else 98
             halo = "#ffffff" if theme_name == "colores" else None
-            _text(ax, cx, KEY_BOTTOM + 190, note, 140, "extrabold",
+            _text(ax, cx, KEY_BOTTOM + 190, large, size, "extrabold",
                   style.LABEL_COLOR, halo=halo, halo_width=14, scale=scale)
-        if SOLFEO_RANGE[0] <= i <= SOLFEO_RANGE[1]:
+        if boxed:
             py = KEY_BOTTOM + 445
             pill_w, pill_h = kw - 44, 150
             ax.add_patch(_key_patch(cx - pill_w / 2, py - pill_h / 2, pill_w,
                                     pill_h, 70, facecolor=t["pill"],
                                     edgecolor=style.BORDER_DARK,
                                     linewidth=2.5 * scale, zorder=8))
-            _text(ax, cx, py - 4, SOLFEO[note], 76, "extrabold",
+            _text(ax, cx, py - 4, boxed, 76, "extrabold",
                   t["pill_text"], zorder=9, scale=scale)
 
     # Black keys, on the boundary after each C, D, F, G, A.
@@ -226,7 +234,7 @@ def _render(theme_name, footer):
                   rotation=90, linespacing=1.05, multialignment="left")
 
     draw.draw_footer(ax, frame, footer, side="right")
-    return draw.save(fig, f"piano-{theme_name}")
+    return draw.save(fig, name or f"piano-{theme_name}")
 
 
 FOOTER = "Notas del piano · en inglés (A B C) y en español (Do Re Mi)"
@@ -234,6 +242,12 @@ FOOTER = "Notas del piano · en inglés (A B C) y en español (Do Re Mi)"
 
 def render_piano_clasico():
     return _render("clasico", FOOTER)
+
+
+def render_piano_clasico_solfeo():
+    """Clásico with the emphasis swapped: Do Re Mi large, letters boxed."""
+    return _render("clasico", FOOTER, big="solfeo",
+                   name="piano-clasico-solfeo")
 
 
 def render_piano_esquema():
