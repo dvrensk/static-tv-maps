@@ -120,7 +120,7 @@ def _render(theme_name, footer):
     klen = KEY_TOP - KEY_BOTTOM
     bw, blen = kw * BLACK_W_FRAC, klen * BLACK_LEN_FRAC
     x0 = MARGIN_X
-    gap = 6 if theme_name != "esquema" else 0
+    gap = 6  # without it the keys read as one slab
 
     # Case: a dark lid above the keys with a strip of red felt.
     if t["case"]:
@@ -134,6 +134,9 @@ def _render(theme_name, footer):
         ax.add_patch(_key_patch(x0 - 60, KEY_BOTTOM - 60, n * kw + 120, 60,
                                 20, facecolor=t["case"], edgecolor="none",
                                 zorder=1))
+        # Dark bed behind the keys, so the gaps between them show.
+        ax.add_patch(Rectangle((x0, KEY_BOTTOM), n * kw, klen,
+                               facecolor=t["case"], zorder=1))
         ax.add_patch(Rectangle((x0, KEY_TOP - 4), n * kw, 22,
                                facecolor=t["felt"], zorder=17))
     else:
