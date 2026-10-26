@@ -38,6 +38,8 @@ KEY_TOP = 1930
 KEY_BOTTOM = 210
 BLACK_W_FRAC = 0.58     # of a white key's width
 BLACK_LEN_FRAC = 0.63   # of a white key's length
+PAD_KEYS = 1            # extra empty space each side, in white-key widths
+GAP_PX = 12             # between white keys, on screen
 
 # One pastel per note, from the "vivo" political palette (a gentle rainbow
 # from Do).
@@ -77,12 +79,13 @@ def _font(weight):
 
 
 def _text(ax, x, y, s, size, weight, color, halo=None, halo_width=0,
-          zorder=10):
+          zorder=10, scale=1.0):
     from matplotlib import patheffects as pe
 
-    effects = ([pe.withStroke(linewidth=halo_width, foreground=halo)]
+    effects = ([pe.withStroke(linewidth=halo_width * scale, foreground=halo)]
                if halo else [])
-    ax.text(x, y, s, fontproperties=_font(weight), fontsize=size, color=color,
+    ax.text(x, y, s, fontproperties=_font(weight), fontsize=size * scale,
+            color=color,
             ha="center", va="center", zorder=zorder, path_effects=effects)
 
 
@@ -110,17 +113,24 @@ def style_rgb(hex_color):
 
 def _render(theme_name, footer):
     t = THEMES[theme_name]
-    frame = (0, 0, style.WIDTH_PX, style.HEIGHT_PX)
+    W, H = style.WIDTH_PX, style.HEIGHT_PX
+    n = len(WHITE)
+    kw = (W - 2 * MARGIN_X) / n
+    # The keyboard is laid out on a W x H design canvas; zooming the view out
+    # by `scale` pads PAD_KEYS key widths each side and keeps the proportions.
+    # Data-unit geometry shrinks with the view; point sizes (text, lines) are
+    # multiplied by `scale` to match.
+    scale = W / (W + 2 * PAD_KEYS * kw)
+    hw, hh = W / 2 / scale, H / 2 / scale
+    frame = (W / 2 - hw, H / 2 - hh, W / 2 + hw, H / 2 + hh)
     fig, ax = draw.new_map(frame)
     ax.set_facecolor(t["background"])
     fig.patch.set_facecolor(t["background"])
 
-    n = len(WHITE)
-    kw = (style.WIDTH_PX - 2 * MARGIN_X) / n
     klen = KEY_TOP - KEY_BOTTOM
     bw, blen = kw * BLACK_W_FRAC, klen * BLACK_LEN_FRAC
     x0 = MARGIN_X
-    gap = 12  # without it the keys read as one slab
+    gap = GAP_PX / scale  # without it the keys read as one slab
 
     # Case: a dark lid above the keys with a strip of red felt.
     if t["case"]:
@@ -151,7 +161,8 @@ def _render(theme_name, footer):
         fill = t["white"] or NOTE_COLORS[note]
         patch = _key_patch(x + gap / 2, KEY_BOTTOM, kw - gap, klen + 60, 22,
                            facecolor=fill, edgecolor=t["white_edge"],
-                           linewidth=3 if theme_name != "clasico" else 1.5,
+                           linewidth=(3 if theme_name != "clasico" else 1.5)
+                           * scale,
                            zorder=2)
         ax.add_patch(patch)
         if theme_name == "clasico":
@@ -166,16 +177,16 @@ def _render(theme_name, footer):
         if i >= FIRST_LABEL:
             halo = "#ffffff" if theme_name == "colores" else None
             _text(ax, cx, KEY_BOTTOM + 190, note, 140, "extrabold",
-                  style.LABEL_COLOR, halo=halo, halo_width=14)
+                  style.LABEL_COLOR, halo=halo, halo_width=14, scale=scale)
         if SOLFEO_RANGE[0] <= i <= SOLFEO_RANGE[1]:
             py = KEY_BOTTOM + 445
             pill_w, pill_h = kw - 44, 150
             ax.add_patch(_key_patch(cx - pill_w / 2, py - pill_h / 2, pill_w,
                                     pill_h, 70, facecolor=t["pill"],
                                     edgecolor=style.BORDER_DARK,
-                                    linewidth=2.5, zorder=8))
+                                    linewidth=2.5 * scale, zorder=8))
             _text(ax, cx, py - 4, SOLFEO[note], 76, "extrabold",
-                  t["pill_text"], zorder=9)
+                  t["pill_text"], zorder=9, scale=scale)
 
     # Black keys, on the boundary after each C, D, F, G, A.
     for i, note in enumerate(WHITE[:-1]):
@@ -184,7 +195,8 @@ def _render(theme_name, footer):
         bx = x0 + (i + 1) * kw - bw / 2
         by = KEY_TOP - blen
         patch = _key_patch(bx, by, bw, blen + 60, 16, facecolor=t["black"],
-                           edgecolor="#141311", linewidth=2, zorder=12)
+                           edgecolor="#141311", linewidth=2 * scale,
+                           zorder=12)
         ax.add_patch(patch)
         if theme_name == "clasico":
             _gradient(ax, (bx, by, bx + bw, KEY_TOP),
@@ -200,14 +212,14 @@ def _render(theme_name, footer):
         upper = NEXT[note]
         if i + 1 > FIRST_LABEL:
             _text(ax, cx, by + 380, f"{note}{SHARP}", 50, "extrabold",
-                  t["black_text"], zorder=15)
+                  t["black_text"], zorder=15, scale=scale)
             _text(ax, cx, by + 300, f"{upper}{FLAT}", 50, "extrabold",
-                  t["black_text"], zorder=15)
+                  t["black_text"], zorder=15, scale=scale)
         if SOLFEO_RANGE[0] <= i < SOLFEO_RANGE[1]:
             _text(ax, cx, by + 200, f"{SOLFEO[note]}{SHARP}", 42,
-                  "extrabold", t["black_solfeo"], zorder=15)
+                  "extrabold", t["black_solfeo"], zorder=15, scale=scale)
             _text(ax, cx, by + 130, f"{SOLFEO[upper]}{FLAT}", 42,
-                  "extrabold", t["black_solfeo"], zorder=15)
+                  "extrabold", t["black_solfeo"], zorder=15, scale=scale)
 
     draw.draw_footer(ax, frame, footer, side="right")
     return draw.save(fig, f"piano-{theme_name}")
