@@ -5,7 +5,8 @@ uses the same canvas, fonts, footer and palette.
 The keyboard runs from G (unlabelled, so the first name you read is A) up to
 the D above the second C. Letters go on every key from that A onwards; the
 solfège covers one octave, Do to Do. Black keys carry both sharp and flat
-names, in solfège too where they fall inside that octave.
+names; inside that octave also the Spanish ones, spelled out ("Do sostenido",
+"Re bemol") and running up the key.
 
 Three designs share the geometry and labels: "clasico" (realistic ivory and
 ebony), "esquema" (flat, map-like outlines) and "colores" (one pastel per
@@ -79,14 +80,17 @@ def _font(weight):
 
 
 def _text(ax, x, y, s, size, weight, color, halo=None, halo_width=0,
-          zorder=10, scale=1.0):
+          zorder=10, scale=1.0, rotation=0, linespacing=1.2,
+          multialignment="center"):
     from matplotlib import patheffects as pe
 
     effects = ([pe.withStroke(linewidth=halo_width * scale, foreground=halo)]
                if halo else [])
     ax.text(x, y, s, fontproperties=_font(weight), fontsize=size * scale,
-            color=color,
-            ha="center", va="center", zorder=zorder, path_effects=effects)
+            color=color, ha="center", va="center", zorder=zorder,
+            rotation=rotation, linespacing=linespacing,
+            multialignment=multialignment,
+            path_effects=effects)
 
 
 def _key_patch(x, y, w, h, radius, **kw):
@@ -204,22 +208,22 @@ def _render(theme_name, footer):
             ax.add_patch(_key_patch(bx + 14, by + 16, bw - 28, 70, 12,
                                     facecolor="#4a4743", edgecolor="none",
                                     zorder=14))
-            ax.add_patch(Rectangle((bx + 22, by + 130), 10, blen - 170,
-                                   facecolor="#ffffff", alpha=0.12,
-                                   zorder=14))
 
         cx = bx + bw / 2
         upper = NEXT[note]
         if i + 1 > FIRST_LABEL:
-            _text(ax, cx, by + 380, f"{note}{SHARP}", 50, "extrabold",
+            _text(ax, cx, by + 250, f"{note}{SHARP}", 50, "extrabold",
                   t["black_text"], zorder=15, scale=scale)
-            _text(ax, cx, by + 300, f"{upper}{FLAT}", 50, "extrabold",
+            _text(ax, cx, by + 165, f"{upper}{FLAT}", 50, "extrabold",
                   t["black_text"], zorder=15, scale=scale)
         if SOLFEO_RANGE[0] <= i < SOLFEO_RANGE[1]:
-            _text(ax, cx, by + 200, f"{SOLFEO[note]}{SHARP}", 42,
-                  "extrabold", t["black_solfeo"], zorder=15, scale=scale)
-            _text(ax, cx, by + 130, f"{SOLFEO[upper]}{FLAT}", 42,
-                  "extrabold", t["black_solfeo"], zorder=15, scale=scale)
+            # Spelled out: "sostenido"/"bemol" are what you say aloud, and
+            # ♯/♭ give no hint of that. Too long to sit across a black key,
+            # so they run up it, at the same size as the letter names.
+            _text(ax, cx, (by + 330 + KEY_TOP - 30) / 2,
+                  f"{SOLFEO[note]} sostenido\n{SOLFEO[upper]} bemol", 50,
+                  "extrabold", t["black_solfeo"], zorder=15, scale=scale,
+                  rotation=90, linespacing=1.05, multialignment="left")
 
     draw.draw_footer(ax, frame, footer, side="right")
     return draw.save(fig, f"piano-{theme_name}")
