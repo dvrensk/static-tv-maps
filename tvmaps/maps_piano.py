@@ -4,7 +4,9 @@ uses the same canvas, fonts, footer and palette.
 
 The keyboard runs from G (unlabelled, so the first name you read is A) up to
 the D above the second C. Letters go on every key from that A onwards; the
-solfège covers one octave, Do to Do. Black keys carry both sharp and flat
+solfège covers one octave, Do to Do, and carries on greyed out over the
+keys either side. Half black keys cut off at both ends keep the first G and
+the last D from reading as an F and a B. Black keys carry both sharp and flat
 names; inside that octave also the Spanish ones, spelled out ("Do sostenido",
 "Re bemol") and running up the key.
 
@@ -30,6 +32,13 @@ SOLFEO = {"C": "Do", "D": "Re", "E": "Mi", "F": "Fa", "G": "Sol", "A": "La",
 # A black key sits after these white keys (no black key after B or E).
 HAS_SHARP_AFTER = {"C", "D", "F", "G", "A"}
 NEXT = {"C": "D", "D": "E", "F": "G", "G": "A", "A": "B"}
+
+ORDER = "CDEFGAB"
+
+# Solfège outside the Do..Do octave: present but greyed out.
+GHOST_TEXT = "#c4bcac"
+GHOST_PILL = "#f1ece1"
+GHOST_EDGE = "#c4bcac"
 
 SHARP, FLAT = "♯", "♭"
 
@@ -181,44 +190,63 @@ def _render(theme_name, footer, big="letras", name=None):
 
         cx = x + kw / 2
         letter = note if i >= FIRST_LABEL else None
-        solfeo = (SOLFEO[note] if SOLFEO_RANGE[0] <= i <= SOLFEO_RANGE[1]
-                  else None)
+        # Outside the Do..Do octave the solfège is still shown, greyed out,
+        # so the names visibly carry on past both ends.
+        solfeo = SOLFEO[note]
+        ghost = not SOLFEO_RANGE[0] <= i <= SOLFEO_RANGE[1]
         large, boxed = (letter, solfeo) if big == "letras" else (solfeo, letter)
+        large_ghost = ghost and big == "solfeo"
+        boxed_ghost = ghost and big == "letras"
         if large:
             # "Sol" is the widest name; 98 pt keeps it clear of the key edges.
             size = 140 if big == "letras" else 98
             halo = "#ffffff" if theme_name == "colores" else None
             _text(ax, cx, KEY_BOTTOM + 190, large, size, "extrabold",
-                  style.LABEL_COLOR, halo=halo, halo_width=14, scale=scale)
+                  GHOST_TEXT if large_ghost else style.LABEL_COLOR,
+                  halo=halo, halo_width=14, scale=scale)
         if boxed:
             py = KEY_BOTTOM + 445
             pill_w, pill_h = kw - 44, 150
-            ax.add_patch(_key_patch(cx - pill_w / 2, py - pill_h / 2, pill_w,
-                                    pill_h, 70, facecolor=t["pill"],
-                                    edgecolor=style.BORDER_DARK,
-                                    linewidth=2.5 * scale, zorder=8))
+            ax.add_patch(_key_patch(
+                cx - pill_w / 2, py - pill_h / 2, pill_w, pill_h, 70,
+                facecolor=GHOST_PILL if boxed_ghost else t["pill"],
+                edgecolor=GHOST_EDGE if boxed_ghost else style.BORDER_DARK,
+                linewidth=2.5 * scale, zorder=8))
             _text(ax, cx, py - 4, boxed, 76, "extrabold",
-                  t["pill_text"], zorder=9, scale=scale)
+                  GHOST_TEXT if boxed_ghost else t["pill_text"], zorder=9,
+                  scale=scale)
 
-    # Black keys, on the boundary after each C, D, F, G, A.
-    for i, note in enumerate(WHITE[:-1]):
+    # Black keys, on the boundary after each C, D, F, G, A. That includes
+    # both outer edges: without the half key cut off there, the first G
+    # would read as an F and the last D as a B.
+    xend = x0 + n * kw
+    keyboard = Rectangle((x0, KEY_BOTTOM - 100), n * kw, klen + 400,
+                         transform=ax.transData)
+    before_first = ORDER[(ORDER.index(WHITE[0]) - 1) % 7]
+    for i, note in enumerate([before_first] + WHITE):
         if note not in HAS_SHARP_AFTER:
             continue
-        bx = x0 + (i + 1) * kw - bw / 2
+        bx = x0 + i * kw - bw / 2
         by = KEY_TOP - blen
         patch = _key_patch(bx, by, bw, blen + 60, 16, facecolor=t["black"],
                            edgecolor="#141311", linewidth=2 * scale,
                            zorder=12)
         ax.add_patch(patch)
+        patch.set_clip_path(keyboard)
         if theme_name == "clasico":
-            _gradient(ax, (bx, by, bx + bw, KEY_TOP),
+            _gradient(ax, (max(bx, x0), by, min(bx + bw, xend), KEY_TOP),
                       "#3b3936", "#151413", patch, zorder=13)
-            ax.add_patch(_key_patch(bx + 14, by + 16, bw - 28, 70, 12,
-                                    facecolor="#4a4743", edgecolor="none",
-                                    zorder=14))
+            bevel = _key_patch(bx + 14, by + 16, bw - 28, 70, 12,
+                               facecolor="#4a4743", edgecolor="none",
+                               zorder=14)
+            ax.add_patch(bevel)
+            bevel.set_clip_path(keyboard)
+        if i in (0, n):
+            continue  # the cut-off edge keys stay unnamed
 
         cx = bx + bw / 2
         upper = NEXT[note]
+        i -= 1  # index of the white key to the left, as below
         if i + 1 > FIRST_LABEL:
             _text(ax, cx, by + 250, f"{note}{SHARP}", 50, "extrabold",
                   t["black_text"], zorder=15, scale=scale)
