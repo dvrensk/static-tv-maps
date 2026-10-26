@@ -120,7 +120,7 @@ def _render(theme_name, footer):
     klen = KEY_TOP - KEY_BOTTOM
     bw, blen = kw * BLACK_W_FRAC, klen * BLACK_LEN_FRAC
     x0 = MARGIN_X
-    gap = 6  # without it the keys read as one slab
+    gap = 12  # without it the keys read as one slab
 
     # Case: a dark lid above the keys with a strip of red felt.
     if t["case"]:
