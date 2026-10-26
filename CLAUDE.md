@@ -35,6 +35,8 @@ requirements:
   `tvmaps/maps_gijon.py` (schematic Gijón street maps, spec in
   `docs/gijon-schematic-design.md`) — the actual maps and all per-feature label
   tuning. New modules must be added to the registry tuple in `generate.py`.
+  `tvmaps/maps_piano.py` is not a map: a labelled piano keyboard (solfège +
+  English letters, graded full/light/ghost) that shares the slideshow.
 - `tvmaps/cities.py` — city gazetteer access (`data/processed/cities.geojson`,
   geocoded via Nominatim by the download script) plus metadata: province and
   community capitals, INE 2025 big-city populations, Asturias towns over
